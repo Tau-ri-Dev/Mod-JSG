@@ -10,7 +10,7 @@ import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.loader.ElementEnum;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;

@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.item;
 
-import dev.tauri.jsg.core.common.item.JSGItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +12,7 @@ public class CartridgeItem extends JSGItem {
     public final float inkPerPage;
 
     public CartridgeItem(Color renderColor, float inkPerPage) {
-        super(new Properties(), CoreTabs.TAB_RESOURCES);
+        super(new Properties(), () -> CoreTabs.TAB_RESOURCES);
         this.renderColor = renderColor;
         this.inkPerPage = inkPerPage;
     }

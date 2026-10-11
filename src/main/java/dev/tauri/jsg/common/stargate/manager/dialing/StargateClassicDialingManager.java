@@ -5,7 +5,7 @@ import dev.tauri.jsg.api.stargate.iris.EnumIrisMode;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
 import dev.tauri.jsg.common.stargate.animation.spinning.ClassicSpinHelper;
-import dev.tauri.jsg.core.common.entity.ScheduledTaskType;
+import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;

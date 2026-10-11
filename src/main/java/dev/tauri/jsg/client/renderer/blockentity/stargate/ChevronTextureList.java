@@ -1,9 +1,9 @@
 package dev.tauri.jsg.client.renderer.blockentity.stargate;
 
 import dev.tauri.jsg.api.stargate.ChevronEnum;
-import dev.tauri.jsg.core.client.renderer.Activation;
-import dev.tauri.jsg.core.client.texture.ITextureLoader;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.client.renderer.Activation;
+import dev.tauri.jsgcore.client.texture.ITextureLoader;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;

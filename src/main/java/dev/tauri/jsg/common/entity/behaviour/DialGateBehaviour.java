@@ -9,7 +9,7 @@ import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargatePegasusBaseBE;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

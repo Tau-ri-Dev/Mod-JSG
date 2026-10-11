@@ -3,8 +3,10 @@ package dev.tauri.jsg.datagen;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.common.registry.CoreItems;
-import dev.tauri.jsg.core.common.registry.tag.CoreItemTags;
+import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.registry.tag.CoreItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
@@ -56,7 +58,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('G', Tags.Items.GLASS_PANES_COLORLESS)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .define('H', Items.HOPPER)
-                .define('T', CoreItems.GEAR_TITANIUM.get())
+                .define('T', MaterialType.TITANIUM.getItem(MaterialItemType.GEAR).get())
                 .define('B', Tags.Items.DYES_CYAN)
                 .define('D', Tags.Items.DYES_GRAY)
                 .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))

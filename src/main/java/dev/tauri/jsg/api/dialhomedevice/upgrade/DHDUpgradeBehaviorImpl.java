@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.dialhomedevice.upgrade;
 
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;

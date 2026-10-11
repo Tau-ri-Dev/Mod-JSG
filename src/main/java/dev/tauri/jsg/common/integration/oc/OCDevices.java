@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.integration.oc;
 
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
-import dev.tauri.jsg.core.common.integration.oc.OCDevice;
+import dev.tauri.jsgcore.common.integration.oc.OCDevice;
 
 public class OCDevices {
     public static final OCDevice STARGATE_ABSTRACT = new OCDevice("STARGATE_ABSTRACT", "stargate", (tile) -> new StargateAbstractOCMethods<>((StargateAbstractBaseBE<?, ?>) tile));

@@ -4,11 +4,12 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.client.screen.EnumMainMenuGateType;
 import dev.tauri.jsg.api.config.util.StargateTimeLimitModeEnum;
-import dev.tauri.jsg.core.common.config.JSGConfigChild;
-import dev.tauri.jsg.core.common.config.JSGCoreConfig;
-import dev.tauri.jsg.core.common.config.values.JSGConfigValue;
-import dev.tauri.jsg.core.common.helper.TemperatureHelper;
+import dev.tauri.jsgcore.common.config.JSGConfigChild;
+import dev.tauri.jsgcore.common.config.JSGCoreConfig;
+import dev.tauri.jsgcore.common.config.values.JSGConfigValue;
+import dev.tauri.jsgcore.common.helper.TemperatureHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModLoadingContext;
 
 import java.util.ArrayList;
 
@@ -431,14 +432,14 @@ public class JSGConfig {
 
     public static final ArrayList<JSGConfigChild> LIST = new ArrayList<>();
 
-    public static void register() {
+    public static void register(ModLoadingContext ctx) {
         LIST.clear();
         LIST.add(C_GENERAL);
         LIST.add(C_DEBUG);
         LIST.add(C_DHD);
         LIST.add(C_SG);
 
-        JSGCoreConfig.register(JSG.MOD_ID, CONFIG_FILE_NAME, LIST);
+        JSGCoreConfig.register(ctx, JSG.MOD_ID, CONFIG_FILE_NAME, LIST);
     }
 
     public static void load() {

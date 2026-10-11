@@ -1,6 +1,6 @@
 package dev.tauri.jsg.common.integration.cctweaked;
 
-import dev.tauri.jsg.core.common.integration.cctweaked.CCDevice;
+import dev.tauri.jsgcore.common.integration.cctweaked.CCDevice;
 
 public class CCDevices {
     public static final CCDevice STARGATE_ABSTRACT = new CCDevice("STARGATE_ABSTRACT", "stargate", StargateAbstractCCMethods::new);

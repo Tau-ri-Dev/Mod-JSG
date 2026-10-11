@@ -9,19 +9,19 @@ import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisState;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
-import dev.tauri.jsg.core.client.model.IModelLoader;
-import dev.tauri.jsg.core.client.renderer.BlockRenderer;
-import dev.tauri.jsg.core.client.renderer.LinkableRenderer;
-import dev.tauri.jsg.core.client.texture.ITextureLoader;
-import dev.tauri.jsg.core.common.blockentity.CamouflageBE;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
-import dev.tauri.jsg.core.common.multistructure.IMultiStructureRenderer;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
-import dev.tauri.jsg.core.common.util.JSGColorUtil;
-import dev.tauri.jsg.core.common.util.RotationUtil;
-import dev.tauri.jsg.core.common.util.math.MathHelper;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.model.IModelLoader;
+import dev.tauri.jsgcore.client.renderer.BlockRenderer;
+import dev.tauri.jsgcore.client.renderer.LinkableRenderer;
+import dev.tauri.jsgcore.client.texture.ITextureLoader;
+import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.common.multistructure.IMultiStructureRenderer;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.util.JSGColorUtil;
+import dev.tauri.jsgcore.common.util.RotationUtil;
+import dev.tauri.jsgcore.common.util.math.MathHelper;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -237,7 +237,7 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
     protected boolean shouldRender() {
         if (tileEntity == null) return false;
         if (rendererState == null) return false;
-        return tileEntity.getBlockState().hasProperty(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) && !tileEntity.getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
+        return tileEntity.getBlockState().hasProperty(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) && !tileEntity.getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
     }
 
     protected abstract void renderGate();

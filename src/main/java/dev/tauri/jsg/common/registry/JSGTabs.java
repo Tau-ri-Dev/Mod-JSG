@@ -1,24 +1,24 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.registry.helper.TabBuilder;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.common.registry.helper.TabBuilder;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 import static dev.tauri.jsg.JSG.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class JSGTabs {
-    private static final DeferredRegister<CreativeModeTab> REGISTER = JSGApi.REGISTRY_HELPER.tab();
+    private static final DeferredRegisterWrapper<CreativeModeTab> REGISTER = JSGApi.REGISTRY_HELPER.tab();
 
-    public static final RegistryObject<CreativeModeTab> TAB_MACHINES = REGISTER.register("machines",
+    public static final RegistryObjectWrapper<CreativeModeTab> TAB_MACHINES = REGISTER.register("machines",
             TabBuilder.create(JSGMapping.rl(MOD_ID, "machines"))
                     .withIcon(() -> JSGBlocks.PRINTER).build());
 

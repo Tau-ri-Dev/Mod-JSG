@@ -8,12 +8,12 @@ import dev.tauri.jsg.common.packet.packets.AdminControllerGuiOpenToClient;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.client.renderer.AbstractItemBEWLR;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
-import dev.tauri.jsg.core.common.helper.RayTraceHelper;
-import dev.tauri.jsg.core.common.item.JSGItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.helper.RayTraceHelper;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,7 +35,7 @@ import java.util.function.Consumer;
 
 public class AdminControllerItem extends JSGItem {
     public AdminControllerItem() {
-        super(new Properties().stacksTo(1), CoreTabs.TAB_TOOLS);
+        super(new Properties().stacksTo(1), () -> CoreTabs.TAB_TOOLS);
     }
 
     @Override

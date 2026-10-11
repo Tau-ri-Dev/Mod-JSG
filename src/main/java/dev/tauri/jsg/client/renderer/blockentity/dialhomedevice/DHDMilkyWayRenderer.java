@@ -14,11 +14,11 @@ import dev.tauri.jsg.common.raycaster.RaycasterMilkyWayDHD;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.JSGRaycasters;
-import dev.tauri.jsg.core.client.renderer.BlockRenderer;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.raycaster.Raycaster;
-import dev.tauri.jsg.core.common.raycaster.util.RayCastedButton;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
+import dev.tauri.jsgcore.client.renderer.BlockRenderer;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.raycaster.Raycaster;
+import dev.tauri.jsgcore.common.raycaster.util.RayCastedButton;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -176,7 +176,7 @@ public class DHDMilkyWayRenderer extends DHDAbstractRenderer<DHDMilkyWayRenderer
                         .render(stack, bufferSource, combinedLight, combinedOverlay, false, r, g, b, a, false);
 
                 RenderSystem.enableBlend();
-                TextureAtlasSprite sprite = BlockRenderer.getFluidTexture(new FluidStack(CoreFluids.MOLTEN_NAQUADAH_REFINED.still.get(), 1000), BlockRenderer.FluidTextureType.STILL);
+                TextureAtlasSprite sprite = BlockRenderer.getFluidTexture(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 1000), BlockRenderer.FluidTextureType.STILL);
                 if (sprite != null) {
                     stack.pushPose();
                     float height = assembled ? (rendererState.naquadahAmount / (float) rendererState.naquadahMaxAmount) : 1f;

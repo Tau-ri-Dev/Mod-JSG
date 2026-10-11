@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class JSGBlockStateProvider extends BlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -20,9 +19,5 @@ public class JSGBlockStateProvider extends BlockStateProvider {
 
     public static ResourceLocation getRL(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
-    }
-
-    private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
 }

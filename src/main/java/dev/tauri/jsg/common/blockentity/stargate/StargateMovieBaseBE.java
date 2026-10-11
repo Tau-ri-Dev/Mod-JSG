@@ -13,8 +13,8 @@ import dev.tauri.jsg.common.stargate.manager.dialing.StargateAbstractDialingMana
 import dev.tauri.jsg.common.stargate.manager.dialing.StargateMovieDialingManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateMovieStateManager;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,8 +49,8 @@ public class StargateMovieBaseBE extends StargateMilkyWayBaseBE {
     public void generateMergeHelper() {
         // setup merge helper - client and server
         mergeHelper = new StargateMovieMergeHelper(this);
-        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        mergeHelper.verticalFacing = dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
+        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        mergeHelper.verticalFacing = dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
         mergeHelper.basePos = getBlockPos();
     }
 

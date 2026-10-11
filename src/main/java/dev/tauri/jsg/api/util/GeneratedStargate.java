@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.util;
 
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 
 public class GeneratedStargate {
     public final StargateAddress address;

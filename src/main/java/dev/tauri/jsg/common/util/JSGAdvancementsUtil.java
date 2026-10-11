@@ -3,7 +3,7 @@ package dev.tauri.jsg.common.util;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.*;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;

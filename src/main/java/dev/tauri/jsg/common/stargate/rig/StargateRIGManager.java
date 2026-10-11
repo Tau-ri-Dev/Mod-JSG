@@ -6,7 +6,7 @@ import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.manager.IStargateRIGManager;
 import dev.tauri.jsg.api.stargate.rig.IRIGWave;
 import dev.tauri.jsg.common.stargate.manager.AbstractStargateManager;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;

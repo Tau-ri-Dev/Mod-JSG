@@ -6,9 +6,9 @@ import dev.tauri.jsg.common.block.stargate.StargateAbstractMemberBlock;
 import dev.tauri.jsg.common.block.stargate.redstone.AbstractStargateRedstoneIO;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
-import dev.tauri.jsg.core.common.block.cartouche.CartoucheBlock;
-import dev.tauri.jsg.core.common.block.core.InvisibleBlock;
-import dev.tauri.jsg.core.common.registry.tag.CoreBlockTags;
+import dev.tauri.jsgcore.common.block.cartouche.CartoucheBlock;
+import dev.tauri.jsgcore.common.block.core.InvisibleBlock;
+import dev.tauri.jsgcore.common.registry.tag.CoreBlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class JSGConfigUtil {

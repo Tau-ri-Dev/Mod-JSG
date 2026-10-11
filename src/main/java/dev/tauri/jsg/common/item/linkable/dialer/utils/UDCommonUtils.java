@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.item.linkable.dialer.utils;
 
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerMode;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 

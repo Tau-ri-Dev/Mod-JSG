@@ -2,9 +2,9 @@ package dev.tauri.jsg.client.renderer.blockentity.dialhomedevice;
 
 import dev.tauri.jsg.api.dialhomedevice.DHDReactorState;
 import dev.tauri.jsg.api.item.IDHDPartItem;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.registry.CoreBiomeOverlays;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.registries.ForgeRegistries;

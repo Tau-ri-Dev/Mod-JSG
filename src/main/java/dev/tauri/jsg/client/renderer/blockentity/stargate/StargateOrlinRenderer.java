@@ -65,7 +65,7 @@ public class StargateOrlinRenderer extends StargateAbstractRenderer<StargateOrli
     }
 
     public boolean isBroken() {
-        return tileEntity.getBlockState().hasProperty(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN) && tileEntity.getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN);
+        return tileEntity.getBlockState().hasProperty(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN) && tileEntity.getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN);
     }
 
     public boolean renderStand() {

@@ -7,10 +7,10 @@ import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDAssemblyClickToServ
 import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDButtonClickedToServer;
 import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDFluidInsertionToServer;
 import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDUpgradeAssemblyClickToServer;
-import dev.tauri.jsg.core.common.raycaster.Raycaster;
-import dev.tauri.jsg.core.common.registry.CoreItems;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
+import dev.tauri.jsgcore.common.raycaster.Raycaster;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +33,7 @@ public abstract class RaycasterDHD extends Raycaster {
 
     @Override
     public float getRotation(Level world, BlockPos pos, Player player) {
-        return world.getBlockState(pos).getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ROTATION_PROPERTY) * -22.5f;
+        return world.getBlockState(pos).getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ROTATION_PROPERTY) * -22.5f;
     }
 
     @Override

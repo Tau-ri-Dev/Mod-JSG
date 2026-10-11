@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.resources.ResourceLocation;
 
 public class JSGAdvancements {

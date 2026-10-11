@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.stargate.animation;
 
 import dev.tauri.jsg.api.stargate.ChevronEnum;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

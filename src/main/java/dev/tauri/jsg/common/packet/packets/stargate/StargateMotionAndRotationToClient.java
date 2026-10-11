@@ -1,6 +1,6 @@
 package dev.tauri.jsg.common.packet.packets.stargate;
 
-import dev.tauri.jsg.core.common.packet.packets.JSGPacket;
+import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;

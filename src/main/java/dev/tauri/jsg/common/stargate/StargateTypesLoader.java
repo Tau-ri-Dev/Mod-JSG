@@ -10,14 +10,14 @@ import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.blockentity.stargate.*;
 import dev.tauri.jsg.common.registry.JSGBlocks;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.List;
 
 public class StargateTypesLoader {
-    public static final DeferredRegister<StargateType<?>> REGISTER = DeferredRegister.create(JSGRegistries.STARGATE_TYPE, JSG.MOD_ID);
+    public static final DeferredRegisterWrapper<StargateType<?>> REGISTER = DeferredRegisterWrapper.of(DeferredRegister.create(JSGRegistries.STARGATE_TYPE, JSG.MOD_ID));
 
     public static void load() {
         StargateTypes.MILKYWAY = REGISTER.register("milkyway", () -> new StargateType<>("MilkyWay", JSGSymbolTypes.MILKYWAY, StargateMilkyWayBaseBE.class,

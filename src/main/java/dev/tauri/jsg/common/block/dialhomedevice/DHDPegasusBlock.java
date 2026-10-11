@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.block.dialhomedevice;
 
 import dev.tauri.jsg.common.item.stargate.dialhomedevice.DHDPegasusItem;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
-import dev.tauri.jsg.core.common.item.JSGBlockItem;
+import dev.tauri.jsgcore.common.item.JSGBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

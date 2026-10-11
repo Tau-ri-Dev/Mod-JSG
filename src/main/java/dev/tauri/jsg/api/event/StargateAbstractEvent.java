@@ -2,7 +2,7 @@ package dev.tauri.jsg.api.event;
 
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 

@@ -5,8 +5,8 @@ import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.common.blockentity.stargate.StargateTollanBaseBE;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 

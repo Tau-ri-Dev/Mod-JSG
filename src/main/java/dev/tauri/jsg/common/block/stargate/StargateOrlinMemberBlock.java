@@ -4,8 +4,9 @@ import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinMemberBE;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -22,29 +23,29 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StargateOrlinMemberBlock extends StargateAbstractMemberBlock implements IStargateRingBlock {
     public StargateOrlinMemberBlock() {
         super(STARGATE_MEMBER_PROPS);
-        this.registerDefaultState(defaultBlockState().setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN, false));
+        this.registerDefaultState(defaultBlockState().setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN, false));
     }
 
     @Nullable
     @Override
-    public RegistryObject<CreativeModeTab> getTab() {
-        return CoreTabs.TAB_TRANSPORTATION.get();
+    public Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+        return CoreTabs.TAB_TRANSPORTATION;
     }
 
     @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN);
+        builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN);
     }
 
     @Nullable
@@ -78,7 +79,7 @@ public class StargateOrlinMemberBlock extends StargateAbstractMemberBlock implem
     @Override
     @ParametersAreNonnullByDefault
     public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        if (blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY))
+        if (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY))
             return Shapes.block();
         var gateShape = StargateAbstractBaseBlock.getGateBlockShapeAABB(blockState);
         if (blockGetter.getBlockEntity(blockPos.below(2)) instanceof StargateOrlinBaseBE) {

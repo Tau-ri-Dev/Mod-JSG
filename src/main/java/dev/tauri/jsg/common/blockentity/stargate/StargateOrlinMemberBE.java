@@ -31,7 +31,7 @@ public class StargateOrlinMemberBE extends StargateAbstractMemberBE {
         if (level == null || level.isClientSide()) return;
         openCount++;
         if (isBroken()) {
-            level.setBlock(getBlockPos(), level.getBlockState(getBlockPos()).setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN, true), 3);
+            level.setBlock(getBlockPos(), level.getBlockState(getBlockPos()).setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN, true), 3);
         }
         setChanged();
     }

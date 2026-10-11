@@ -10,7 +10,7 @@ import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
 import dev.tauri.jsg.common.loader.ElementEnum;
 import dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState;
 import dev.tauri.jsg.common.stargate.animation.chevron.StargateUniverseChevronsState;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;

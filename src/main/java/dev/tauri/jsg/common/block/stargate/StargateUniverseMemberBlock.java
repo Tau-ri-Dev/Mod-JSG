@@ -3,15 +3,16 @@ package dev.tauri.jsg.common.block.stargate;
 import dev.tauri.jsg.api.block.stargate.IStargateChevronBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Supplier;
 
 public abstract class StargateUniverseMemberBlock extends StargateClassicMemberBlock {
 
@@ -26,8 +27,8 @@ public abstract class StargateUniverseMemberBlock extends StargateClassicMemberB
 
         @Nullable
         @Override
-        public RegistryObject<CreativeModeTab> getTab() {
-            return CoreTabs.TAB_TRANSPORTATION.get();
+        public Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+            return CoreTabs.TAB_TRANSPORTATION;
         }
     }
 
@@ -41,8 +42,8 @@ public abstract class StargateUniverseMemberBlock extends StargateClassicMemberB
 
         @Nullable
         @Override
-        public RegistryObject<CreativeModeTab> getTab() {
-            return CoreTabs.TAB_TRANSPORTATION.get();
+        public Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+            return CoreTabs.TAB_TRANSPORTATION;
         }
     }
 }

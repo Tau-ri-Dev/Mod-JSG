@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.advancements;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.common.advancement.JSGCriterion;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 
 public class JSGCriterions {
     //TODO: Delete MERGING, GATE OPEN criterions

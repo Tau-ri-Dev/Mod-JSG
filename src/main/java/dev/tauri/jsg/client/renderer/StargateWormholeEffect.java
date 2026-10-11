@@ -7,10 +7,10 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.effect.StargateWormholeType;
 import dev.tauri.jsg.common.registry.JSGPositionedSounds;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.sound.JSGSoundHelperClient;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.sound.JSGSoundHelperClient;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,7 +23,7 @@ import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.drawScaledCustomSizeModalRect;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.drawScaledCustomSizeModalRect;
 
 /**
  * CLIENT SIDE

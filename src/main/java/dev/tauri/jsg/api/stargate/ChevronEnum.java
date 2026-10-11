@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.stargate;
 
-import dev.tauri.jsg.core.common.util.EnumKeyInterface;
-import dev.tauri.jsg.core.common.util.EnumKeyMap;
+import dev.tauri.jsgcore.common.util.EnumKeyInterface;
+import dev.tauri.jsgcore.common.util.EnumKeyMap;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.block.stargate;
 
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
-import dev.tauri.jsg.core.JSGCore;
+import dev.tauri.jsgcore.JSGCore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

@@ -2,8 +2,8 @@ package dev.tauri.jsg.common.command.commands;
 
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
-import dev.tauri.jsg.core.common.command.JSGAbstractCommand;
-import dev.tauri.jsg.core.common.command.JSGCommand;
+import dev.tauri.jsgcore.common.command.JSGAbstractCommand;
+import dev.tauri.jsgcore.common.command.JSGCommand;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 

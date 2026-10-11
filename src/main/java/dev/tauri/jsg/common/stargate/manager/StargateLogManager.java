@@ -1,6 +1,6 @@
 package dev.tauri.jsg.common.stargate.manager;
 
-import dev.tauri.jsg.core.common.blockentity.IBELogManager;
+import dev.tauri.jsgcore.common.blockentity.IBELogManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

@@ -1,9 +1,9 @@
 package dev.tauri.jsg;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.registry.helper.FluidHelper;
-import dev.tauri.jsg.core.common.registry.helper.builder.block.BlockRegistryHelperGeneric;
-import dev.tauri.jsg.core.common.registry.helper.builder.item.ItemRegistryHelperGeneric;
+import dev.tauri.jsgcore.common.registry.helper.FluidHelper;
+import dev.tauri.jsgcore.common.registry.helper.builder.block.BlockRegistryHelperGeneric;
+import dev.tauri.jsgcore.common.registry.helper.builder.item.ItemRegistryHelperGeneric;
 
 public class Constants {
 

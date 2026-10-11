@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import dev.tauri.jsg.api.config.JSGConfig;
-import dev.tauri.jsg.core.client.renderer.EmissiveRenderer;
+import dev.tauri.jsgcore.client.renderer.EmissiveRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import org.jetbrains.annotations.NotNull;

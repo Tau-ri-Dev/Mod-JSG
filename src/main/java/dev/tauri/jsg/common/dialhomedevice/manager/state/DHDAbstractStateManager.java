@@ -7,10 +7,10 @@ import dev.tauri.jsg.client.renderer.blockentity.dialhomedevice.DHDAbstractRende
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
 import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsg.common.dialhomedevice.manager.AbstractDHDManager;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.entity.StateType;
-import dev.tauri.jsg.core.common.registry.CoreStateTypes;
-import dev.tauri.jsg.core.common.state.BiomeOverrideState;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.registry.CoreStateTypes;
+import dev.tauri.jsgcore.common.state.BiomeOverrideState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;

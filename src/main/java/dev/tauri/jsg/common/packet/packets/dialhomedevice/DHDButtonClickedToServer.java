@@ -1,9 +1,9 @@
 package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
-import dev.tauri.jsg.core.common.packet.packets.PositionedPacket;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

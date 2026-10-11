@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.config.data.ProgressJSON;
-import dev.tauri.jsg.core.common.packet.packets.JSGPacket;
+import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;

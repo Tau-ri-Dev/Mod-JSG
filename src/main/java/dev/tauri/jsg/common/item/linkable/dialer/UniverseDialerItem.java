@@ -4,12 +4,12 @@ import dev.tauri.jsg.api.registry.JSGUniverseDialerModes;
 import dev.tauri.jsg.client.renderer.item.dialer.UniverseDialerBEWLR;
 import dev.tauri.jsg.client.screen.gui.DialerVirtualGui;
 import dev.tauri.jsg.common.item.linkable.dialer.modes.UDMemoryMode;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.JSGItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
-import dev.tauri.jsg.core.common.util.I18n;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -41,7 +41,7 @@ public class UniverseDialerItem extends JSGItem {
     public static final String C_BIOME_OVERLAY = "biomeOverlay";
 
     public UniverseDialerItem() {
-        super(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON), CoreTabs.TAB_TOOLS);
+        super(new Item.Properties().stacksTo(1).rarity(Rarity.COMMON), () -> CoreTabs.TAB_TOOLS);
     }
 
     @Override

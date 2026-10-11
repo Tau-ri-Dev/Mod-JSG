@@ -2,11 +2,12 @@ package dev.tauri.jsg.common.block.stargate.redstone;
 
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicMemberBE;
-import dev.tauri.jsg.core.common.block.JSGBlock;
-import dev.tauri.jsg.core.common.blockstate.JSGProperties;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.ITabbedItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.block.JSGBlock;
+import dev.tauri.jsgcore.common.blockstate.JSGProperties;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.ITabbedItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -24,7 +25,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -32,6 +32,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractStargateRedstoneIO extends JSGBlock implements ITabbedItem {
@@ -70,8 +71,8 @@ public abstract class AbstractStargateRedstoneIO extends JSGBlock implements ITa
 
 
     @Nullable
-    public RegistryObject<CreativeModeTab> getTab() {
-        return CoreTabs.TAB_TRANSPORTATION.get();
+    public Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+        return CoreTabs.TAB_TRANSPORTATION;
     }
 
     @Override

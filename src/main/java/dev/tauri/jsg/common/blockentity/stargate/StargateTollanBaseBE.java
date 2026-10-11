@@ -9,7 +9,7 @@ import dev.tauri.jsg.common.stargate.manager.dialing.StargateAbstractDialingMana
 import dev.tauri.jsg.common.stargate.manager.dialing.StargateTollanDialingManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateTollanStateManager;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.IPointOfOriginType;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,8 +27,8 @@ public class StargateTollanBaseBE extends StargateMilkyWayBaseBE {
     public void generateMergeHelper() {
         // setup merge helper - client and server
         mergeHelper = new StargateTollanMergeHelper(this);
-        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        mergeHelper.verticalFacing = dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
+        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        mergeHelper.verticalFacing = dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
         mergeHelper.basePos = getBlockPos();
     }
 

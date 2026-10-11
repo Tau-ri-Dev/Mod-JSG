@@ -1,12 +1,12 @@
 package dev.tauri.jsg.api.stargate.type;
 
-import net.minecraftforge.registries.RegistryObject;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 
 public class StargateTypes {
-    public static RegistryObject<StargateType<?>> MILKYWAY;
-    public static RegistryObject<StargateType<?>> PEGASUS;
-    public static RegistryObject<StargateType<?>> UNIVERSE;
-    public static RegistryObject<StargateType<?>> TOLLAN;
-    public static RegistryObject<StargateType<?>> ORLIN;
-    public static RegistryObject<StargateType<?>> MOVIE;
+    public static RegistryObjectWrapper<StargateType<?>> MILKYWAY;
+    public static RegistryObjectWrapper<StargateType<?>> PEGASUS;
+    public static RegistryObjectWrapper<StargateType<?>> UNIVERSE;
+    public static RegistryObjectWrapper<StargateType<?>> TOLLAN;
+    public static RegistryObjectWrapper<StargateType<?>> ORLIN;
+    public static RegistryObjectWrapper<StargateType<?>> MOVIE;
 }

@@ -2,8 +2,9 @@ package dev.tauri.jsg.datagen;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.client.model.JSGOBJModelLoaderBuilder;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.model.JSGOBJModelLoaderBuilder;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -13,7 +14,6 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Objects;
 
@@ -26,11 +26,11 @@ public class JSGItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
     }
 
-    private void blockOBJModel(RegistryObject<Block> block, ItemDisplayContext... renderTypes) {
+    private void blockOBJModel(RegistryObjectWrapper<Block> block, ItemDisplayContext... renderTypes) {
         itemOBJModel(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())), renderTypes);
     }
 
-    private void itemOBJModel(RegistryObject<Item> item, ItemDisplayContext... renderTypes) {
+    private void itemOBJModel(RegistryObjectWrapper<Item> item, ItemDisplayContext... renderTypes) {
         itemOBJModel(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item.get())), renderTypes);
     }
 

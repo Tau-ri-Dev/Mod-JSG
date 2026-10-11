@@ -21,12 +21,12 @@ import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.stargate.animation.IrisAnimationState;
 import dev.tauri.jsg.common.state.stargate.StargateRendererActionState;
 import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
-import dev.tauri.jsg.core.common.blockentity.ScheduledTaskExecutorInterface;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
-import dev.tauri.jsg.core.common.entity.ScheduledTaskType;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
-import dev.tauri.jsg.core.common.util.EnumKeyInterface;
-import dev.tauri.jsg.core.common.util.EnumKeyMap;
+import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
+import dev.tauri.jsgcore.common.util.EnumKeyInterface;
+import dev.tauri.jsgcore.common.util.EnumKeyMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
@@ -367,7 +367,7 @@ public class StargateIrisManager extends AbstractStargateManager<StargateClassic
     private void setIrisBlocks(boolean set) {
         var world = stargate.getLevel();
         if (world == null) return;
-        BlockState invBlockState = JSGBlocks.IRIS_BLOCK.get().defaultBlockState().setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, stargate.getFacing()).setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalFacingByDirection(stargate.getFacingVertical()));
+        BlockState invBlockState = JSGBlocks.IRIS_BLOCK.get().defaultBlockState().setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, stargate.getFacing()).setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalFacingByDirection(stargate.getFacingVertical()));
         for (BlockPos invPos : getIrisBlocksPattern()) {
             BlockPos newPos = stargate.relative(invPos);
             if (set) {

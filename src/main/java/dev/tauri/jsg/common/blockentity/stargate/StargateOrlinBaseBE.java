@@ -27,15 +27,15 @@ import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateOrlinStateManager;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.worldgen.generator.StargateGenerator;
-import dev.tauri.jsg.core.common.blockentity.ILinkable;
-import dev.tauri.jsg.core.common.entity.IAddressNotebookPageData;
-import dev.tauri.jsg.core.common.entity.NotebookPageType;
-import dev.tauri.jsg.core.common.power.general.EnergyRequiredToOperate;
-import dev.tauri.jsg.core.common.power.general.SmallEnergyStorage;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.blockentity.ILinkable;
+import dev.tauri.jsgcore.common.entity.IAddressNotebookPageData;
+import dev.tauri.jsgcore.common.entity.NotebookPageType;
+import dev.tauri.jsgcore.common.power.general.EnergyRequiredToOperate;
+import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -155,8 +155,8 @@ public class StargateOrlinBaseBE extends StargateAbstractBaseBE<StargateOrlinRen
     public void generateMergeHelper() {
         // setup merge helper - client and server
         mergeHelper = new StargateOrlinMergeHelper(this);
-        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        mergeHelper.verticalFacing = dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
+        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        mergeHelper.verticalFacing = dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
         mergeHelper.basePos = getBlockPos();
     }
 
@@ -210,7 +210,7 @@ public class StargateOrlinBaseBE extends StargateAbstractBaseBE<StargateOrlinRen
         openCount++;
         getMergeHelper().incrementMembersOpenCount();
         if (isBroken(true)) {
-            level.setBlock(getBlockPos(), level.getBlockState(getBlockPos()).setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN, true), 3);
+            level.setBlock(getBlockPos(), level.getBlockState(getBlockPos()).setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN, true), 3);
         }
         setChanged();
     }

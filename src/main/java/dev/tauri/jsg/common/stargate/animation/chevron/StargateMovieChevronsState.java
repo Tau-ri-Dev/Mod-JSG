@@ -9,12 +9,12 @@ import dev.tauri.jsg.api.stargate.exception.StargateException;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.stargate.manager.state.StargateMovieStateManager;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
-import dev.tauri.jsg.core.common.entity.ScheduledTaskType;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.util.math.MathFunction;
-import dev.tauri.jsg.core.common.util.math.MathFunctionImpl;
-import dev.tauri.jsg.core.common.util.math.MathRange;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.util.math.MathFunction;
+import dev.tauri.jsgcore.common.util.math.MathFunctionImpl;
+import dev.tauri.jsgcore.common.util.math.MathRange;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 

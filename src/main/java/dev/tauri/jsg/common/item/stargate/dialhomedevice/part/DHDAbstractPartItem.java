@@ -1,14 +1,14 @@
 package dev.tauri.jsg.common.item.stargate.dialhomedevice.part;
 
 import dev.tauri.jsg.api.item.IDHDPartItem;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.JSGItem;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,13 +29,13 @@ public class DHDAbstractPartItem extends JSGItem implements IDHDPartItem {
         this.raycasterId = raycasterId;
     }
 
-    public DHDAbstractPartItem(Properties properties, RegistryObject<CreativeModeTab> tab, boolean mandatory, int raycasterId) {
+    public DHDAbstractPartItem(Properties properties, Supplier<RegistryObjectWrapper<CreativeModeTab>> tab, boolean mandatory, int raycasterId) {
         super(properties, tab);
         this.mandatory = mandatory;
         this.raycasterId = raycasterId;
     }
 
-    public DHDAbstractPartItem(Properties properties, List<RegistryObject<CreativeModeTab>> tabs, boolean mandatory, int raycasterId) {
+    public DHDAbstractPartItem(Properties properties, List<Supplier<RegistryObjectWrapper<CreativeModeTab>>> tabs, boolean mandatory, int raycasterId) {
         super(properties, tabs);
         this.mandatory = mandatory;
         this.raycasterId = raycasterId;

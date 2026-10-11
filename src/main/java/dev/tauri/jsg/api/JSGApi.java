@@ -1,10 +1,10 @@
 package dev.tauri.jsg.api;
 
 import dev.tauri.jsg.api.stargate.network.IStargateNetwork;
-import dev.tauri.jsg.core.LoggerWrapper;
-import dev.tauri.jsg.core.client.LoadersHolder;
-import dev.tauri.jsg.core.common.registry.helper.RegistryHelper;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.LoggerWrapper;
+import dev.tauri.jsgcore.client.LoadersHolder;
+import dev.tauri.jsgcore.common.registry.helper.RegistryHelper;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

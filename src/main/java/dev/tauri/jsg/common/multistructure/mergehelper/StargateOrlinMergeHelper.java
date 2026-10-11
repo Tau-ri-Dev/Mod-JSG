@@ -62,14 +62,14 @@ public class StargateOrlinMergeHelper extends StargateAbstractMergeHelper {
         if (level == null) return false;
         boolean shouldBeMerged = true;
 
-        var broken = stargate.getBlockState().getOptionalValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN).orElse(false);
+        var broken = stargate.getBlockState().getOptionalValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN).orElse(false);
 
         for (Map.Entry<BlockPos, BlockState> entry : getBlocks().entrySet()) {
             BlockState state = level.getBlockState(entry.getKey());
             if (state.getBlock() == entry.getValue().getBlock()
-                    && state.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY) == entry.getValue().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY)
-                    && state.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY).equals(entry.getValue().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY))
-                    && state.getOptionalValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN).orElse(false).equals(broken)
+                    && state.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY) == entry.getValue().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY)
+                    && state.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY).equals(entry.getValue().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY))
+                    && state.getOptionalValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN).orElse(false).equals(broken)
             ) continue;
             shouldBeMerged = false;
             break;

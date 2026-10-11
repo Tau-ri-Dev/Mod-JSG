@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 
 public class JSGPositionedSounds {
     public static final PositionedSound WORMHOLE_TRAVEL = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "misc.stargate.wormhole.travel"), true, 1).register(JSGApi.REGISTRY_HELPER.sound());

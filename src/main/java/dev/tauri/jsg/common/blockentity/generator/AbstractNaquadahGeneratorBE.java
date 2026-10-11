@@ -1,12 +1,12 @@
 package dev.tauri.jsg.common.blockentity.generator;
 
-import dev.tauri.jsg.core.common.blockentity.BEStateProvider;
-import dev.tauri.jsg.core.common.blockentity.ITickable;
-import dev.tauri.jsg.core.common.blockentity.ScheduledTaskExecutorInterface;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
-import dev.tauri.jsg.core.common.entity.ScheduledTaskType;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.entity.StateType;
+import dev.tauri.jsgcore.common.blockentity.BEStateProvider;
+import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.entity.StateType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

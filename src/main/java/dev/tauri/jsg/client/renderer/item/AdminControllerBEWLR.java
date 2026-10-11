@@ -3,7 +3,7 @@ package dev.tauri.jsg.client.renderer.item;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.tauri.jsg.common.loader.ElementEnum;
-import dev.tauri.jsg.core.client.renderer.AbstractItemBEWLR;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;

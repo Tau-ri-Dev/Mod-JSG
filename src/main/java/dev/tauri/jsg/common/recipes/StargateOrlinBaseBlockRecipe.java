@@ -4,10 +4,12 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.entity.StargateAddressData;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.registry.JSGBlocks;
-import dev.tauri.jsg.core.common.entity.NotebookPageType;
-import dev.tauri.jsg.core.common.recipe.notebook.NotebookRecipeUtils;
-import dev.tauri.jsg.core.common.registry.CoreItems;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.entity.NotebookPageType;
+import dev.tauri.jsgcore.common.recipe.notebook.NotebookRecipeUtils;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -35,7 +37,7 @@ public class StargateOrlinBaseBlockRecipe extends ShapedRecipe {
         super(JSGMapping.rl(JSG.MOD_ID, "orlin_base_block"), "JSG", CraftingBookCategory.BUILDING, 3, 3, NonNullList.of(Ingredient.EMPTY,
                 Ingredient.of(new ItemStack(Items.COPPER_INGOT)), Ingredient.of(NotebookRecipeUtils.PAGE1.copy()), Ingredient.of(new ItemStack(Items.COPPER_INGOT)),
                 Ingredient.of(new ItemStack(Items.COPPER_INGOT)), Ingredient.of(new ItemStack(JSGBlocks.TOASTER.get())), Ingredient.of(new ItemStack(Items.COPPER_INGOT)),
-                Ingredient.of(new ItemStack(Items.REPEATER)), Ingredient.of(new ItemStack(CoreItems.TITANIUM_DUST.get())), Ingredient.of(new ItemStack(Items.REPEATER))
+                Ingredient.of(new ItemStack(Items.REPEATER)), Ingredient.of(new ItemStack(MaterialType.TITANIUM.getItem(MaterialItemType.DUST).get())), Ingredient.of(new ItemStack(Items.REPEATER))
         ), getOrlinGate(NotebookRecipeUtils.PAGE1.copy()));
     }
 

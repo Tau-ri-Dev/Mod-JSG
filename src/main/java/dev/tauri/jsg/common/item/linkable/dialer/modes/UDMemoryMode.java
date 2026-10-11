@@ -5,7 +5,7 @@ import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsg.common.blockentity.stargate.StargateUniverseBaseBE;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
-import dev.tauri.jsg.core.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

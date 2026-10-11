@@ -7,10 +7,10 @@ import dev.tauri.jsg.client.renderer.item.GarageDoorOpenerBEWLR;
 import dev.tauri.jsg.client.screen.gui.GDOVirtualGui;
 import dev.tauri.jsg.client.screen.provider.GDOVirtualGuiProvider;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
-import dev.tauri.jsg.core.common.item.JSGItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -39,7 +39,7 @@ import java.util.function.Consumer;
 public class GDOItem extends JSGItem {
 
     public GDOItem() {
-        super(new Properties().stacksTo(1).rarity(Rarity.COMMON), CoreTabs.TAB_TOOLS);
+        super(new Properties().stacksTo(1).rarity(Rarity.COMMON), () -> CoreTabs.TAB_TOOLS);
     }
 
     @Override

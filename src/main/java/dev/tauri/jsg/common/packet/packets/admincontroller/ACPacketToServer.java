@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.packet.packets.admincontroller;
 
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
-import dev.tauri.jsg.core.common.packet.packets.JSGPacket;
+import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

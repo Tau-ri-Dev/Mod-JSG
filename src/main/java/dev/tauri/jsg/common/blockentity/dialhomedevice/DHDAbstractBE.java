@@ -19,20 +19,20 @@ import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsg.common.dialhomedevice.manager.DHDReactorManager;
 import dev.tauri.jsg.common.dialhomedevice.manager.state.DHDAbstractStateManager;
 import dev.tauri.jsg.common.helpers.StargateLinkingHelper;
-import dev.tauri.jsg.core.common.blockentity.BEStateProvider;
-import dev.tauri.jsg.core.common.blockentity.ILinkable;
-import dev.tauri.jsg.core.common.blockentity.JSGBlockEntity;
-import dev.tauri.jsg.core.common.config.ingame.IConfigurable;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.entity.StateType;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
-import dev.tauri.jsg.core.common.sound.ISoundEvent;
-import dev.tauri.jsg.core.common.sound.JSGSoundHelper;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.util.FluidTank;
-import dev.tauri.jsg.core.common.util.JSGItemStackHandler;
+import dev.tauri.jsgcore.common.blockentity.BEStateProvider;
+import dev.tauri.jsgcore.common.blockentity.ILinkable;
+import dev.tauri.jsgcore.common.blockentity.JSGBlockEntity;
+import dev.tauri.jsgcore.common.config.ingame.IConfigurable;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.sound.ISoundEvent;
+import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.util.FluidTank;
+import dev.tauri.jsgcore.common.util.JSGItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -82,11 +82,11 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     public DHDAbstractBE(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);
         this.stateManager = createStateManager();
-        this.reactorManager = new DHDReactorManager(this, () -> new FluidTank(new FluidStack(CoreFluids.MOLTEN_NAQUADAH_REFINED.get(), 0), JSGConfig.DialHomeDevice.fluidCapacity.get()) {
+        this.reactorManager = new DHDReactorManager(this, () -> new FluidTank(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 0), JSGConfig.DialHomeDevice.fluidCapacity.get()) {
             @Override
             public boolean isFluidValid(FluidStack fluid) {
                 if (fluid == null) return false;
-                return fluid.getFluid() == CoreFluids.MOLTEN_NAQUADAH_REFINED.get();
+                return fluid.getFluid() == MaterialType.REFINED_NAQUADAH.getFluid().get();
             }
 
             @Override
@@ -242,7 +242,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
 
     @Override
     public Vec3 getBlockPosInFront() {
-        Direction dhdFacing = Direction.from2DDataValue(Math.round(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ROTATION_PROPERTY) / 4.0f)).getOpposite();
+        Direction dhdFacing = Direction.from2DDataValue(Math.round(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ROTATION_PROPERTY) / 4.0f)).getOpposite();
         return getBlockPos().getCenter().add(new Vec3(dhdFacing.getNormal().getX(), dhdFacing.getNormal().getY(), dhdFacing.getNormal().getZ()));
     }
 

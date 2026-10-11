@@ -3,8 +3,8 @@ package dev.tauri.jsg.common.packet.packets.admincontroller.event;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACPacketToClient;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 

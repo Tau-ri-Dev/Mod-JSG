@@ -1,7 +1,7 @@
 package dev.tauri.jsg.client.screen.gui.admincontroller.tabs;
 
 import dev.tauri.jsg.client.screen.gui.admincontroller.AdminControllerGUI;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.navigation.ScreenRectangle;

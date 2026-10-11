@@ -2,10 +2,10 @@ package dev.tauri.jsg.client.screen.gui.mainmenu;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.screen.widget.base.JSGButtonClassic;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.screen.widget.base.JSGButtonClassic;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static dev.tauri.jsg.client.screen.gui.mainmenu.GuiCustomMainMenu.poseStack;
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.drawModalRectWithCustomSizedTexture;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.drawModalRectWithCustomSizedTexture;
 
 @OnlyIn(Dist.CLIENT)
 @SuppressWarnings("unused")

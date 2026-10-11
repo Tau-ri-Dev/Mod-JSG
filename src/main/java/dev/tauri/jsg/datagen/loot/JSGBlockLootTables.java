@@ -2,8 +2,9 @@ package dev.tauri.jsg.datagen.loot;
 
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.common.registry.JSGBlocks;
-import dev.tauri.jsg.core.common.blockstate.JSGProperties;
-import dev.tauri.jsg.core.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.blockstate.JSGProperties;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -27,7 +28,6 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -129,7 +129,7 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
     @Override
     @NotNull
     protected Iterable<Block> getKnownBlocks() {
-        return JSGApi.REGISTRY_HELPER.block().getEntries().stream().map(RegistryObject::get)::iterator;
+        return JSGApi.REGISTRY_HELPER.block().getEntries().stream().map(RegistryObjectWrapper::get)::iterator;
     }
 
     protected void dropNothing(Block block) {

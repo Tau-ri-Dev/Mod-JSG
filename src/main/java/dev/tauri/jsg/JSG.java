@@ -20,12 +20,12 @@ import dev.tauri.jsg.common.registry.JSGRegistriesInit;
 import dev.tauri.jsg.common.stargate.StargateTypesLoader;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.stargate.network.StargateReservedAddresses;
-import dev.tauri.jsg.core.JSGAddon;
-import dev.tauri.jsg.core.JSGAddons;
-import dev.tauri.jsg.core.JSGCore;
-import dev.tauri.jsg.core.LoggerWrapper;
-import dev.tauri.jsg.core.common.integration.Integrations;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.JSGAddon;
+import dev.tauri.jsgcore.JSGAddons;
+import dev.tauri.jsgcore.JSGCore;
+import dev.tauri.jsgcore.LoggerWrapper;
+import dev.tauri.jsgcore.common.integration.Integrations;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -104,7 +104,7 @@ public class JSG implements JSGAddon {
         }
 
         JSGConfig.load();
-        JSGConfig.register();
+        JSGConfig.register(ctx);
 
         IEventBus eventBus = ctx.getModEventBus();
 

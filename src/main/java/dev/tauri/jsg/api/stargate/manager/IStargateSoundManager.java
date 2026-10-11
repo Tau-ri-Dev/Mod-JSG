@@ -1,6 +1,6 @@
 package dev.tauri.jsg.api.stargate.manager;
 
-import dev.tauri.jsg.core.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.blockentity.ITickable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 

@@ -23,8 +23,8 @@ import dev.tauri.jsg.common.packet.packets.stargate.SaveIrisCodeToServer;
 import dev.tauri.jsg.common.packet.packets.stargate.StargateMotionAndRotationToClient;
 import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionRequestToClient;
 import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionToServer;
-import dev.tauri.jsg.core.common.packet.SimplePacketHandler;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.packet.SimplePacketHandler;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 

@@ -4,8 +4,8 @@ import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.common.raycaster.util.RayCastedButton;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
+import dev.tauri.jsgcore.common.raycaster.util.RayCastedButton;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;

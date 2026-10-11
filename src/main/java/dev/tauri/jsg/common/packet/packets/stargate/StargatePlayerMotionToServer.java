@@ -3,7 +3,7 @@ package dev.tauri.jsg.common.packet.packets.stargate;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.stargate.manager.StargateEventHorizonManager;
 import dev.tauri.jsg.common.stargate.teleportation.traveler.PlayerTraveler;
-import dev.tauri.jsg.core.common.packet.packets.PositionedPacket;
+import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;

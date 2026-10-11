@@ -10,11 +10,11 @@ import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.common.integration.cctweaked.CCDevice;
-import dev.tauri.jsg.core.common.integration.cctweaked.CCTweakedHelper;
-import dev.tauri.jsg.core.common.integration.cctweaked.methods.AbstractCCMethods;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.integration.cctweaked.CCDevice;
+import dev.tauri.jsgcore.common.integration.cctweaked.CCTweakedHelper;
+import dev.tauri.jsgcore.common.integration.cctweaked.methods.AbstractCCMethods;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.*;

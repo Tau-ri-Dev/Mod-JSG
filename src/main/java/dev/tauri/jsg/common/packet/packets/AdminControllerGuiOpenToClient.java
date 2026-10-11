@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.common.packet.packets.JSGPacket;
+import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

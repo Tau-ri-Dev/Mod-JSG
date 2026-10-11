@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.block.jub;
 
 import dev.tauri.jsg.common.capability.JSGCapabilities;
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

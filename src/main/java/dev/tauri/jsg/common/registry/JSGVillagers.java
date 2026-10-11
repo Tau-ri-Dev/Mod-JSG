@@ -6,10 +6,15 @@ import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.common.entity.VillagerTradesBuilder;
 import dev.tauri.jsg.common.registry.tags.JSGBiomeTags;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.registry.CoreBlocks;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
-import dev.tauri.jsg.core.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
+import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
+import dev.tauri.jsgcore.common.definition.material.MaterialOreVariant;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.registry.CoreBlocks;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -23,35 +28,33 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class JSGVillagers {
-    private static final DeferredRegister<VillagerProfession> PROFESSION_REGISTER = JSGApi.REGISTRY_HELPER.villagerProfession();
-    private static final DeferredRegister<VillagerType> TYPE_REGISTER = JSGApi.REGISTRY_HELPER.villagerType();
-    private static final DeferredRegister<PoiType> POI_REGISTER = JSGApi.REGISTRY_HELPER.poi();
+    private static final DeferredRegisterWrapper<VillagerProfession> PROFESSION_REGISTER = JSGApi.REGISTRY_HELPER.villagerProfession();
+    private static final DeferredRegisterWrapper<VillagerType> TYPE_REGISTER = JSGApi.REGISTRY_HELPER.villagerType();
+    private static final DeferredRegisterWrapper<PoiType> POI_REGISTER = JSGApi.REGISTRY_HELPER.poi();
 
-    public static final RegistryObject<PoiType> NAQUADAH_CAULDRON_POI = POI_REGISTER.register("naquadah_cauldron", () -> new PoiType(ImmutableSet.copyOf(CoreFluids.MOLTEN_NAQUADAH_RAW.cauldron.get().getStateDefinition().getPossibleStates()), 4, 1));
+    public static final RegistryObjectWrapper<PoiType> NAQUADAH_CAULDRON_POI = POI_REGISTER.register("naquadah_cauldron", () -> new PoiType(ImmutableSet.copyOf(CoreBlocks.CAULDRON.get().getStateDefinition().getPossibleStates()), 4, 1));
 
-    public static final RegistryObject<VillagerProfession> PRIEST_DESERT = PROFESSION_REGISTER.register("priest_desert", () -> new VillagerProfession("priest_desert", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_JUNGLE = PROFESSION_REGISTER.register("priest_jungle", () -> new VillagerProfession("priest_jungle", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_PLAINS = PROFESSION_REGISTER.register("priest_plains", () -> new VillagerProfession("priest_plains", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_SAVANNA = PROFESSION_REGISTER.register("priest_savanna", () -> new VillagerProfession("priest_savanna", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_SNOW = PROFESSION_REGISTER.register("priest_snow", () -> new VillagerProfession("priest_snow", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_SWAMP = PROFESSION_REGISTER.register("priest_swamp", () -> new VillagerProfession("priest_swamp", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObject<VillagerProfession> PRIEST_TAIGA = PROFESSION_REGISTER.register("priest_taiga", () -> new VillagerProfession("priest_taiga", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_DESERT = PROFESSION_REGISTER.register("priest_desert", () -> new VillagerProfession("priest_desert", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_JUNGLE = PROFESSION_REGISTER.register("priest_jungle", () -> new VillagerProfession("priest_jungle", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_PLAINS = PROFESSION_REGISTER.register("priest_plains", () -> new VillagerProfession("priest_plains", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SAVANNA = PROFESSION_REGISTER.register("priest_savanna", () -> new VillagerProfession("priest_savanna", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SNOW = PROFESSION_REGISTER.register("priest_snow", () -> new VillagerProfession("priest_snow", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SWAMP = PROFESSION_REGISTER.register("priest_swamp", () -> new VillagerProfession("priest_swamp", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_TAIGA = PROFESSION_REGISTER.register("priest_taiga", () -> new VillagerProfession("priest_taiga", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
 
-    public static final RegistryObject<VillagerProfession> SLAVE_MINER = PROFESSION_REGISTER.register("slave_miner", () -> new VillagerProfession("slave_miner", holder -> holder.is(Objects.requireNonNull(NAQUADAH_CAULDRON_POI.getKey())), holder ->
+    public static final RegistryObjectWrapper<VillagerProfession> SLAVE_MINER = PROFESSION_REGISTER.register("slave_miner", () -> new VillagerProfession("slave_miner", holder -> holder.is(Objects.requireNonNull(NAQUADAH_CAULDRON_POI.getKey())), holder ->
             holder.is(Objects.requireNonNull(NAQUADAH_CAULDRON_POI.getKey())),
-            ImmutableSet.of(Items.IRON_PICKAXE, CoreItems.NAQUADAH_ORE_RAW.get()),
-            ImmutableSet.copyOf(CoreBlocks.ORE_NAQUADAH.values().stream().map(RegistryObject::get).collect(Collectors.toSet())), null));
+            ImmutableSet.of(Items.IRON_PICKAXE, MaterialType.NAQUADAH.getItem(MaterialItemType.RAW).get()),
+            ImmutableSet.copyOf(Arrays.stream(MaterialOreVariant.values()).map(v -> MaterialType.NAQUADAH.getOre(v).get()).toList()), null));
 
-    public static final RegistryObject<VillagerType> ABYDOS_TYPE = TYPE_REGISTER.register("abydonian", () -> new VillagerType("abydonian"));
+    public static final RegistryObjectWrapper<VillagerType> ABYDOS_TYPE = TYPE_REGISTER.register("abydonian", () -> new VillagerType("abydonian"));
 
 
     public static void init() {
@@ -97,7 +100,7 @@ public class JSGVillagers {
                      return null;
                 })
 
-                .setInput1(new ItemStack(CoreItems.TITANIUM_INGOT.get(), 20))
+                .setInput1(new ItemStack(MaterialType.TRINIUM.getItem(MaterialItemType.INGOT).get(), 20))
                 .setOutput(new ItemStack(Items.EMERALD, 1))
                 .setMaxUses(12)
                 .setXpPerTrade(1)
@@ -116,7 +119,7 @@ public class JSGVillagers {
                 .setPriestOnly()
                 .register()
 
-                .setInput1(new ItemStack(CoreItems.NAQUADAH_ORE_RAW.get(), 24))
+                .setInput1(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.RAW).get(), 24))
                 .setOutput(new ItemStack(Items.EMERALD, 1))
                 .setMaxUses(12)
                 .setXpPerTrade(1)
@@ -154,7 +157,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD, 1))
-                .setInput2(new ItemStack(CoreItems.FOOD_LEMON.get(),6))
+                .setInput2(new ItemStack(CoreItems.SLICE_LEMON.get(),6))
                 .setOutput(new ItemStack(Items.MUSHROOM_STEW,1))
                 .setMaxUses(5)
                 .setXpPerTrade(15)
@@ -174,7 +177,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,6))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_PEGASUS.get(),4))
+                .setInput2(new ItemStack(CrystalType.PEGASUS.getCrystalItem().get(),4))
                 .setOutput(new ItemStack(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL.get(),1))
                 .setMaxUses(6)
                 .setXpPerTrade(20)
@@ -203,7 +206,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,4))
-                .setInput2(new ItemStack(CoreItems.TRINIUM_INGOT.get(),2))
+                .setInput2(new ItemStack(MaterialType.TRINIUM.getItem(MaterialItemType.INGOT).get(),2))
                 .setOutput(new ItemStack(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get(),1))
                 .setMaxUses(12)
                 .setXpPerTrade(15)
@@ -213,7 +216,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD, 4))
-                .setInput2(new ItemStack(CoreItems.NAQUADAH_ALLOY.get(),3))
+                .setInput2(new ItemStack(MaterialType.NAQUADAH_ALLOY.getItem(MaterialItemType.INGOT).get(),3))
                 .setOutput(new ItemStack(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get(),1))
                 .setMaxUses(12)
                 .setXpPerTrade(15)
@@ -223,7 +226,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,4))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_ALLOY.get(),3))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH_ALLOY.getItem(MaterialItemType.INGOT).get(),3))
                 .setMaxUses(10)
                 .setXpPerTrade(10)
                 .setPriceMul(0.02f)
@@ -232,7 +235,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD, 4))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_RED.get(),1))
+                .setOutput(new ItemStack(CrystalType.RED.getCrystalItem().get(),1))
                 .setMaxUses(10)
                 .setXpPerTrade(30)
                 .setPriceMul(0.02f)
@@ -241,8 +244,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,2))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_RED.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_RED_SMALL.get(),2))
+                .setInput2(new ItemStack(CrystalType.RED.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.RED.getSmallCrystalItem().get(),2))
                 .setMaxUses(12)
                 .setXpPerTrade(30)
                 .setPriceMul(0.02f)
@@ -251,7 +254,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD, 3))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_PEGASUS.get(),2))
+                .setOutput(new ItemStack(CrystalType.PEGASUS.getCrystalItem().get(),2))
                 .setMaxUses(4)
                 .setXpPerTrade(30)
                 .setPriceMul(0.02f)
@@ -260,8 +263,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,2))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_PEGASUS.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_PEGASUS_SMALL.get(),1))
+                .setInput2(new ItemStack(CrystalType.PEGASUS.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.PEGASUS.getSmallCrystalItem().get(),1))
                 .setMaxUses(8)
                 .setXpPerTrade(30)
                 .setPriceMul(0.02f)
@@ -270,7 +273,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_ENDER.get(),2))
+                .setOutput(new ItemStack(CrystalType.ENDER.getCrystalItem().get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -279,7 +282,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setOutput(new ItemStack(CoreItems.TRINIUM_NUGGET.get(),8))
+                .setOutput(new ItemStack(MaterialType.TRINIUM.getItem(MaterialItemType.NUGGET).get(),8))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -288,8 +291,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,3))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_ENDER.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_ENDER_SMALL.get(),2))
+                .setInput2(new ItemStack(CrystalType.ENDER.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.ENDER.getSmallCrystalItem().get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.2f)
@@ -298,7 +301,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_YELLOW.get(),3))
+                .setOutput(new ItemStack(CrystalType.YELLOW.getCrystalItem().get(),3))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -307,8 +310,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_YELLOW.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_YELLOW_SMALL.get(),2))
+                .setInput2(new ItemStack(CrystalType.YELLOW.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.YELLOW.getSmallCrystalItem().get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -317,7 +320,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.IRON_INGOT, 6))
-                .setInput2(new ItemStack(CoreItems.TITANIUM_NUGGET.get(),1))
+                .setInput2(new ItemStack(MaterialType.TITANIUM.getItem(MaterialItemType.NUGGET).get(),1))
                 .setOutput(new ItemStack(CoreItems.JSG_WRENCH.get(),1))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
@@ -327,7 +330,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD, 2))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_WHITE.get(),3))
+                .setOutput(new ItemStack(CrystalType.WHITE.getCrystalItem().get(),3))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -336,8 +339,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,2))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_WHITE.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_WHITE_SMALL.get(),3))
+                .setInput2(new ItemStack(CrystalType.WHITE.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.WHITE.getSmallCrystalItem().get(),3))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -347,7 +350,7 @@ public class JSGVillagers {
 
                 .setInput1(new ItemStack(Items.EMERALD, 1))
                 .setInput2(new ItemStack(Items.WHEAT,48))
-                .setOutput(new ItemStack(CoreItems.FOOD_LEMON.get(),1))
+                .setOutput(new ItemStack(CoreItems.SLICE_LEMON.get(),1))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -356,7 +359,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_BLUE.get(),4))
+                .setOutput(new ItemStack(CrystalType.BLUE.getCrystalItem().get(),4))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -365,8 +368,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_BLUE.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_BLUE_SMALL.get(),2))
+                .setInput2(new ItemStack(CrystalType.BLUE.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.BLUE.getSmallCrystalItem().get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -385,7 +388,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,2))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_BLUE.get(),3))
+                .setOutput(new ItemStack(CrystalType.BLUE.getCrystalItem().get(),3))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -394,8 +397,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_BLUE.get(),1))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_BLUE_SMALL.get(),2))
+                .setInput2(new ItemStack(CrystalType.BLUE.getCrystalItem().get(),1))
+                .setOutput(new ItemStack(CrystalType.BLUE.getSmallCrystalItem().get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -414,7 +417,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,2))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_ENDER.get(),4))
+                .setOutput(new ItemStack(CrystalType.ENDER.getCrystalItem().get(),4))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -423,8 +426,8 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.EMERALD,1))
-                .setInput2(new ItemStack(CoreItems.CRYSTAL_ENDER.get(),2))
-                .setOutput(new ItemStack(CoreItems.CRYSTAL_ENDER_SMALL.get(),4))
+                .setInput2(new ItemStack(CrystalType.ENDER.getCrystalItem().get(),2))
+                .setOutput(new ItemStack(CrystalType.ENDER.getSmallCrystalItem().get(),4))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -470,7 +473,7 @@ public class JSGVillagers {
                 .setForProfessions(PRIEST_SWAMP.get())
                 .register()
 
-                .setInput1(new ItemStack(CoreItems.CRYSTAL_RED.get(),4))
+                .setInput1(new ItemStack(CrystalType.RED.getCrystalItem().get(),4))
                 .setInput2(new ItemStack(Items.EMERALD,3))
                 .setOutput(new ItemStack(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL.get(),1))
                 .setMaxUses(5)
@@ -482,7 +485,7 @@ public class JSGVillagers {
 
                 //Slave Miner
                 .setInput1(new ItemStack(Items.CARROT,4))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_NUGGET.get(), 1))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.NUGGET).get(), 1))
                 .setMaxUses(8)
                 .setXpPerTrade(1)
                 .setPriceMul(0.02f)
@@ -491,7 +494,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.SWEET_BERRIES, 6))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_DUST.get(),2))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.INGOT).get(),2))
                 .setMaxUses(6)
                 .setXpPerTrade(1)
                 .setPriceMul(0.02f)
@@ -500,7 +503,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.APPLE, 8))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_ORE_RAW.get(), 3))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.RAW).get(), 3))
                 .setMaxUses(10)
                 .setXpPerTrade(1)
                 .setPriceMul(0.02f)
@@ -518,7 +521,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.BEETROOT,20))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_DUST.get(),2))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.DUST).get(),2))
                 .setMaxUses(5)
                 .setXpPerTrade(12)
                 .setPriceMul(0.02f)
@@ -527,7 +530,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.POTATO,16))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_NUGGET.get(),2))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.NUGGET).get(),2))
                 .setMaxUses(6)
                 .setXpPerTrade(8)
                 .setPriceMul(0.02f)
@@ -545,7 +548,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.COOKED_CHICKEN,4))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_ORE_RAW.get(),2))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.RAW).get(),2))
                 .setMaxUses(6)
                 .setXpPerTrade(20)
                 .setPriceMul(0.02f)
@@ -554,7 +557,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.COOKED_RABBIT,6))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_NUGGET.get(),27))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.NUGGET).get(),27))
                 .setMaxUses(12)
                 .setXpPerTrade(10)
                 .setPriceMul(0.02f)
@@ -563,7 +566,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.COOKED_MUTTON,12))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_DUST.get(),4))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.DUST).get(),4))
                 .setMaxUses(12)
                 .setXpPerTrade(15)
                 .setPriceMul(0.02f)
@@ -581,7 +584,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.COOKED_PORKCHOP,8))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_RAW_DUST.get(),3))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.DUST).get(),3))
                 .setMaxUses(10)
                 .setXpPerTrade(10)
                 .setPriceMul(0.02f)
@@ -590,7 +593,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(Items.CAKE,1))
-                .setOutput(new ItemStack(CoreBlocks.NAQUADAH_RAW_BLOCK.get(),1))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getRaw().get(),1))
                 .setMaxUses(10)
                 .setXpPerTrade(20)
                 .setPriceMul(0.02f)
@@ -608,7 +611,7 @@ public class JSGVillagers {
                 .register()
 
                 .setInput1(new ItemStack(JSGItems.FOOD_CHOCOLATE_BAR.get(),4))
-                .setOutput(new ItemStack(CoreItems.NAQUADAH_ALLOY_RAW.get(),2))
+                .setOutput(new ItemStack(MaterialType.NAQUADAH.getItem(MaterialItemType.RAW).get(),2))
                 .setMaxUses(8)
                 .setXpPerTrade(30)
                 .setPriceMul(0.02f)

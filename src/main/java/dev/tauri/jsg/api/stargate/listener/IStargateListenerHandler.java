@@ -4,7 +4,7 @@ import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
 import dev.tauri.jsg.api.stargate.iris.codesender.CodeSender;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 

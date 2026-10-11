@@ -1,9 +1,9 @@
 package dev.tauri.jsg.common.loader;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.client.IModelsHolder;
-import dev.tauri.jsg.core.client.LoadersHolder;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.client.IModelsHolder;
+import dev.tauri.jsgcore.client.LoadersHolder;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 

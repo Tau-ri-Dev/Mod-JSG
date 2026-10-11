@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.event;
 
 import dev.tauri.jsg.api.stargate.Stargate;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraftforge.eventbus.api.Cancelable;
 
 /**

@@ -1,7 +1,7 @@
 package dev.tauri.jsg.client.screen.gui.admincontroller.element;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

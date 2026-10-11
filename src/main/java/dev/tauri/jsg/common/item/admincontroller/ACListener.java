@@ -5,7 +5,7 @@ import dev.tauri.jsg.api.stargate.manager.IStargateStateManager;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.admincontroller.event.ACStargateEngageSymbolPacketToClient;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 
 public class ACListener {
     public static void sendChevronEngaged(IStargateStateManager manager, StargatePos stargate, SymbolInterface symbolInterface, ChevronEnum chevron) {

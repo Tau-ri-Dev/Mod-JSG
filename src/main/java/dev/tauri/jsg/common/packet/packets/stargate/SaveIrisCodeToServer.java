@@ -2,10 +2,10 @@ package dev.tauri.jsg.common.packet.packets.stargate;
 
 import dev.tauri.jsg.api.stargate.iris.EnumIrisMode;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
-import dev.tauri.jsg.core.common.packet.JSGCorePacketHandler;
-import dev.tauri.jsg.core.common.packet.packets.PositionedPacket;
-import dev.tauri.jsg.core.common.packet.packets.StateUpdatePacketToClient;
-import dev.tauri.jsg.core.common.registry.CoreStateTypes;
+import dev.tauri.jsgcore.common.packet.JSGCorePacketHandler;
+import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
+import dev.tauri.jsgcore.common.packet.packets.StateUpdatePacketToClient;
+import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

@@ -4,7 +4,7 @@ import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.traveler.IStargateTeleporter;
 import dev.tauri.jsg.api.stargate.traveler.IStargateTraveler;
 import dev.tauri.jsg.api.stargate.traveler.TravelerSendResult;
-import dev.tauri.jsg.core.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.blockentity.ITickable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;

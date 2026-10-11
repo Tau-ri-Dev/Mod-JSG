@@ -1,7 +1,7 @@
 package dev.tauri.jsg.client.screen.gui.admincontroller.element;
 
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

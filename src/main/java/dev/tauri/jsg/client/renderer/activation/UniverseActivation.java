@@ -1,10 +1,10 @@
 package dev.tauri.jsg.client.renderer.activation;
 
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
 
-public class UniverseActivation extends dev.tauri.jsg.core.client.renderer.Activation<SymbolInterface> {
+public class UniverseActivation extends dev.tauri.jsgcore.client.renderer.Activation<SymbolInterface> {
 
     public UniverseActivation(SymbolInterface textureKey, long stateChange, boolean dim) {
         super(textureKey, stateChange, dim);

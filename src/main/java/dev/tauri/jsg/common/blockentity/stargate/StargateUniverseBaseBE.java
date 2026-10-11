@@ -22,15 +22,15 @@ import dev.tauri.jsg.common.stargate.manager.dialing.StargateAbstractDialingMana
 import dev.tauri.jsg.common.stargate.manager.dialing.StargateUniverseDialingManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateUniverseStateManager;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.helper.DimensionsHelper;
-import dev.tauri.jsg.core.common.power.general.EnergyRequiredToOperate;
-import dev.tauri.jsg.core.common.power.general.LargeEnergyStorage;
-import dev.tauri.jsg.core.common.registry.CoreBiomeOverlays;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.helper.DimensionsHelper;
+import dev.tauri.jsgcore.common.power.general.EnergyRequiredToOperate;
+import dev.tauri.jsgcore.common.power.general.LargeEnergyStorage;
+import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -105,8 +105,8 @@ public class StargateUniverseBaseBE extends StargateClassicBaseBE<StargateUniver
     public void generateMergeHelper() {
         // setup merge helper - client and server
         mergeHelper = new StargateUniverseMergeHelper(this);
-        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        mergeHelper.verticalFacing = dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
+        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        mergeHelper.verticalFacing = dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
         mergeHelper.basePos = getBlockPos();
     }
 

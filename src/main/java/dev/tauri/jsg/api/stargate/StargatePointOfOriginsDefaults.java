@@ -1,10 +1,10 @@
 package dev.tauri.jsg.api.stargate;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.loader.PointOfOriginsLoader;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.IPointOfOriginType;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.PointOfOrigin;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.loader.PointOfOriginsLoader;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;

@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 
 public class JSGSoundEvents {
     // ----------------------------------------------------------
