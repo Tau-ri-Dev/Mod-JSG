@@ -30,6 +30,13 @@ allprojects {
         toolchain.languageVersion = JavaLanguageVersion.of(17)
     }
 
+    javadoc {
+        source = sourceSets.main.allJava
+        options.encoding = 'UTF-8'
+        classpath = files(sourceSets.main.compileClasspath)
+        destinationDir = file("${buildDir}/docs/javadoc")
+    }
+
     minecraft {
         mappings channel: mapping_channel, version: mapping_version
         copyIdeResources = true
