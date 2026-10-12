@@ -28,7 +28,7 @@ public interface IStargateEventHorizonManager extends INBTSerializable<CompoundT
 
     boolean isMovingTowardsGate(Vec3 motionVec);
 
-    IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> afterPlace);
+    IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> beforePlace, Consumer<IStargateTraveler<?>> afterPlace);
 
     boolean canBeSend(IStargateTraveler<?> traveler);
 

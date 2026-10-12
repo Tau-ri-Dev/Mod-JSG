@@ -34,6 +34,7 @@ public class StargateWormholeHandler {
             });
             return;
         }
+        if (WORMHOLE_ANIMATION_END_MAP.containsKey(sp.getUUID())) return;
 
         var time = System.currentTimeMillis();
         WORMHOLE_ANIMATION_END_MAP.put(sp.getUUID(), (time + (length * 1000L)));

@@ -329,8 +329,8 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
     }
 
     @Override
-    public IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> afterPlace) {
-        return new StargateTeleporter(traveler, afterPlace);
+    public IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> beforePlace, Consumer<IStargateTraveler<?>> afterPlace) {
+        return new StargateTeleporter(traveler, beforePlace, afterPlace);
     }
 
     @Override
@@ -424,6 +424,7 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
             if (traveler.get() instanceof Entity e && entitiesRecentlyGoThrough.contains(e)) continue;
 
             entitiesWaitingToTeleport.put(traveler, true);
+            traveler.loadPassengers();
             if (traveler.canBeSendThisWay(teleport)) {
                 if (isCurrentlyUnstable && level.random.nextFloat() < JSGConfig.Stargate.ehDeathChance.get()) {
                     traveler.killUnstable();
@@ -439,6 +440,10 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
 
     protected static List<Entity> getAllEntityParts(Entity entity) {
         if (entity instanceof PartEntity<?>) return List.of();
+        if (entity.getVehicle() != null)
+            return List.of();
+        //if (!entity.getPassengers().isEmpty())
+        //    return Util.make(new LinkedList<>(entity.getPassengers()), l -> l.addFirst(entity));
         return List.of(entity);
     }
 

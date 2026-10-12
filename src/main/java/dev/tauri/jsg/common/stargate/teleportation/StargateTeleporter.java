@@ -12,10 +12,12 @@ import java.util.function.Function;
 
 public class StargateTeleporter implements IStargateTeleporter {
     protected IStargateTraveler<?> traveler;
+    protected final Consumer<IStargateTraveler<?>> beforePlace;
     protected final Consumer<IStargateTraveler<?>> afterPlace;
 
-    public StargateTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> afterPlace) {
+    public StargateTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> beforePlace, Consumer<IStargateTraveler<?>> afterPlace) {
         this.traveler = traveler;
+        this.beforePlace = beforePlace;
         this.afterPlace = afterPlace;
     }
 
@@ -24,6 +26,7 @@ public class StargateTeleporter implements IStargateTeleporter {
         Entity e = repositionEntity.apply(false);
         if (e == null) return null;
         traveler = traveler.getTransmitter().getEventHorizonManager().getTraveler(e, traveler);
+        beforePlace.accept(traveler);
         traveler.getReceiver().getEventHorizonManager().receive(traveler);
         afterPlace.accept(traveler);
         return e;
