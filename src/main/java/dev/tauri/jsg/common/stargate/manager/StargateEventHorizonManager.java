@@ -48,6 +48,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -374,33 +375,39 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
 
         // scan teleport box for entities and add them
         for (var e : entitiesTPBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            var packet = getTraveler(e);
-            if (entitiesWaitingToTeleport.containsKey(packet)) continue;
-            if (packet == null) continue;
-            entitiesWaitingToTeleport.put(packet, false);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(e);
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                var packet = getTraveler(ePart);
+                if (entitiesWaitingToTeleport.containsKey(packet)) return;
+                if (packet == null) return;
+                entitiesWaitingToTeleport.put(packet, false);
+            });
         }
 
         // scan back box for entities and add them if they were in front box previous tick
         for (var e : entitiesBackBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            if (!entitiesInFrontBoxLastTick.contains(e)) continue;
-            var packet = getTraveler(e);
-            if (entitiesWaitingToTeleport.containsKey(packet)) continue;
-            entitiesInFrontBoxLastTick.remove(e);
-            if (packet == null) continue;
-            entitiesWaitingToTeleport.put(packet, false);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(ePart);
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                if (!entitiesInFrontBoxLastTick.contains(ePart)) return;
+                var packet = getTraveler(ePart);
+                if (entitiesWaitingToTeleport.containsKey(packet)) return;
+                entitiesInFrontBoxLastTick.remove(ePart);
+                if (packet == null) return;
+                entitiesWaitingToTeleport.put(packet, false);
+            });
         }
 
         // scan the front box for new entities that can potentially go through in next subtick
         entitiesInFrontBoxLastTick.clear();
         for (var e : entitiesFrontBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesInFrontBoxLastTick.contains(e)) continue;
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            entitiesInFrontBoxLastTick.add(e);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(ePart);
+                if (entitiesInFrontBoxLastTick.contains(ePart)) return;
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                entitiesInFrontBoxLastTick.add(ePart);
+            });
         }
 
         // update the last teleported entities list
@@ -428,6 +435,11 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
                 traveler.killWrongTravel();
             }
         }
+    }
+
+    protected static List<Entity> getAllEntityParts(Entity entity) {
+        if (entity instanceof PartEntity<?>) return List.of();
+        return List.of(entity);
     }
 
     public boolean isMovingTowardsGate(Vec3 motionVec) {
