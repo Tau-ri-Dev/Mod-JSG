@@ -1,9 +1,9 @@
 package dev.tauri.jsg.common.block.stargate;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

@@ -1,11 +1,11 @@
 package dev.tauri.jsg.common.packet.packets.stargate;
 
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class StargateMotionAndRotationToClient extends JSGPacket {
 

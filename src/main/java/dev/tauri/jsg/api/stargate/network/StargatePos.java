@@ -1,6 +1,7 @@
 package dev.tauri.jsg.api.stargate.network;
 
 import dev.tauri.jsg.api.JSGApi;
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import net.neoforged.fml.loading.FMLEnvironment;
 import org.jetbrains.annotations.Nullable;
 

@@ -6,13 +6,13 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.util.ParameterReplacer;
 import dev.tauri.jsgcore.mapping.JSGMapping;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.core.registries.BuiltInRegistries;
 
 public class RIGEntity {
     public static final Codec<RIGEntity> CODEC = RecordCodecBuilder.create(rigEntityInstance -> rigEntityInstance.group(

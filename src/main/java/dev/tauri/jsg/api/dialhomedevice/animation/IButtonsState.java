@@ -1,9 +1,8 @@
 package dev.tauri.jsg.api.dialhomedevice.animation;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
-import net.minecraft.nbt.CompoundTag;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 
 import java.util.List;
 

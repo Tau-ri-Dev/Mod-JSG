@@ -29,6 +29,7 @@ import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.sound.ISoundEvent;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;

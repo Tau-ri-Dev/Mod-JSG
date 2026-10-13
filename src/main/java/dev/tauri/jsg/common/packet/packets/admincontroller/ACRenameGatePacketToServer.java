@@ -2,8 +2,8 @@ package dev.tauri.jsg.common.packet.packets.admincontroller;
 
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import net.minecraft.network.FriendlyByteBuf;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

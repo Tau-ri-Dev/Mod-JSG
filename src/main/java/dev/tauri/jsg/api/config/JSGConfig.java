@@ -9,7 +9,6 @@ import dev.tauri.jsgcore.common.config.JSGCoreConfig;
 import dev.tauri.jsgcore.common.config.values.JSGConfigValue;
 import dev.tauri.jsgcore.common.helper.TemperatureHelper;
 import net.neoforged.neoforge.common.ModConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
 
 import java.util.ArrayList;
 
@@ -450,7 +449,7 @@ public class JSGConfig {
 
     public static final ArrayList<JSGConfigChild> LIST = new ArrayList<>();
 
-    public static void register(ModLoadingContext ctx) {
+    public static void register() {
         LIST.clear();
         LIST.add(C_GENERAL);
         LIST.add(C_DEBUG);
@@ -458,7 +457,7 @@ public class JSGConfig {
         LIST.add(C_SG);
         LIST.add(C_ZPM);
 
-        JSGCoreConfig.register(ctx, JSG.MOD_ID, CONFIG_FILE_NAME, LIST);
+        JSGCoreConfig.register(JSG.MOD_ID, CONFIG_FILE_NAME, LIST);
     }
 
     public static void load() {

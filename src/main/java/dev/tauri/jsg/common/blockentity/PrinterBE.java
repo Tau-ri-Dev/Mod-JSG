@@ -1,14 +1,12 @@
 package dev.tauri.jsg.common.blockentity;
 
-import dev.tauri.jsg.common.helpers.CurrentRegistries;
-import dev.tauri.jsg.core.common.util.ItemNBT;
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import com.google.common.collect.Maps;
 import dev.tauri.jsg.api.entity.StargateAddressData;
 import dev.tauri.jsg.api.registry.JSGNotebookPageTypes;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.client.renderer.blockentity.machine.PrinterRendererState;
+import dev.tauri.jsg.common.helpers.CurrentRegistries;
 import dev.tauri.jsg.common.item.CartridgeItem;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
 import dev.tauri.jsg.common.registry.JSGPositionedSounds;
@@ -21,14 +19,15 @@ import dev.tauri.jsgcore.common.integration.ComputerDeviceProvider;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemEmpty;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
 import dev.tauri.jsgcore.common.loader.PointOfOriginsLoader;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -39,11 +38,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
 import java.util.*;
@@ -259,11 +256,11 @@ public class PrinterBE extends BlockEntity implements ITickable, ComputerDeviceP
     @ParametersAreNonnullByDefault
     public void saveAdditional(CompoundTag compound, net.minecraft.core.HolderLookup.Provider registries) {
         super.saveAdditional(compound, registries);
-        compound.put("inputItem", dev.tauri.jsg.core.common.util.ItemNBT.saveStack(inputPages));
+        compound.put("inputItem", dev.tauri.jsgcore.common.util.ItemNBT.saveStack(inputPages));
         var size = outputPages.size();
         compound.putInt("outputPagesSize", size);
         for (var i = 0; i < size; i++) {
-            compound.put("outputItem" + i, dev.tauri.jsg.core.common.util.ItemNBT.saveStack(outputPages.get(i)));
+            compound.put("outputItem" + i, dev.tauri.jsgcore.common.util.ItemNBT.saveStack(outputPages.get(i)));
         }
         compound.putLong("printStarted", printStarted);
         compound.putIntArray("symbolsToPrint", symbolsToPrint);
@@ -275,7 +272,7 @@ public class PrinterBE extends BlockEntity implements ITickable, ComputerDeviceP
         compound.putInt("inksCount", cartridges.size());
         var i = 0;
         for (var cartridge : cartridges) {
-            compound.put("cartridge" + i, dev.tauri.jsg.core.common.util.ItemNBT.saveStack(cartridge));
+            compound.put("cartridge" + i, dev.tauri.jsgcore.common.util.ItemNBT.saveStack(cartridge));
             i++;
         }
     }
@@ -286,10 +283,10 @@ public class PrinterBE extends BlockEntity implements ITickable, ComputerDeviceP
         super.loadAdditional(compound, registries);
         cartridges.clear();
         outputPages.clear();
-        inputPages = dev.tauri.jsg.core.common.util.ItemNBT.stackOf(compound.getCompound("inputItem"));
+        inputPages = dev.tauri.jsgcore.common.util.ItemNBT.stackOf(compound.getCompound("inputItem"));
         var size = compound.getInt("outputPagesSize");
         for (int i = 0; i < size; i++) {
-            outputPages.addLast(dev.tauri.jsg.core.common.util.ItemNBT.stackOf(compound.getCompound("outputItem" + i)));
+            outputPages.addLast(dev.tauri.jsgcore.common.util.ItemNBT.stackOf(compound.getCompound("outputItem" + i)));
         }
         printStarted = compound.getLong("printStarted");
         var array = compound.getIntArray("symbolsToPrint");
@@ -304,7 +301,7 @@ public class PrinterBE extends BlockEntity implements ITickable, ComputerDeviceP
             address = new StargateAddressDynamic(compound.getCompound("address"));
         var inksCount = compound.getInt("inksCount");
         for (var i = 0; i < inksCount; i++) {
-            cartridges.add(dev.tauri.jsg.core.common.util.ItemNBT.stackOf(compound.getCompound("cartridge" + i)));
+            cartridges.add(dev.tauri.jsgcore.common.util.ItemNBT.stackOf(compound.getCompound("cartridge" + i)));
         }
     }
 

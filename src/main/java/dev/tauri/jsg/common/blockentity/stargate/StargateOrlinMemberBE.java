@@ -1,15 +1,14 @@
 package dev.tauri.jsg.common.blockentity.stargate;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
 import dev.tauri.jsg.common.registry.JSGBlocks;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 
 public class StargateOrlinMemberBE extends StargateAbstractMemberBE {

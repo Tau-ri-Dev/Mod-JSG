@@ -1,17 +1,17 @@
 package dev.tauri.jsg.common.packet.packets.linkable;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerClientActionEnum;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerItem;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerMode;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class UniverseDialerActionPacketToServer extends JSGPacket {
 

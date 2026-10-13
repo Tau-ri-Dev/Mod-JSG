@@ -1,11 +1,11 @@
 package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 
 public class DHDUpgradeAssemblyClickToServer extends PositionedPacket {
     int slot;
@@ -42,7 +42,7 @@ public class DHDUpgradeAssemblyClickToServer extends PositionedPacket {
     }
 
     @Override
-    public void handle(NetworkEvent.Context ctx) {
+    public void handle(PacketContext ctx) {
         if (ctx.getDirection() != NetworkDirection.PLAY_TO_SERVER) return;
         ctx.setPacketHandled(true);
         var player = ctx.getSender();

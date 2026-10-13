@@ -7,6 +7,7 @@ import dev.tauri.jsg.client.renderer.item.dialer.IUniverseDialerScreen;
 import dev.tauri.jsg.common.item.linkable.dialer.utils.UDCommonUtils;
 import dev.tauri.jsg.common.packet.packets.linkable.UniverseDialerActionPacketToServer;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.util.I18n;
 import net.minecraft.core.BlockPos;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

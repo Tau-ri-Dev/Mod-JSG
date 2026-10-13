@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.worldgen.generator;
 
-import net.neoforged.fml.common.EventBusSubscriber;
 import com.mojang.datafixers.util.Pair;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
@@ -12,7 +11,6 @@ import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.stargate.network.StargateReservedAddresses;
-import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.config.json.dimension.JSGDimensionConfig;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.util.AccessUtil;
@@ -31,11 +29,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

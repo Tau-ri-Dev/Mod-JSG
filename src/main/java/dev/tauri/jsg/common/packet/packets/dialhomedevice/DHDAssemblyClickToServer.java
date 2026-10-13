@@ -2,15 +2,15 @@ package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
 import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
-import dev.tauri.jsg.core.common.packet.NetworkDirection;
-import dev.tauri.jsg.core.common.packet.PacketContext;
-import net.minecraft.core.registries.BuiltInRegistries;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;

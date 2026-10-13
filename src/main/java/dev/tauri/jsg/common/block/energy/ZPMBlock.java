@@ -3,13 +3,14 @@ package dev.tauri.jsg.common.block.energy;
 import dev.tauri.jsg.common.blockentity.energy.ZPMBE;
 import dev.tauri.jsg.common.item.energy.ZPMItemBlock;
 import dev.tauri.jsg.common.registry.JSGTabs;
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
-import dev.tauri.jsg.core.common.block.util.IHighlightBlock;
-import dev.tauri.jsg.core.common.block.util.IItemBlock;
-import dev.tauri.jsg.core.common.item.ITabbedItem;
-import dev.tauri.jsg.core.common.item.JSGBlockItem;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
-import dev.tauri.jsg.core.common.util.ItemNBT;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
+import dev.tauri.jsgcore.common.block.util.IItemBlock;
+import dev.tauri.jsgcore.common.item.ITabbedItem;
+import dev.tauri.jsgcore.common.item.JSGBlockItem;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -23,11 +24,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Supplier;
 
 public class ZPMBlock extends TickableBEBlock implements ITabbedItem, IItemBlock, IHighlightBlock {
     public ZPMBlock() {
@@ -72,8 +73,8 @@ public class ZPMBlock extends TickableBEBlock implements ITabbedItem, IItemBlock
     }
 
     @Override
-    public @Nullable RegistryObject<CreativeModeTab> getTab() {
-        return JSGTabs.TAB_MACHINES;
+    public @Nullable Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+        return () -> JSGTabs.TAB_MACHINES;
     }
 
     @Override

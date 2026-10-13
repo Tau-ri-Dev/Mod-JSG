@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.stargate.manager.state;
 
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisState;
@@ -19,12 +18,12 @@ import dev.tauri.jsgcore.common.blockentity.StateProviderInterface;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class StargateAbstractStateManager<SG extends StargateAbstractBaseBE<?, ?>, S extends StargateAbstractRendererState> extends AbstractStargateManager<SG> implements IStargateStateManager, StateProviderInterface {

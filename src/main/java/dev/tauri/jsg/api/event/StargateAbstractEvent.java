@@ -3,8 +3,8 @@ package dev.tauri.jsg.api.event;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.Event;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * Parent event for all stargate-related events in JSG

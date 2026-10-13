@@ -1,19 +1,17 @@
 package dev.tauri.jsg.common.recipes;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.registry.JSGUniverseDialerModes;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerItem;
 import dev.tauri.jsg.common.item.linkable.dialer.modes.UDMemoryMode;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsgcore.common.recipe.notebook.NotebookRecipeUtils;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;

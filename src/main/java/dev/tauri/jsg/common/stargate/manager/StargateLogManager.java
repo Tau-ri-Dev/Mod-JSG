@@ -1,11 +1,11 @@
 package dev.tauri.jsg.common.stargate.manager;
 
-import net.minecraft.network.chat.ComponentSerialization;
 import dev.tauri.jsg.common.helpers.CurrentRegistries;
 import dev.tauri.jsgcore.common.blockentity.IBELogManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import org.slf4j.event.Level;
 
 import java.util.LinkedList;

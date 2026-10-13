@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.capability;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.jub.JUBDevice;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.BlockCapability;

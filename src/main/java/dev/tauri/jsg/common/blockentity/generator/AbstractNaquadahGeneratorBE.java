@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.blockentity.generator;
 
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.blockentity.BEStateProvider;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
@@ -8,14 +7,13 @@ import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;

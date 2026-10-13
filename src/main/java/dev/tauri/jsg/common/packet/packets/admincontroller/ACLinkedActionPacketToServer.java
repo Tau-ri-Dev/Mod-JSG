@@ -7,9 +7,9 @@ import dev.tauri.jsg.api.stargate.iris.EnumIrisState;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.item.admincontroller.ACUtils;
 import dev.tauri.jsg.common.item.admincontroller.AdminControllerAction;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 import java.util.Optional;
 

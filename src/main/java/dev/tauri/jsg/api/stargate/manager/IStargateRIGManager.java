@@ -1,9 +1,8 @@
 package dev.tauri.jsg.api.stargate.manager;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.rig.IRIGWave;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
-import net.minecraft.nbt.CompoundTag;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import org.jetbrains.annotations.Nullable;
 
 public interface IStargateRIGManager extends LegacyNBTSerializable, ITickable {

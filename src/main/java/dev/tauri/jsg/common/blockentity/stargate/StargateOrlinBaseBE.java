@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.blockentity.stargate;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.entity.StargateAddressData;
@@ -36,6 +35,7 @@ import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
 import dev.tauri.jsgcore.common.sound.PositionedSound;
 import dev.tauri.jsgcore.common.sound.SoundEvent;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;

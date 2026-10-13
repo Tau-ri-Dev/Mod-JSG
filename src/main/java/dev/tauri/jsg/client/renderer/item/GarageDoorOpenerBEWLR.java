@@ -1,6 +1,5 @@
 package dev.tauri.jsg.client.renderer.item;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -11,6 +10,7 @@ import dev.tauri.jsgcore.client.renderer.HandHeldDeviceRenderer;
 import dev.tauri.jsgcore.client.renderer.HandPosition;
 import dev.tauri.jsgcore.client.texture.ITexture;
 import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;

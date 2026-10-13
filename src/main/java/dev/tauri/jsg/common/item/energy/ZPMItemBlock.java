@@ -2,10 +2,10 @@ package dev.tauri.jsg.common.item.energy;
 
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.registry.JSGTabs;
-import dev.tauri.jsg.core.common.item.JSGBlockItem;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
-import dev.tauri.jsg.core.common.power.general.ItemEnergyStorage;
-import dev.tauri.jsg.core.common.util.ItemNBT;
+import dev.tauri.jsgcore.common.item.JSGBlockItem;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.power.general.ItemEnergyStorage;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -28,7 +28,7 @@ public class ZPMItemBlock extends JSGBlockItem {
     protected final boolean creative;
 
     public ZPMItemBlock(Block block, boolean creative) {
-        super(block, new Item.Properties().stacksTo(1), List.of(JSGTabs.TAB_MACHINES));
+        super(block, new Item.Properties().stacksTo(1), List.of(() -> JSGTabs.TAB_MACHINES));
         this.creative = creative;
     }
 

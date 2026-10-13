@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.container;
 
 import dev.tauri.jsg.common.registry.JSGMenuTypes;
-import dev.tauri.jsg.core.common.forgeutil.SlotHandler;
+import dev.tauri.jsgcore.common.forgeutil.SlotHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;

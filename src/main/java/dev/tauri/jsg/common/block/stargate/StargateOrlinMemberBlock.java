@@ -1,12 +1,12 @@
 package dev.tauri.jsg.common.block.stargate;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinMemberBE;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

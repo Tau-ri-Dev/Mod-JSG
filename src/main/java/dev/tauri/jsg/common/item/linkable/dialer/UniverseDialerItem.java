@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.item.linkable.dialer;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.registry.JSGUniverseDialerModes;
 import dev.tauri.jsg.client.renderer.item.dialer.UniverseDialerBEWLR;
 import dev.tauri.jsg.client.screen.gui.DialerVirtualGui;
@@ -10,6 +9,7 @@ import dev.tauri.jsgcore.common.helper.ItemHelper;
 import dev.tauri.jsgcore.common.item.JSGItem;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
 import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -31,7 +31,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Consumer;

@@ -1,20 +1,17 @@
 package dev.tauri.jsg.common.blockentity.stargate;
 
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.config.JSGConfigUtil;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

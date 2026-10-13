@@ -1,6 +1,5 @@
 package dev.tauri.jsg.client.item.tooltip;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.config.ingame.option.StargateConfigOptions;
 import dev.tauri.jsg.api.power.PowerUtils;
@@ -10,6 +9,7 @@ import dev.tauri.jsgcore.client.texture.ITexture;
 import dev.tauri.jsgcore.common.config.ingame.BEConfig;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.JSGItemStackHandler;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;

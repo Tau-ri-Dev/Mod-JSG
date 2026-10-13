@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.item.admincontroller;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.client.renderer.item.AdminControllerBEWLR;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractMemberBE;
@@ -15,6 +14,7 @@ import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.helper.RayTraceHelper;
 import dev.tauri.jsgcore.common.item.JSGItem;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,7 +29,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;

@@ -1,5 +1,6 @@
 package dev.tauri.jsg.api.stargate.manager;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.Stargate;
@@ -18,8 +19,6 @@ import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import it.unimi.dsi.fastutil.Pair;
-import net.minecraft.nbt.CompoundTag;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

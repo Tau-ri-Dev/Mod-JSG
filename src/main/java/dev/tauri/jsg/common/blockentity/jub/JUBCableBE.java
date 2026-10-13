@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.blockentity.jub;
 
-import dev.tauri.jsg.common.capability.JSGCapabilities;
 import dev.tauri.jsg.common.jub.JUBDevice;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
 import dev.tauri.jsgcore.common.blockentity.ITickable;

@@ -3,8 +3,8 @@ package dev.tauri.jsg.common.datafixer;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.JSGCore;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.JSGCore;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**

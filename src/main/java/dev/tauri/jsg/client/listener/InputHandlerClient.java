@@ -1,6 +1,5 @@
 package dev.tauri.jsg.client.listener;
 
-import net.neoforged.fml.common.EventBusSubscriber;
 import com.mojang.blaze3d.platform.InputConstants;
 import dev.tauri.jsg.client.screen.gui.DialerVirtualGui;
 import dev.tauri.jsg.client.screen.gui.GDOVirtualGui;
@@ -17,9 +16,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.InputEvent;
 
 import javax.annotation.Nullable;
 

@@ -105,7 +105,7 @@ public class JSG implements JSGAddon {
         }
 
         JSGConfig.load();
-        JSGConfig.register(ctx);
+        JSGConfig.register();
 
         Constants.init();
         JSGRegistries.init();
@@ -117,7 +117,7 @@ public class JSG implements JSGAddon {
         JSGTemplatePoolInjectors.register();
         JSGLootTableInjectors.register();
 
-        dev.tauri.jsg.common.datafixer.JSGDataFixers.registerAliases();
+        //dev.tauri.jsg.common.datafixer.JSGDataFixers.registerAliases();
 
         JSGRegistriesInit.register(eventBus);
 

@@ -118,7 +118,7 @@ public class EntityTraveler<E extends Entity> extends AbstractTraveler<E> {
             if (passenger instanceof EntityTraveler<?> entityPassenger)
                 entityPassenger.get().stopRiding();
         });
-        get().changeDimension(targetLevel, sourceGate.getEventHorizonManager().getTeleporter(this, (traveler) -> {
+        get().changeDimension(sourceGate.getEventHorizonManager().getTeleporter(this, (traveler) -> {
                     getPassengers().forEach(passenger -> passenger.sendChangeDimension(targetLevel, newPassengers::add));
                     traveler.insertPassengers(newPassengers);
                     traveler.getPassengers().forEach(passenger -> {

@@ -12,6 +12,7 @@ import dev.tauri.jsg.common.blockentity.stargate.*;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 

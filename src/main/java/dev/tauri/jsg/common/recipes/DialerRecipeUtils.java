@@ -1,10 +1,10 @@
 package dev.tauri.jsg.common.recipes;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.registry.JSGUniverseDialerModes;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerItem;
 import dev.tauri.jsg.common.item.linkable.dialer.modes.UDMemoryMode;
 import dev.tauri.jsg.common.registry.JSGItems;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;

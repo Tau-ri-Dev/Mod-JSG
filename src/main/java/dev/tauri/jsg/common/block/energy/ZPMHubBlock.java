@@ -3,12 +3,13 @@ package dev.tauri.jsg.common.block.energy;
 import dev.tauri.jsg.common.blockentity.energy.ZPMHubBE;
 import dev.tauri.jsg.common.container.ZPMHubContainer;
 import dev.tauri.jsg.common.registry.JSGTabs;
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
-import dev.tauri.jsg.core.common.block.util.IHighlightBlock;
-import dev.tauri.jsg.core.common.blockstate.JSGProperties;
-import dev.tauri.jsg.core.common.helper.BlockPosHelper;
-import dev.tauri.jsg.core.common.helper.ItemHandlerHelper;
-import dev.tauri.jsg.core.common.item.ITabbedItem;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
+import dev.tauri.jsgcore.common.blockstate.JSGProperties;
+import dev.tauri.jsgcore.common.helper.BlockPosHelper;
+import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
+import dev.tauri.jsgcore.common.item.ITabbedItem;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -33,11 +34,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Supplier;
 
 public class ZPMHubBlock extends TickableBEBlock implements ITabbedItem, IHighlightBlock {
     public ZPMHubBlock() {
@@ -87,8 +88,8 @@ public class ZPMHubBlock extends TickableBEBlock implements ITabbedItem, IHighli
     }
 
     @Override
-    public @Nullable RegistryObject<CreativeModeTab> getTab() {
-        return JSGTabs.TAB_MACHINES;
+    public @Nullable Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+        return () -> JSGTabs.TAB_MACHINES;
     }
 
     @Override

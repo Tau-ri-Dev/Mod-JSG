@@ -2,7 +2,6 @@ package dev.tauri.jsg.client.screen.gui;
 
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.linkable.UniverseDialerKeyPressedToServer;
-import net.minecraft.SharedConstants;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;

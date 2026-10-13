@@ -1,8 +1,7 @@
 package dev.tauri.jsg.api.stargate.manager;
 
-import dev.tauri.jsg.api.stargate.network.StargatePos;
-import net.minecraft.nbt.CompoundTag;
 import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
+import dev.tauri.jsg.api.stargate.network.StargatePos;
 
 public interface IStargateAutoCloseManager extends LegacyNBTSerializable {
 

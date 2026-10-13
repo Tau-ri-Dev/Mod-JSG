@@ -1,11 +1,11 @@
 package dev.tauri.jsg.common.packet.packets.stargate;
 
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class StargatePlayerMotionRequestToClient extends PositionedPacket {
 

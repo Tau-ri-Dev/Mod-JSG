@@ -2,6 +2,7 @@ package dev.tauri.jsg.common.stargate.animation.chevron;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.integration.StargateComputerEvents;
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.api.sound.StargateSoundEventEnum;
@@ -33,7 +34,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

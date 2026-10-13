@@ -1,15 +1,14 @@
 package dev.tauri.jsg.api.stargate.manager;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisMode;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisState;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
 import dev.tauri.jsg.api.stargate.iris.codesender.CodeSender;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

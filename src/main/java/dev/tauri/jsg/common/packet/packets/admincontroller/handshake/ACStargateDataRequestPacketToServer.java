@@ -4,8 +4,8 @@ import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.common.item.admincontroller.ACStargateData;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACPacketToServer;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import net.minecraft.network.FriendlyByteBuf;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 import java.util.Optional;
 

@@ -1,6 +1,5 @@
 package dev.tauri.jsg.api.stargate;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGSymbolUsages;
@@ -28,6 +27,7 @@ import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.symbol.SymbolUtil;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import dev.tauri.jsgcore.common.util.RotationUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;

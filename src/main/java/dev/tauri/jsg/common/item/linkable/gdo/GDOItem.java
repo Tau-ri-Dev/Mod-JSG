@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.item.linkable.gdo;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.iris.codesender.CodeSender;
@@ -12,6 +11,7 @@ import dev.tauri.jsgcore.common.helper.ItemHelper;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.item.JSGItem;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -32,7 +32,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;

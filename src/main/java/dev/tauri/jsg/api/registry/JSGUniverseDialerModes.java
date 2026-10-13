@@ -9,7 +9,7 @@ import dev.tauri.jsg.common.item.linkable.dialer.modes.UDStatusMode;
 import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.neoforged.bus.api.IEventBus;
-import dev.tauri.jsg.core.common.registry.JSGDeferredRegister;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class JSGUniverseDialerModes {
     public static final DeferredRegisterWrapper<UniverseDialerMode> REGISTER = DeferredRegisterWrapper.of(DeferredRegister.create(JSGRegistries.UNIVERSE_DIALER_MODES, JSG.MOD_ID));

@@ -1,10 +1,10 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.config.data.ProgressJSON;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class ProgressUpdateToClient extends JSGPacket {
     public ResourceLocation act;

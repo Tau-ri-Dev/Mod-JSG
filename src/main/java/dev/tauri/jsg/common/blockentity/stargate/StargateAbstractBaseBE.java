@@ -37,7 +37,7 @@ import dev.tauri.jsgcore.common.entity.StateType;
 import dev.tauri.jsgcore.common.integration.ComputerDeviceHolder;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
 import dev.tauri.jsgcore.common.multistructure.IMultiStructureBE;
-import dev.tauri.jsg.core.common.packet.TargetPoint;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.sound.IPositionedSound;

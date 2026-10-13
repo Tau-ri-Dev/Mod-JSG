@@ -6,8 +6,8 @@ import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.*;
 

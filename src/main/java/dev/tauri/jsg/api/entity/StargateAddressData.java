@@ -1,12 +1,12 @@
 package dev.tauri.jsg.api.entity;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsgcore.common.entity.IAddressNotebookPageData;
 import dev.tauri.jsgcore.common.entity.INotebookPageData;
 import dev.tauri.jsgcore.common.symbol.address.IAddress;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 import net.minecraft.nbt.CompoundTag;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

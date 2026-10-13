@@ -1,10 +1,10 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class AdminControllerGuiOpenToClient extends JSGPacket {
     public AdminControllerGuiOpenToClient() {

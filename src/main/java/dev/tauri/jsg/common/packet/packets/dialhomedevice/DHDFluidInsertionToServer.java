@@ -1,6 +1,8 @@
 package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,8 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidUtil;
-import dev.tauri.jsg.core.common.packet.NetworkDirection;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class DHDFluidInsertionToServer extends PositionedPacket {
     InteractionHand hand;

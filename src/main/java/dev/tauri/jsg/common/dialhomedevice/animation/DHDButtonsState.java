@@ -1,6 +1,7 @@
 package dev.tauri.jsg.common.dialhomedevice.animation;
 
 import dev.tauri.jsg.api.dialhomedevice.animation.IButtonsState;
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.client.renderer.activation.DHDActivation;
 import dev.tauri.jsg.common.dialhomedevice.manager.state.DHDAbstractStateManager;
@@ -18,7 +19,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

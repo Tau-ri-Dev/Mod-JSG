@@ -6,8 +6,8 @@ import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.client.screen.gui.mainmenu.GuiCustomMainMenu;
 import dev.tauri.jsg.client.screen.gui.mainmenu.MainMenuGateRenderer;
 import dev.tauri.jsg.client.screen.gui.mainmenu.MainMenuTheme;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +15,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Comparator;
 
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.*;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.*;
 
 public class GuiStargateBackgroundRenderer extends PanoramaRenderer {
     private static final int BACKGROUND_CHANGE_ANIMATION_LENGTH = 60; //ticks

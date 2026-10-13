@@ -1,11 +1,10 @@
 package dev.tauri.jsg.common.dialhomedevice.manager;
 
-import dev.tauri.jsg.common.helpers.CurrentRegistries;
-import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.dialhomedevice.DHDReactorState;
 import dev.tauri.jsg.api.dialhomedevice.manager.IDHDReactorManager;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsg.common.helpers.CurrentRegistries;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.util.FluidTank;

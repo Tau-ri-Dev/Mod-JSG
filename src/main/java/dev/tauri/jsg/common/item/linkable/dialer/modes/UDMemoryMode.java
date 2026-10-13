@@ -1,12 +1,12 @@
 package dev.tauri.jsg.common.item.linkable.dialer.modes;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsg.common.blockentity.stargate.StargateUniverseBaseBE;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

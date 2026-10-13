@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.block.energy;
 
 import dev.tauri.jsg.common.blockentity.energy.ZPMCreativeBE;
 import dev.tauri.jsg.common.item.energy.ZPMItemBlock;
-import dev.tauri.jsg.core.common.item.JSGBlockItem;
+import dev.tauri.jsgcore.common.item.JSGBlockItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;

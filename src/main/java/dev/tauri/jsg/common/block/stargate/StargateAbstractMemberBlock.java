@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -42,7 +42,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static dev.tauri.jsg.common.block.stargate.StargateAbstractBaseBlock.getNextDirections;
-import net.minecraft.world.ItemInteractionResult;
 
 public abstract class StargateAbstractMemberBlock extends TickableBEBlock implements IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_MEMBER_PROPS = Properties.of()

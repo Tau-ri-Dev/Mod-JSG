@@ -13,7 +13,6 @@ import dev.tauri.jsg.common.registry.JSGVillagers;
 import dev.tauri.jsg.common.registry.util.VillagerUtil;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsgcore.common.definition.material.MaterialOreVariant;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.util.CreativeItemsChecker;
 import net.minecraft.core.BlockPos;

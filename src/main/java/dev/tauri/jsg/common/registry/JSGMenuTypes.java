@@ -14,8 +14,8 @@ import net.minecraft.world.inventory.MenuType;
 public class JSGMenuTypes {
 
     public static final RegistryObjectWrapper<MenuType<StargateContainer>> STARGATE_MENU_TYPE = JSGApi.REGISTRY_HELPER.menu().register("stargate_container", RegistryHelper.menu(StargateContainer::new));
-    public static final RegistryObject<MenuType<ZPMHubContainer>> ZPM_HUB_MENU_TYPE = JSGApi.REGISTRY_HELPER.menu().register("zpm_hub_container", RegistryHelper.menu(ZPMHubContainer::new));
-    public static final RegistryObject<MenuType<ZPMSlotContainer>> ZPM_SLOT_MENU_TYPE = JSGApi.REGISTRY_HELPER.menu().register("zpm_slot_container", RegistryHelper.menu(ZPMSlotContainer::new));
+    public static final RegistryObjectWrapper<MenuType<ZPMHubContainer>> ZPM_HUB_MENU_TYPE = JSGApi.REGISTRY_HELPER.menu().register("zpm_hub_container", RegistryHelper.menu(ZPMHubContainer::new));
+    public static final RegistryObjectWrapper<MenuType<ZPMSlotContainer>> ZPM_SLOT_MENU_TYPE = JSGApi.REGISTRY_HELPER.menu().register("zpm_slot_container", RegistryHelper.menu(ZPMSlotContainer::new));
 
     public static void init() {
         JSGApi.REGISTRY_HELPER.guiRegister(() -> {

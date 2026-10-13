@@ -63,7 +63,7 @@
           "block": "minecraft:brown_stained_glass"
         },
         "output_state": {
-          "Name": "jsg_core:raw_naquadah_ore_block"
+          "Name": "jsg_core:raw_naquadah_block"
         }
       },
       {

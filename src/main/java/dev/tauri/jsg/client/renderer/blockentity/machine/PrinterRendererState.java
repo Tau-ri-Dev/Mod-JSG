@@ -25,11 +25,11 @@ public class PrinterRendererState extends State {
     public void toBytes(ByteBuf buf) {
         var b = new FriendlyByteBuf(buf);
         if (input == null) input = ItemStack.EMPTY;
-        dev.tauri.jsg.core.common.util.BufHelper.writeItemStack(b, input);
+        dev.tauri.jsgcore.common.util.BufHelper.writeItemStack(b, input);
         if (output == null) output = new LinkedList<>();
         b.writeInt(output.size());
         for (var o : output) {
-            dev.tauri.jsg.core.common.util.BufHelper.writeItemStack(b, o);
+            dev.tauri.jsgcore.common.util.BufHelper.writeItemStack(b, o);
         }
         if (addressDynamic == null) b.writeBoolean(false);
         else {
@@ -49,7 +49,7 @@ public class PrinterRendererState extends State {
             b.writeBoolean(false);
         b.writeInt(cartridges.size());
         for (var c : cartridges) {
-            dev.tauri.jsg.core.common.util.BufHelper.writeItemStack(b, c);
+            dev.tauri.jsgcore.common.util.BufHelper.writeItemStack(b, c);
         }
     }
 
@@ -57,11 +57,11 @@ public class PrinterRendererState extends State {
     public void fromBytes(ByteBuf buf) {
         cartridges = new ArrayList<>();
         var b = new FriendlyByteBuf(buf);
-        input = dev.tauri.jsg.core.common.util.BufHelper.readItemStack(b);
+        input = dev.tauri.jsgcore.common.util.BufHelper.readItemStack(b);
         output = new LinkedList<>();
         var size = b.readInt();
         for (var i = 0; i < size; i++) {
-            output.addLast(dev.tauri.jsg.core.common.util.BufHelper.readItemStack(b));
+            output.addLast(dev.tauri.jsgcore.common.util.BufHelper.readItemStack(b));
         }
         if (b.readBoolean()) {
             addressDynamic = new StargateAddressDynamic(b);
@@ -78,7 +78,7 @@ public class PrinterRendererState extends State {
         }
         size = b.readInt();
         for (int i = 0; i < size; i++) {
-            cartridges.add(dev.tauri.jsg.core.common.util.BufHelper.readItemStack(b));
+            cartridges.add(dev.tauri.jsgcore.common.util.BufHelper.readItemStack(b));
         }
     }
 }

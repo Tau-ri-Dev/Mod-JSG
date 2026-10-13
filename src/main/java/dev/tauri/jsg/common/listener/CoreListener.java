@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.listener;
 
-import net.neoforged.fml.common.EventBusSubscriber;
 import com.mojang.serialization.Dynamic;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.StargatePointOfOriginsDefaults;
@@ -12,7 +11,7 @@ import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.Map;
 import java.util.stream.Stream;

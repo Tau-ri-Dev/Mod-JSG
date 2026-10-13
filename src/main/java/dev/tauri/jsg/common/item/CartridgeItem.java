@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.item;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.item.JSGItem;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

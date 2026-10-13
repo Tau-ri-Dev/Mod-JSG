@@ -2,12 +2,12 @@ package dev.tauri.jsg.common.packet.packets.effect;
 
 import dev.tauri.jsg.client.renderer.StargateWormholeEffect;
 import dev.tauri.jsg.common.effect.StargateWormholeType;
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import dev.tauri.jsg.core.common.packet.NetworkDirection;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class StargateWormholeEffectToClient extends JSGPacket {
 

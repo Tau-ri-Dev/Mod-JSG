@@ -1,5 +1,6 @@
 package dev.tauri.jsg.api.stargate.manager;
 
+import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
@@ -7,8 +8,6 @@ import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorageWrapper;
 import dev.tauri.jsgcore.common.power.general.EnergyRequiredToOperate;
-import net.minecraft.nbt.CompoundTag;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 
 import javax.annotation.Nullable;
 

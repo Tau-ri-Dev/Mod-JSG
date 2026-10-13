@@ -1,11 +1,10 @@
 package dev.tauri.jsg.common.packet;
 
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.packet.packets.AdminControllerGuiOpenToClient;
 import dev.tauri.jsg.common.packet.packets.PrinterButtonClickedToServer;
-import dev.tauri.jsg.common.packet.packets.ZPMHubAnimationToServer;
 import dev.tauri.jsg.common.packet.packets.ProgressUpdateToClient;
+import dev.tauri.jsg.common.packet.packets.ZPMHubAnimationToServer;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACEntryActionPacketToServer;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACLinkedActionPacketToServer;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACRenameGatePacketToServer;
@@ -26,9 +25,9 @@ import dev.tauri.jsg.common.packet.packets.stargate.StargateMotionAndRotationToC
 import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionRequestToClient;
 import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionToServer;
 import dev.tauri.jsgcore.common.packet.SimplePacketHandler;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 public class JSGPacketHandler {
 

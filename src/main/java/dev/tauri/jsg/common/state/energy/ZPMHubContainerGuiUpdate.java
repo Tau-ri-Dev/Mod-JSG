@@ -1,6 +1,6 @@
 package dev.tauri.jsg.common.state.energy;
 
-import dev.tauri.jsg.core.common.entity.State;
+import dev.tauri.jsgcore.common.entity.State;
 import io.netty.buffer.ByteBuf;
 
 public class ZPMHubContainerGuiUpdate extends State {

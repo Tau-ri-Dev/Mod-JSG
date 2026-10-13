@@ -1,14 +1,14 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.blockentity.PrinterBE;
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
-import dev.tauri.jsg.core.common.packet.NetworkDirection;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class PrinterButtonClickedToServer extends PositionedPacket {
     public int button;

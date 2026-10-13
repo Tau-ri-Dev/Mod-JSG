@@ -1,6 +1,5 @@
 package dev.tauri.jsg.client.renderer.blockentity.dialhomedevice;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.tauri.jsg.api.config.JSGConfig;
@@ -19,6 +18,7 @@ import dev.tauri.jsgcore.common.item.notebook.NotebookItem;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

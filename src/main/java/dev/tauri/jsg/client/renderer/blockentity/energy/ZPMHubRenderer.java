@@ -6,7 +6,7 @@ import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.common.blockentity.energy.ZPMHubBE;
 import dev.tauri.jsg.common.loader.ElementEnum;
 import dev.tauri.jsg.common.state.energy.ZPMModelType;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

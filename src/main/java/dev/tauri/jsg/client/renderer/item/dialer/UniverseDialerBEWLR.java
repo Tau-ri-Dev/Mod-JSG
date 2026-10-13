@@ -10,7 +10,7 @@ import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
 import dev.tauri.jsgcore.client.renderer.HandPosition;
 import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
-import dev.tauri.jsg.core.common.util.ItemNBT;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.HumanoidArm;

@@ -2,8 +2,8 @@ package dev.tauri.jsg.common.packet.packets.admincontroller.handshake;
 
 import dev.tauri.jsg.common.item.admincontroller.ACStargateData;
 import dev.tauri.jsg.common.packet.packets.admincontroller.ACPacketToClient;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import net.minecraft.network.FriendlyByteBuf;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class ACStargateDataPacketToClient extends ACPacketToClient {
     protected ACStargateData data;

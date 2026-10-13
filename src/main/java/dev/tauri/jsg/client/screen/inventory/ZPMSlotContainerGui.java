@@ -2,7 +2,7 @@ package dev.tauri.jsg.client.screen.inventory;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.container.ZPMSlotContainer;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;

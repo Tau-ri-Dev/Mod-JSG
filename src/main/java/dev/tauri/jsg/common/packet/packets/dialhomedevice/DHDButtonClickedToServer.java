@@ -1,6 +1,8 @@
 package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsgcore.common.packet.NetworkDirection;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
@@ -10,8 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
-import dev.tauri.jsg.core.common.packet.NetworkDirection;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class DHDButtonClickedToServer extends PositionedPacket {
     public DHDButtonClickedToServer() {

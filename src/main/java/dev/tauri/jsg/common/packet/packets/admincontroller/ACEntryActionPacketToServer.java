@@ -13,6 +13,7 @@ import dev.tauri.jsg.common.stargate.teleportation.traveler.PlayerTraveler;
 import dev.tauri.jsgcore.common.helper.BlockHelper;
 import dev.tauri.jsgcore.common.item.notebook.NotebookItem;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.ListTag;
@@ -20,7 +21,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -3,8 +3,8 @@ package dev.tauri.jsg.common.blockentity.energy;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
 import dev.tauri.jsg.common.state.energy.ZPMModelType;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
-import dev.tauri.jsg.core.common.power.general.SmallEnergyStorage;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 

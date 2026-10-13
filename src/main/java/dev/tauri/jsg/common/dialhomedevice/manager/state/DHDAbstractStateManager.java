@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.dialhomedevice.manager.state;
 
-import dev.tauri.jsg.core.common.packet.TargetPoint;
 import dev.tauri.jsg.api.dialhomedevice.manager.IDHDStateManager;
 import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
@@ -10,13 +9,13 @@ import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsg.common.dialhomedevice.manager.AbstractDHDManager;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.state.BiomeOverrideState;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.minecraft.core.registries.BuiltInRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;

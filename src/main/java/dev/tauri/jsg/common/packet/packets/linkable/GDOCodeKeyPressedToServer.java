@@ -1,17 +1,17 @@
 package dev.tauri.jsg.common.packet.packets.linkable;
 
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.iris.codesender.PlayerCodeSender;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.item.linkable.gdo.GDOItem;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
-import dev.tauri.jsg.core.common.packet.PacketContext;
 
 public class GDOCodeKeyPressedToServer extends JSGPacket {
     int number;

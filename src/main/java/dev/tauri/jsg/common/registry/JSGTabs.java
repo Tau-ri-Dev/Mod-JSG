@@ -1,8 +1,6 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.registry.JSGDeferredRegister;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
 import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import dev.tauri.jsgcore.common.registry.helper.TabBuilder;

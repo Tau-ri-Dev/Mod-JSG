@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.state.energy;
 
 import dev.tauri.jsg.common.item.energy.ZPMItemBlock;
-import dev.tauri.jsg.core.common.util.ItemNBT;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;

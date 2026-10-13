@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.capability;
 
 import dev.tauri.jsg.common.registry.JSGDataComponents;
-import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;

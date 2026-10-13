@@ -1,9 +1,9 @@
 package dev.tauri.jsg.common.packet.packets.admincontroller;
 
-import net.minecraft.network.chat.ComponentSerialization;
+import dev.tauri.jsgcore.common.packet.PacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import dev.tauri.jsg.core.common.packet.PacketContext;
+import net.minecraft.network.chat.ComponentSerialization;
 
 public class ACResponsePacketToClient extends ACPacketToClient {
     public Component component;
