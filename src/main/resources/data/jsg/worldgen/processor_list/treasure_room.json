@@ -26,7 +26,7 @@
             "probability": 0.2
           },
           "output_state": {
-            "Name": "jsg:naquadah_alloy_raw_block"
+            "Name": "jsg_core:naquadah_block"
           }
         },
         {
@@ -39,7 +39,7 @@
             "probability": 0.1
           },
           "output_state": {
-            "Name": "jsg:naquadah_alloy_block"
+            "Name": "jsg_core:naquadah_alloy_block"
           }
         },
         {
@@ -52,7 +52,7 @@
             "probability": 0.5
           },
           "output_state": {
-            "Name": "jsg:naquadah_alloy_raw_block"
+            "Name": "jsg_core:naquadah_block"
           }
         },
         {
@@ -65,7 +65,7 @@
             "probability": 0.1
           },
           "output_state": {
-            "Name": "jsg:naquadah_alloy_block"
+            "Name": "jsg_core:naquadah_alloy_block"
           }
         }
       ]

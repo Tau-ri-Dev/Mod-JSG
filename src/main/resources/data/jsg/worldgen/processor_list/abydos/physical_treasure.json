@@ -25,7 +25,7 @@
           "probability": 0.25
         },
         "output_state": {
-          "Name": "jsg_core:naquadah_alloy_raw_block"
+          "Name": "jsg_core:naquadah_block"
         }
       },
       {
