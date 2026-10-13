@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.block.generator;
 
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
-import dev.tauri.jsg.core.common.block.util.IHighlightBlock;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.ParametersAreNonnullByDefault;

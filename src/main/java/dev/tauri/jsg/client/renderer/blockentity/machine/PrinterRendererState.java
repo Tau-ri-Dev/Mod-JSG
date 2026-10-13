@@ -1,8 +1,8 @@
 package dev.tauri.jsg.client.renderer.blockentity.machine;
 
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;

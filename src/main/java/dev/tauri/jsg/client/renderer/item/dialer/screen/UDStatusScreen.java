@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.client.renderer.item.dialer.IUniverseDialerScreen;
 import dev.tauri.jsg.common.item.linkable.dialer.modes.UDStatusMode;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemDisplayContext;

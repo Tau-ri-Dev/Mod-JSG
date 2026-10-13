@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.item.stargate.dialhomedevice;
 
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.JSGBlockItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.JSGBlockItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 
 public abstract class DHDAbstractItem extends JSGBlockItem {
     public DHDAbstractItem(Block block) {
-        super(block, new Item.Properties(), List.of(CoreTabs.TAB_TRANSPORTATION.get()));
+        super(block, new Item.Properties(), List.of(CoreTabs.TAB_TRANSPORTATION));
     }
 
     @Override

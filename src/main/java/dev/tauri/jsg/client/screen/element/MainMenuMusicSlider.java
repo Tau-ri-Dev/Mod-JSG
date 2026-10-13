@@ -1,9 +1,9 @@
 package dev.tauri.jsg.client.screen.element;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.screen.widget.IconButton;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.screen.widget.IconButton;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;

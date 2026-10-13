@@ -1,9 +1,9 @@
 package dev.tauri.jsg.common.loader;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.client.IModelsHolder;
-import dev.tauri.jsg.core.client.LoadersHolder;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.client.IModelsHolder;
+import dev.tauri.jsgcore.client.LoadersHolder;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,15 +47,15 @@ public enum ElementEnum implements IModelsHolder {
 
     // --------------------------------------------------------------------------------------------
     // Movie
-
-    MOVIE_GATE("movie/gate.obj", "movie/gatering", true),
-    MOVIE_RING("movie/ring.obj", "movie/gatering", true),
+    //NEW
+    MOVIE_GATE("movie/gate.obj", "movie/gate", true),
+    MOVIE_RING("movie/ring.obj", "movie/ring", true),
 
     MOVIE_CHEVRON_LIGHT("movie/chevron_light.obj", "movie/chevron", true),
-    MOVIE_CHEVRON_FRAME("movie/chevron_frame.obj", "movie/gatering", true),
+    MOVIE_CHEVRON_FRAME("movie/chevron_frame.obj", "movie/chevron", true),
     MOVIE_CHEVRON_MOVING("movie/chevron_moving.obj", "movie/chevron", true),
     MOVIE_CHEVRON_MOVING_TOP("movie/chevron_moving_top.obj", "movie/chevron", true),
-    MOVIE_CHEVRON_BACK("movie/chevron_back.obj", "movie/gatering", true),
+    MOVIE_CHEVRON_BACK("movie/chevron_back.obj", "movie/chevron", true),
 
     // --------------------------------------------------------------------------------------------
     // Universe

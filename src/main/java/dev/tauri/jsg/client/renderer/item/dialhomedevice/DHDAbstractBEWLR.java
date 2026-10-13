@@ -2,8 +2,8 @@ package dev.tauri.jsg.client.renderer.item.dialhomedevice;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import dev.tauri.jsg.core.client.renderer.AbstractItemBEWLR;
-import dev.tauri.jsg.core.common.util.RotationUtil;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
+import dev.tauri.jsgcore.common.util.RotationUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;

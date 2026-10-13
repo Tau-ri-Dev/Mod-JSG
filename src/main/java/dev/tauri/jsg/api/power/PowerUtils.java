@@ -1,9 +1,9 @@
 package dev.tauri.jsg.api.power;
 
 import dev.tauri.jsg.api.config.JSGConfig;
-import dev.tauri.jsg.core.common.power.general.EnergyRequiredToOperate;
-import dev.tauri.jsg.core.common.power.general.LargeEnergyStorage;
-import dev.tauri.jsg.core.common.power.general.SmallEnergyStorage;
+import dev.tauri.jsgcore.common.power.general.EnergyRequiredToOperate;
+import dev.tauri.jsgcore.common.power.general.LargeEnergyStorage;
+import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
 
 public class PowerUtils {
     public static LargeEnergyStorage getLarge(Runnable onChanged) {

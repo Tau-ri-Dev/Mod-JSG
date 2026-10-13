@@ -1,6 +1,6 @@
 package dev.tauri.jsg.common.stargate.animation;
 
-import dev.tauri.jsg.core.common.entity.State;
+import dev.tauri.jsgcore.common.entity.State;
 import io.netty.buffer.ByteBuf;
 
 public class IrisAnimationState extends State {

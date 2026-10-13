@@ -3,7 +3,7 @@ package dev.tauri.jsg.common.stargate.animation.incoming;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.sound.StargateSoundEventEnum;
 import dev.tauri.jsg.common.stargate.manager.dialing.StargateUniverseDialingManager;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import net.minecraft.nbt.CompoundTag;
 
 public class UniverseIncomingAnimation extends IncomingAnimation<StargateUniverseDialingManager> {

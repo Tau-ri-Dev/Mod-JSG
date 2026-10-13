@@ -2,8 +2,8 @@ package dev.tauri.jsg.common.integration.oc;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.blockentity.PrinterBE;
-import dev.tauri.jsg.core.common.integration.ComputerDeviceProvider;
-import dev.tauri.jsg.core.common.integration.oc.methods.AbstractOCMethods;
+import dev.tauri.jsgcore.common.integration.ComputerDeviceProvider;
+import dev.tauri.jsgcore.common.integration.oc.methods.AbstractOCMethods;
 import li.cil.oc.api.machine.Callback;
 
 public class PrinterOCMethods extends AbstractOCMethods<PrinterBE> {

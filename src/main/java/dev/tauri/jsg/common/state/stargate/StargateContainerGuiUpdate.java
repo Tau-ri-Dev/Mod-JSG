@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.state.stargate;
 
 import dev.tauri.jsg.api.stargate.iris.EnumIrisMode;
 import dev.tauri.jsg.common.stargate.manager.StargateConnection;
-import dev.tauri.jsg.core.common.entity.State;
+import dev.tauri.jsgcore.common.entity.State;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 

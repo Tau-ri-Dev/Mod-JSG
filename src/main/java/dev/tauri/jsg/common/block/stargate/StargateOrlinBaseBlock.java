@@ -3,7 +3,7 @@ package dev.tauri.jsg.common.block.stargate;
 import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
-import dev.tauri.jsg.core.common.item.notebook.PageNotebookItemFilled;
+import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -32,13 +32,13 @@ import java.util.List;
 public class StargateOrlinBaseBlock extends StargateAbstractBaseBlock {
     public StargateOrlinBaseBlock() {
         super(STARGATE_BASE_PROPS.isRedstoneConductor((pState, level, pos) -> true));
-        this.registerDefaultState(defaultBlockState().setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN, false));
+        this.registerDefaultState(defaultBlockState().setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN, false));
     }
 
     @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.ORLIN_BROKEN);
+        builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN);
     }
 
     @Override
@@ -107,9 +107,9 @@ public class StargateOrlinBaseBlock extends StargateAbstractBaseBlock {
     @Override
     @ParametersAreNonnullByDefault
     public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        if (blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY))
+        if (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY))
             return Shapes.block();
-        if (dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY)) == null)
+        if (dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY)) == null)
             return Shapes.create(0, 0, 0, 1, 0.4, 1);
         return Shapes.create(0, 0.25, 0, 1, 0.75, 1);
     }

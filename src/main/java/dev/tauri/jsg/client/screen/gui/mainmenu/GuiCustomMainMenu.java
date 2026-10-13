@@ -12,15 +12,15 @@ import dev.tauri.jsg.client.screen.gui.mainmenu.background.GuiStargateBackground
 import dev.tauri.jsg.common.config.data.ProgressJSON;
 import dev.tauri.jsg.common.registry.JSGPositionedSounds;
 import dev.tauri.jsg.common.util.WebsiteUtils;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.screen.widget.IconButton;
-import dev.tauri.jsg.core.client.screen.widget.base.JSGButtonClassic;
-import dev.tauri.jsg.core.client.sound.FlybySoundInstance;
-import dev.tauri.jsg.core.client.sound.JSGSoundHelperClient;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
-import dev.tauri.jsg.core.common.util.TimeUtils;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.screen.widget.IconButton;
+import dev.tauri.jsgcore.client.screen.widget.base.JSGButtonClassic;
+import dev.tauri.jsgcore.client.sound.FlybySoundInstance;
+import dev.tauri.jsgcore.client.sound.JSGSoundHelperClient;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.common.util.TimeUtils;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -45,8 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.*;
-import static dev.tauri.jsg.core.client.sound.JSGSoundHelperClient.playPositionedFlyBySound;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.*;
+import static dev.tauri.jsgcore.client.sound.JSGSoundHelperClient.playPositionedFlyBySound;
 
 @OnlyIn(Dist.CLIENT)
 public class GuiCustomMainMenu extends Screen {

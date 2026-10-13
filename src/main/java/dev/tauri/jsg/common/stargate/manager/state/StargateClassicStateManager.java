@@ -9,10 +9,10 @@ import dev.tauri.jsg.common.stargate.animation.spinning.ClassicSpinHelper;
 import dev.tauri.jsg.common.state.stargate.StargateContainerGuiState;
 import dev.tauri.jsg.common.state.stargate.StargateContainerGuiUpdate;
 import dev.tauri.jsg.common.state.stargate.StargateRendererActionState;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.entity.StateType;
-import dev.tauri.jsg.core.common.registry.CoreStateTypes;
-import dev.tauri.jsg.core.common.state.BiomeOverrideState;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.registry.CoreStateTypes;
+import dev.tauri.jsgcore.common.state.BiomeOverrideState;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 

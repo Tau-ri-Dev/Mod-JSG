@@ -2,8 +2,8 @@ package dev.tauri.jsg.common.integration.jei;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.client.screen.inventory.StargateContainerGui;
-import dev.tauri.jsg.core.common.integration.jei.JEIAdvancedGuiHandler;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.integration.jei.JEIAdvancedGuiHandler;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;

@@ -7,16 +7,16 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
 
-import static dev.tauri.jsg.core.client.renderer.HandHeldDeviceRenderer.drawTexturedRect;
+import static dev.tauri.jsgcore.client.renderer.HandHeldDeviceRenderer.drawTexturedRect;
 
 public class UDModesRenderUtils {
 

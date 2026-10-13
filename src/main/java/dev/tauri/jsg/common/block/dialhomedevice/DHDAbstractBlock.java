@@ -1,14 +1,14 @@
 package dev.tauri.jsg.common.block.dialhomedevice;
 
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
-import dev.tauri.jsg.core.common.block.util.IHighlightBlock;
-import dev.tauri.jsg.core.common.block.util.IItemBlock;
-import dev.tauri.jsg.core.common.blockentity.ILinkable;
-import dev.tauri.jsg.core.common.blockstate.JSGProperties;
-import dev.tauri.jsg.core.common.helper.BlockPosHelper;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
-import dev.tauri.jsg.core.common.util.math.MathHelper;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
+import dev.tauri.jsgcore.common.block.util.IItemBlock;
+import dev.tauri.jsgcore.common.blockentity.ILinkable;
+import dev.tauri.jsgcore.common.blockstate.JSGProperties;
+import dev.tauri.jsgcore.common.helper.BlockPosHelper;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.util.math.MathHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

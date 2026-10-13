@@ -5,7 +5,7 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.entity.animal.MastadgeEntity;
 import dev.tauri.jsg.common.entity.client.JSGEntityModelLayer;
 import dev.tauri.jsg.common.entity.client.MastadgeModel;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

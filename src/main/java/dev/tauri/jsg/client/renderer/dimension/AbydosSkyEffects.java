@@ -1,10 +1,10 @@
 package dev.tauri.jsg.client.renderer.dimension;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.client.renderer.dimension.AbstractSkyEffects;
-import dev.tauri.jsg.core.client.renderer.dimension.util.CustomSkyObjectRenderer;
-import dev.tauri.jsg.core.common.util.math.MathHelper;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.renderer.dimension.AbstractSkyEffects;
+import dev.tauri.jsgcore.client.renderer.dimension.util.CustomSkyObjectRenderer;
+import dev.tauri.jsgcore.common.util.math.MathHelper;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;

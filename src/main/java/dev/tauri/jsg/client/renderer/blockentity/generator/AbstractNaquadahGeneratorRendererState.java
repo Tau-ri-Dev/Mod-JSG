@@ -1,6 +1,6 @@
 package dev.tauri.jsg.client.renderer.blockentity.generator;
 
-import dev.tauri.jsg.core.common.entity.State;
+import dev.tauri.jsgcore.common.entity.State;
 import io.netty.buffer.ByteBuf;
 
 public class AbstractNaquadahGeneratorRendererState extends State {

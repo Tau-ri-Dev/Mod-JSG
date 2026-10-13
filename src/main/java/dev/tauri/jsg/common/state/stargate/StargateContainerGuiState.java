@@ -2,9 +2,9 @@ package dev.tauri.jsg.common.state.stargate;
 
 import dev.tauri.jsg.api.registry.JSGSymbolUsages;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
-import dev.tauri.jsg.core.common.config.ingame.BEConfig;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.config.ingame.BEConfig;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 

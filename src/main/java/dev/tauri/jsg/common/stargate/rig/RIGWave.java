@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.tauri.jsg.api.stargate.rig.IRIGWave;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
-import dev.tauri.jsg.core.common.util.ParameterReplacer;
+import dev.tauri.jsgcore.common.util.ParameterReplacer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;

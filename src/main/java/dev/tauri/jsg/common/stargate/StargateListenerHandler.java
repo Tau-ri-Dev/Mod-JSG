@@ -8,7 +8,7 @@ import dev.tauri.jsg.api.stargate.listener.IStargateListenerHandler;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.stargate.manager.AbstractStargateManager;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 

@@ -7,7 +7,7 @@ import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateConnectionStatus;
 import dev.tauri.jsg.common.stargate.manager.StargateLogManager;
-import dev.tauri.jsg.core.common.blockentity.IBELogManager;
+import dev.tauri.jsgcore.common.blockentity.IBELogManager;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.HashMap;

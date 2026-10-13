@@ -5,12 +5,13 @@ import dev.tauri.jsg.core.common.util.ItemNBT;
 import dev.tauri.jsg.api.item.IDHDFluidTank;
 import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.stargate.Stargate;
+import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.common.dialhomedevice.manager.DHDReactorManager;
 import dev.tauri.jsg.common.dialhomedevice.manager.state.DHDAbstractStateManager;
-import dev.tauri.jsg.core.common.blockentity.*;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.blockentity.*;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -81,6 +82,8 @@ public interface StargateDHD extends ILinkableBE<Stargate<?>>, ITickable, IPrepa
     boolean isAssembled(IDHDPartItem part);
 
     boolean isAssembled();
+
+    int getMaxSymbols(@Nullable StargateAddressDynamic dialedAddress);
 
     /**
      * Called before assembling/disassembling part

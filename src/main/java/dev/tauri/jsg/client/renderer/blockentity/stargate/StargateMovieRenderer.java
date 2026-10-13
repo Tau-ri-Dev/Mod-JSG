@@ -3,6 +3,7 @@ package dev.tauri.jsg.client.renderer.blockentity.stargate;
 import com.mojang.math.Axis;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.StargatePointOfOriginsDefaults;
+import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
 import dev.tauri.jsg.common.loader.ElementEnum;
 import dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState;
 import it.unimi.dsi.fastutil.Pair;
@@ -23,6 +24,34 @@ public class StargateMovieRenderer extends StargateMilkyWayRenderer {
         stack.popPose();
         renderRing();
         renderChevrons();
+    }
+
+    @Override
+    protected void renderKawoosh() {
+        stack.scale(1.01f, 1.01f, 1f);
+        stack.translate(0, 0, -0.055);
+        super.renderKawoosh();
+    }
+
+    @Override
+    protected void translateIrisBlade() {
+        stack.translate(0.1, 0, -0.05);
+        rotateAround(stack, Axis.ZP.rotationDegrees(-0.5f), getIrisPivot());
+    }
+
+    @Override
+    public void renderIris(boolean backOnly) {
+        if (rendererState == null) return;
+        EnumIrisType irisType = rendererState.irisType;
+        stack.pushPose();
+        if (irisType == null || irisType == EnumIrisType.SHIELD) {
+            stack.scale(1.01f, 1.01f, 1f);
+            super.renderIris(backOnly);
+            stack.popPose();
+            return;
+        }
+        super.renderIris(backOnly);
+        stack.popPose();
     }
 
     @Override

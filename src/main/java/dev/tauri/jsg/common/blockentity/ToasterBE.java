@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.blockentity;
 
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
-import dev.tauri.jsg.core.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.blockentity.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

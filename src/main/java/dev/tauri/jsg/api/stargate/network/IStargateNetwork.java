@@ -2,7 +2,7 @@ package dev.tauri.jsg.api.stargate.network;
 
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsg.api.stargate.type.StargateType;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;

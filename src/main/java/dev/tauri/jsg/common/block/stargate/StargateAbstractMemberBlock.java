@@ -2,10 +2,10 @@ package dev.tauri.jsg.common.block.stargate;
 
 import dev.tauri.jsg.api.block.stargate.IStargateBlock;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractMemberBE;
-import dev.tauri.jsg.core.common.block.TickableBEBlock;
-import dev.tauri.jsg.core.common.blockentity.CamouflageBE;
-import dev.tauri.jsg.core.common.helper.BlockPosHelper;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.helper.BlockPosHelper;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -44,7 +44,7 @@ import java.util.List;
 import static dev.tauri.jsg.common.block.stargate.StargateAbstractBaseBlock.getNextDirections;
 import net.minecraft.world.ItemInteractionResult;
 
-public abstract class StargateAbstractMemberBlock extends TickableBEBlock implements IStargateBlock, dev.tauri.jsg.core.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, dev.tauri.jsg.core.common.block.util.WrenchRotatable {
+public abstract class StargateAbstractMemberBlock extends TickableBEBlock implements IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_MEMBER_PROPS = Properties.of()
             .strength(2.5f, 30f)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
@@ -58,9 +58,9 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
         super(properties);
         this.registerDefaultState(
                 defaultBlockState()
-                        .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY, true)
-                        .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.NORTH)
-                        .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, 0)
+                        .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY, true)
+                        .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.NORTH)
+                        .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, 0)
                         .setValue(BlockStateProperties.WATERLOGGED, false)
         );
     }
@@ -69,7 +69,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
-        return blockState.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.rotateDir(blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), rotation));
+        return blockState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.rotateDir(blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), rotation));
     }
 
     @Override
@@ -82,7 +82,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
                 var facing = gate.getFacing();
                 var vertical = gate.getFacingVertical();
                 var next = getNextDirections(facing, vertical);
-                state = state.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, next.left()).setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalFacingByDirection(next.right()));
+                state = state.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, next.left()).setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalFacingByDirection(next.right()));
                 context.getLevel().setBlock(context.getClickedPos(), state, 3);
                 gate.getMergeHelper().updateMemberStateAndCheck(null);
             }
@@ -93,7 +93,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public @NotNull BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.flipDir(blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), mirror));
+        return blockState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.flipDir(blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), mirror));
     }
 
     @Override
@@ -135,7 +135,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     public boolean renderHighlight(BlockState blockState, BlockGetter level, BlockPos pos) {
         var tile = level.getBlockEntity(pos);
         if (tile instanceof CamouflageBE camoBE && !camoBE.getCamoBlock().isAir()) return true;
-        return blockState.hasProperty(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) && blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
+        return blockState.hasProperty(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) && blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
     }
 
     @Override
@@ -212,9 +212,9 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
-        builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY);
+        builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY);
+        builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY);
         builder.add(BlockStateProperties.WATERLOGGED);
     }
 
@@ -231,8 +231,8 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
         if (ctx.getPlayer() != null)
             pitch = ctx.getPlayer().getXRot();
         return defaultBlockState()
-                .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, ctx.getHorizontalDirection().getOpposite())
-                .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalFacingByDirection(dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalDirectionByPitch(pitch).getOpposite()))
+                .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, ctx.getHorizontalDirection().getOpposite())
+                .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalFacingByDirection(dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalDirectionByPitch(pitch).getOpposite()))
                 .setValue(BlockStateProperties.WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER);
     }
 
@@ -241,7 +241,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     @ParametersAreNonnullByDefault
     @Nonnull
     public RenderShape getRenderShape(BlockState blockState) {
-        return (blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? RenderShape.MODEL : RenderShape.ENTITYBLOCK_ANIMATED);
+        return (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? RenderShape.MODEL : RenderShape.ENTITYBLOCK_ANIMATED);
     }
 
     @Override
@@ -249,14 +249,14 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
     @ParametersAreNonnullByDefault
     @Nonnull
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? Shapes.block() : StargateAbstractBaseBlock.getGateBlockShape(blockState, blockGetter, blockPos));
+        return (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? Shapes.block() : StargateAbstractBaseBlock.getGateBlockShape(blockState, blockGetter, blockPos));
     }
 
     @Override
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getVisualShape(BlockState blockState, BlockGetter pReader, BlockPos pPos, CollisionContext pContext) {
-        return (blockState.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? Shapes.block() : Shapes.empty());
+        return (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? Shapes.block() : Shapes.empty());
     }
 
     @Override

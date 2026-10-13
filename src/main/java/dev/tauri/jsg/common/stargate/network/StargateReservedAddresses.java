@@ -7,8 +7,8 @@ import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolMilkyWayEnu
 import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolPegasusEnum;
 import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolUniverseEnum;
 import dev.tauri.jsg.common.registry.JSGDimensions;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;

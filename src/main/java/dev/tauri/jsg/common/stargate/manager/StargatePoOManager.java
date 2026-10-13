@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.stargate.manager;
 
 import dev.tauri.jsg.api.stargate.Stargate;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.IPoOManager;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.IPoOManager;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 
 public class StargatePoOManager extends AbstractStargateManager<Stargate<?>> implements IPoOManager {
     public StargatePoOManager(Stargate<?> stargate) {

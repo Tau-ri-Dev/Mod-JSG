@@ -19,9 +19,9 @@ import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
-import dev.tauri.jsg.core.common.integration.cctweaked.CCTweakedHelper;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.integration.cctweaked.CCTweakedHelper;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 

@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.registry.tags;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;

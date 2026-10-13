@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.packet.packets;
 
 import dev.tauri.jsg.common.blockentity.PrinterBE;
-import dev.tauri.jsg.core.common.packet.packets.PositionedPacket;
+import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

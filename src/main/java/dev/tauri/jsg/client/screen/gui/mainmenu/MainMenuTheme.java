@@ -7,8 +7,8 @@ import dev.tauri.jsg.common.config.data.ProgressJSON;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.ProgressUpdateToClient;
 import dev.tauri.jsg.common.registry.JSGPositionedSounds;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 

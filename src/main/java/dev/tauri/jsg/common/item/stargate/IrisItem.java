@@ -2,10 +2,10 @@ package dev.tauri.jsg.common.item.stargate;
 
 import dev.tauri.jsg.api.item.IIrisItem;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.ICreativeThing;
-import dev.tauri.jsg.core.common.item.JSGItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.ICreativeThing;
+import dev.tauri.jsgcore.common.item.JSGItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +47,7 @@ public class IrisItem extends JSGItem implements ICreativeThing, IIrisItem {
     public ItemStack repairableItem = ItemStack.EMPTY;
 
     public IrisItem(Item.Properties props, EnumIrisType type) {
-        super(props, CoreTabs.TAB_UPGRADES);
+        super(props, () -> CoreTabs.TAB_UPGRADES);
         this.type = type;
     }
 

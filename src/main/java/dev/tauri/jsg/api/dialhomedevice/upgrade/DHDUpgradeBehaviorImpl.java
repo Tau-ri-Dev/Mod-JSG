@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.dialhomedevice.upgrade;
 
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -25,23 +25,23 @@ public class DHDUpgradeBehaviorImpl implements IDHDUpgradeBehavior {
     }
 
     @Override
-    public long modifyEnergyPerNaquadah(long baseEnergy) {
-        return 0;
+    public double modifyEnergyPerNaquadah(double baseEnergy) {
+        return baseEnergy;
     }
 
     @Override
     public boolean onSymbolActivated(SymbolInterface symbol) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean onSymbolButtonPushed(SymbolInterface symbol, @Nullable ServerPlayer player, boolean force) {
-        return false;
+        return true;
     }
 
     @Override
     public int modifyMaxSymbolsInAddress(int symbolsCount, StargateAddressDynamic dialedAddress) {
-        return 0;
+        return symbolsCount;
     }
 
     @Override

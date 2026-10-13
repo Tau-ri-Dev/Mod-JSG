@@ -5,7 +5,7 @@ import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerMode;
 import dev.tauri.jsg.common.stargate.rig.RIGWave;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;

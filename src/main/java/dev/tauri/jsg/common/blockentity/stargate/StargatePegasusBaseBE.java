@@ -16,10 +16,10 @@ import dev.tauri.jsg.common.stargate.manager.dialing.StargateAbstractDialingMana
 import dev.tauri.jsg.common.stargate.manager.dialing.StargatePegasusDialingManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.manager.state.StargatePegasusStateManager;
-import dev.tauri.jsg.core.common.blockentity.ILinkable;
-import dev.tauri.jsg.core.common.sound.PositionedSound;
-import dev.tauri.jsg.core.common.sound.SoundEvent;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.blockentity.ILinkable;
+import dev.tauri.jsgcore.common.sound.PositionedSound;
+import dev.tauri.jsgcore.common.sound.SoundEvent;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
@@ -50,8 +50,8 @@ public class StargatePegasusBaseBE extends StargateClassicBaseBE<StargatePegasus
     public void generateMergeHelper() {
         // setup merge helper - client and server
         mergeHelper = new StargatePegasusMergeHelper(this);
-        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
-        mergeHelper.verticalFacing = dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
+        mergeHelper.horizontalFacing = getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY);
+        mergeHelper.verticalFacing = dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY));
         mergeHelper.basePos = getBlockPos();
     }
 

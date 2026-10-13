@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.stargate;
 
 import dev.tauri.jsg.api.stargate.manager.IStargateIrisManager;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 

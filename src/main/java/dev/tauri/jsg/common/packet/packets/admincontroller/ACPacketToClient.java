@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.packet.packets.admincontroller;
 
 import dev.tauri.jsg.client.screen.gui.admincontroller.AdminControllerGUI;
-import dev.tauri.jsg.core.common.packet.packets.JSGPacket;
+import dev.tauri.jsgcore.common.packet.packets.JSGPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 

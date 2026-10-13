@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.state.stargate;
 
 import dev.tauri.jsg.common.stargate.manager.StargateSoundManager;
-import dev.tauri.jsg.core.common.entity.State;
+import dev.tauri.jsgcore.common.entity.State;
 import io.netty.buffer.ByteBuf;
 
 public class StargateSoundUpdateState extends State {

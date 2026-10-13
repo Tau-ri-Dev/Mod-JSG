@@ -5,8 +5,8 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.config.JSGConfigUtil;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
-import dev.tauri.jsg.core.common.blockentity.CamouflageBE;
-import dev.tauri.jsg.core.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.blockentity.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -33,8 +33,8 @@ public abstract class StargateAbstractMemberBE extends CamouflageBE implements I
                 :
                 StargateAbstractMergeHelper.findBaseTile(
                         getLevel(), getBlockPos(),
-                        getCurrentBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY),
-                        dev.tauri.jsg.core.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getCurrentBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY)),
+                        getCurrentBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY),
+                        dev.tauri.jsgcore.common.blockstate.JSGProperties.getDirectionByVerticalFacing(getCurrentBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY)),
                         getBaseBlock()
                 )
         );

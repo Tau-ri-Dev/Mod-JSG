@@ -7,7 +7,7 @@ import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolPegasusEnum
 import dev.tauri.jsg.client.renderer.item.dialhomedevice.DHDAbstractBEWLR;
 import dev.tauri.jsg.client.renderer.item.dialhomedevice.DHDPegasusBEWLR;
 import dev.tauri.jsg.common.loader.ElementEnum;
-import dev.tauri.jsg.core.common.registry.CoreBiomeOverlays;
+import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;

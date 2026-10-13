@@ -61,8 +61,8 @@ public abstract class StargateClassicMergeHelper extends StargateAbstractMergeHe
             if (offsetAndRotate)
                 newPos = stargate.relative(pos); //BlockPosHelper.rotate(pos, horizontalFacing, verticalFacing).offset(basePos);
             map.put(newPos, getChevronBlock().defaultBlockState()
-                    .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, horizontalFacing)
-                    .setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalFacingByDirection(verticalFacing))
+                    .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, horizontalFacing)
+                    .setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalFacingByDirection(verticalFacing))
                     .setValue(BlockStateProperties.WATERLOGGED, offsetAndRotate && Objects.requireNonNull(stargate.getLevel()).getFluidState(newPos).getType() == Fluids.WATER)
             );
         }

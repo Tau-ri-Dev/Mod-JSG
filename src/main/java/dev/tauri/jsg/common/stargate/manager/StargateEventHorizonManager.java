@@ -24,14 +24,14 @@ import dev.tauri.jsg.common.stargate.teleportation.traveler.*;
 import dev.tauri.jsg.common.state.stargate.StargateFlashState;
 import dev.tauri.jsg.common.state.stargate.StargateVaporizeBlockParticlesRequest;
 import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
-import dev.tauri.jsg.core.common.blockentity.ScheduledTaskExecutorInterface;
-import dev.tauri.jsg.core.common.entity.ScheduledTask;
-import dev.tauri.jsg.core.common.entity.ScheduledTaskType;
-import dev.tauri.jsg.core.common.packet.JSGCorePacketHandler;
-import dev.tauri.jsg.core.common.packet.packets.StateUpdatePacketToClient;
-import dev.tauri.jsg.core.common.sound.JSGSoundHelper;
-import dev.tauri.jsg.core.common.util.JSGAxisAlignedBB;
-import dev.tauri.jsg.core.common.util.RotationUtil;
+import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
+import dev.tauri.jsgcore.common.entity.ScheduledTask;
+import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
+import dev.tauri.jsgcore.common.packet.JSGCorePacketHandler;
+import dev.tauri.jsgcore.common.packet.packets.StateUpdatePacketToClient;
+import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
+import dev.tauri.jsgcore.common.util.RotationUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -48,6 +48,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -328,8 +329,8 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
     }
 
     @Override
-    public IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> afterPlace) {
-        return new StargateTeleporter(traveler, afterPlace);
+    public IStargateTeleporter getTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> beforePlace, Consumer<IStargateTraveler<?>> afterPlace) {
+        return new StargateTeleporter(traveler, beforePlace, afterPlace);
     }
 
     @Override
@@ -374,33 +375,39 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
 
         // scan teleport box for entities and add them
         for (var e : entitiesTPBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            var packet = getTraveler(e);
-            if (entitiesWaitingToTeleport.containsKey(packet)) continue;
-            if (packet == null) continue;
-            entitiesWaitingToTeleport.put(packet, false);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(e);
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                var packet = getTraveler(ePart);
+                if (entitiesWaitingToTeleport.containsKey(packet)) return;
+                if (packet == null) return;
+                entitiesWaitingToTeleport.put(packet, false);
+            });
         }
 
         // scan back box for entities and add them if they were in front box previous tick
         for (var e : entitiesBackBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            if (!entitiesInFrontBoxLastTick.contains(e)) continue;
-            var packet = getTraveler(e);
-            if (entitiesWaitingToTeleport.containsKey(packet)) continue;
-            entitiesInFrontBoxLastTick.remove(e);
-            if (packet == null) continue;
-            entitiesWaitingToTeleport.put(packet, false);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(ePart);
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                if (!entitiesInFrontBoxLastTick.contains(ePart)) return;
+                var packet = getTraveler(ePart);
+                if (entitiesWaitingToTeleport.containsKey(packet)) return;
+                entitiesInFrontBoxLastTick.remove(ePart);
+                if (packet == null) return;
+                entitiesWaitingToTeleport.put(packet, false);
+            });
         }
 
         // scan the front box for new entities that can potentially go through in next subtick
         entitiesInFrontBoxLastTick.clear();
         for (var e : entitiesFrontBox) {
-            entitiesInAnyBox.add(e);
-            if (entitiesInFrontBoxLastTick.contains(e)) continue;
-            if (entitiesRecentlyGoThrough.contains(e)) continue;
-            entitiesInFrontBoxLastTick.add(e);
+            getAllEntityParts(e).forEach(ePart -> {
+                entitiesInAnyBox.add(ePart);
+                if (entitiesInFrontBoxLastTick.contains(ePart)) return;
+                if (entitiesRecentlyGoThrough.contains(ePart)) return;
+                entitiesInFrontBoxLastTick.add(ePart);
+            });
         }
 
         // update the last teleported entities list
@@ -417,6 +424,7 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
             if (traveler.get() instanceof Entity e && entitiesRecentlyGoThrough.contains(e)) continue;
 
             entitiesWaitingToTeleport.put(traveler, true);
+            traveler.loadPassengers();
             if (traveler.canBeSendThisWay(teleport)) {
                 if (isCurrentlyUnstable && level.random.nextFloat() < JSGConfig.Stargate.ehDeathChance.get()) {
                     traveler.killUnstable();
@@ -428,6 +436,15 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
                 traveler.killWrongTravel();
             }
         }
+    }
+
+    protected static List<Entity> getAllEntityParts(Entity entity) {
+        if (entity instanceof PartEntity<?>) return List.of();
+        if (entity.getVehicle() != null)
+            return List.of();
+        //if (!entity.getPassengers().isEmpty())
+        //    return Util.make(new LinkedList<>(entity.getPassengers()), l -> l.addFirst(entity));
+        return List.of(entity);
     }
 
     public boolean isMovingTowardsGate(Vec3 motionVec) {

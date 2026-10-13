@@ -2,9 +2,10 @@ package dev.tauri.jsg.common.block.jub;
 
 import dev.tauri.jsg.common.blockentity.jub.JUBCableBE;
 import dev.tauri.jsg.common.capability.JSGCapabilities;
-import dev.tauri.jsg.core.common.helper.ItemHelper;
-import dev.tauri.jsg.core.common.item.ITabbedItem;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.helper.ItemHelper;
+import dev.tauri.jsgcore.common.item.ITabbedItem;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -28,7 +29,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,20 +36,21 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class JUBCableBlock extends JUBDeviceBlock implements SimpleWaterloggedBlock, ITabbedItem {
     public JUBCableBlock() {
         super(Properties.of().dynamicShape().noOcclusion());
         this.registerDefaultState(
                 defaultBlockState()
-                        //.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.CENTER)
+                        //.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.CENTER)
                         .setValue(BlockStateProperties.WATERLOGGED, false)
         );
     }
 
     @Nullable
-    public RegistryObject<CreativeModeTab> getTab() {
-        return CoreTabs.TAB_ENERGY;
+    public Supplier<RegistryObjectWrapper<CreativeModeTab>> getTab() {
+        return () -> CoreTabs.TAB_ENERGY;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class JUBCableBlock extends JUBDeviceBlock implements SimpleWaterloggedBl
     @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        //builder.add(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT);
+        //builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT);
         builder.add(BlockStateProperties.WATERLOGGED);
     }
 
@@ -100,7 +101,7 @@ public class JUBCableBlock extends JUBDeviceBlock implements SimpleWaterloggedBl
             if (JSGCapabilities.getJUB(be) == null) continue;
             connections.add(d);
         }
-        return state;//.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
+        return state;//.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
     }
 
     @Override
@@ -122,19 +123,19 @@ public class JUBCableBlock extends JUBDeviceBlock implements SimpleWaterloggedBl
         if (!(reader instanceof Level level)) return;
         if (level.isClientSide()) return;
         /*var be = level.getBlockEntity(neighbor);
-        var connections = state.getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT).getConnections();
+        var connections = state.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT).getConnections();
         var newState = state;
         var delta = neighbor.subtract(pos);
         var dir = Direction.fromDelta(delta.getX(), delta.getY(), delta.getZ());
         if (be == null || (JSGCapabilities.getJUB(be) == null) || (JSGCapabilities.getJUB(be) == null)) {
             if (connections.contains(dir)) {
                 connections.remove(dir);
-                newState = newState.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
+                newState = newState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
                 level.setBlock(pos, newState, 3);
             }
         } else if (!connections.contains(dir)) {
             connections.add(dir);
-            newState = newState.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
+            newState = newState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.JUB_VARIANT, JUBCableVariant.fromDirections(connections));
             level.setBlock(pos, newState, 3);
         }*/
     }

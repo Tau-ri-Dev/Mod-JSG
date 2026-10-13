@@ -3,18 +3,18 @@ package dev.tauri.jsg.api.config.ingame.option;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.config.util.StargateTimeLimitModeEnum;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
-import dev.tauri.jsg.core.common.config.ingame.BEConfigOptionProvider;
-import dev.tauri.jsg.core.common.config.ingame.option.ConfigOptionsHolder;
-import dev.tauri.jsg.core.common.config.ingame.option.type.BooleanBEConfigOption;
-import dev.tauri.jsg.core.common.config.ingame.option.type.IntegerBEConfigOption;
-import dev.tauri.jsg.core.common.symbol.pointoforigin.IPointOfOriginType;
+import dev.tauri.jsgcore.common.config.ingame.BEConfigOptionProvider;
+import dev.tauri.jsgcore.common.config.ingame.option.ConfigOptionsHolder;
+import dev.tauri.jsgcore.common.config.ingame.option.type.BooleanBEConfigOption;
+import dev.tauri.jsgcore.common.config.ingame.option.type.IntegerBEConfigOption;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
 import net.minecraft.resources.ResourceLocation;
 
 public class StargateConfigOptions {
     public static class Common {
         public static final ConfigOptionsHolder HOLDER = new ConfigOptionsHolder();
 
-        public static final BEConfigOptionProvider<StargateTimeLimitModeEnum> TIME_LIMIT_MODE = HOLDER.register("time_limit_mode", (onChanged) -> new dev.tauri.jsg.core.common.config.ingame.option.type.EnumBEConfigOption<>(onChanged, JSGConfig.Stargate.maxOpenedWhat.get(), StargateTimeLimitModeEnum::values, (object) -> {
+        public static final BEConfigOptionProvider<StargateTimeLimitModeEnum> TIME_LIMIT_MODE = HOLDER.register("time_limit_mode", (onChanged) -> new dev.tauri.jsgcore.common.config.ingame.option.type.EnumBEConfigOption<>(onChanged, JSGConfig.Stargate.maxOpenedWhat.get(), StargateTimeLimitModeEnum::values, (object) -> {
             if (object instanceof StargateTimeLimitModeEnum mode)
                 return mode;
             return null;

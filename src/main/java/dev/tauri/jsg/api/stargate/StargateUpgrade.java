@@ -1,9 +1,9 @@
 package dev.tauri.jsg.api.stargate;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.core.common.item.IUpgradeItem;
-import dev.tauri.jsg.core.common.util.IUpgrade;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.item.IUpgradeItem;
+import dev.tauri.jsgcore.common.util.IUpgrade;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 

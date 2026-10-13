@@ -5,17 +5,17 @@ import dev.tauri.jsg.api.entity.StargateAddressData;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.common.entity.AddressNotebookPageType;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.entity.NotebookPageType;
-import dev.tauri.jsg.core.common.helper.DimensionsHelper;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
-import dev.tauri.jsg.core.mapping.JSGMapping;
-import dev.tauri.jsg.core.common.registry.RegistryObject;
+import dev.tauri.jsgcore.common.entity.AddressNotebookPageType;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.entity.NotebookPageType;
+import dev.tauri.jsgcore.common.helper.DimensionsHelper;
+import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 
 public class JSGNotebookPageTypes {
 
-    public static final RegistryObject<NotebookPageType<StargateAddressData>> STARGATE_ADDRESS = JSGApi.REGISTRY_HELPER.notebookPage().register("stargate_address", () -> new AddressNotebookPageType<>(
+    public static final RegistryObjectWrapper<NotebookPageType<StargateAddressData>> STARGATE_ADDRESS = JSGApi.REGISTRY_HELPER.notebookPage().register("stargate_address", () -> new AddressNotebookPageType<>(
             StargateAddressData::new,
             stargateAddressData -> stargateAddressData != null ? stargateAddressData.serializeNBT() : null,
             (level, pos, random, data) -> {

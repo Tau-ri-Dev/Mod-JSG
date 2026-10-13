@@ -3,9 +3,7 @@ package dev.tauri.jsg.datagen.tag;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
-import dev.tauri.jsg.core.common.registry.tag.CoreBlockTags;
-import net.minecraft.Util;
+import dev.tauri.jsgcore.common.registry.tag.CoreBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -55,12 +53,6 @@ public class JSGBlockTagGenerator extends BlockTagsProvider {
 
         //Crafting Tags
         tag(BlockTags.SMELTS_TO_GLASS).add(JSGBlocks.ABYDOS_SAND.get());
-        Util.make(tag(BlockTags.CAULDRONS), (tag) -> tag.add(CoreFluids.MOLTEN_TRINIUM.cauldron.get())
-                .add(CoreFluids.MOLTEN_TITANIUM.cauldron.get())
-                .add(CoreFluids.MOLTEN_NAQUADAH_REFINED.cauldron.get())
-                .add(CoreFluids.MOLTEN_NAQUADAH_ALLOY.cauldron.get())
-                .add(CoreFluids.MOLTEN_NAQUADAH_RAW.cauldron.get()));
-
 
         //Mechanics Tags
         tag(BlockTags.INVALID_SPAWN_INSIDE)

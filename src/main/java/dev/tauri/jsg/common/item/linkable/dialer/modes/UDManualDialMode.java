@@ -16,7 +16,7 @@ import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerMode;
 import dev.tauri.jsg.common.packet.packets.linkable.UniverseDialerActionPacketToServer;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
-import dev.tauri.jsg.core.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

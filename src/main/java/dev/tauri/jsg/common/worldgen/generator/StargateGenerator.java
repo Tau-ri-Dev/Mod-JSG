@@ -11,15 +11,15 @@ import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
 import dev.tauri.jsg.common.helpers.StargateLinkingHelper;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.common.blockentity.CamouflageBE;
-import dev.tauri.jsg.core.common.blockentity.IUpgradable;
-import dev.tauri.jsg.core.common.config.ingame.IConfigurable;
-import dev.tauri.jsg.core.common.helper.BlockHelper;
-import dev.tauri.jsg.core.common.helper.BlockPosHelper;
-import dev.tauri.jsg.core.common.helper.ItemHandlerHelper;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
-import dev.tauri.jsg.core.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.blockentity.IUpgradable;
+import dev.tauri.jsgcore.common.config.ingame.IConfigurable;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.helper.BlockHelper;
+import dev.tauri.jsgcore.common.helper.BlockPosHelper;
+import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.registry.CoreItems;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -73,7 +73,7 @@ public class StargateGenerator implements IStargateGenerator {
 
         // Place base block
         if (!conf.baseInPlace)
-            conf.world.setBlock(conf.gateBasePos, gateBaseBlockState.setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, conf.gateFacing).setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsg.core.common.blockstate.JSGProperties.getVerticalFacingByDirection(conf.gateVerticalFacing)), 16 | 2);
+            conf.world.setBlock(conf.gateBasePos, gateBaseBlockState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, conf.gateFacing).setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_VERTICAL_PROPERTY, dev.tauri.jsgcore.common.blockstate.JSGProperties.getVerticalFacingByDirection(conf.gateVerticalFacing)), 16 | 2);
 
         StargateAbstractBaseBE<?, ?> gateTile;
         try {
@@ -176,7 +176,7 @@ public class StargateGenerator implements IStargateGenerator {
                 if (dhdRotation < 0) {
                     dhdRotation = BlockPosHelper.getIntDHDRotationFromFacing(conf.gateFacing, (conf.gateFacing == Direction.WEST || conf.gateFacing == Direction.EAST));
                 }
-                BlockState dhdBlockState = dhdBlock.defaultBlockState().setValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ROTATION_PROPERTY, dhdRotation);
+                BlockState dhdBlockState = dhdBlock.defaultBlockState().setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ROTATION_PROPERTY, dhdRotation);
                 conf.world.setBlock(conf.dhdPos, dhdBlockState, 16 | 2);
             }
             DHDAbstractBE dhdTile = ((DHDAbstractBE) Objects.requireNonNull(conf.world.getBlockEntity(conf.dhdPos)));
@@ -192,7 +192,7 @@ public class StargateGenerator implements IStargateGenerator {
                 dhdTile.getItemStackHandler().setStackInSlot(3, new ItemStack(CoreItems.CRYSTAL_UPGRADE_EFFICIENCY.get(), 1));
 
             if (conf.dhdFluid >= 0) {
-                dhdTile.getReactorManager().getTank().setFluid(new FluidStack(CoreFluids.MOLTEN_NAQUADAH_REFINED.get(), conf.dhdFluid));
+                dhdTile.getReactorManager().getTank().setFluid(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), conf.dhdFluid));
             }
 
             StargateLinkingHelper.updateLinkedGate(conf.world, conf.gateBasePos, conf.dhdPos);

@@ -5,7 +5,7 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.registry.JSGRegistries;
 import dev.tauri.jsg.common.config.stargate.StargateRIGConfig;
 import dev.tauri.jsg.common.stargate.rig.RIGWave;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

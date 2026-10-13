@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.item.stargate.dialhomedevice;
 
 import dev.tauri.jsg.client.renderer.item.dialhomedevice.DHDPegasusBEWLR;
-import dev.tauri.jsg.core.client.renderer.AbstractItemBEWLR;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;

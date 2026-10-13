@@ -4,9 +4,9 @@ import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisMode;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisState;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
-import dev.tauri.jsg.core.client.texture.ITextureLoader;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
+import dev.tauri.jsgcore.client.texture.ITextureLoader;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 

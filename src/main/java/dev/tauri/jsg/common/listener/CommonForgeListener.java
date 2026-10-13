@@ -12,9 +12,10 @@ import dev.tauri.jsg.common.recipes.UniverseDialerCloneRecipe;
 import dev.tauri.jsg.common.registry.JSGVillagers;
 import dev.tauri.jsg.common.registry.util.VillagerUtil;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.common.registry.CoreBlocks;
+import dev.tauri.jsgcore.common.definition.material.MaterialOreVariant;
 import dev.tauri.jsg.core.common.registry.RegistryObject;
-import dev.tauri.jsg.core.common.util.CreativeItemsChecker;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.util.CreativeItemsChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.registries.Registries;
@@ -44,6 +45,7 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executor;
@@ -68,7 +70,9 @@ public class CommonForgeListener {
 
         // todo: fix activity not being set after profession change
         if (villager.getVillagerData().getProfession() == JSGVillagers.SLAVE_MINER.get()) {
-            villager.getBrain().addActivityWithConditions(Activity.WORK, VillagerUtil.getWorkPackageForSlave((blockState) -> CoreBlocks.ORE_NAQUADAH.values().stream().map(RegistryObject::get).anyMatch(block -> block == blockState.getBlock()), 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryStatus.VALUE_PRESENT)));
+            villager.getBrain().addActivityWithConditions(Activity.WORK, VillagerUtil.getWorkPackageForSlave((blockState) ->
+                    Arrays.stream(MaterialOreVariant.values()).map(v -> MaterialType.NAQUADAH.getOre(v).get())
+                            .anyMatch(block -> block == blockState.getBlock()), 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryStatus.VALUE_PRESENT)));
             villager.getInventory().setItem(0, new ItemStack(Items.IRON_PICKAXE));
         }
         JSGVillagers.checkAndGetCustomType(villager).ifPresent(villagerType -> villager.setVillagerData(villager.getVillagerData().setType(villagerType)));

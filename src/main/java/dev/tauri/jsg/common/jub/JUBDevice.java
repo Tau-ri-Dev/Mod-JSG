@@ -2,7 +2,7 @@ package dev.tauri.jsg.common.jub;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.capability.JSGCapabilities;
-import dev.tauri.jsg.core.common.helper.BlockHelper;
+import dev.tauri.jsgcore.common.helper.BlockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;

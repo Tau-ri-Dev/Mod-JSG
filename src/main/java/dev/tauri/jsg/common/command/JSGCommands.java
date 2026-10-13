@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.command;
 
 import dev.tauri.jsg.common.command.commands.*;
-import dev.tauri.jsg.core.common.command.JSGAbstractCommand;
-import dev.tauri.jsg.core.common.command.JSGCommand;
+import dev.tauri.jsgcore.common.command.JSGAbstractCommand;
+import dev.tauri.jsgcore.common.command.JSGCommand;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class JSGCommands {
      * @param commandInstance - instance of JSGAbstractCommand from your mod
      */
     @SuppressWarnings("unused")
-    public static void registerSubCommand(dev.tauri.jsg.core.common.command.JSGCommand baseCommand, dev.tauri.jsg.core.common.command.JSGAbstractCommand commandInstance) {
+    public static void registerSubCommand(dev.tauri.jsgcore.common.command.JSGCommand baseCommand, dev.tauri.jsgcore.common.command.JSGAbstractCommand commandInstance) {
         baseCommand.registerSubCommand(commandInstance);
     }
 }

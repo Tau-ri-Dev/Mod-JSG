@@ -13,22 +13,22 @@ import dev.tauri.jsg.common.container.StargateContainer;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.stargate.SaveIrisCodeToServer;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.core.JSGCore;
-import dev.tauri.jsg.core.client.screen.tab.TabSideEnum;
-import dev.tauri.jsg.core.client.screen.tab.TabbedContainerScreen;
-import dev.tauri.jsg.core.client.screen.tab.tabs.*;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.forgeutil.SlotHandler;
-import dev.tauri.jsg.core.common.helper.TemperatureHelper;
-import dev.tauri.jsg.core.common.item.IUpgradeItem;
-import dev.tauri.jsg.core.common.packet.JSGCorePacketHandler;
-import dev.tauri.jsg.core.common.packet.packets.SaveConfigToServer;
-import dev.tauri.jsg.core.common.power.JSGEnergyStorage;
-import dev.tauri.jsg.core.common.registry.CoreFonts;
-import dev.tauri.jsg.core.common.symbol.SymbolType;
-import dev.tauri.jsg.core.common.util.I18n;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.JSGCore;
+import dev.tauri.jsgcore.client.screen.tab.TabSideEnum;
+import dev.tauri.jsgcore.client.screen.tab.TabbedContainerScreen;
+import dev.tauri.jsgcore.client.screen.tab.tabs.*;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.forgeutil.SlotHandler;
+import dev.tauri.jsgcore.common.helper.TemperatureHelper;
+import dev.tauri.jsgcore.common.item.IUpgradeItem;
+import dev.tauri.jsgcore.common.packet.JSGCorePacketHandler;
+import dev.tauri.jsgcore.common.packet.packets.SaveConfigToServer;
+import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
+import dev.tauri.jsgcore.common.registry.CoreFonts;
+import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.*;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.*;
 
 public class StargateContainerGui extends TabbedContainerScreen<StargateContainer> {
     public static final ResourceLocation BACKGROUND_TEXTURE = JSGMapping.rl(JSG.MOD_ID, "textures/gui/container/stargate/gui.png");

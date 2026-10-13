@@ -6,8 +6,8 @@ import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.blockentity.PrinterBE;
-import dev.tauri.jsg.core.common.integration.cctweaked.CCTweakedHelper;
-import dev.tauri.jsg.core.common.integration.cctweaked.methods.AbstractCCMethods;
+import dev.tauri.jsgcore.common.integration.cctweaked.CCTweakedHelper;
+import dev.tauri.jsgcore.common.integration.cctweaked.methods.AbstractCCMethods;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.LinkedList;

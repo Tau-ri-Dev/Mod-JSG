@@ -12,10 +12,10 @@ import dev.tauri.jsg.common.packet.packets.admincontroller.ACResponsePacketToCli
 import dev.tauri.jsg.common.packet.packets.admincontroller.event.ACStargateEngageSymbolPacketToClient;
 import dev.tauri.jsg.common.packet.packets.admincontroller.handshake.ACStargateDataRequestPacketToServer;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.core.client.screen.util.GuiHelper;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.helper.JSGMinecraftHelper;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.screen.util.GuiHelper;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 
-import static dev.tauri.jsg.core.client.screen.util.GuiHelper.drawModalRectWithCustomSizedTexture;
+import static dev.tauri.jsgcore.client.screen.util.GuiHelper.drawModalRectWithCustomSizedTexture;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

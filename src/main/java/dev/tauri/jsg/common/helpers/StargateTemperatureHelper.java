@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import dev.tauri.jsg.common.block.stargate.StargateAbstractBaseBlock;
 import dev.tauri.jsg.common.block.stargate.StargateAbstractMemberBlock;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
-import dev.tauri.jsg.core.common.helper.TemperatureHelper;
+import dev.tauri.jsgcore.common.helper.TemperatureHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -51,7 +51,7 @@ public class StargateTemperatureHelper {
     public static Double getBlockTemperature(BlockState state, Level level, BlockPos pos) {
         if (state.getBlock() instanceof StargateAbstractBaseBlock || state.getBlock() instanceof StargateAbstractMemberBlock)
             return null;
-        if (dev.tauri.jsg.core.common.registry.helper.FluidHelper.isLiquidBlock(state)) {
+        if (dev.tauri.jsgcore.common.registry.helper.FluidHelper.isLiquidBlock(state)) {
             Fluid fluid = state.getFluidState().getType();
             if (state.getBlock() instanceof LiquidBlock liquid) {
                 fluid = liquid.fluid;

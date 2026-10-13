@@ -2,10 +2,33 @@ package dev.tauri.jsg.api.stargate.traveler;
 
 import dev.tauri.jsg.api.stargate.Stargate;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public interface IStargateTraveler<E> {
     E get();
+
+    default boolean hasPassengers() {
+        return false;
+    }
+
+    default List<IStargateTraveler<?>> getPassengers() {
+        return List.of();
+    }
+
+    default void loadPassengers() {
+    }
+
+    default void setVehicle(Entity vehicle) {
+
+    }
+
+    default void insertPassengers(List<IStargateTraveler<?>> passengers) {
+
+    }
 
     Stargate<?> getTransmitter();
 
@@ -57,7 +80,7 @@ public interface IStargateTraveler<E> {
         return true;
     }
 
-    void sendChangeDimension(ServerLevel targetLevel);
+    void sendChangeDimension(ServerLevel targetLevel, Consumer<IStargateTraveler<?>> newTraveler);
 
     default void sendSameDimension() {
         getReceiver().getEventHorizonManager().receive(this);
@@ -69,7 +92,8 @@ public interface IStargateTraveler<E> {
         }
 
         if (!isSameDimension())
-            sendChangeDimension((ServerLevel) getReceiver().getStargateLevel());
+            sendChangeDimension((ServerLevel) getReceiver().getStargateLevel(), (newTraveler) -> {
+            });
         else
             sendSameDimension();
     }

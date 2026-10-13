@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.stargate.exception;
 
 import dev.tauri.jsg.api.stargate.Stargate;
-import dev.tauri.jsg.core.common.helper.BlockHelper;
+import dev.tauri.jsgcore.common.helper.BlockHelper;
 
 public class StargateException extends RuntimeException {
     protected final Stargate<?> stargate;

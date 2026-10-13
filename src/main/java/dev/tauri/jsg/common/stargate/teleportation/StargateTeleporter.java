@@ -10,10 +10,12 @@ import java.util.function.Consumer;
 
 public class StargateTeleporter implements IStargateTeleporter {
     protected IStargateTraveler<?> traveler;
+    protected final Consumer<IStargateTraveler<?>> beforePlace;
     protected final Consumer<IStargateTraveler<?>> afterPlace;
 
-    public StargateTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> afterPlace) {
+    public StargateTeleporter(IStargateTraveler<?> traveler, Consumer<IStargateTraveler<?>> beforePlace, Consumer<IStargateTraveler<?>> afterPlace) {
         this.traveler = traveler;
+        this.beforePlace = beforePlace;
         this.afterPlace = afterPlace;
     }
 
@@ -28,6 +30,7 @@ public class StargateTeleporter implements IStargateTeleporter {
                 placed -> {
                     // The entity may have been recreated during the dimension change - rebind the traveler.
                     traveler = traveler.getTransmitter().getEventHorizonManager().getTraveler(placed, traveler);
+                    beforePlace.accept(traveler);
                     traveler.getReceiver().getEventHorizonManager().receive(traveler);
                     afterPlace.accept(traveler);
                 });

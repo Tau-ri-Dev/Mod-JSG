@@ -3,13 +3,14 @@ package dev.tauri.jsg.common.raycaster;
 import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
-import dev.tauri.jsg.common.packet.packets.stargate.DHDAssemblyClickToServer;
-import dev.tauri.jsg.common.packet.packets.stargate.DHDButtonClickedToServer;
-import dev.tauri.jsg.common.packet.packets.stargate.DHDFluidInsertionToServer;
-import dev.tauri.jsg.core.common.raycaster.Raycaster;
-import dev.tauri.jsg.core.common.registry.CoreItems;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
+import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDAssemblyClickToServer;
+import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDButtonClickedToServer;
+import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDFluidInsertionToServer;
+import dev.tauri.jsg.common.packet.packets.dialhomedevice.DHDUpgradeAssemblyClickToServer;
+import dev.tauri.jsgcore.common.raycaster.Raycaster;
+import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +32,7 @@ public abstract class RaycasterDHD extends Raycaster {
 
     @Override
     public float getRotation(Level world, BlockPos pos, Player player) {
-        return world.getBlockState(pos).getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ROTATION_PROPERTY) * -22.5f;
+        return world.getBlockState(pos).getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ROTATION_PROPERTY) * -22.5f;
     }
 
     @Override
@@ -43,10 +44,15 @@ public abstract class RaycasterDHD extends Raycaster {
 
     public abstract IDHDPartItem getDHDButtonsConsolePart();
 
+    public abstract IDHDPartItem getDHDUpgradesCoverPart();
+
     @Override
     public boolean isButtonEnabled(Level level, Player player, int buttonId, BlockPos pos, InteractionHand hand) {
         var dhdTile = (DHDAbstractBE) level.getBlockEntity(pos);
         if (dhdTile != null) {
+            if (buttonId >= UPGRADE_SLOT_TL_IMM_BUTTON_ID && buttonId <= UPGRADE_SLOT_B_IMM_BUTTON_ID) {
+                return !dhdTile.isAssembled(getDHDUpgradesCoverPart());
+            }
             if (!dhdTile.isAssembled(getDHDButtonsConsolePart()) && buttonId < 100) return false;
             var item = player.getItemInHand(hand);
             var fluidCap = java.util.Optional.ofNullable(item.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM));
@@ -128,6 +134,11 @@ public abstract class RaycasterDHD extends Raycaster {
                         JSGPacketHandler.sendToServer(new DHDAssemblyClickToServer(pos, part.get(), true));
                         return true;
                     }
+                }
+                if (buttonId >= UPGRADE_SLOT_TL_IMM_BUTTON_ID && buttonId <= UPGRADE_SLOT_B_IMM_BUTTON_ID) {
+                    // upgrades
+                    JSGPacketHandler.sendToServer(new DHDUpgradeAssemblyClickToServer(pos, buttonId - UPGRADE_SLOT_TL_IMM_BUTTON_ID, hand, isSneaking || player.getItemInHand(hand).isEmpty()));
+                    return true;
                 }
                 if (dhdTile.isAssembled() && buttonId != -1 && buttonId < 100) {
                     SymbolInterface symbol = dhdTile.getSymbolType().valueOf(buttonId);

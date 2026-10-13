@@ -5,8 +5,8 @@ import dev.tauri.jsg.api.registry.*;
 import dev.tauri.jsg.client.renderer.entity.MastadgeRenderer;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.stargate.StargateTypesLoader;
-import dev.tauri.jsg.core.common.registry.CoreTabs;
-import dev.tauri.jsg.core.common.registry.helper.RegistryHelper;
+import dev.tauri.jsgcore.common.registry.CoreTabs;
+import dev.tauri.jsgcore.common.registry.helper.RegistryHelper;
 import net.neoforged.bus.api.IEventBus;
 
 public class JSGRegistriesInit {

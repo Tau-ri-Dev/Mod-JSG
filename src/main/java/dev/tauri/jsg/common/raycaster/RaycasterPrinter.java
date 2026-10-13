@@ -4,9 +4,9 @@ import dev.tauri.jsg.common.blockentity.PrinterBE;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.PrinterButtonClickedToServer;
 import dev.tauri.jsg.common.registry.JSGBlocks;
-import dev.tauri.jsg.core.common.raycaster.Raycaster;
-import dev.tauri.jsg.core.common.raycaster.util.RayCastedButton;
-import dev.tauri.jsg.core.common.util.vectors.Vector3f;
+import dev.tauri.jsgcore.common.raycaster.Raycaster;
+import dev.tauri.jsgcore.common.raycaster.util.RayCastedButton;
+import dev.tauri.jsgcore.common.util.vectors.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -77,7 +77,7 @@ public class RaycasterPrinter extends Raycaster {
 
     @Override
     public float getRotation(Level world, BlockPos pos, Player player) {
-        return -world.getBlockState(pos).getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY).getOpposite().toYRot();
+        return -world.getBlockState(pos).getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY).getOpposite().toYRot();
     }
 
     @Override

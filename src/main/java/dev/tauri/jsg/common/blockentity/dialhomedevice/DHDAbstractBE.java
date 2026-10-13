@@ -10,6 +10,7 @@ import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
+import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateCloseResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
@@ -19,22 +20,20 @@ import dev.tauri.jsg.common.dialhomedevice.manager.DHDReactorManager;
 import dev.tauri.jsg.common.dialhomedevice.manager.state.DHDAbstractStateManager;
 import dev.tauri.jsg.common.helpers.CurrentRegistries;
 import dev.tauri.jsg.common.helpers.StargateLinkingHelper;
-import dev.tauri.jsg.core.common.blockentity.BEStateProvider;
-import dev.tauri.jsg.core.common.blockentity.ILinkable;
-import dev.tauri.jsg.core.common.blockentity.JSGBlockEntity;
-import dev.tauri.jsg.core.common.config.ingame.IConfigurable;
-import dev.tauri.jsg.core.common.entity.BiomeOverlayInstance;
-import dev.tauri.jsg.core.common.entity.State;
-import dev.tauri.jsg.core.common.entity.StateType;
-import dev.tauri.jsg.core.common.helper.LinkingHelper;
-import dev.tauri.jsg.core.common.item.CommonUpgrade;
-import dev.tauri.jsg.core.common.packet.TargetPoint;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
-import dev.tauri.jsg.core.common.sound.ISoundEvent;
-import dev.tauri.jsg.core.common.sound.JSGSoundHelper;
-import dev.tauri.jsg.core.common.symbol.SymbolInterface;
-import dev.tauri.jsg.core.common.util.FluidTank;
-import dev.tauri.jsg.core.common.util.JSGItemStackHandler;
+import dev.tauri.jsgcore.common.blockentity.BEStateProvider;
+import dev.tauri.jsgcore.common.blockentity.ILinkable;
+import dev.tauri.jsgcore.common.blockentity.JSGBlockEntity;
+import dev.tauri.jsgcore.common.config.ingame.IConfigurable;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
+import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.entity.StateType;
+import dev.tauri.jsgcore.common.helper.LinkingHelper;
+import dev.tauri.jsgcore.common.sound.ISoundEvent;
+import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
+import dev.tauri.jsgcore.common.symbol.SymbolInterface;
+import dev.tauri.jsgcore.common.util.FluidTank;
+import dev.tauri.jsgcore.common.util.JSGItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -66,7 +65,9 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDHD, ILinkable<Stargate<?>>, BEStateProvider {
     // ====================================================================================
@@ -78,11 +79,11 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     public DHDAbstractBE(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);
         this.stateManager = createStateManager();
-        this.reactorManager = new DHDReactorManager(this, () -> new FluidTank(new FluidStack(CoreFluids.MOLTEN_NAQUADAH_REFINED.get(), 0), JSGConfig.DialHomeDevice.fluidCapacity.get()) {
+        this.reactorManager = new DHDReactorManager(this, () -> new FluidTank(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 0), JSGConfig.DialHomeDevice.fluidCapacity.get()) {
             @Override
             public boolean isFluidValid(FluidStack fluid) {
                 if (fluid == null) return false;
-                return fluid.getFluid() == CoreFluids.MOLTEN_NAQUADAH_REFINED.get();
+                return fluid.getFluid() == MaterialType.REFINED_NAQUADAH.getFluid().get();
             }
 
             @Override
@@ -91,8 +92,8 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
             }
         }, (tank) -> hasControlCrystal(), (tank) -> {
             double energyPerOne = JSGConfig.DialHomeDevice.energyPerNaquadah.get();
-            if (hasUpgrade(CommonUpgrade.EFFICIENCY_UPGRADE)) {
-                energyPerOne *= JSGConfig.DialHomeDevice.efficiencyUpgradeMultiplier.get();
+            for (var behavior : getBehaviors()) {
+                energyPerOne = behavior.modifyEnergyPerNaquadah(energyPerOne);
             }
             return (int) energyPerOne;
         });
@@ -135,6 +136,8 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     public void activateSymbol(SymbolInterface symbol) {
         if (level == null) return;
         if (getStateManager().getButtonsState().get(symbol).isActive()) return;
+        if (getBehaviors().stream().anyMatch(behavior -> !behavior.onSymbolActivated(symbol)))
+            return;
         var playSound = getLinkedDeviceOptional().map(gateTile -> {
             if (!gateTile.getDialingManager().getStargateState().dialingComputer()) return true;
             return (gateTile instanceof IConfigurable configurable && configurable.getConfig().getValueOrDefault(StargateConfigOptions.Classic.DHD_OC_PRESS_SOUND));
@@ -165,6 +168,8 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     // TODO(Mine): Refactor "dhd_milkyway" key to just "dhd"
     @Override
     public void pushSymbolButton(SymbolInterface symbol, @Nullable ServerPlayer player, boolean force) {
+        if (getBehaviors().stream().anyMatch(behavior -> !behavior.onSymbolButtonPushed(symbol, player, force)))
+            return;
         if (!hasControlCrystal()) {
             if (player != null)
                 player.sendSystemMessage(Component.translatable("block.jsg.dhd_milkyway.no_crystal_warn"), true);
@@ -213,12 +218,28 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
         return behaviors.values();
     }
 
+    public Collection<Integer> getBehaviorsUsedSlots() {
+        return behaviors.entrySet().stream()
+                .filter(e -> e.getValue() != null)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    @Override
+    public int getMaxSymbols(@Nullable StargateAddressDynamic dialedAddress) {
+        var maxSymbols = 7;
+        for (var behavior : getBehaviors()) {
+            maxSymbols = behavior.modifyMaxSymbolsInAddress(maxSymbols, dialedAddress);
+        }
+        return maxSymbols;
+    }
+
     // ====================================================================================
 
 
     @Override
     public Vec3 getBlockPosInFront() {
-        Direction dhdFacing = Direction.from2DDataValue(Math.round(getBlockState().getValue(dev.tauri.jsg.core.common.blockstate.JSGProperties.ROTATION_PROPERTY) / 4.0f)).getOpposite();
+        Direction dhdFacing = Direction.from2DDataValue(Math.round(getBlockState().getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ROTATION_PROPERTY) / 4.0f)).getOpposite();
         return getBlockPos().getCenter().add(new Vec3(dhdFacing.getNormal().getX(), dhdFacing.getNormal().getY(), dhdFacing.getNormal().getZ()));
     }
 
@@ -261,10 +282,15 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                 else if (!isAssembled((IDHDPartItem) getControlCrystal()))
                     getStateManager().assemblePart((IDHDPartItem) getControlCrystal());
             } else {
-                if (getStackInSlot(slot).isEmpty() && behaviors.containsKey(slot))
+                var level = getLevel();
+                if (getStackInSlot(slot).isEmpty() && behaviors.containsKey(slot)) {
+                    if (level != null)
+                        Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onDetach(level));
                     behaviors.remove(slot);
-                else if (getStackInSlot(slot).getItem() instanceof IDHDUpgradeItem dhdUpgradeItem && dhdUpgradeItem.getUpgrade() instanceof IDHDUpgrade dhdUpgrade) {
+                } else if (getStackInSlot(slot).getItem() instanceof IDHDUpgradeItem dhdUpgradeItem && dhdUpgradeItem.getUpgrade() instanceof IDHDUpgrade dhdUpgrade) {
                     behaviors.put(slot, dhdUpgrade.createBehavior(DHDAbstractBE.this));
+                    if (level != null)
+                        Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onAttach(level));
                 }
             }
             setChanged();

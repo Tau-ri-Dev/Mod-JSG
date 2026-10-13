@@ -6,19 +6,19 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.loader.ElementEnum;
-import dev.tauri.jsg.core.client.renderer.AbstractItemBEWLR;
-import dev.tauri.jsg.core.client.renderer.HandHeldDeviceRenderer;
-import dev.tauri.jsg.core.client.renderer.HandPosition;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.util.I18n;
-import dev.tauri.jsg.core.mapping.JSGMapping;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
+import dev.tauri.jsgcore.client.renderer.HandHeldDeviceRenderer;
+import dev.tauri.jsgcore.client.renderer.HandPosition;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.util.I18n;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import static dev.tauri.jsg.core.client.renderer.HandHeldDeviceRenderer.drawModalRectWithCustomSizedTexture;
+import static dev.tauri.jsgcore.client.renderer.HandHeldDeviceRenderer.drawModalRectWithCustomSizedTexture;
 
 @OnlyIn(Dist.CLIENT)
 public class GarageDoorOpenerBEWLR extends AbstractItemBEWLR {

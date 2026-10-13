@@ -14,11 +14,11 @@ import dev.tauri.jsg.common.raycaster.RaycasterPegasusDHD;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.JSGRaycasters;
-import dev.tauri.jsg.core.client.renderer.BlockRenderer;
-import dev.tauri.jsg.core.client.texture.ITexture;
-import dev.tauri.jsg.core.common.raycaster.Raycaster;
-import dev.tauri.jsg.core.common.raycaster.util.RayCastedButton;
-import dev.tauri.jsg.core.common.registry.CoreFluids;
+import dev.tauri.jsgcore.client.renderer.BlockRenderer;
+import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsgcore.common.raycaster.Raycaster;
+import dev.tauri.jsgcore.common.raycaster.util.RayCastedButton;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -29,6 +29,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DHDPegasusRenderer extends DHDAbstractRenderer<DHDPegasusRendererState> {
     public DHDPegasusRenderer(BlockEntityRendererProvider.Context ignored) {
@@ -80,6 +81,15 @@ public class DHDPegasusRenderer extends DHDAbstractRenderer<DHDPegasusRendererSt
     public void renderDHD(PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay) {
         ElementEnum.PEGASUS_DHD_BASE.bindTexture(rendererState.getBiomeOverlay()).render(poseStack, bufferSource, combinedLight, combinedOverlay);
         ElementEnum.PEGASUS_DHD_CRYSTAL_HOLDER.render(poseStack, bufferSource, combinedLight, combinedOverlay);
+
+        var slot = new AtomicInteger(0);
+        DHDMilkyWayRenderer.UPGRADE_POSES.forEach(pose -> {
+            if (!rendererState.hasUpgrade(slot.getAndIncrement())) return;
+            poseStack.pushPose();
+            poseStack.translate(pose.x(), pose.y(), -0.083);
+            ElementEnum.PEGASUS_DHD_UPGRADE_CRYSTAL.bindTexture(rendererState.getBiomeOverlay()).render(poseStack, bufferSource, combinedLight, combinedOverlay);
+            poseStack.popPose();
+        });
     }
 
     @Override
@@ -136,7 +146,7 @@ public class DHDPegasusRenderer extends DHDAbstractRenderer<DHDPegasusRendererSt
                         .bindTexture(rendererState.getBiomeOverlay())
                         .render(stack, bufferSource, combinedLight, combinedOverlay, false, r, g, b, a, false);
                 RenderSystem.enableBlend();
-                TextureAtlasSprite sprite = BlockRenderer.getFluidTexture(new FluidStack(CoreFluids.MOLTEN_NAQUADAH_REFINED.still.get(), 1000), BlockRenderer.FluidTextureType.STILL);
+                TextureAtlasSprite sprite = BlockRenderer.getFluidTexture(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 1000), BlockRenderer.FluidTextureType.STILL);
                 if (sprite != null) {
                     stack.pushPose();
                     float height = assembled ? (rendererState.naquadahAmount / (float) rendererState.naquadahMaxAmount) : 1f;
