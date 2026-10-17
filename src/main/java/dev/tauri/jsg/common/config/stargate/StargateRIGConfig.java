@@ -24,7 +24,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(5, 15)
                 .build());
-        map.put("Desert_hostile_wave", RIGWave.Builder.create()
+        map.put("desert_hostile_wave", RIGWave.Builder.create()
                 .weight(40)
                 .addEntity(new RIGEntity("minecraft:husk", 30))
                 .addEntity(new RIGEntity("minecraft:skeleton", 25, "{HandItems:[{Count:1,id:bow},{}], ArmorItems:[{},{},{},{Count:1, id:golden_helmet}], ArmorDropChances:[0.0f,0.0f,0.0f,0.1f]}"))
@@ -34,7 +34,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(5, 20)
                 .build());
-        map.put("Snowy_hostile_wave", RIGWave.Builder.create()
+        map.put("snowy_hostile_wave", RIGWave.Builder.create()
                 .weight(40)
                 .addEntity(new RIGEntity("minecraft:stray", 25, "{HandItems:[{Count:1,id:bow},{}],ArmorItems:[{},{},{},{Count:1,id:leather_helmet,tag:{display:{color:16383998}}}],HandDropChances:[0.1f,0.0f]}"))
                 .addEntity(new RIGEntity("minecraft:stray", 15, "{HandItems:[{Count:1,id:bow,tag:{Enchantments:[{id:power,lvl:1},{id:punch,lvl:1}]}},{}],ArmorItems:[{},{},{},{Count:1,id:leather_helmet,tag:{display:{color:16383998}}}]}"))
@@ -45,7 +45,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(5, 10)
                 .build());
-        map.put("Swamp_hostile_wave", RIGWave.Builder.create()
+        map.put("swamp_hostile_wave", RIGWave.Builder.create()
                 .weight(40)
                 .addEntity(new RIGEntity("minecraft:zombie", 10, "{CanPickUpLoot:1b,ArmorItems:[{},{Count:1,id:leather_leggings},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.3f,0.0f,0.2f]}"))
                 .addEntity(new RIGEntity("minecraft:skeleton", 10, "{HandItems:[{Count:1,id:bow},{}], ArmorItems:[{},{},{},{Count:1, id:iron_helmet}], ArmorDropChances:[0.0f,0.0f,0.0f,0.1f]}"))
@@ -58,7 +58,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(2, 7)
                 .build());
-        map.put("Jungle_hostile_wave", RIGWave.Builder.create()
+        map.put("jungle_hostile_wave", RIGWave.Builder.create()
                 .weight(40)
                 .addEntity(new RIGEntity("minecraft:zombie", 5, "{CanPickUpLoot:1b,ArmorItems:[{},{Count:1,id:leather_leggings},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.3f,0.0f,0.2f]}"))
                 .addEntity(new RIGEntity("minecraft:skeleton", 5, "{HandItems:[{Count:1,id:bow},{}], ArmorItems:[{},{},{},{Count:1, id:golden_helmet}]}"))
@@ -68,7 +68,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(2, 7)
                 .build());
-        map.put("Ocean_hostile_wave", RIGWave.Builder.create()
+        map.put("ocean_hostile_wave", RIGWave.Builder.create()
                 .weight(8)
                 .addEntity(new RIGEntity("minecraft:drowned", 15, "{CanBreakDoors:1b}"))
                 .addEntity(new RIGEntity("minecraft:drowned", 8, "{HandItems:[{Count:1,id:trident},{}]}"))
@@ -78,7 +78,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(4, 7)
                 .build());
-        map.put("NetherZombie_piglin_wave", RIGWave.Builder.create()
+        map.put("nether_zombie_piglin_wave", RIGWave.Builder.create()
                 .weight(17)
                 .addEntity(new RIGEntity("minecraft:zombified_piglin", 10, "{CanBreakDoors:1b,HandItems:[{Count:1,id:golden_sword},{}]}"))
                 .addEntity(new RIGEntity("minecraft:skeleton", 4, "{HandItems:[{Count:1,id:bow},{}]}"))
@@ -86,7 +86,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(3, 10)
                 .build());
-        map.put("NetherHunting_piglin_wave", RIGWave.Builder.create()
+        map.put("nether_hunting_piglin_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:hoglin", 8, "{Age:-25000}"))
                 .addEntity(new RIGEntity("minecraft:hoglin", 9))
@@ -108,7 +108,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(6, 12)
                 .shouldOpenIrisChance(0.05)
                 .build());
-        map.put("NetherFortress_wave", RIGWave.Builder.create()
+        map.put("nether_fortress_wave", RIGWave.Builder.create()
                 .weight(8)
                 .addEntity(new RIGEntity("minecraft:zombified_piglin", 12, "{CanBreakDoors:1b,HandItems:[{Count:1,id:golden_sword},{}]}"))
                 .addEntity(new RIGEntity("minecraft:blaze", 4))
@@ -117,7 +117,7 @@ public class StargateRIGConfig {
                 .selectRandomMobs()
                 .randomMobsCount(4, 12)
                 .build());
-        map.put("End_wave", RIGWave.Builder.create()
+        map.put("end_wave", RIGWave.Builder.create()
                 .weight(5)
                 .addEntity(new RIGEntity("minecraft:enderman", 1))
                 .allowedBiomes(List.of("#minecraft:is_end"))
@@ -125,7 +125,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(4, 9)
                 .chevronsToDial(8)
                 .build());
-        map.put("Vindicators_wave", RIGWave.Builder.create()
+        map.put("vindicators_wave", RIGWave.Builder.create()
                 .weight(17)
                 .addEntity(new RIGEntity("minecraft:vindicator", 40, "{HandItems:[{Count:1, id:iron_axe},{}],HandDropChances:[0.1f,0.0f]}"))
                 .addEntity(new RIGEntity("minecraft:evoker", 1))
@@ -138,14 +138,14 @@ public class StargateRIGConfig {
                 .randomMobsCount(10, 15)
                 .shouldOpenIrisChance(0.05)
                 .build());
-        map.put("Warden_wave", RIGWave.Builder.create()
+        map.put("warden_wave", RIGWave.Builder.create()
                 .weight(1)
                 .addEntity(new RIGEntity("minecraft:warden", 1, "{Brain:{memories:{\"minecraft:dig_cooldown\":{value:{},ttl:1200L}}}}"))
                 .addDifficulty(Difficulty.HARD, true)
                 .allowedBiomes(List.of("#minecraft:is_overworld"))
                 .blacklistedBiomes(List.of("#micraft.is_ocean"))
                 .build());
-        map.put("VillagerPlains_wave", RIGWave.Builder.create()
+        map.put("villager_plains_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:farmer,level:1,type:plains}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:fisherman,level:1,type:plains}, Xp: 1}"))
@@ -161,7 +161,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(3, 6)
                 .shouldOpenIrisChance(0.3)
                 .build());
-        map.put("VillagerDesert_wave", RIGWave.Builder.create()
+        map.put("villager_desert_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:cartographer,level:1,type:desert}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:librarian,level:1,type:desert}, Xp: 1}"))
@@ -176,7 +176,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(4, 8)
                 .shouldOpenIrisChance(0.3)
                 .build());
-        map.put("VillagerSavanna_wave", RIGWave.Builder.create()
+        map.put("villager_savanna_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:cartographer,level:1,type:savanna}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:cleric,level:1,type:savanna}, Xp: 1}"))
@@ -193,7 +193,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(3, 8)
                 .shouldOpenIrisChance(0.3)
                 .build());
-        map.put("VillagerSnowy_wave", RIGWave.Builder.create()
+        map.put("villager_snowy_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:farmer,level:1,type:snow}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:armorer,level:1,type:snow}, Xp: 1}"))
@@ -207,7 +207,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(2, 7)
                 .shouldOpenIrisChance(0.3)
                 .build());
-        map.put("VillagerTaiga_wave", RIGWave.Builder.create()
+        map.put("villager_taiga_wave", RIGWave.Builder.create()
                 .weight(12)
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:fletcher,level:1,type:taiga}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:armorer,level:1,type:taiga}, Xp: 1}"))
@@ -223,7 +223,7 @@ public class StargateRIGConfig {
                 .randomMobsCount(4, 6)
                 .shouldOpenIrisChance(0.3)
                 .build());
-        map.put("Trader_wave", RIGWave.Builder.create()
+        map.put("trader_wave", RIGWave.Builder.create()
                 .weight(5)
                 .addEntity(new RIGEntity("minecraft:wandering_trader", 1, "{UUID:%UUID%,DespawnDelay:48000}"))
                 .addEntity(new RIGEntity("minecraft:trader_llama", 2, "{Leashed:1b,Leash:{UUID:%UUID%}}"))
