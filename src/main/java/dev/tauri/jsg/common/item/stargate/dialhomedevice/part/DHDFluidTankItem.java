@@ -2,7 +2,9 @@ package dev.tauri.jsg.common.item.stargate.dialhomedevice.part;
 
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.item.IDHDFluidTank;
+import dev.tauri.jsg.client.renderer.item.dialhomedevice.part.DHDFluidTankBEWLR;
 import dev.tauri.jsg.common.capability.DHDFluidHandlerItemStack;
+import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,6 +12,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DHDFluidTankItem extends DHDAbstractPartItem implements IDHDFluidTank {
@@ -24,8 +30,15 @@ public class DHDFluidTankItem extends DHDAbstractPartItem implements IDHDFluidTa
         super(properties, tabs, mandatory, raycasterId);
     }
 
+    @Override
     public ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable CompoundTag nbt) {
         return new DHDFluidHandlerItemStack(stack, JSGConfig.DialHomeDevice.fluidCapacity.get());
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(AbstractItemBEWLR.create(DHDFluidTankBEWLR::new));
     }
 
     @Override

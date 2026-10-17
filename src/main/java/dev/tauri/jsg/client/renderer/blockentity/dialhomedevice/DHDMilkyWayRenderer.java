@@ -25,10 +25,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2d;
 
+import java.awt.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -182,8 +184,10 @@ public class DHDMilkyWayRenderer extends DHDAbstractRenderer<DHDMilkyWayRenderer
                     float height = assembled ? (rendererState.naquadahAmount / (float) rendererState.naquadahMaxAmount) : 1f;
                     stack.scale(1, height, 1);
                     ITexture.bindTextureWithMc(sprite.atlasLocation());
+                    var extension = IClientFluidTypeExtensions.of(MaterialType.REFINED_NAQUADAH.getFluid().type.get());
+                    var color = new Color(extension.getTintColor(), true);
                     ElementEnum.MILKYWAY_DHD_FLUID_TANK_FLUID
-                            .render(stack, bufferSource, combinedLight, combinedOverlay, false, r, g, b, a, false, sprite);
+                            .render(stack, bufferSource, combinedLight, combinedOverlay, false, color.getRed() / 255f * r, color.getGreen() / 255f * g, color.getBlue() / 255f * b, color.getAlpha() / 255f * a, false, sprite);
                     stack.popPose();
                 }
                 ElementEnum.MILKYWAY_DHD_FLUID_TANK_GLASS
