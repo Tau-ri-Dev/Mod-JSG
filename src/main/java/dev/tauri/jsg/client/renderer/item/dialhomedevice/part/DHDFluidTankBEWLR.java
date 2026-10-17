@@ -22,14 +22,24 @@ public class DHDFluidTankBEWLR extends DHDAbstractBEWLR {
     @Override
     public void renderDHD(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack stack, MultiBufferSource bufferSource, int light, int overlay, float partialTick) {
         if (itemDisplayContext == ItemDisplayContext.GROUND) {
-            stack.scale(2, 2, 2);
-            stack.translate(0, -0.7, 0);
+            stack.scale(5f, 5f, 5f);
+            stack.translate(0, -0.1, 0);
         } else if (itemDisplayContext.firstPerson()) {
-            stack.translate(0, 0.2, 0);
+            stack.scale(5f, 5f, 5f);
+            stack.translate(0, 0.17, -0.05);
+            stack.mulPose(Axis.YP.rotationDegrees(180));
+        } else if (itemDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || itemDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND) {
+            stack.scale(5f, 5f, 5f);
+            stack.translate(0, 0, -0.05);
+            stack.mulPose(Axis.YP.rotationDegrees(180));
         } else if (itemDisplayContext == ItemDisplayContext.GUI) {
             stack.scale(9f, 9f, 9f);
             stack.translate(0, -0.03, 0);
             stack.mulPose(Axis.YP.rotationDegrees(180));
+        } else if (itemDisplayContext == ItemDisplayContext.FIXED) {
+            stack.translate(1, 0, -1);
+            stack.scale(5f, 5f, 5f);
+            stack.translate(-0.03, 0.3, 0);
         }
         ElementEnum.MILKYWAY_DHD_FLUID_TANK_BASE.bindTexture()
                 .render(stack, bufferSource, light, false, 1, true);
@@ -45,12 +55,12 @@ public class DHDFluidTankBEWLR extends DHDAbstractBEWLR {
             var extension = IClientFluidTypeExtensions.of(MaterialType.REFINED_NAQUADAH.getFluid().type.get());
             var color = new Color(extension.getTintColor(), true);
             ElementEnum.MILKYWAY_DHD_FLUID_TANK_FLUID
-                    .render(stack, bufferSource, light, overlay, false, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f, false, sprite);
+                    .render(stack, bufferSource, light, overlay, false, color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f, true, sprite);
             stack.popPose();
         }
         ElementEnum.MILKYWAY_DHD_FLUID_TANK_GLASS
                 .bindTexture()
-                .render(stack, bufferSource, light, overlay, false, 1, false);
+                .render(stack, bufferSource, light, overlay, false, 1, true);
         RenderSystem.disableBlend();
     }
 
