@@ -8,6 +8,7 @@ import dev.tauri.jsg.common.packet.packets.AdminControllerGuiOpenToClient;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
+import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.client.renderer.AbstractItemBEWLR;
 import dev.tauri.jsgcore.common.helper.ItemHelper;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
@@ -73,7 +74,8 @@ public class AdminControllerItem extends JSGItem {
                 }
 
                 if (!(te instanceof Stargate<?>)) {
-                    te = LinkingHelper.findClosestTile(world, player.blockPosition(), JSGBlockTags.ALL_STARGATE_BASES, Stargate.class, 20, 20);
+                    var resolvedPos = JSGCore.sableWrapper.getCorrectedBlockPos(world, player.blockPosition());
+                    te = LinkingHelper.findClosestTile(world, resolvedPos, JSGBlockTags.ALL_STARGATE_BASES, Stargate.class, 20, 20);
                 }
 
                 if (te instanceof Stargate<?> baseTile && baseTile.isMerged()) {
