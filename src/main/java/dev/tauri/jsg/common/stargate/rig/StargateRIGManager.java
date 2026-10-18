@@ -158,6 +158,6 @@ public class StargateRIGManager extends AbstractStargateManager<Stargate<?>> imp
     }
 
     public static List<String> getWaves(RegistryAccess access) {
-        return JSGRegistries.R_RIG_WAVES.apply(access).holders().filter(w -> w.get().isActive).map(r -> r.key().location().toString()).toList();
+        return JSGRegistries.R_RIG_WAVES.apply(access).holders().filter(w -> w.value().isActive).map(r -> r.key().location().toString()).toList();
     }
 }

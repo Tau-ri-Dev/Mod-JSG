@@ -37,11 +37,11 @@ public class JSGItemModelProvider extends ItemModelProvider {
         );
     }
 
-    private void blockOBJModel(RegistryObjectWrapper<Block> block, ItemDisplayContext... renderTypes) {
+    private void blockOBJModel(RegistryObjectWrapper<? extends Block> block, ItemDisplayContext... renderTypes) {
         itemOBJModel(Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block.get())), renderTypes);
     }
 
-    private void itemOBJModel(RegistryObjectWrapper<Item> item, ItemDisplayContext... renderTypes) {
+    private void itemOBJModel(RegistryObjectWrapper<? extends Item> item, ItemDisplayContext... renderTypes) {
         itemOBJModel(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item.get())), renderTypes);
     }
 

@@ -12,11 +12,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class DHDFluidTankBEWLR extends DHDAbstractBEWLR {
     @Override
@@ -47,7 +48,7 @@ public class DHDFluidTankBEWLR extends DHDAbstractBEWLR {
         TextureAtlasSprite sprite = BlockRenderer.getFluidTexture(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 1000), BlockRenderer.FluidTextureType.STILL);
         if (sprite != null) {
             stack.pushPose();
-            float height = itemStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+            float height = Optional.ofNullable(itemStack.getCapability(Capabilities.FluidHandler.ITEM))
                     .map(c -> (float) ((double) c.getFluidInTank(0).getAmount() / (double) Math.max(1, c.getTankCapacity(0))))
                     .orElse(0f);
             stack.scale(1, height, 1);
