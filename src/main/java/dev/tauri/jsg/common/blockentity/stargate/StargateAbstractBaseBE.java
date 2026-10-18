@@ -26,6 +26,7 @@ import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.stargate.rig.StargateRIGManager;
 import dev.tauri.jsg.common.state.stargate.StargateRendererActionState;
 import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
+import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
 import dev.tauri.jsgcore.common.blockentity.IBELogManager;
 import dev.tauri.jsgcore.common.blockentity.ILinkable;
@@ -35,6 +36,7 @@ import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
 import dev.tauri.jsgcore.common.integration.ComputerDeviceHolder;
+import dev.tauri.jsgcore.common.integration.sable.ResolvedLevelPos;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
 import dev.tauri.jsgcore.common.multistructure.IMultiStructureBE;
 import dev.tauri.jsgcore.common.packet.TargetPoint;
@@ -88,6 +90,9 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     public Map<SymbolType<?>, StargateAddress> gateAddressMapClient = new HashMap<>();
 
     protected UUID uuid;
+
+    @Nullable
+    protected ResolvedLevelPos lastAddressGenBlockPos = null;
 
     public StargateAbstractBaseBE(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);
@@ -189,6 +194,13 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
 
     // ----------------------------------------------
     // ADDRESSES
+
+
+    @Override
+    public void generateAddresses(boolean reset) {
+        Stargate.super.generateAddresses(reset);
+        lastAddressGenBlockPos = new ResolvedLevelPos(getStargateLevel(), blockPosition());
+    }
 
     @Override
     public Map<SymbolType<?>, StargateAddress> getAddressMap() {
@@ -501,7 +513,19 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
             }
             if (getTime() % 100 == 0)
                 StargateComputerEvents.PING.get().sendVia(this);
+
+            // check if gate traveled > 16 blocks away -> regenerate addresses
+            if (getTime() % 5 == 0 && lastAddressGenBlockPos != null && (lastAddressGenBlockPos.level() != getStargateLevel() || lastAddressGenBlockPos.pos().distSqr(blockPositionSable().pos()) > (Stargate.RELATIVE_ADDRESS_POS_RANGE * Stargate.RELATIVE_ADDRESS_POS_RANGE))) {
+                generateAddresses(true);
+            }
         }
+    }
+
+    @Override
+    public ResolvedLevelPos blockPositionSable() {
+        var level = getLevel();
+        if (level == null) return Stargate.super.blockPositionSable();
+        return JSGCore.sableWrapper.getRelativePos(level, blockPosition());
     }
 
     @Override

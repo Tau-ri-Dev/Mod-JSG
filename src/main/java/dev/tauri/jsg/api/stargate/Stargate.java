@@ -16,6 +16,7 @@ import dev.tauri.jsg.api.util.IStargateGenerator;
 import dev.tauri.jsgcore.common.blockentity.*;
 import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.integration.ComputerDeviceProvider;
+import dev.tauri.jsgcore.common.integration.sable.ResolvedLevelPos;
 import dev.tauri.jsgcore.common.loader.PointOfOriginsLoader;
 import dev.tauri.jsgcore.common.multistructure.merging.IMergeHelper;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
@@ -50,6 +51,8 @@ import java.util.function.Predicate;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITickable, PointOfOriginProvider, ScheduledTaskExecutorInterface, IStateProvider, ComputerDeviceProvider {
+    int RELATIVE_ADDRESS_POS_RANGE = 16;
+
     static int[] getRandomSymbolsToDisplay(int maxSymbols, Predicate<Integer> shouldDisplaySymbol) {
         var symbolsToDisplay = new ArrayList<Integer>();
         if (maxSymbols < 1) return new int[0];
@@ -173,13 +176,13 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
     void setStaticGateAddress(SymbolType<?> symbolType, StargateAddress stargateAddress);
 
     default void generateAddresses(boolean reset) {
-        var level = getStargateLevel();
+        var level = blockPositionSable().level();
         if (level == null) return;
         initStargatePos();
         var stargatePos = getStargatePos();
         if (reset)
             getNetwork().removeStargate(getStargatePos());
-        var seed = blockPosition().hashCode() * 31L + level.dimension().location().hashCode();
+        var seed = blockPositionSable().pos().hashCode() * 31L + level.dimension().location().hashCode();
         JSGApi.logger.debug("Seed for stargate {} address gen is {}", stargatePos.toString(), seed);
         Random random = new Random(seed);
 
@@ -413,6 +416,10 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
 
     default BlockPos blockPosition() {
         return self().getBlockPos();
+    }
+
+    default ResolvedLevelPos blockPositionSable() {
+        return new ResolvedLevelPos(getStargateLevel(), blockPosition());
     }
 
     // util
