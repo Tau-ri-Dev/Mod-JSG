@@ -114,14 +114,14 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
     @Nullable
     public Map<SymbolType<?>, StargateAddress> getAddresses(StargatePos pos) {
         if (pos == null) return null;
-        return new HashMap<>(GATES_MAP_BY_POS.get(pos));
+        return new HashMap<>(Optional.ofNullable(GATES_MAP_BY_POS.get(pos)).orElseGet(Map::of));
     }
 
     @Override
     @Nullable
     public Map<SymbolType<?>, StargateAddress> getStaticAddresses(StargatePos pos) {
         if (pos == null) return null;
-        return new HashMap<>(GATES_MAP_BY_POS_STATIC.get(pos));
+        return new HashMap<>(Optional.ofNullable(GATES_MAP_BY_POS_STATIC.get(pos)).orElseGet(Map::of));
     }
 
     @Override
