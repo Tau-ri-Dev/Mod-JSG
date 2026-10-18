@@ -48,6 +48,7 @@ public abstract class AbstractStargateGeneratorScreen extends GenericMessageScre
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         var ticks = (System.currentTimeMillis() / 1000.0 * 20.0) - initTick;
         renderMenuBackground(graphics);
+        graphics.pose().pushPose();
         graphics.fillGradient(0, 0, width, height, 0xC0101010, 0xD0101010);
 
         var y = height - 20 - 8;
@@ -63,8 +64,10 @@ public abstract class AbstractStargateGeneratorScreen extends GenericMessageScre
 
         graphics.pose().pushPose();
         RenderSystem.enableDepthTest();
+        graphics.pose().translate(0, 0, 1000);
         renderGateAssembly(graphics, mouseX, mouseY, ticks);
         RenderSystem.disableDepthTest();
+        graphics.pose().popPose();
         graphics.pose().popPose();
     }
 
