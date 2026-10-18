@@ -452,17 +452,29 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
     }
 
     default JSGAxisAlignedBB relative(JSGAxisAlignedBB box, Vec3 pivot) {
-        var p = blockPosition();
+        return relative(box, pivot, false);
+    }
+
+    default JSGAxisAlignedBB relative(JSGAxisAlignedBB box, Vec3 pivot, boolean useSable) {
+        var p = useSable ? blockPositionSable().pos() : blockPosition();
         return rotated(box, pivot).offset(p.getX(), p.getY(), p.getZ());
     }
 
     default Vec3 relative(Vec3 pos, Vec3 pivot) {
-        var p = blockPosition();
+        return relative(pos, pivot, false);
+    }
+
+    default Vec3 relative(Vec3 pos, Vec3 pivot, boolean useSable) {
+        var p = useSable ? blockPositionSable().pos() : blockPosition();
         return rotated(pos, pivot).add(p.getX(), p.getY(), p.getZ());
     }
 
     default Vec3 relative(Vec3 pos) {
-        var p = blockPosition();
+        return relative(pos, false);
+    }
+
+    default Vec3 relative(Vec3 pos, boolean useSable) {
+        var p = useSable ? blockPositionSable().pos() : blockPosition();
         return rotated(pos).add(p.getX(), p.getY(), p.getZ());
     }
 
@@ -472,12 +484,20 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
     }
 
     default BlockPos relative(BlockPos pos, BlockPos pivot) {
-        var p = blockPosition();
+        return relative(pos, pivot, false);
+    }
+
+    default BlockPos relative(BlockPos pos, BlockPos pivot, boolean useSable) {
+        var p = useSable ? blockPositionSable().pos() : blockPosition();
         return rotated(pos, pivot).offset(p.getX(), p.getY(), p.getZ());
     }
 
     default Vec3 getRelative(Vec3 vector) {
-        var p = blockPosition();
+        return getRelative(vector, false);
+    }
+
+    default Vec3 getRelative(Vec3 vector, boolean useSable) {
+        var p = useSable ? blockPositionSable().pos() : blockPosition();
         return getRelativeRotated(vector.subtract(p.getX(), p.getY(), p.getZ()));
     }
 

@@ -274,12 +274,12 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
         if (connection.getStatus().none()) return null;
         return connection.callConnected((c, targetGate) -> {
             // get entity position in relative to the receiving gate
-            var newPos = stargate.getRelative(entity.position()).add(0, 0, 1);
+            var newPos = stargate.getRelative(entity.position(), true).add(0, 0, 1);
             // process the position by gates (Orlin gate needs the positon to shrink because of it's size)
             var targetManager = ((StargateEventHorizonManager) targetGate.getEventHorizonManager());
             newPos = targetManager.processPositionVector(processPositionVector(newPos, !c.isInitiating()), c.isInitiating());
             // get the new position rotated by the target gate
-            newPos = targetGate.relative(newPos, targetManager.getPositionVectorRotationPivot());
+            newPos = targetGate.relative(newPos, targetManager.getPositionVectorRotationPivot(), true);
 
             // same for the motion except we are not offsetting it by the gate pos - only rotate
             var newMotionVector = stargate.getRelativeRotated(originalMotion);
@@ -298,7 +298,7 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
     public IStargateTraveler<?> getStaticTraveler(Stargate<?> targetGate, Entity entity) {
         var newPos = new Vec3(0.5, 2.5, 0.5);
         newPos = ((StargateEventHorizonManager) targetGate.getEventHorizonManager()).processPositionVector(processPositionVector(newPos, true), false);
-        newPos = targetGate.relative(newPos);
+        newPos = targetGate.relative(newPos, true);
 
         float yaw = entity.getYRot();
         return getTraveler(entity, newPos, new Vec3(0, 0, 0), new Vec3(0, 0, 0), yaw, stargate, targetGate, true);
