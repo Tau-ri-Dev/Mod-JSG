@@ -23,11 +23,17 @@ public interface IStargateNetwork {
 
     Map<SymbolType<?>, StargateAddress> getAddresses(StargatePos pos);
 
+    Map<SymbolType<?>, StargateAddress> getStaticAddresses(StargatePos pos);
+
     Pair<StargatePos, StargateAddress> getRandomAddress(RandomSource random, SymbolType<?> symbolTypeEnum, @Nullable StargateType<?> stargateType, @Nullable Predicate<StargatePos> customTest);
 
     void putStargate(StargateAddress address, StargatePos stargatePos);
 
+    void putStaticStargate(StargateAddress address, StargatePos stargatePos);
+
     void putStargate(Map<SymbolType<?>, StargateAddress> addressMap, StargatePos stargatePos);
+
+    void putStaticStargate(Map<SymbolType<?>, StargateAddress> addressMap, StargatePos stargatePos);
 
     void removeStargate(StargatePos stargatePos);
 
