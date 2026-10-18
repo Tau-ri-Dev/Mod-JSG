@@ -8,7 +8,6 @@ import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.helper.DimensionsHelper;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
-import dev.tauri.jsgcore.mapping.JSGMapping;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +15,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
@@ -43,10 +41,23 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
     public StargateNetwork() {
     }
 
+    /**
+     * Holds gates addresses by their positions
+     */
     private final Map<StargatePos, Map<SymbolType<?>, StargateAddress>> GATES_MAP_BY_POS = new LinkedHashMap<>();
+    /**
+     * Holds gates positions by their addresses - useful when searching for stargate by dialed address
+     */
     private final Map<StargateAddress, StargatePos> GATES_MAP_BY_ADDRESS = new LinkedHashMap<>();
 
-    public final List<ResourceLocation> generatedSpecialStructures = new ArrayList<>();
+    /**
+     * Holds gates static addresses (fixed 9 symbol addresses) by their positions
+     */
+    private final Map<StargatePos, Map<SymbolType<?>, StargateAddress>> GATES_MAP_BY_POS_STATIC = new LinkedHashMap<>();
+    /**
+     * Holds gates positions by their static addresses (fixed 9 symbol addresses) - useful when searching for stargate by dialed address
+     */
+    private final Map<StargateAddress, StargatePos> GATES_MAP_BY_ADDRESS_STATIC = new LinkedHashMap<>();
 
     public Map<StargatePos, Map<SymbolType<?>, StargateAddress>> getAll() {
         return GATES_MAP_BY_POS;
@@ -63,6 +74,7 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         return map;
     }
 
+    @Override
     @Nonnull
     public Optional<Map.Entry<StargatePos, Map<SymbolType<?>, StargateAddress>>> getStargateByDimension(ResourceKey<Level> dimension) {
         for (var e : GATES_MAP_BY_POS.entrySet()) {
@@ -73,6 +85,7 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         return Optional.empty();
     }
 
+    @Override
     @Nullable
     public StargatePos getStargate(StargateAddress address) {
         if (address == null)
@@ -80,7 +93,12 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         if (address.getSize() < 7)
             return null;
 
-        StargatePos pos = GATES_MAP_BY_ADDRESS.get(address);
+        StargatePos pos = null;
+        if (address.getSize() >= 8)
+            pos = GATES_MAP_BY_ADDRESS_STATIC.get(address);
+        if (pos == null)
+            pos = GATES_MAP_BY_ADDRESS.get(address);
+
         if (pos == null) return null;
         if (pos.getWorld() == null) return null;
 
@@ -92,12 +110,21 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         return pos;
     }
 
+    @Override
     @Nullable
     public Map<SymbolType<?>, StargateAddress> getAddresses(StargatePos pos) {
         if (pos == null) return null;
         return new HashMap<>(GATES_MAP_BY_POS.get(pos));
     }
 
+    @Override
+    @Nullable
+    public Map<SymbolType<?>, StargateAddress> getStaticAddresses(StargatePos pos) {
+        if (pos == null) return null;
+        return new HashMap<>(GATES_MAP_BY_POS_STATIC.get(pos));
+    }
+
+    @Override
     @Nullable
     public Pair<StargatePos, StargateAddress> getRandomAddress(RandomSource random, SymbolType<?> symbolTypeEnum, @Nullable StargateType<?> stargateType, @Nullable Predicate<StargatePos> customTest) {
         var size = GATES_MAP_BY_POS.size();
@@ -117,12 +144,21 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         return allowedList.get(rand);
     }
 
+    @Override
     public void putStargate(StargateAddress address, StargatePos stargatePos) {
         var map = new HashMap<SymbolType<?>, StargateAddress>();
         map.put(address.getSymbolType(), address);
         putStargate(map, stargatePos);
     }
 
+    @Override
+    public void putStaticStargate(StargateAddress address, StargatePos stargatePos) {
+        var map = new HashMap<SymbolType<?>, StargateAddress>();
+        map.put(address.getSymbolType(), address);
+        putStaticStargate(map, stargatePos);
+    }
+
+    @Override
     public void putStargate(Map<SymbolType<?>, StargateAddress> addressMap, StargatePos stargatePos) {
         if (addressMap == null) {
             JSG.logger.warn("Tried to add NULL-address gate! Aborting...", new NullPointerException());
@@ -144,11 +180,35 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         setDirty();
     }
 
+    @Override
+    public void putStaticStargate(Map<SymbolType<?>, StargateAddress> addressMap, StargatePos stargatePos) {
+        if (addressMap == null) {
+            JSG.logger.warn("Tried to add NULL-address static gate! Aborting...", new NullPointerException());
+            return;
+        }
+        //JSG.logger.info("Adding stargate's addresses at " + stargatePos + " into the network!");
+
+        var map = GATES_MAP_BY_POS_STATIC.get(stargatePos);
+        if (map == null)
+            GATES_MAP_BY_POS_STATIC.put(stargatePos, new HashMap<>(addressMap));
+        else {
+            map.putAll(addressMap);
+            GATES_MAP_BY_POS_STATIC.put(stargatePos, map);
+        }
+        for (var address : addressMap.values()) {
+            GATES_MAP_BY_ADDRESS_STATIC.put(address, stargatePos);
+        }
+        checkForInvalidDims();
+        setDirty();
+    }
+
+    @Override
     public void removeStargate(StargatePos stargatePos) {
         if (stargatePos == null) return;
         JSG.logger.debug("Removing stargate's addresses at {} from the network!", stargatePos);
 
         GATES_MAP_BY_POS.remove(stargatePos);
+        GATES_MAP_BY_POS_STATIC.remove(stargatePos);
 
         var del = new ArrayList<StargateAddress>();
         for (var e : GATES_MAP_BY_ADDRESS.entrySet()) {
@@ -159,6 +219,17 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
 
         for (var a : del) {
             GATES_MAP_BY_ADDRESS.remove(a);
+        }
+
+        var delStatic = new ArrayList<StargateAddress>();
+        for (var e : GATES_MAP_BY_ADDRESS_STATIC.entrySet()) {
+            if (e.getValue() == stargatePos) {
+                delStatic.add(e.getKey());
+            }
+        }
+
+        for (var a : delStatic) {
+            GATES_MAP_BY_ADDRESS_STATIC.remove(a);
         }
 
         setDirty();
@@ -187,12 +258,17 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         }
     }
 
+    @Override
     public void renameStargate(StargatePos pos, String newName) {
         var map = getAddresses(pos);
+        var mapStatic = getStaticAddresses(pos);
         removeStargate(pos);
         JSG.logger.debug("Setting gate's name at {} to: {}", pos, newName);
         pos.setName(newName);
+
         putStargate(map, pos);
+        putStaticStargate(mapStatic, pos);
+
         setDirty();
     }
 
@@ -208,7 +284,19 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
     public void fromNBT(CompoundTag compound) {
         GATES_MAP_BY_POS.clear();
         GATES_MAP_BY_ADDRESS.clear();
+        GATES_MAP_BY_POS_STATIC.clear();
+        GATES_MAP_BY_ADDRESS_STATIC.clear();
         ListTag stargateTagList = compound.getList("stargates", Tag.TAG_COMPOUND);
+        ListTag stargateStaticTagList = compound.getList("stargates_static", Tag.TAG_COMPOUND);
+        for (Tag stargateTag : stargateStaticTagList) {
+            CompoundTag stargateCompound = (CompoundTag) stargateTag;
+
+            StargatePos stargatePos = new StargatePos(stargateCompound.getCompound("pos"));
+            var tagMap = stargateCompound.getList("addressMap", Tag.TAG_COMPOUND);
+            for (var addressTag : tagMap) {
+                putStaticStargate(new StargateAddress((CompoundTag) addressTag), stargatePos);
+            }
+        }
 
         if (compound.contains("version") && compound.getString("version").equalsIgnoreCase("2.0")) {
             for (Tag stargateTag : stargateTagList) {
@@ -233,12 +321,6 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
                 putStargate(stargateAddress, stargatePos);
             }
         }
-
-        generatedSpecialStructures.clear();
-        var structuresSize = compound.getInt("specialStructureGenerated_size");
-        for (int i = 0; i < structuresSize; i++) {
-            generatedSpecialStructures.add(JSGMapping.rl(compound.getString("specialStructureGenerated_" + i)));
-        }
     }
 
     @Nonnull
@@ -246,8 +328,8 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
     public CompoundTag save(@Nonnull CompoundTag compound) {
         JSG.logger.info("Saving SGN: Started");
         compound.putString("version", "2.0");
-        ListTag stargateTagList = new ListTag();
 
+        ListTag stargateTagList = new ListTag();
         for (var stargate : GATES_MAP_BY_POS.entrySet()) {
             var sgTag = new CompoundTag();
             sgTag.put("pos", stargate.getKey().serializeNBT());
@@ -260,11 +342,18 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         }
         compound.put("stargates", stargateTagList);
 
-        var structuresSize = generatedSpecialStructures.size();
-        compound.putInt("specialStructureGenerated_size", structuresSize);
-        for (int i = 0; i < structuresSize; i++) {
-            compound.putString("specialStructureGenerated_" + i, generatedSpecialStructures.get(i).toString());
+        ListTag stargateStaticTagList = new ListTag();
+        for (var stargate : GATES_MAP_BY_POS_STATIC.entrySet()) {
+            var sgTag = new CompoundTag();
+            sgTag.put("pos", stargate.getKey().serializeNBT());
+            var mapList = new ListTag();
+            for (var address : stargate.getValue().entrySet()) {
+                mapList.add(address.getValue().serializeNBT());
+            }
+            sgTag.put("addressMap", mapList);
+            stargateStaticTagList.add(sgTag);
         }
+        compound.put("stargates_static", stargateStaticTagList);
         JSG.logger.info("Saving SGN: Done");
 
         return compound;

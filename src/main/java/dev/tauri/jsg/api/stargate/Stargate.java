@@ -45,10 +45,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 
 @MethodsReturnNonnullByDefault
@@ -82,6 +79,10 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
     }
 
     // stargate methods
+    UUID getId();
+
+    void setId(UUID id);
+
     long getTime();
 
     void initStargatePos();
@@ -160,10 +161,17 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
 
     Map<SymbolType<?>, StargateAddress> getAddressMap();
 
+    Map<SymbolType<?>, StargateAddress> getAddressMapStatic();
+
     @Nullable
     StargateAddress getStargateAddress(SymbolType<?> symbolType);
 
+    @Nullable
+    StargateAddress getStargateAddressStatic(SymbolType<?> symbolType);
+
     void setGateAddress(SymbolType<?> symbolType, StargateAddress stargateAddress);
+
+    void setStaticGateAddress(SymbolType<?> symbolType, StargateAddress stargateAddress);
 
     default void generateAddresses(boolean reset) {
         var level = getStargateLevel();
@@ -197,6 +205,27 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
             // in this case you need 7 symbols to go from end to nether, but ONLY 6 to go from overworld to nether or the end!!!
 
             setGateAddress(symbolType, address);
+        }
+
+        // --------------
+        // GENERATE STATIC
+        seed = getId().getLeastSignificantBits();
+        JSGApi.logger.debug("Seed for static stargate {} address gen is {}", stargatePos.toString(), seed);
+        random = new Random(seed);
+
+        for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
+            var address = getStargateAddressStatic(symbolType);
+            if (address != null && !reset) continue;
+            var sgn = getNetwork();
+            address = new StargateAddress(symbolType);
+            StargatePos sgnPos;
+            do {
+                address.clear();
+                address.generate(random);
+                sgnPos = sgn.getStargate(address);
+                JSGApi.logger.debug("Generating static address for gate at {}, symbol type {}: {} ", stargatePos.toString(), symbolType.getId(), address.getNameList(getPointOfOrigin()));
+            } while (sgnPos != null && !sgnPos.equals(stargatePos));
+            setStaticGateAddress(symbolType, address);
         }
     }
 
@@ -461,12 +490,15 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         var stack = new ItemStack(this.getStargateType().getBaseBlock());
         var tag = stack.getOrCreateTag();
         tag.put("stargateEnergyManager", getEnergyManager().serializeNBT());
+        tag.putUUID("stargateId", getId());
         stack.setTag(tag);
         return stack;
     }
 
     default void updateContainerItemsByItemStack(ItemStack stack) {
         var tag = stack.getOrCreateTag();
+        if (tag.contains("stargateId"))
+            setId(tag.getUUID("stargateId"));
         if (!tag.contains("stargateEnergyManager")) return;
         getEnergyManager().deserializeNBT(tag.getCompound("stargateEnergyManager"));
         setStargateChanged();

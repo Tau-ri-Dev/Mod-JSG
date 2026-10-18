@@ -65,10 +65,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -85,6 +82,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     protected ComputerDeviceHolder computerDeviceHolder;
 
     protected final Map<SymbolType<?>, StargateAddress> gateAddressMap = new HashMap<>();
+    protected final Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new HashMap<>();
     protected StargatePos stargatePos;
     protected StargateAbstractMergeHelper mergeHelper = null;
     protected boolean isMerged;
@@ -93,12 +91,27 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
 
     public Map<SymbolType<?>, StargateAddress> gateAddressMapClient = new HashMap<>();
 
+    protected UUID uuid;
+
     public StargateAbstractBaseBE(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);
+        this.uuid = UUID.randomUUID();
         generateMergeHelper();
         if (level != null && !level.isClientSide)
             createDeviceHolder();
         setChanged();
+    }
+
+    @Override
+    public UUID getId() {
+        return uuid;
+    }
+
+    @Override
+    public void setId(UUID id) {
+        if (id != this.uuid)
+            setChanged();
+        this.uuid = id;
     }
 
     @Override
@@ -186,10 +199,23 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
         return Map.copyOf(gateAddressMap);
     }
 
+    @Override
+    public Map<SymbolType<?>, StargateAddress> getAddressMapStatic() {
+        return Map.copyOf(gateAddressMapStatic);
+    }
+
+    @Override
     @Nullable
     public StargateAddress getStargateAddress(SymbolType<?> symbolType) {
         if (gateAddressMap == null) return null;
         return gateAddressMap.get(symbolType);
+    }
+
+    @Override
+    @Nullable
+    public StargateAddress getStargateAddressStatic(SymbolType<?> symbolType) {
+        if (gateAddressMapStatic == null) return null;
+        return gateAddressMapStatic.get(symbolType);
     }
 
     @Override
@@ -198,6 +224,15 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
         gateAddressMap.put(symbolType, stargateAddress);
         getNetwork().putStargate(stargateAddress, stargatePos);
         JSG.logger.debug("Setting gate's address at {} to {} ({})", stargatePos.toString(), stargateAddress.toString(), symbolType.toString());
+        setChanged();
+    }
+
+    @Override
+    public void setStaticGateAddress(SymbolType<?> symbolType, StargateAddress stargateAddress) {
+        initStargatePos();
+        gateAddressMapStatic.put(symbolType, stargateAddress);
+        getNetwork().putStaticStargate(stargateAddress, stargatePos);
+        JSG.logger.debug("Setting gate's static address at {} to {} ({})", stargatePos.toString(), stargateAddress.toString(), symbolType.toString());
         setChanged();
     }
 
@@ -519,6 +554,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
 
     @Override
     public void saveAdditional(CompoundTag compound) {
+        compound.putUUID("stargateId", uuid);
         compound.put("soundManager", getSoundManager().serializeNBT());
         compound.put("stargateEnergyManager", getEnergyManager().serializeNBT());
         compound.put("stargateDialingManager", getDialingManager().serializeNBT());
@@ -540,6 +576,8 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
 
     @Override
     public void load(CompoundTag compound) {
+        if (compound.contains("stargateId"))
+            uuid = compound.getUUID("stargateId");
         if (compound.contains("soundManager")) {
             getSoundManager().deserializeNBT(compound.getCompound("soundManager"));
             getEnergyManager().deserializeNBT(compound.getCompound("stargateEnergyManager"));
