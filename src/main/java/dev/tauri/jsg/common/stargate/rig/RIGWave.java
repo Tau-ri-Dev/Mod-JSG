@@ -22,6 +22,7 @@ import java.util.Optional;
 
 public class RIGWave implements IRIGWave {
     public static final Codec<RIGWave> CODEC = RecordCodecBuilder.create(rigWaveInstance -> rigWaveInstance.group(
+            Codec.BOOL.optionalFieldOf("isActive", true).forGetter((wave) -> wave.isActive),
             Codec.INT.fieldOf("weight").forGetter((wave) -> wave.weight),
             Codec.INT.fieldOf("chevronsToDial").forGetter((wave) -> wave.chevronsToDial),
             Codec.STRING.listOf().fieldOf("allowedOnGates").forGetter((wave) -> wave.allowedOnGates),
@@ -35,6 +36,7 @@ public class RIGWave implements IRIGWave {
             IntProvider.CODEC.optionalFieldOf("randomMobsCount").forGetter((wave) -> Optional.ofNullable(wave.randomMobsCount))
     ).apply(rigWaveInstance, RIGWave::new));
 
+    public boolean isActive;
     public int weight;
     public int chevronsToDial;
     public List<String> allowedOnGates;
@@ -54,7 +56,8 @@ public class RIGWave implements IRIGWave {
     private ParameterReplacer replacer = new ParameterReplacer();
 
     @SuppressWarnings("all")
-    public RIGWave(int weight, int chevronsToDial, List<String> allowedOnGates, Optional<List<String>> allowedInDims, Optional<List<String>> allowedBiomes, Optional<List<String>> blacklistedBiomes, List<String> allowedForDifficulties, List<RIGEntity> entities, boolean selectRandomMobs, double shouldOpenIrisChance, Optional<IntProvider> randomMobsCount) {
+    public RIGWave(boolean isActive, int weight, int chevronsToDial, List<String> allowedOnGates, Optional<List<String>> allowedInDims, Optional<List<String>> allowedBiomes, Optional<List<String>> blacklistedBiomes, List<String> allowedForDifficulties, List<RIGEntity> entities, boolean selectRandomMobs, double shouldOpenIrisChance, Optional<IntProvider> randomMobsCount) {
+        this.isActive = isActive;
         this.weight = weight;
         this.chevronsToDial = chevronsToDial;
         this.allowedOnGates = allowedOnGates;
@@ -247,7 +250,7 @@ public class RIGWave implements IRIGWave {
 
 
         public RIGWave build() {
-            return new RIGWave(weight, chevronsToDial, allowedOnGates, Optional.ofNullable(allowedInDims), Optional.ofNullable(allowedBiomes), Optional.ofNullable(blacklistedBiomes), allowedForDifficulties.stream().map(Enum::name).toList(), entities, selectRandomMobs, shouldOpenIrisChance, Optional.ofNullable(randomMobsCount));
+            return new RIGWave(true, weight, chevronsToDial, allowedOnGates, Optional.ofNullable(allowedInDims), Optional.ofNullable(allowedBiomes), Optional.ofNullable(blacklistedBiomes), allowedForDifficulties.stream().map(Enum::name).toList(), entities, selectRandomMobs, shouldOpenIrisChance, Optional.ofNullable(randomMobsCount));
         }
     }
 }

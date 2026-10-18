@@ -48,7 +48,7 @@ public class DHDReactorManager extends AbstractDHDManager<DHDAbstractBE> impleme
     public void tick(@NotNull Level level) {
         if (level.isClientSide()) return;
 
-        if ((lastAmount > getTank().getFluidAmount() && level.getGameTime() % 20 == 0) && lastAmount < getTank().getFluidAmount()) {
+        if ((lastAmount > getTank().getFluidAmount() && level.getGameTime() % 20 == 0) || lastAmount < getTank().getFluidAmount()) {
             lastAmount = getTank().getFluidAmount();
             dhd.getStateManager().getAndSendState(CoreStateTypes.RENDERER_STATE.get());
         }

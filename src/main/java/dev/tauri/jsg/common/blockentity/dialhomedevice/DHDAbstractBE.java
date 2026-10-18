@@ -278,9 +278,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
             if (slot == 0) {
-                if (getStackInSlot(slot).isEmpty())
-                    getStateManager().disassemblePart((IDHDPartItem) getControlCrystal());
-                else if (!isAssembled((IDHDPartItem) getControlCrystal()))
+                if (!getStackInSlot(slot).isEmpty() && !isAssembled((IDHDPartItem) getControlCrystal()))
                     getStateManager().assemblePart((IDHDPartItem) getControlCrystal());
             } else {
                 var level = getLevel();

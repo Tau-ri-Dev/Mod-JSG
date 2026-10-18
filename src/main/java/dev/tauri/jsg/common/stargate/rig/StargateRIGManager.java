@@ -31,7 +31,7 @@ public class StargateRIGManager extends AbstractStargateManager<Stargate<?>> imp
     public void onLoad(@NotNull Level level) {
         if (level.isClientSide) return;
         waves.clear();
-        var configWaves = JSGRegistries.R_RIG_WAVES.apply(level.registryAccess()).stream().toList();
+        var configWaves = JSGRegistries.R_RIG_WAVES.apply(level.registryAccess()).stream().filter(w -> w.isActive).toList();
         for (var wave : configWaves) {
             if (!wave.allowedOnGates.contains(stargate.getStargateType().toString())) continue;
             for (int i = 0; i < wave.weight; i++) {
@@ -158,6 +158,6 @@ public class StargateRIGManager extends AbstractStargateManager<Stargate<?>> imp
     }
 
     public static List<String> getWaves(RegistryAccess access) {
-        return JSGRegistries.R_RIG_WAVES.apply(access).holders().map(r -> r.key().location().toString()).toList();
+        return JSGRegistries.R_RIG_WAVES.apply(access).holders().filter(w -> w.get().isActive).map(r -> r.key().location().toString()).toList();
     }
 }
