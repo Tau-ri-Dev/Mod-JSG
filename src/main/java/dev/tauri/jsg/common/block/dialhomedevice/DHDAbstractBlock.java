@@ -1,6 +1,7 @@
 package dev.tauri.jsg.common.block.dialhomedevice;
 
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
 import dev.tauri.jsgcore.common.block.util.IItemBlock;
@@ -116,7 +117,9 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
         var player = ctx.getPlayer();
         boolean snowy = isSnowAroundBlock(level, pos);
         if (player != null) {
+            JSGCore.sableWrapper.pushEntity(player, level, pos);
             int facing = MathHelper.floor((double) (player.getYHeadRot() * 16.0F / 360.0F) + 0.5D) & 0x0F;
+            JSGCore.sableWrapper.popEntity(player, level, pos);
             state = state.setValue(JSGProperties.ROTATION_PROPERTY, facing).setValue(JSGProperties.SNOWY, snowy);
         }
         return state.setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER);
