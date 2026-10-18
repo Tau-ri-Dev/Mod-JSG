@@ -24,6 +24,7 @@ import dev.tauri.jsg.common.stargate.teleportation.traveler.*;
 import dev.tauri.jsg.common.state.stargate.StargateFlashState;
 import dev.tauri.jsg.common.state.stargate.StargateVaporizeBlockParticlesRequest;
 import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
+import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
@@ -547,23 +548,25 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
         // Vaporize blocks
         for (var lBox : blockDestroyBoxes) {
             var gBox = lBox.offset(pos);
-            new BlockCollisions<>(level, null, gBox, false, (p, s) -> p).forEachRemaining(dPos -> {
-                BlockState state = level.getBlockState(dPos);
-                if (dPos.equals(stargate.getGateCenterPos()) && state.is(Blocks.LIGHT)) return;
-                if (!level.getBlockState(dPos).isAir() && state.getDestroySpeed(level, dPos) >= 0.0f && JSGConfigUtil.canKawooshDestroyBlock(state)) {
-                    if (state.is(Blocks.WATER)) {
-                        var waterCount = 0;
-                        for (var dir : Direction.values()) {
-                            if (dir == Direction.DOWN) continue;
-                            if (level.getBlockState(dPos.relative(dir)).is(Blocks.WATER) && level.getFluidState(dPos.relative(dir)).isSource())
-                                waterCount++;
-                        }
-                        if (waterCount <= 2)
+            new BlockCollisions<>(level, null, gBox, false, (p, s) -> p).forEachRemaining(p -> {
+                JSGCore.sableWrapper.runIncludingSubLevels(level, p.immutable(), (l, dPos) -> {
+                    BlockState state = level.getBlockState(dPos);
+                    if (dPos.equals(stargate.getGateCenterPos()) && state.is(Blocks.LIGHT)) return;
+                    if (!level.getBlockState(dPos).isAir() && state.getDestroySpeed(level, dPos) >= 0.0f && JSGConfigUtil.canKawooshDestroyBlock(state)) {
+                        if (state.is(Blocks.WATER)) {
+                            var waterCount = 0;
+                            for (var dir : Direction.values()) {
+                                if (dir == Direction.DOWN) continue;
+                                if (level.getBlockState(dPos.relative(dir)).is(Blocks.WATER) && level.getFluidState(dPos.relative(dir)).isSource())
+                                    waterCount++;
+                            }
+                            if (waterCount <= 2)
+                                level.setBlockAndUpdate(dPos, Blocks.AIR.defaultBlockState());
+                        } else
                             level.setBlockAndUpdate(dPos, Blocks.AIR.defaultBlockState());
-                    } else
-                        level.setBlockAndUpdate(dPos, Blocks.AIR.defaultBlockState());
-                    JSGCorePacketHandler.sendToClient(new StateUpdatePacketToClient(pos, JSGStateTypes.STARGATE_VAPORIZE_BLOCK_PARTICLES, new StargateVaporizeBlockParticlesRequest(dPos, state.is(Blocks.WATER))), stargate.getStateManager().getTargetPoint());
-                }
+                        JSGCorePacketHandler.sendToClient(new StateUpdatePacketToClient(pos, JSGStateTypes.STARGATE_VAPORIZE_BLOCK_PARTICLES, new StargateVaporizeBlockParticlesRequest(dPos, state.is(Blocks.WATER))), stargate.getStateManager().getTargetPoint());
+                    }
+                });
             });
         }
     }
