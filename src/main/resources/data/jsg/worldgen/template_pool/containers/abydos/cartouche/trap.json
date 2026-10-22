@@ -1,0 +1,21 @@
+{
+  "name": "jsg:containers/abydos/cartouche/trap",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "location": "jsg:containers/abydos/cartouche/trapped_chest",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
