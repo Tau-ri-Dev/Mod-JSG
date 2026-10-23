@@ -160,7 +160,7 @@ public class RaycasterPegasusDHD extends RaycasterDHD {
             )),
 
             //Unknown 1
-            new RayCastedButton(UNKNOWN1.id, JSGSymbolTypes.PEGASUS, List.of(
+            new RayCastedButton(FENRIN.id, JSGSymbolTypes.PEGASUS, List.of(
                     new Vector3f(0.172469f, 0.427726f, 0.746644f),
                     new Vector3f(0.117893f, 0.294192f, 0.840188f),
                     new Vector3f(0.002769f, 0.310656f, 0.830288f),
@@ -250,7 +250,7 @@ public class RaycasterPegasusDHD extends RaycasterDHD {
             )),
 
             //Unknown 2
-            new RayCastedButton(UNKNOWN2.id, JSGSymbolTypes.PEGASUS, List.of(
+            new RayCastedButton(NA_PO.id, JSGSymbolTypes.PEGASUS, List.of(
                     new Vector3f(0.110504f, 0.287085f, 0.87943f),
                     new Vector3f(0.057908f, 0.167658f, 0.983694f),
                     new Vector3f(0.000297f, 0.175897f, 0.97874f),
