@@ -80,6 +80,12 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+
+    // Metrics
+    maven {
+        name = "faststatsReleases"
+        url = uri("https://repo.faststats.dev/releases")
+    }
 }
 
 configurations {
@@ -105,6 +111,9 @@ dependencies {
     // OC2 / Tinkers: no 1.21.x builds (see enable_oc2); Create/Mekanism runtime deps
     // return in M9/M10 once integration code is ported.
     //compileOnly "li.cil:oc2:1.0"
+
+    // Metrics
+    compileOnly "dev.faststats.metrics:neoforge:${faststats_version}"
 }
 
 tasks.withType(JavaCompile).configureEach {

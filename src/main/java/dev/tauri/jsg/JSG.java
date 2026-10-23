@@ -131,6 +131,7 @@ public class JSG implements JSGAddon {
         //Integrations.OCCE.addOnLoad(OCDevices::load);
 
         JSGAddons.registerAddon(this);
+        JSGMetrics.load();
     }
 
     private void registerSpawnPlacements(net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent event) {
