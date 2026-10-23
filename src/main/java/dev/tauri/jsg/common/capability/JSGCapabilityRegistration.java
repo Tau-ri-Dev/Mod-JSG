@@ -61,6 +61,8 @@ public class JSGCapabilityRegistration {
 
             // CC:Tweaked peripherals (no-op when CC is absent)
             JSGCore.ccWrapper.registerPeripheralBE(event, type);
+            // OC:Rebooted peripherals
+            JSGCore.ocWrapper.registerPeripheralBE(event, type);
         }
 
         event.registerItem(Capabilities.FluidHandler.ITEM,
