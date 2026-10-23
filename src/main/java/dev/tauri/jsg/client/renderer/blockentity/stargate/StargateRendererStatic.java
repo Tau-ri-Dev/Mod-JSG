@@ -130,7 +130,6 @@ public class StargateRendererStatic {
         public void render(float tick, boolean white, Float alpha, float mul, byte animationOverride, int color, int innerColor) {
             RenderSystem.enableDepthTest();
             RenderSystem.enableCull();
-            boolean animated = animationOverride != -1;
             var c = new Color(color, true);
             var innerC = new Color(innerColor, true);
 
@@ -148,19 +147,8 @@ public class StargateRendererStatic {
 
                     BufferBuilder b = t.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.NEW_ENTITY);
 
-                    int texIndex = (int) (tick * 4 % 185);
-                    float xTexOffset = texIndex % 14 / 14f;
-                    float yTexOffset = texIndex / 14 / 14f;
-
                     float xTex = 0.5f;
-                    float yTex = 0.5f;
-
-                    if (animated) {
-                        xTex /= 14.0f;
-                        xTex += xTexOffset;
-                        yTex /= 14.0f;
-                        yTex += yTexOffset;
-                    } else yTex *= -1;
+                    float yTex = -0.5f;
 
                     if (coloredBackground)
                         b.addVertex(matrix, 0, 0, 0).setColor((c.getRed() / 255f), (c.getGreen() / 255f), (c.getBlue() / 255f), a).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(0, 1, 0);
@@ -180,14 +168,7 @@ public class StargateRendererStatic {
                         }
 
                         xTex = tx.get(index);
-                        yTex = ty.get(index);
-
-                        if (animated) {
-                            xTex /= 14.0f;
-                            xTex += xTexOffset;
-                            yTex /= 14.0f;
-                            yTex += yTexOffset;
-                        } else yTex *= -1;
+                        yTex = -ty.get(index);
 
                         if (coloredBackground)
                             b.addVertex(matrix, x.get(index), y.get(index), getOffset(index, tick * mul, mul, 0)).setColor((c.getRed() / 255f), (c.getGreen() / 255f), (c.getBlue() / 255f), a).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(0, 1, 0);
@@ -318,9 +299,6 @@ public class StargateRendererStatic {
                     alpha = 1.0f - alpha;
             }
 
-            int texIndex = (int) (tick * 4 % 185);
-            float xTexOffset = texIndex % 14 / 14f;
-            float yTexOffset = texIndex / 14 / 14f;
             for (int k = 0; k < 2; k++) {
                 final boolean coloredBackground = (k == 0);
                 final float a = (alpha != null ? alpha : 1f) * (coloredBackground ? (c.getAlpha() / 255f) : 1f);
@@ -354,14 +332,7 @@ public class StargateRendererStatic {
                             z += getOffset(index, tick * mul, mul, quadStripIndex);
 
                         float xTex = tx.get(index);
-                        float yTex = ty.get(index);
-
-                        if (animate) {
-                            xTex /= 14.0f;
-                            xTex += xTexOffset;
-                            yTex /= 14.0f;
-                            yTex += yTexOffset;
-                        } else yTex *= -1;
+                        float yTex = -ty.get(index);
 
                         if (coloredBackground)
                             b.addVertex(matrix, x.get(index), y.get(index), z).setColor((c.getRed() / 255f), (c.getGreen() / 255f), (c.getBlue() / 255f), a).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(0, 1, 0);
@@ -372,14 +343,7 @@ public class StargateRendererStatic {
                         index = index + SECTIONS;
 
                         xTex = tx.get(index);
-                        yTex = ty.get(index);
-
-                        if (animate) {
-                            xTex /= 14.0f;
-                            xTex += xTexOffset;
-                            yTex /= 14.0f;
-                            yTex += yTexOffset;
-                        } else yTex *= -1;
+                        yTex = -ty.get(index);
 
                         if (innerZ != null) z = innerZ;
                         else z = getOffset(index + SECTIONS * quadStripIndex, tick * mul, mul, quadStripIndex + 1);
@@ -405,9 +369,6 @@ public class StargateRendererStatic {
                     alpha = 1.0f - alpha;
             }
 
-            int texIndex = (int) (tick * 4 % 185);
-            float xTexOffset = texIndex % 14 / 14f;
-            float yTexOffset = texIndex / 14 / 14f;
             for (int k = 0; k < 2; k++) {
                 final boolean coloredBackground = (k == 0);
                 final float a = (alpha != null ? alpha : 1f) * (coloredBackground ? (c.getAlpha() / 255f) : 1f);
@@ -433,12 +394,7 @@ public class StargateRendererStatic {
                         float z = z4;
 
                         float xTex = tx.get(index);
-                        float yTex = ty.get(index);
-
-                        xTex /= 14.0f;
-                        xTex += xTexOffset;
-                        yTex /= 14.0f;
-                        yTex += yTexOffset;
+                        float yTex = -ty.get(index);
 
                         if (coloredBackground)
                             b.addVertex(matrix, x.get(index), y.get(index), z).setColor((c.getRed() / 255f), (c.getGreen() / 255f), (c.getBlue() / 255f), a).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(0, 1, 0);
@@ -449,12 +405,7 @@ public class StargateRendererStatic {
                         index = index + SECTIONS;
 
                         xTex = tx.get(index);
-                        yTex = ty.get(index);
-
-                        xTex /= 14.0f;
-                        xTex += xTexOffset;
-                        yTex /= 14.0f;
-                        yTex += yTexOffset;
+                        yTex = -ty.get(index);
 
                         z = z5;
 

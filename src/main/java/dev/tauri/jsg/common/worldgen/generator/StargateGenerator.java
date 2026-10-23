@@ -186,10 +186,10 @@ public class StargateGenerator implements IStargateGenerator {
 
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_DHD))
                 dhdTile.getItemStackHandler().setStackInSlot(1, new ItemStack(JSGItems.CRYSTAL_GLYPH_DHD.get(), 1));
-            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_CAPACITY_DHD))
+            /*.if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_CAPACITY_DHD))
                 dhdTile.getItemStackHandler().setStackInSlot(2, new ItemStack(CoreItems.CRYSTAL_UPGRADE_CAPACITY.get(), 1));
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_EFFICIENCY_DHD))
-                dhdTile.getItemStackHandler().setStackInSlot(3, new ItemStack(CoreItems.CRYSTAL_UPGRADE_EFFICIENCY.get(), 1));
+                dhdTile.getItemStackHandler().setStackInSlot(3, new ItemStack(CoreItems.CRYSTAL_UPGRADE_EFFICIENCY.get(), 1));*/
 
             if (conf.dhdFluid >= 0) {
                 dhdTile.getReactorManager().getTank().setFluid(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), conf.dhdFluid));

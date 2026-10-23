@@ -8,10 +8,7 @@ import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.common.registry.tag.CoreItemTags;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -43,12 +40,12 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', Tags.Items.STONES)
                 .define('C', Tags.Items.INGOTS_COPPER)
                 .define('I', Tags.Items.INGOTS_IRON)
-                .define('T', CoreItemTags.INGOT_TITANIUM)
+                .define('T', MaterialType.TITANIUM.tags().ingots())
                 .unlockedBy("has_stone_slab", has(Blocks.SMOOTH_STONE_SLAB))
                 .unlockedBy("has_stone", has(Tags.Items.STONES))
                 .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
                 .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
-                .unlockedBy("has_titanium_ingot", has(CoreItemTags.INGOT_TITANIUM))
+                .unlockedBy("has_titanium_ingot", has(MaterialType.TITANIUM.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGBlocks.PRINTER.get())
@@ -56,18 +53,18 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PGP")
                 .pattern("RHT")
                 .pattern("BDB")
-                .define('P', CoreItemTags.PLATE_TITANIUM)
+                .define('P', MaterialType.TITANIUM.tags().plates())
                 .define('G', Tags.Items.GLASS_PANES_COLORLESS)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .define('H', Items.HOPPER)
                 .define('T', MaterialType.TITANIUM.getItem(MaterialItemType.GEAR).get())
                 .define('B', Tags.Items.DYES_CYAN)
                 .define('D', Tags.Items.DYES_GRAY)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES_COLORLESS))
                 .unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
                 .unlockedBy("has_hopper", has(Items.HOPPER))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TITANIUM))
+                .unlockedBy("has_gear", has(MaterialType.TITANIUM.tags().gears()))
                 .unlockedBy("has_cyan_dye", has(Tags.Items.DYES_CYAN))
                 .unlockedBy("has_gray_dye", has(Tags.Items.DYES_GRAY))
                 .save(pWriter);
@@ -159,14 +156,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .define('G', CoreItemTags.GEAR_NAQUADAH_ALLOY)
+                .define('G', MaterialType.NAQUADAH_ALLOY.tags().gears())
                 .unlockedBy("has_red_crystal", has(CoreItemTags.GEM_RED))
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_MILKYWAY.get()))
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit_naquadah", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .unlockedBy("has_capacitor", has(CoreItems.CRYSTAL_ENERGY_BASIC.get()))
                 .unlockedBy("has_circuit_crystal", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_NAQUADAH_ALLOY))
+                .unlockedBy("has_gear", has(MaterialType.NAQUADAH_ALLOY.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK.get())
@@ -176,10 +173,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PCP")
                 .define('C', CoreItemTags.GEM_RED)
                 .define('G', Items.RED_STAINED_GLASS)
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_RED))
                 .unlockedBy("has_glass", has(Items.RED_STAINED_GLASS))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK.get())
@@ -188,9 +185,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PPP")
                 .pattern("###")
                 .define('#', JSGItems.FRAGMENT_MILKYWAY.get())
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_MILKYWAY.get()))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get())
@@ -204,14 +201,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .define('G', CoreItemTags.GEAR_NAQUADAH_ALLOY)
+                .define('G', MaterialType.NAQUADAH_ALLOY.tags().gears())
                 .unlockedBy("has_pegasus_crystal", has(CoreItemTags.GEM_PEGASUS))
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_PEGASUS.get()))
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit_naquadah", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .unlockedBy("has_capacitor", has(CoreItems.CRYSTAL_ENERGY_BASIC.get()))
                 .unlockedBy("has_circuit_crystal", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_NAQUADAH_ALLOY))
+                .unlockedBy("has_gear", has(MaterialType.NAQUADAH_ALLOY.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK.get())
@@ -221,10 +218,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PCP")
                 .define('C', CoreItemTags.GEM_PEGASUS)
                 .define('G', Items.LIGHT_BLUE_STAINED_GLASS)
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_PEGASUS))
                 .unlockedBy("has_glass", has(Items.LIGHT_BLUE_STAINED_GLASS))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_PEGASUS_RING_BLOCK.get())
@@ -233,9 +230,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PPP")
                 .pattern("###")
                 .define('#', JSGItems.FRAGMENT_PEGASUS.get())
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_PEGASUS.get()))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get())
@@ -249,14 +246,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .define('G', CoreItemTags.GEAR_NAQUADAH)
+                .define('G', MaterialType.NAQUADAH.tags().gears())
                 .unlockedBy("has_white_crystal", has(CoreItemTags.GEM_WHITE))
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_UNIVERSE.get()))
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit_naquadah", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .unlockedBy("has_capacitor", has(CoreItems.CRYSTAL_ENERGY_BASIC.get()))
                 .unlockedBy("has_circuit_crystal", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_NAQUADAH))
+                .unlockedBy("has_gear", has(MaterialType.NAQUADAH.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK.get())
@@ -266,12 +263,12 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("TCT")
                 .define('C', CoreItemTags.GEM_WHITE)
                 .define('G', Items.WHITE_STAINED_GLASS)
-                .define('N', CoreItemTags.PLATE_NAQUADAH)
-                .define('T', CoreItemTags.PLATE_TITANIUM)
+                .define('N', MaterialType.NAQUADAH.tags().plates())
+                .define('T', MaterialType.TITANIUM.tags().plates())
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_WHITE))
                 .unlockedBy("has_glass", has(Items.LIGHT_BLUE_STAINED_GLASS))
-                .unlockedBy("has_naquadah_plate", has(CoreItemTags.PLATE_NAQUADAH))
-                .unlockedBy("has_titanium_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_naquadah_plate", has(MaterialType.NAQUADAH.tags().plates()))
+                .unlockedBy("has_titanium_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK.get())
@@ -280,10 +277,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PCP")
                 .pattern("###")
                 .define('#', JSGItems.FRAGMENT_UNIVERSE.get())
-                .define('P', CoreItemTags.PLATE_NAQUADAH)
+                .define('P', MaterialType.NAQUADAH.tags().plates())
                 .define('C', CoreItemTags.GEM_WHITE)
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_UNIVERSE.get()))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH.tags().plates()))
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_WHITE))
                 .save(pWriter);
 
@@ -298,14 +295,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .define('G', CoreItemTags.GEAR_TITANIUM)
+                .define('G', MaterialType.TITANIUM.tags().gears())
                 .unlockedBy("has_blue_crystal", has(CoreItemTags.GEM_BLUE))
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_TOLLAN.get()))
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit_naquadah", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .unlockedBy("has_capacitor", has(CoreItems.CRYSTAL_ENERGY_BASIC.get()))
                 .unlockedBy("has_circuit_crystal", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TITANIUM))
+                .unlockedBy("has_gear", has(MaterialType.TITANIUM.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK.get())
@@ -314,9 +311,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#B#")
                 .pattern("###")
                 .define('#', CoreItemTags.GEM_BLUE)
-                .define('B', CoreItemTags.PLATE_TITANIUM)
+                .define('B', MaterialType.TITANIUM.tags().plates())
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_WHITE))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_TOLLAN_RING_BLOCK.get())
@@ -325,9 +322,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PPP")
                 .pattern("###")
                 .define('#', JSGItems.FRAGMENT_TOLLAN.get())
-                .define('P', CoreItemTags.PLATE_NAQUADAH)
+                .define('P', MaterialType.NAQUADAH.tags().plates())
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_TOLLAN.get()))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .save(pWriter);
 
 
@@ -342,14 +339,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .define('G', CoreItemTags.GEAR_NAQUADAH)
+                .define('G', MaterialType.NAQUADAH.tags().gears())
                 .unlockedBy("has_white_crystal", has(CoreItemTags.GEM_WHITE))
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_MILKYWAY.get()))
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit_naquadah", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .unlockedBy("has_capacitor", has(CoreItems.CRYSTAL_ENERGY_BASIC.get()))
                 .unlockedBy("has_circuit_crystal", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_NAQUADAH))
+                .unlockedBy("has_gear", has(MaterialType.NAQUADAH.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK.get())
@@ -357,12 +354,12 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("RGR")
                 .pattern("RNR")
                 .pattern("NRN")
-                .define('R', CoreItemTags.PLATE_NAQUADAH)
+                .define('R', MaterialType.NAQUADAH.tags().plates())
                 .define('G', Items.BLACK_STAINED_GLASS)
-                .define('N', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('N', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .unlockedBy("has_glass", has(Items.BLACK_STAINED_GLASS))
-                .unlockedBy("has_raw_naquadah_plate", has(CoreItemTags.PLATE_NAQUADAH))
-                .unlockedBy("has_naquadah_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .unlockedBy("has_raw_naquadah_plate", has(MaterialType.NAQUADAH.tags().plates()))
+                .unlockedBy("has_naquadah_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.STARGATE_MOVIE_RING_BLOCK.get())
@@ -371,9 +368,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PPP")
                 .pattern("###")
                 .define('#', JSGItems.FRAGMENT_MILKYWAY.get())
-                .define('P', CoreItemTags.PLATE_NAQUADAH)
+                .define('P', MaterialType.NAQUADAH.tags().plates())
                 .unlockedBy("has_fragment", has(JSGItems.FRAGMENT_MILKYWAY.get()))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH))
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH.tags().plates()))
                 .save(pWriter);
 
         //Redstone IO
@@ -416,18 +413,18 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PBP")
                 .pattern("CHN")
                 .pattern("III")
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .define('B', JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
                 .define('H', JSGItems.HOLDER_CRYSTAL.get())
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
-                .define('I', CoreItemTags.INGOT_NAQUADAH_ALLOY)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .define('I', MaterialType.NAQUADAH_ALLOY.tags().ingots())
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .unlockedBy("has_button", has(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON.get()))
                 .unlockedBy("has_crystal_circuit", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
                 .unlockedBy("has_crystal_holder", has(JSGItems.HOLDER_CRYSTAL.get()))
                 .unlockedBy("has_naquadah_circuit", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
-                .unlockedBy("has_naquadah_ingot", has(CoreItemTags.INGOT_NAQUADAH_ALLOY))
+                .unlockedBy("has_naquadah_ingot", has(MaterialType.NAQUADAH_ALLOY.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.DHD_PEGASUS.get())
@@ -435,18 +432,18 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("PBP")
                 .pattern("CHN")
                 .pattern("III")
-                .define('P', CoreItemTags.PLATE_NAQUADAH_ALLOY)
+                .define('P', MaterialType.NAQUADAH_ALLOY.tags().plates())
                 .define('B', JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON.get())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
                 .define('H', JSGItems.HOLDER_CRYSTAL_PEGASUS.get())
                 .define('N', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
-                .define('I', CoreItemTags.INGOT_NAQUADAH_ALLOY)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
+                .define('I', MaterialType.NAQUADAH_ALLOY.tags().ingots())
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
                 .unlockedBy("has_button", has(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON.get()))
                 .unlockedBy("has_crystal_circuit", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
                 .unlockedBy("has_crystal_holder", has(JSGItems.HOLDER_CRYSTAL_PEGASUS.get()))
                 .unlockedBy("has_naquadah_circuit", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
-                .unlockedBy("has_naquadah_ingot", has(CoreItemTags.INGOT_NAQUADAH_ALLOY))
+                .unlockedBy("has_naquadah_ingot", has(MaterialType.NAQUADAH_ALLOY.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL.get())
@@ -519,10 +516,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("TET")
                 .pattern("ECE")
                 .pattern("TET")
-                .define('T', CoreItemTags.INGOT_TRINIUM)
+                .define('T', MaterialType.TRINIUM.tags().ingots())
                 .define('E', CoreItemTags.GEM_ENDER)
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_TRINIUM))
+                .unlockedBy("has_ingot", has(MaterialType.TRINIUM.tags().ingots()))
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_ENDER))
                 .unlockedBy("has_circuit", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
                 .save(pWriter);
@@ -609,9 +606,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X#")
                 .pattern("X X")
                 .pattern("#X#")
-                .define('#', CoreItemTags.GEAR_TITANIUM)
+                .define('#', MaterialType.TITANIUM.tags().gears())
                 .define('X', JSGItems.QUAD_IRIS_BLADE.get())
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TITANIUM))
+                .unlockedBy("has_gear", has(MaterialType.TITANIUM.tags().gears()))
                 .unlockedBy("has_quad_blade", has(JSGItems.QUAD_IRIS_BLADE.get()))
                 .save(pWriter);
 
@@ -620,9 +617,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X#")
                 .pattern("X X")
                 .pattern("#X#")
-                .define('#', CoreItemTags.GEAR_TRINIUM)
+                .define('#', MaterialType.TRINIUM.tags().gears())
                 .define('X', JSGItems.QUAD_IRIS_BLADE_TRINIUM.get())
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TRINIUM))
+                .unlockedBy("has_gear", has(MaterialType.TRINIUM.tags().gears()))
                 .unlockedBy("has_quad_blade", has(JSGItems.QUAD_IRIS_BLADE_TRINIUM.get()))
                 .save(pWriter);
 
@@ -653,10 +650,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("###")
                 .pattern("XXX")
                 .pattern("###")
-                .define('#', CoreItemTags.PLATE_NAQUADAH_ALLOY)
-                .define('X', CoreItemTags.INGOT_NAQUADAH_ALLOY)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_NAQUADAH_ALLOY))
+                .define('#', MaterialType.NAQUADAH_ALLOY.tags().plates())
+                .define('X', MaterialType.NAQUADAH_ALLOY.tags().ingots())
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
+                .unlockedBy("has_ingot", has(MaterialType.NAQUADAH_ALLOY.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.FRAGMENT_PEGASUS.get())
@@ -664,10 +661,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("###")
                 .pattern("XXX")
                 .pattern("###")
-                .define('#', CoreItemTags.PLATE_NAQUADAH_ALLOY)
-                .define('X', CoreItemTags.INGOT_TRINIUM)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH_ALLOY))
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_TRINIUM))
+                .define('#', MaterialType.NAQUADAH_ALLOY.tags().plates())
+                .define('X', MaterialType.TRINIUM.tags().ingots())
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH_ALLOY.tags().plates()))
+                .unlockedBy("has_ingot", has(MaterialType.TRINIUM.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.FRAGMENT_UNIVERSE.get())
@@ -675,10 +672,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("###")
                 .pattern("XXX")
                 .pattern("###")
-                .define('#', CoreItemTags.PLATE_NAQUADAH)
-                .define('X', CoreItemTags.INGOT_TITANIUM)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_NAQUADAH))
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_TITANIUM))
+                .define('#', MaterialType.NAQUADAH.tags().plates())
+                .define('X', MaterialType.TITANIUM.tags().ingots())
+                .unlockedBy("has_plate", has(MaterialType.NAQUADAH.tags().plates()))
+                .unlockedBy("has_ingot", has(MaterialType.TITANIUM.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.FRAGMENT_TOLLAN.get())
@@ -686,9 +683,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("###")
                 .pattern("XXX")
                 .pattern("###")
-                .define('#', CoreItemTags.PLATE_TITANIUM)
+                .define('#', MaterialType.TITANIUM.tags().plates())
                 .define('X', Tags.Items.INGOTS_IRON)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .unlockedBy("has_ingot", has(Tags.Items.INGOTS_IRON))
                 .save(pWriter);
 
@@ -697,10 +694,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X ")
                 .pattern(" # ")
                 .pattern(" # ")
-                .define('#', CoreItemTags.PLATE_TITANIUM)
-                .define('X', CoreItemTags.NUGGET_TITANIUM)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TITANIUM))
+                .define('#', MaterialType.TITANIUM.tags().plates())
+                .define('X', MaterialType.TITANIUM.tags().nuggets())
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
+                .unlockedBy("has_nugget", has(MaterialType.TITANIUM.tags().nuggets()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.QUAD_IRIS_BLADE.get())
@@ -709,9 +706,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X#")
                 .pattern(" # ")
                 .define('#', JSGItems.IRIS_BLADE.get())
-                .define('X', CoreItemTags.GEAR_TITANIUM)
+                .define('X', MaterialType.TITANIUM.tags().gears())
                 .unlockedBy("has_blade", has(JSGItems.IRIS_BLADE.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TITANIUM))
+                .unlockedBy("has_gear", has(MaterialType.TITANIUM.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.IRIS_BLADE_TRINIUM.get())
@@ -719,10 +716,10 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X ")
                 .pattern(" # ")
                 .pattern(" # ")
-                .define('#', CoreItemTags.PLATE_TRINIUM)
-                .define('X', CoreItemTags.NUGGET_TRINIUM)
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TRINIUM))
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TRINIUM))
+                .define('#', MaterialType.TRINIUM.tags().plates())
+                .define('X', MaterialType.TRINIUM.tags().nuggets())
+                .unlockedBy("has_plate", has(MaterialType.TRINIUM.tags().plates()))
+                .unlockedBy("has_nugget", has(MaterialType.TRINIUM.tags().nuggets()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.QUAD_IRIS_BLADE_TRINIUM.get())
@@ -731,9 +728,9 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("#X#")
                 .pattern(" # ")
                 .define('#', JSGItems.IRIS_BLADE_TRINIUM.get())
-                .define('X', CoreItemTags.GEAR_TRINIUM)
+                .define('X', MaterialType.TRINIUM.tags().gears())
                 .unlockedBy("has_blade", has(JSGItems.IRIS_BLADE_TRINIUM.get()))
-                .unlockedBy("has_gear", has(CoreItemTags.GEAR_TRINIUM))
+                .unlockedBy("has_gear", has(MaterialType.TRINIUM.tags().gears()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.HOLDER_CRYSTAL.get())
@@ -741,14 +738,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("NCN")
                 .pattern("PIP")
                 .pattern(" P ")
-                .define('N', CoreItemTags.NUGGET_TITANIUM)
+                .define('N', MaterialType.TITANIUM.tags().nuggets())
                 .define('C', CoreItemTags.GEM_RED)
-                .define('P', CoreItemTags.PLATE_TITANIUM)
-                .define('I', CoreItemTags.INGOT_NAQUADAH_ALLOY)
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TITANIUM))
+                .define('P', MaterialType.TITANIUM.tags().plates())
+                .define('I', MaterialType.NAQUADAH_ALLOY.tags().ingots())
+                .unlockedBy("has_nugget", has(MaterialType.TITANIUM.tags().nuggets()))
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_RED))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
+                .unlockedBy("has_ingot", has(MaterialType.NAQUADAH_ALLOY.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.HOLDER_CRYSTAL_PEGASUS.get())
@@ -756,14 +753,14 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("NCN")
                 .pattern("PIP")
                 .pattern(" P ")
-                .define('N', CoreItemTags.NUGGET_TITANIUM)
+                .define('N', MaterialType.TITANIUM.tags().nuggets())
                 .define('C', CoreItemTags.GEM_PEGASUS)
-                .define('P', CoreItemTags.PLATE_TITANIUM)
-                .define('I', CoreItemTags.INGOT_NAQUADAH_ALLOY)
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TITANIUM))
+                .define('P', MaterialType.TITANIUM.tags().plates())
+                .define('I', MaterialType.NAQUADAH_ALLOY.tags().ingots())
+                .unlockedBy("has_nugget", has(MaterialType.TITANIUM.tags().nuggets()))
                 .unlockedBy("has_crystal", has(CoreItemTags.GEM_PEGASUS))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
-                .unlockedBy("has_ingot", has(CoreItemTags.INGOT_NAQUADAH_ALLOY))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
+                .unlockedBy("has_ingot", has(MaterialType.NAQUADAH_ALLOY.tags().ingots()))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON.get())
@@ -771,11 +768,11 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("X#X")
                 .pattern("#G#")
                 .pattern("X#X")
-                .define('X', CoreItemTags.NUGGET_TITANIUM)
-                .define('#', CoreItemTags.PLATE_TITANIUM)
+                .define('X', MaterialType.TITANIUM.tags().nuggets())
+                .define('#', MaterialType.TITANIUM.tags().plates())
                 .define('G', Items.RED_STAINED_GLASS_PANE)
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TITANIUM))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_nugget", has(MaterialType.TITANIUM.tags().nuggets()))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .unlockedBy("has_pane", has(Items.RED_STAINED_GLASS_PANE))
                 .save(pWriter);
 
@@ -784,11 +781,11 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("X#X")
                 .pattern("#G#")
                 .pattern("X#X")
-                .define('X', CoreItemTags.NUGGET_TITANIUM)
-                .define('#', CoreItemTags.PLATE_TITANIUM)
+                .define('X', MaterialType.TITANIUM.tags().nuggets())
+                .define('#', MaterialType.TITANIUM.tags().plates())
                 .define('G', Items.CYAN_STAINED_GLASS_PANE)
-                .unlockedBy("has_nugget", has(CoreItemTags.NUGGET_TITANIUM))
-                .unlockedBy("has_plate", has(CoreItemTags.PLATE_TITANIUM))
+                .unlockedBy("has_nugget", has(MaterialType.TITANIUM.tags().nuggets()))
+                .unlockedBy("has_plate", has(MaterialType.TITANIUM.tags().plates()))
                 .unlockedBy("has_pane", has(Items.CYAN_STAINED_GLASS_PANE))
                 .save(pWriter);
 

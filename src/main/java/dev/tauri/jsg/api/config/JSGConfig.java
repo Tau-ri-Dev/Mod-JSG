@@ -348,10 +348,6 @@ public class JSGConfig {
                 "SIDE: SERVER"
         ));
 
-        public static final JSGConfigValue.BooleanValue renderEHifTheyNot = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "EventHorizon.Render EHs even if they are not rendering", true,
-                "SIDE: CLIENT"
-        ));
-
         public static final JSGConfigValue.IntValue eventHorizonRenderSections = C_SG.add(new JSGConfigValue.IntValue(BUILDER, "EventHorizon.Rendering.Number of EH sections", 36 * 2, 12, 36 * 8,
                 "Defines how many sections should be used to render EH kawoosh",
                 "DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!",

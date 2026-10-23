@@ -202,8 +202,8 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
     // ---------------------------------------------------------------------------------------
     // Render
 
-    protected static final String EV_HORIZON_OVERLAY_TEXTURE = "textures/tesr/event_horizon_animated_overlay.png";
-    protected static final String EV_HORIZON_KAWOOSH_OVERLAY_TEXTURE = "textures/tesr/event_horizon_animated_overlay_kawoosh.png";
+    protected static final String EV_HORIZON_OVERLAY_TEXTURE_BASE = "textures/tesr/animated/event_horizon/overlay";
+    protected static final String EV_HORIZON_KAWOOSH_OVERLAY_TEXTURE_BASE = "textures/tesr/animated/kawoosh/overlay";
     private static final float VORTEX_START = 5.275f;
     private static final float SPEED_FACTOR = 6f;
 
@@ -215,13 +215,6 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
         return JSGApi.JSG_LOADERS_HOLDER.model();
     }
 
-    private static final Map<ResourceLocation, Boolean> EH_RENDERED = new HashMap<>();
-
-    static {
-        EH_RENDERED.put(JSGMapping.rl(JSG.MOD_ID, EV_HORIZON_OVERLAY_TEXTURE), false);
-        EH_RENDERED.put(JSGMapping.rl(JSG.MOD_ID, EV_HORIZON_KAWOOSH_OVERLAY_TEXTURE), false);
-    }
-
     public void renderWholeGate() {
         renderGate();
         renderIris(true);
@@ -229,10 +222,6 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
         if (rendererState.doEventHorizonRender) {
             stack.pushPose();
             renderKawoosh();
-            stack.popPose();
-        } else if (JSGConfig.Stargate.renderEHifTheyNot.get()) {
-            stack.pushPose();
-            preRenderKawoosh();
             stack.popPose();
         }
 
@@ -254,28 +243,19 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
         return false;
     }
 
-    protected ResourceLocation getEventHorizonTextureResource(boolean kawoosh) {
-        return JSGMapping.rl(JSG.MOD_ID, (kawoosh ? EV_HORIZON_KAWOOSH_OVERLAY_TEXTURE : EV_HORIZON_OVERLAY_TEXTURE));
+    protected ResourceLocation getEventHorizonTextureResource(boolean kawoosh, double frame) {
+        frame *= 4.0;
+        return JSGMapping.rl(JSG.MOD_ID, (kawoosh ? EV_HORIZON_KAWOOSH_OVERLAY_TEXTURE_BASE : EV_HORIZON_OVERLAY_TEXTURE_BASE) + "_" + (int) (frame % 185));
     }
 
     protected void renderKawoosh() {
-        renderKawoosh(rendererState, true);
-    }
-
-    protected void preRenderKawoosh() {
-
-        StargateAbstractRendererState rs = new StargateAbstractRendererState().initClient(rendererState.pos);
-
-        for (int i = 0; i < 2; i++) {
-            rs.vortexState = (i == 0 ? EnumVortexState.STILL : EnumVortexState.FORMING);
-            renderKawoosh(rs, false);
-        }
+        renderKawoosh(rendererState);
     }
 
     @Nonnull
     public abstract Pair<Integer, Integer> getEventHorizonColor();
 
-    protected void renderKawoosh(StargateAbstractRendererState rendererState, boolean render) {
+    protected void renderKawoosh(StargateAbstractRendererState rendererState) {
         //OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 
         float gateWait = (float) tileEntity.getTime() - rendererState.gateWaitStart;
@@ -289,30 +269,21 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
                 || rendererState.vortexState == EnumVortexState.DECREASING
                 || rendererState.vortexState == EnumVortexState.FULL);
 
-        ResourceLocation ehTextureRes = getEventHorizonTextureResource(isKawoosh && !rendererState.noxDialing);
-        if (!render && EH_RENDERED.get(ehTextureRes)) return;
-
-        EH_RENDERED.put(ehTextureRes, true);
-
         //GlStateManager.disableLighting();
         //GlStateManager.enableCull();
 
         stack.pushPose();
         stack.translate(0, 0, 0.06);
 
-        if (!render) {
-            stack.scale(0.0000001f, 0.0000001f, 0.0000001f);
-        }
+        long kawooshStart = rendererState.gateWaitStart + 44 - 24;
+        float tick = level.getGameTime() - kawooshStart + partialTicks;
+        float mul;
 
-        // set default texture
+        ResourceLocation ehTextureRes = getEventHorizonTextureResource(isKawoosh && !rendererState.noxDialing, tick);
         var ehTexture = getTextureLoader().getTexture(ehTextureRes);
 
         // bind texture
         if (ehTexture != null) ehTexture.bindTexture();
-
-        long kawooshStart = rendererState.gateWaitStart + 44 - 24;
-        float tick = (float) (level.getGameTime() - kawooshStart + partialTicks);
-        float mul;
 
         float inner = StargateRendererStatic.EVENT_HORIZON_RADIUS - (tick / (rendererState.noxDialing ? 3.2f : 1)) / 3.957f;
 
@@ -515,7 +486,7 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
                     stack.mulPose(Axis.YN.rotationDegrees(180));
 
                     // Bind non-kawoosh texture from back
-                    ehTextureRes = getEventHorizonTextureResource(false);
+                    ehTextureRes = getEventHorizonTextureResource(false, tick);
                     ehTexture = getTextureLoader().getTexture(ehTextureRes);
                     if (ehTexture != null) ehTexture.bindTexture();
 
