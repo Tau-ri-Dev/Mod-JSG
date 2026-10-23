@@ -1,5 +1,5 @@
 {
-  "name": "jsg:abydos/ambient/camps/bench",
+  "name": "jsg:containers/abydos/camp",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -9,18 +9,18 @@
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
-        "location": "jsg:abydos/ambient/camp/slab",
+        "location": "jsg:containers/abydos/camp/barrel",
         "processors": "minecraft:empty",
         "projection": "terrain_matching",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
-        "location": "jsg:abydos/ambient/camp/wood",
+        "location": "jsg:containers/abydos/camp/chest",
         "processors": "minecraft:empty",
         "projection": "terrain_matching",
         "element_type": "minecraft:single_pool_element"

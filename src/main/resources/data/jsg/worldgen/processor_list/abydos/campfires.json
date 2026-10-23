@@ -1,0 +1,305 @@
+[
+  {
+    "processor_type": "minecraft:rule",
+    "rules": [
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "north",
+            "lit": "true",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "south",
+            "lit": "true",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "west",
+            "lit": "true",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "east",
+            "lit": "true",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "north",
+            "lit": "true",
+            "signal_fire": "true",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "south",
+            "lit": "true",
+            "signal_fire": "true",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "west",
+            "lit": "true",
+            "signal_fire": "true",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "east",
+            "lit": "true",
+            "signal_fire": "true",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "north",
+            "lit": "false",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "south",
+            "lit": "false",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:pink_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "west",
+            "lit": "false",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:pink_stained_glass"
+        },
+        "output_state": {
+          "Name": "minecraft:campfire",
+          "Properties": {
+            "facing": "east",
+            "lit": "false",
+            "signal_fire": "false",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:magenta_stained_glass",
+          "probability": 0.2
+        },
+        "output_state": {
+          "Name": "minecraft:jungle_slab",
+          "Properties": {
+            "type": "bottom",
+            "waterlogged": "false"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:magenta_stained_glass",
+          "probability": 0.1
+        },
+        "output_state": {
+          "Name": "minecraft:jungle_wood"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:magenta_stained_glass",
+          "probability": 0.2
+        },
+        "output_state": {
+          "Name": "minecraft:stripped_jungle_wood"
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:random_block_match",
+          "block": "minecraft:magenta_stained_glass",
+          "probability": 0.15
+        },
+        "output_state": {
+          "Name": "minecraft:hay_block",
+          "Properties": {
+            "axis": "y"
+          }
+        }
+      },
+      {
+        "location_predicate": {
+          "predicate_type": "minecraft:always_true"
+        },
+        "input_predicate": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:magenta_stained_glass"
+        },
+        "output_state": {
+          "Name": "minecraft:air"
+        }
+      }
+    ]
+  }
+]

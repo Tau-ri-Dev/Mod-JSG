@@ -1,46 +1,46 @@
 {
-  "name": "jsg:abydos/ambient/camps/decors",
+  "name": "jsg:containers/abydos/cartouche/regular",
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 5,
+      "weight": 1,
       "element": {
         "element_type": "minecraft:empty_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 1,
       "element": {
-        "location": "jsg:abydos/ambient/camp/barrel_empty",
+        "location": "jsg:containers/abydos/cartouche/barrel_up",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 5,
+      "weight": 1,
       "element": {
-        "location": "jsg:abydos/ambient/camp/chest_empty",
+        "location": "jsg:containers/abydos/cartouche/barrel_side",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
-        "location": "jsg:abydos/ambient/camp/barrel_loot",
+        "location": "jsg:containers/abydos/cartouche/chest",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
     {
-      "weight": 2,
+      "weight": 4,
       "element": {
-        "location": "jsg:abydos/ambient/camp/chest_empty",
+        "location": "jsg:containers/abydos/cartouche/trapped_chest",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     }
