@@ -3,7 +3,10 @@ package dev.tauri.jsg.datagen;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.datagen.custom.JSGRIGWavesProvider;
 import dev.tauri.jsg.datagen.loot.JSGLootTableProvider;
-import dev.tauri.jsg.datagen.tag.*;
+import dev.tauri.jsg.datagen.tag.JSGBlockTagGenerator;
+import dev.tauri.jsg.datagen.tag.JSGFluidTagGenerator;
+import dev.tauri.jsg.datagen.tag.JSGItemTagGenerator;
+import dev.tauri.jsg.datagen.tag.JSGStructureTagGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -26,7 +29,7 @@ public class JSGDataGenerators {
         var blockTagGenerator = generator.addProvider(event.includeServer(), new JSGBlockTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGItemTagGenerator(output, lookupProvider, blockTagGenerator.contentsGetter(), exFileHelper));
 
-        generator.addProvider(event.includeServer(), new JSGBiomeTagGenerator(output, lookupProvider, exFileHelper));
+        //generator.addProvider(event.includeServer(), new JSGBiomeTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGFluidTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGStructureTagGenerator(output, lookupProvider, exFileHelper));
 

@@ -113,7 +113,7 @@ dependencies {
     //compileOnly "li.cil:oc2:1.0"
 
     // Metrics
-    compileOnly "dev.faststats.metrics:neoforge:${faststats_version}"
+    implementation "dev.faststats.metrics:neoforge:${faststats_version}"
 }
 
 tasks.withType(JavaCompile).configureEach {

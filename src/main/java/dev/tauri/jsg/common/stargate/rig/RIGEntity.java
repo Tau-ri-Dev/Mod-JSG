@@ -3,7 +3,6 @@ package dev.tauri.jsg.common.stargate.rig;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.util.ParameterReplacer;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +33,7 @@ public class RIGEntity {
         try {
             this.nbt = TagParser.parseTag(nbt);
         } catch (Exception e) {
-            JSGCore.logger.error("Error while creating RIGEntity {}:", name, e);
+            JSG.logger.error("Error while creating RIGEntity {}:", name, e);
         }
     }
 
