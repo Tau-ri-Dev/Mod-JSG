@@ -30,6 +30,7 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGBiomeTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGFluidTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGStructureTagGenerator(output, lookupProvider, exFileHelper));
+        generator.addProvider(event.includeServer(), new JSGEntityTagGenerator(output, lookupProvider, exFileHelper));
 
         generator.addProvider(event.includeServer(), new JSGRIGWavesProvider(output));
         generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
