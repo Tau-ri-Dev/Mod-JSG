@@ -19,7 +19,6 @@ import dev.tauri.jsgcore.mapping.JSGMapping;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -506,14 +505,14 @@ public class NetworkTab extends AdminControllerTab {
             if (dimension.isEmpty() || p.level().dimension() == dimension.get()) {
                 graphics.pose().pushPose();
                 graphics.pose().translate(0, 0, 5);
-                var xOriginal = (int) (p.position().x() * scale) - 4;
-                var yOriginal = (int) (p.position().z() * scale) - 4;
+                var xOriginal = (int) (p.position().x() * scale) - 5;
+                var yOriginal = (int) (p.position().z() * scale) - 5;
                 var x = (Math.max(-currentX, Math.min(-currentX + NetworkMap.this.getWidth() - 14, xOriginal)));
                 var y = (Math.max(-currentY, Math.min(-currentY + NetworkMap.this.getHeight() - 14, yOriginal)));
 
                 float outsideFactor = (x != xOriginal || y != yOriginal) ? (float) (0.8f - (Math.min(1f, Math.sqrt((float) (x - xOriginal) * (float) (x - xOriginal) + (float) (y - yOriginal) * (float) (y - yOriginal)) / 10000f) * 0.7f)) : 1f;
                 RenderSystem.setShaderColor(1, 1, 1, outsideFactor);
-                graphics.blit(JSGMapping.rl("textures/gui/widgets.png"), (int) x, (int) y, 7, 7, 192, 0, 14, 14, 256, 256);
+                graphics.blitSprite(ResourceLocation.withDefaultNamespace("pending_invite/reject"), (int) x, (int) y, 10, 10);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
                 if (outsideFactor >= 1f)
                     graphics.drawCenteredString(NetworkTab.this.baseGUI.getMinecraft().font, Component.translatable("gui.admincontroller.tab.network.map.you_are_here"), (int) (p.position().x() * scale), (int) (p.position().z() * scale) - 3 + 2 + 7, 0xffffff);
@@ -521,12 +520,12 @@ public class NetworkTab extends AdminControllerTab {
             }
             graphics.pose().pushPose();
             graphics.pose().translate(-(currentX), -(currentY), 0);
-            var i = 0;
-            //graphics.drawString(Minecraft.getInstance().font, "currentX: " + currentX, 10, 10 * (++i), 0xffffff);
-            //graphics.drawString(Minecraft.getInstance().font, "currentY: " + currentY, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "scale: " + scale, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "mouseX: " + ((pMouseX - getX() - currentX)) / scale, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "mouseY: " + ((pMouseY - getY() - currentY)) / scale, 10, 10 * (++i), 0xffffff);
+            //.var i = 0;
+            //.graphics.drawString(Minecraft.getInstance().font, "currentX: " + currentX, 10, 10 * (++i), 0xffffff);
+            //.graphics.drawString(Minecraft.getInstance().font, "currentY: " + currentY, 10, 10 * (++i), 0xffffff);
+            //.graphics.drawString(Minecraft.getInstance().font, "scale: " + scale, 10, 10 * (++i), 0xffffff);
+            //.graphics.drawString(Minecraft.getInstance().font, "mouseX: " + ((pMouseX - getX() - currentX)) / scale, 10, 10 * (++i), 0xffffff);
+            //.graphics.drawString(Minecraft.getInstance().font, "mouseY: " + ((pMouseY - getY() - currentY)) / scale, 10, 10 * (++i), 0xffffff);
             graphics.pose().popPose();
         }
 
