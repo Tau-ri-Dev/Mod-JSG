@@ -4,6 +4,7 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.tags.JSGItemTags;
+import dev.tauri.jsgcore.common.integration.Integrations;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
@@ -14,7 +15,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
-import slimeknights.tconstruct.TConstruct;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
@@ -53,31 +53,31 @@ public class JSGItemTagGenerator extends ItemTagsProvider {
 
         //Tinkers Construct casts
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts")))
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts")))
                 .add(JSGItems.IRIS_BLADE.get())
                 .add(JSGItems.IRIS_BLADE_TRINIUM.get());
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/gold")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/gold")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_golden_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/iris_blade")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/iris_blade")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_golden_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/iris_blade_sand")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/iris_blade_sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_sand_cast"))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_red_sand_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/multi_use")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/multi_use")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_golden_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/red_sand")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/red_sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_red_sand_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/sand")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_sand_cast"));
 
-        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/single_use")))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"))
-                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/single_use")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_sand_cast"))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_red_sand_cast"));
     }
 }
