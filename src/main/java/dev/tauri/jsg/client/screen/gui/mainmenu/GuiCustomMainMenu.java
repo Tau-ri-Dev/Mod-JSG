@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import dev.faststats.screen.minecraft.ConsentScreen;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.client.screen.EnumMainMenuGateType;
 import dev.tauri.jsg.api.config.JSGConfig;
@@ -69,6 +70,7 @@ public class GuiCustomMainMenu extends Screen {
     public static long menuDisplayed = -1;
     public static boolean menuWasDisplayed = false;
     public static double firstTransitionStart = 0;
+    public static boolean displayMetricsConsent = false;
     private static int currentButton = 0;
     private static boolean menuWasDisplayedIgnoredFPS = false;
 
@@ -191,6 +193,8 @@ public class GuiCustomMainMenu extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        if (checkMetricsConsent())
+            return;
         GuiCustomMainMenu.graphics = graphics;
         GuiHelper.currentStack = GuiCustomMainMenu.graphics.pose();
         poseStack = graphics.pose();
@@ -262,6 +266,13 @@ public class GuiCustomMainMenu extends Screen {
     }
 
     public static boolean soundIntroPlayed = false;
+
+    protected boolean checkMetricsConsent() {
+        if (!displayMetricsConsent) return false;
+        displayMetricsConsent = false;
+        getMinecraft().forceSetScreen(new ConsentScreen(this, true));
+        return true;
+    }
 
     public void drawFirstAnimation() {
         if (!JSGConfig.General.enableLogo.get()) return;

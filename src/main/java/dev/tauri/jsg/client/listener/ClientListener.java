@@ -1,5 +1,6 @@
 package dev.tauri.jsg.client.listener;
 
+import dev.faststats.screen.onboarding.FirstRunOnboarding;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.client.screen.gui.mainmenu.GuiCustomMainMenu;
@@ -34,6 +35,8 @@ public class ClientListener {
         }
         if (!JSGConfig.General.disableJSGMainMenu.get()) {
             if (!event.isCanceled() && event.getCurrentScreen() instanceof TitleScreen) {
+                if (FirstRunOnboarding.shouldOpen())
+                    GuiCustomMainMenu.displayMetricsConsent = true;
                 event.setNewScreen(new GuiCustomMainMenu());
                 if (initMainMenu) {
                     GuiCustomMainMenu.menuDisplayed = -1;
@@ -44,14 +47,25 @@ public class ClientListener {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onGuiOpen(ScreenEvent.Init.Pre event) {
+        onGuiOpenImpl(event);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onGuiOpen(ScreenEvent.Init.Post event) {
+        onGuiOpenImpl(event);
+    }
+
+    private static void onGuiOpenImpl(ScreenEvent.Init event) {
         if (event.getScreen() instanceof LevelLoadingScreen) {
             Minecraft.getInstance().forceSetScreen(new LevelGenerationScreen());
             return;
         }
         if (!JSGConfig.General.disableJSGMainMenu.get()) {
             if (event.getScreen() instanceof TitleScreen) {
-                Minecraft.getInstance().setScreen(new GuiCustomMainMenu());
+                if (FirstRunOnboarding.shouldOpen())
+                    GuiCustomMainMenu.displayMetricsConsent = true;
+                Minecraft.getInstance().forceSetScreen(new GuiCustomMainMenu());
                 if (initMainMenu) {
                     GuiCustomMainMenu.menuDisplayed = -1;
                     initMainMenu = false;

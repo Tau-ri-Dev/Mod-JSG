@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,5 +102,10 @@ public class MastadgeEntity extends Camel {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.DOLPHIN_DEATH;
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(LevelReader level) {
+        return super.checkSpawnObstruction(level);
     }
 }
