@@ -26,16 +26,20 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -76,6 +80,37 @@ public class CommonForgeListener {
             villager.getInventory().setItem(0, new ItemStack(Items.IRON_PICKAXE));
         }
         JSGVillagers.checkAndGetCustomType(villager).ifPresent(villagerType -> villager.setVillagerData(villager.getVillagerData().setType(villagerType)));
+    }
+
+    @SubscribeEvent
+    public static void onVillagerTick(LivingEvent.LivingTickEvent event) {
+        if (event.getEntity() instanceof Villager villager && !villager.level().isClientSide) {
+
+            if ((villager.tickCount + villager.getId()) % 24000 == 0) {
+                VillagerProfession profession = villager.getVillagerData().getProfession();
+
+                if (JSGVillagers.isPriest(profession)) {
+                    restockVillagerTrades(villager);
+                }
+            }
+        }
+    }
+
+    private static void restockVillagerTrades(Villager villager) {
+        MerchantOffers offers = villager.getOffers();
+        boolean upgraded = false;
+
+        for (MerchantOffer offer : offers) {
+            if (offer.isOutOfStock() || offer.getUses() > 0) {
+                offer.resetUses();
+                upgraded = true;
+            }
+        }
+
+        if (upgraded) {
+            villager.setOffers(offers);
+            villager.level().broadcastEntityEvent(villager, (byte) 14);
+        }
     }
 
     @SubscribeEvent
