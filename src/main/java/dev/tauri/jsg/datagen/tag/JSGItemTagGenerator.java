@@ -14,6 +14,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
+import slimeknights.tconstruct.TConstruct;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
@@ -49,5 +50,34 @@ public class JSGItemTagGenerator extends ItemTagsProvider {
                 .add(CoreItems.CRYSTAL_ENERGY_ADVANCED.get())
                 .add(CoreItems.CRYSTAL_ENERGY_ULTIMATE.get())
                 .add(CoreItems.CRYSTAL_ENERGY_CREATIVE.get());
+
+        //Tinkers Construct casts
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts")))
+                .add(JSGItems.IRIS_BLADE.get())
+                .add(JSGItems.IRIS_BLADE_TRINIUM.get());
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/gold")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/iris_blade")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/iris_blade_sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/multi_use")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_golden_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/red_sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/sand")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"));
+
+        tag(ItemTags.create(JSGMapping.rl(TConstruct.MOD_ID, "casts/single_use")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_sand_cast"))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID,"iris_blade_red_sand_cast"));
     }
 }
