@@ -5,12 +5,12 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
+import dev.tauri.jsg.api.stargate.network.address.ReservedStargateAddress;
 import dev.tauri.jsg.client.screen.provider.SGGeneratorGuiProvider;
 import dev.tauri.jsg.common.registry.JSGDimensions;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.common.stargate.network.StargateReservedAddresses;
 import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.config.json.dimension.JSGDimensionConfig;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
@@ -19,6 +19,7 @@ import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -34,6 +35,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -78,7 +80,7 @@ public class DimensionStargateGenerator {
                 stats.put(dimension.location().toString(), StargateGeneratorDimStatus.SKIPPED);
                 continue;
             }
-            var sg = getStargateFromNetwork(network, dimension);
+            var sg = getStargateFromNetwork(e.getServer().registryAccess(), network, dimension);
             if (sg.isEmpty()) {
                 if (findStructureAndGenerate(level, message)) {
                     totalGenerated.getAndIncrement();
@@ -93,10 +95,13 @@ public class DimensionStargateGenerator {
         JSG.logger.info("SG generator DONE");
     }
 
-    private static Optional<StargatePos> getStargateFromNetwork(StargateNetwork network, ResourceKey<Level> dimension) {
+    private static Optional<StargatePos> getStargateFromNetwork(RegistryAccess access, StargateNetwork network, ResourceKey<Level> dimension) {
         if (dimension == Level.OVERWORLD) {
-            var sg = network.getStargate(StargateReservedAddresses.OVERWORLD.addresses().get(JSGSymbolTypes.MILKYWAY.get()));
-            return Optional.ofNullable(sg);
+            var ra = ReservedStargateAddress.getStargate(access, dimension, null);
+            if (ra.isPresent()) {
+                var sg = network.getStargate(ra.get().addresses().get(JSGSymbolTypes.MILKYWAY.get()));
+                return Optional.ofNullable(sg);
+            }
         }
         return network.getStargateByDimension(dimension).map(Map.Entry::getKey);
     }
@@ -180,10 +185,18 @@ public class DimensionStargateGenerator {
         }
         message.set(Component.translatable("createWorld.stargates_generating.running_sg_regen"));
         gateBE.tryRegenerateStargateIfNeeded();
-        var reservedStargate = StargateReservedAddresses.getStargate(level);
-        if (reservedStargate.isEmpty()) return;
-        if (reservedStargate.get().isGenerated()) return;
-        if (setAddress)
-            reservedStargate.get().setAddresses(gateBE);
+        var blackList = new ArrayList<ReservedStargateAddress>();
+        Optional<ReservedStargateAddress> reservedStargate;
+        while (true) {
+            reservedStargate = ReservedStargateAddress.getStargate(level, blackList);
+            if (reservedStargate.isEmpty()) return;
+            if (reservedStargate.get().isGenerated()) {
+                blackList.add(reservedStargate.get());
+                continue;
+            }
+            if (setAddress)
+                reservedStargate.get().setAddresses(gateBE);
+            break;
+        }
     }
 }

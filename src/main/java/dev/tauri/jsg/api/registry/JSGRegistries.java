@@ -2,6 +2,7 @@ package dev.tauri.jsg.api.registry;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
+import dev.tauri.jsg.api.stargate.network.address.ReservedStargateAddress;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerMode;
 import dev.tauri.jsg.common.stargate.rig.RIGWave;
@@ -29,10 +30,12 @@ public class JSGRegistries {
     public static final ResourceKey<Registry<StargateType<?>>> STARGATE_TYPE = ResourceKey.createRegistryKey(JSGMapping.rl(JSGApi.MOD_ID, "stargate_type"));
     public static final ResourceKey<Registry<RIGWave>> RIG_WAVES = ResourceKey.createRegistryKey(JSGMapping.rl(JSGApi.MOD_ID, "rig_waves"));
     public static final ResourceKey<Registry<UniverseDialerMode>> UNIVERSE_DIALER_MODES = ResourceKey.createRegistryKey(JSGMapping.rl(JSGApi.MOD_ID, "universe_dialer_modes"));
+    public static final ResourceKey<Registry<ReservedStargateAddress>> RESERVED_ADDRESSES = ResourceKey.createRegistryKey(JSGMapping.rl(JSGApi.MOD_ID, "reserved_addresses"));
 
     public static final Supplier<IForgeRegistry<StargateType<?>>> R_STARGATE_TYPE = create(STARGATE_TYPE);
     public static final Function<RegistryAccess, Registry<RIGWave>> R_RIG_WAVES = (access) -> access.registryOrThrow(RIG_WAVES);
     public static final Supplier<IForgeRegistry<UniverseDialerMode>> R_UNIVERSE_DIALER_MODES = create(UNIVERSE_DIALER_MODES, (owner, stage) -> UniverseDialerMode.calculateModesSequence());
+    public static final Function<RegistryAccess, Registry<ReservedStargateAddress>> R_RESERVED_ADDRESSES = (access) -> access.registryOrThrow(RESERVED_ADDRESSES);
 
     private static <T> Supplier<IForgeRegistry<T>> create(ResourceKey<Registry<T>> id, IForgeRegistry.BakeCallback<T> onBake) {
         return create(id, () -> new RegistryBuilder<T>().setName(id.location()).onBake(onBake));
@@ -59,5 +62,6 @@ public class JSGRegistries {
     @SubscribeEvent
     public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
         event.dataPackRegistry(RIG_WAVES, RIGWave.CODEC);
+        event.dataPackRegistry(RESERVED_ADDRESSES, ReservedStargateAddress.CODEC);
     }
 }
