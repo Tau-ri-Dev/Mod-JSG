@@ -4,7 +4,7 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsgcore.common.registry.tag.CoreBlockTags;
-import net.minecraft.core.HolderLookup;
+import dev.tauri.jsgcore.mapping.JSGMapping;import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -149,5 +149,9 @@ public class JSGBlockTagGenerator extends BlockTagsProvider {
                 .addTag(BlockTags.BASE_STONE_OVERWORLD)
                 .add(Blocks.SAND)
                 .add(Blocks.SANDSTONE);
+
+        //Ad Astra tags
+        tag(BlockTags.create(JSGMapping.rl("ad_astra", "passes_flood_fill")))
+                .add(JSGBlocks.IRIS_BLOCK.get());
     }
 }

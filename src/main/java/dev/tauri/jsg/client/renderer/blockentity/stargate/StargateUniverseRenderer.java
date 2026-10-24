@@ -23,6 +23,8 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
 
     private static final float GATE_DIAMETER = 8.67415f;
 
+    protected float angularRotation = 0;
+
     public StargateUniverseRenderer(BlockEntityRendererProvider.Context ignored) {
         super(ignored);
     }
@@ -39,8 +41,9 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
 
     @Override
     protected void renderGate() {
+        stack.pushPose();
         tileEntity.getDialingManager().getSpinHelper().correctClientRingStartTime(level.getGameTime(), Minecraft.getInstance().gui.getGuiTicks());
-        var angularRotation = (float) tileEntity.getDialingManager().getSpinHelper().apply(Minecraft.getInstance().gui.getGuiTicks() + partialTicks, true);
+        angularRotation = (float) tileEntity.getDialingManager().getSpinHelper().apply(Minecraft.getInstance().gui.getGuiTicks() + partialTicks, true);
 
         stack.mulPose(Axis.ZN.rotationDegrees(angularRotation));
 
@@ -60,6 +63,7 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
             symbol.getModel(StargateTypes.UNIVERSE.get(), tileEntity.getPointOfOrigin(), StargatePointOfOriginsDefaults.VARIANT_GATE).render(stack, source, combinedLight, symbolLight > 2, maxLight / LightTexture.FULL_BRIGHT);
             stack.popPose();
         }
+        stack.popPose();
     }
 
     @Override
@@ -79,6 +83,7 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
     @Override
     public void renderIris(boolean backOnly) {
         stack.pushPose();
+        stack.mulPose(Axis.ZN.rotationDegrees(angularRotation));
         stack.translate(0, 0, 0.06);
         var scale = (getGateDiameter() / 10.1815f) * 1.037f;
         stack.scale(scale, scale, 1f);
