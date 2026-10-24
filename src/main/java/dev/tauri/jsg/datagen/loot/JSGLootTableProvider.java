@@ -12,7 +12,9 @@ import java.util.concurrent.CompletableFuture;
 public class JSGLootTableProvider {
     public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         return new LootTableProvider(output, Set.of(), List.of(
-                new LootTableProvider.SubProviderEntry(JSGBlockLootTables::new, LootContextParamSets.BLOCK)
-        ), registries);
+                new LootTableProvider.SubProviderEntry(JSGBlockLootTables::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(JSGChestLootTableProvider::new, LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(JSGEntityLootTableProvider::new, LootContextParamSets.ENTITY)
+        ));
     }
 }

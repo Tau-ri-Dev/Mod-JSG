@@ -2,6 +2,7 @@ package dev.tauri.jsg.datagen;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.datagen.custom.JSGRIGWavesProvider;
+import dev.tauri.jsg.datagen.custom.JSGReservedAddressesProvider;
 import dev.tauri.jsg.datagen.loot.JSGLootTableProvider;
 import dev.tauri.jsg.datagen.tag.*;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -31,6 +32,7 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGStructureTagGenerator(output, lookupProvider, exFileHelper));
 
         generator.addProvider(event.includeServer(), new JSGRIGWavesProvider(output));
+        generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
 
         //generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
     }

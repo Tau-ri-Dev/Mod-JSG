@@ -5,12 +5,13 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
+import dev.tauri.jsg.api.stargate.network.address.ReservedStargateAddress;
 import dev.tauri.jsg.client.screen.provider.SGGeneratorGuiProvider;
 import dev.tauri.jsg.common.registry.JSGDimensions;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.common.stargate.network.StargateReservedAddresses;
+import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.config.json.dimension.JSGDimensionConfig;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.util.AccessUtil;
@@ -18,6 +19,7 @@ import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -34,6 +36,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -79,7 +82,7 @@ public class DimensionStargateGenerator {
                 stats.put(dimension.location().toString(), StargateGeneratorDimStatus.SKIPPED);
                 continue;
             }
-            var sg = getStargateFromNetwork(network, dimension);
+            var sg = getStargateFromNetwork(e.getServer().registryAccess(), network, dimension);
             if (sg.isEmpty()) {
                 boolean generated;
                 try {
@@ -109,26 +112,16 @@ public class DimensionStargateGenerator {
 
         JSG.logger.info("SG generator progress: {}% ({}s elapsed)", String.format("%.2f", 100f), (double) (Util.getMillis() - started) / 1000);
         JSG.logger.info("Total new gates generated: {}", totalGenerated);
-        // Per-dimension summary, cross-checked against the stargate network. The stats map is
-        // our own bookkeeping; the network is the ground truth for "a gate really exists here",
-        // so a GENERATED dimension without a registered gate means generation silently failed.
-        for (ResourceKey<Level> dimension : levels) {
-            var status = stats.get(dimension.location().toString());
-            var registered = getStargateFromNetwork(network, dimension).isPresent();
-            if ((status == StargateGeneratorDimStatus.GENERATED || status == StargateGeneratorDimStatus.ALREADY_GENERATED) && !registered)
-                JSG.logger.error("SG generator summary: {} -> {} but NO stargate is registered in the network!", dimension.location(), status);
-            else if (status == StargateGeneratorDimStatus.ERROR)
-                JSG.logger.warn("SG generator summary: {} -> {} (no gate was generated there, see errors above)", dimension.location(), status);
-            else
-                JSG.logger.info("SG generator summary: {} -> {}{}", dimension.location(), status, registered ? " (gate registered in network)" : "");
-        }
         JSG.logger.info("SG generator DONE");
     }
 
-    private static Optional<StargatePos> getStargateFromNetwork(StargateNetwork network, ResourceKey<Level> dimension) {
+    private static Optional<StargatePos> getStargateFromNetwork(RegistryAccess access, StargateNetwork network, ResourceKey<Level> dimension) {
         if (dimension == Level.OVERWORLD) {
-            var sg = network.getStargate(StargateReservedAddresses.OVERWORLD.addresses().get(JSGSymbolTypes.MILKYWAY.get()));
-            return Optional.ofNullable(sg);
+            var ra = ReservedStargateAddress.getStargate(access, dimension, null);
+            if (ra.isPresent()) {
+                var sg = network.getStargate(ra.get().addresses().get(JSGSymbolTypes.MILKYWAY.get()));
+                return Optional.ofNullable(sg);
+            }
         }
         return network.getStargateByDimension(dimension).map(Map.Entry::getKey);
     }
@@ -212,48 +205,6 @@ public class DimensionStargateGenerator {
         return result;
     }
 
-    /**
-     * Covers the widest gate scan in {@link #setGeneratedStargateAddress} (140 blocks): a block
-     * 140 blocks from the origin is at most 9 chunks from the origin's chunk.
-     */
-    private static final int ESCALATED_CHUNKS_RADIUS = 9;
-
-    /**
-     * Pumps the server's task queue (which drives chunk generation) until every chunk within
-     * {@code radius} of {@code center} is fully generated. The server's own managedBlock re-throws
-     * worldgen failures stored via {@link MinecraftServer#setFatalException}, and the deadline
-     * turns a stall into an exception too - both are handled per-dimension in onServerStarted,
-     * so a bad dimension is skipped instead of hanging world creation or scanning a half-loaded
-     * region.
-     */
-    private static void waitForChunks(ServerLevel level, ChunkPos center, int radius) {
-        var chunkSource = level.getChunkSource();
-        final long deadlineNanos = Util.getNanos() + 120L * 1_000_000_000L;
-        level.getServer().managedBlock(() -> Util.getNanos() > deadlineNanos
-                || allChunksFull(chunkSource, center, radius));
-        if (!allChunksFull(chunkSource, center, radius))
-            throw new IllegalStateException("Timed out waiting for chunks around " + center + " (radius " + radius + ") to generate");
-    }
-
-    /**
-     * @return true once every chunk in the (2*radius+1) square around {@code center} is fully
-     * generated and loaded. Never triggers generation itself - {@link ServerChunkCache#getChunkNow}
-     * returns null for chunks that are not yet at FULL status.
-     */
-    private static boolean allChunksFull(ServerChunkCache chunkSource, ChunkPos center, int radius) {
-        for (var x = -radius; x <= radius; x++) {
-            for (var z = -radius; z <= radius; z++) {
-                if (chunkSource.getChunkNow(center.x + x, center.z + z) == null)
-                    return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * @return true if a stargate was found (and registered) in the generated structure. The scan
-     * only sees loaded chunks, so a false return may just mean the gate's chunk is not loaded yet.
-     */
     private static boolean setGeneratedStargateAddress(ServerLevel level, BlockPos structureOrigin, boolean setAddress, Pair<BlockPos, Holder<Structure>> structureEntry, AtomicReference<Component> message) {
         final AtomicReference<BoundingBox> box = new AtomicReference<>(null);
         /*var structureManager = level.structureManager();
@@ -286,11 +237,19 @@ public class DimensionStargateGenerator {
         }
         message.set(Component.translatable("createWorld.stargates_generating.running_sg_regen"));
         gateBE.tryRegenerateStargateIfNeeded();
-        var reservedStargate = StargateReservedAddresses.getStargate(level);
-        if (reservedStargate.isEmpty()) return true;
-        if (reservedStargate.get().isGenerated()) return true;
-        if (setAddress)
-            reservedStargate.get().setAddresses(gateBE);
-        return true;
+        var blackList = new ArrayList<ReservedStargateAddress>();
+        Optional<ReservedStargateAddress> reservedStargate;
+        while (true) {
+            reservedStargate = ReservedStargateAddress.getStargate(level, blackList);
+            if (reservedStargate.isEmpty()) return true;
+            if (reservedStargate.get().isGenerated()) {
+                blackList.add(reservedStargate.get());
+                continue;
+            }
+            if (setAddress)
+                reservedStargate.get().setAddresses(gateBE);
+            return true;
+        }
+        return false;
     }
 }

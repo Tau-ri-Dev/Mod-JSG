@@ -26,10 +26,14 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.LevelResource;
@@ -38,6 +42,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -75,6 +80,37 @@ public class CommonForgeListener {
             villager.getInventory().setItem(0, new ItemStack(Items.IRON_PICKAXE));
         }
         JSGVillagers.checkAndGetCustomType(villager).ifPresent(villagerType -> villager.setVillagerData(villager.getVillagerData().setType(villagerType)));
+    }
+
+    @SubscribeEvent
+    public static void onVillagerTick(LivingEvent.LivingTickEvent event) {
+        if (event.getEntity() instanceof Villager villager && !villager.level().isClientSide) {
+
+            if ((villager.tickCount + villager.getId()) % 24000 == 0) {
+                VillagerProfession profession = villager.getVillagerData().getProfession();
+
+                if (JSGVillagers.isPriest(profession)) {
+                    restockVillagerTrades(villager);
+                }
+            }
+        }
+    }
+
+    private static void restockVillagerTrades(Villager villager) {
+        MerchantOffers offers = villager.getOffers();
+        boolean upgraded = false;
+
+        for (MerchantOffer offer : offers) {
+            if (offer.isOutOfStock() || offer.getUses() > 0) {
+                offer.resetUses();
+                upgraded = true;
+            }
+        }
+
+        if (upgraded) {
+            villager.setOffers(offers);
+            villager.level().broadcastEntityEvent(villager, (byte) 14);
+        }
     }
 
     @SubscribeEvent
@@ -126,9 +162,9 @@ public class CommonForgeListener {
             // getRecipes() is an immutable view on 1.21 - copy before adding
             var recipes = new java.util.ArrayList<net.minecraft.world.item.crafting.RecipeHolder<?>>(recipesManager.getRecipes());
 
-            recipes.add(new net.minecraft.world.item.crafting.RecipeHolder<>(UniverseDialerCloneRecipe.ID, new UniverseDialerCloneRecipe()));
-            recipes.add(new net.minecraft.world.item.crafting.RecipeHolder<>(PageAndUniverseDialerRecipe.ID, new PageAndUniverseDialerRecipe()));
-            recipes.add(new net.minecraft.world.item.crafting.RecipeHolder<>(StargateOrlinBaseBlockRecipe.ID, new StargateOrlinBaseBlockRecipe()));
+            recipes.add(new RecipeHolder<>(UniverseDialerCloneRecipe.ID, new UniverseDialerCloneRecipe()));
+            recipes.add(new RecipeHolder<>(PageAndUniverseDialerRecipe.ID, new PageAndUniverseDialerRecipe()));
+            recipes.add(new RecipeHolder<>(StargateOrlinBaseBlockRecipe.ID, new StargateOrlinBaseBlockRecipe()));
 
             recipesManager.replaceRecipes(recipes);
             JSG.logger.info("Recipes successfully reloaded!");

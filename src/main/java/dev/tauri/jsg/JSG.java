@@ -19,7 +19,6 @@ import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.registry.JSGRegistriesInit;
 import dev.tauri.jsg.common.stargate.StargateTypesLoader;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsg.common.stargate.network.StargateReservedAddresses;
 import dev.tauri.jsgcore.JSGAddon;
 import dev.tauri.jsgcore.JSGAddons;
 import dev.tauri.jsgcore.JSGCore;
@@ -171,7 +170,6 @@ public class JSG implements JSGAddon {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         new StargateNetwork().register(event.getServer().overworld().getDataStorage());
-        StargateReservedAddresses.register();
     }
 
     @SubscribeEvent
