@@ -35,6 +35,6 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGRIGWavesProvider(output));
         generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
 
-        generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
+        generator.addProvider(event.includeServer(), new JSGDamageTypeProvider(output, lookupProvider));
     }
 }
