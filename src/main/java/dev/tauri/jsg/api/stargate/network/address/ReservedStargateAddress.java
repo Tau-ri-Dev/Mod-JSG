@@ -36,7 +36,7 @@ public record ReservedStargateAddress(ResourceKey<Level> dimension, Map<SymbolTy
     ).apply(reservedAddress, (dim, map) -> {
         var newMap = new HashMap<SymbolType<?>, StargateAddress>();
         map.forEach((s, a) -> {
-            var symbolType = JSGCoreRegistries.R_SYMBOL_TYPE.get().getValue(s.location());
+            var symbolType = JSGCoreRegistries.R_SYMBOL_TYPE.get().get(s.location());
             if (symbolType == null) return;
             var address = new StargateAddress(symbolType);
             address.address.addAll(a.stream()

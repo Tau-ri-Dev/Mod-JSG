@@ -42,10 +42,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class CommonForgeListener {
     }
 
     @SubscribeEvent
-    public static void onVillagerTick(LivingEvent.LivingTickEvent event) {
+    public static void onVillagerTick(EntityTickEvent.Post event) {
         if (event.getEntity() instanceof Villager villager && !villager.level().isClientSide) {
 
             if ((villager.tickCount + villager.getId()) % 24000 == 0) {

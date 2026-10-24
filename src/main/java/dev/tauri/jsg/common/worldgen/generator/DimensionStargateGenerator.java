@@ -11,7 +11,6 @@ import dev.tauri.jsg.common.registry.JSGDimensions;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
-import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.config.json.dimension.JSGDimensionConfig;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.util.AccessUtil;
@@ -205,6 +204,44 @@ public class DimensionStargateGenerator {
         return result;
     }
 
+    /**
+     * Covers the widest gate scan in {@link #setGeneratedStargateAddress} (140 blocks): a block
+     * 140 blocks from the origin is at most 9 chunks from the origin's chunk.
+     */
+    private static final int ESCALATED_CHUNKS_RADIUS = 9;
+
+    /**
+     * Pumps the server's task queue (which drives chunk generation) until every chunk within
+     * {@code radius} of {@code center} is fully generated. The server's own managedBlock re-throws
+     * worldgen failures stored via {@link MinecraftServer#setFatalException}, and the deadline
+     * turns a stall into an exception too - both are handled per-dimension in onServerStarted,
+     * so a bad dimension is skipped instead of hanging world creation or scanning a half-loaded
+     * region.
+     */
+    private static void waitForChunks(ServerLevel level, ChunkPos center, int radius) {
+        var chunkSource = level.getChunkSource();
+        final long deadlineNanos = Util.getNanos() + 120L * 1_000_000_000L;
+        level.getServer().managedBlock(() -> Util.getNanos() > deadlineNanos
+                || allChunksFull(chunkSource, center, radius));
+        if (!allChunksFull(chunkSource, center, radius))
+            throw new IllegalStateException("Timed out waiting for chunks around " + center + " (radius " + radius + ") to generate");
+    }
+
+    /**
+     * @return true once every chunk in the (2*radius+1) square around {@code center} is fully
+     * generated and loaded. Never triggers generation itself - {@link ServerChunkCache#getChunkNow}
+     * returns null for chunks that are not yet at FULL status.
+     */
+    private static boolean allChunksFull(ServerChunkCache chunkSource, ChunkPos center, int radius) {
+        for (var x = -radius; x <= radius; x++) {
+            for (var z = -radius; z <= radius; z++) {
+                if (chunkSource.getChunkNow(center.x + x, center.z + z) == null)
+                    return false;
+            }
+        }
+        return true;
+    }
+
     private static boolean setGeneratedStargateAddress(ServerLevel level, BlockPos structureOrigin, boolean setAddress, Pair<BlockPos, Holder<Structure>> structureEntry, AtomicReference<Component> message) {
         final AtomicReference<BoundingBox> box = new AtomicReference<>(null);
         /*var structureManager = level.structureManager();
@@ -250,6 +287,5 @@ public class DimensionStargateGenerator {
                 reservedStargate.get().setAddresses(gateBE);
             return true;
         }
-        return false;
     }
 }

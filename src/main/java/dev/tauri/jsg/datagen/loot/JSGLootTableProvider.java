@@ -15,6 +15,6 @@ public class JSGLootTableProvider {
                 new LootTableProvider.SubProviderEntry(JSGBlockLootTables::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(JSGChestLootTableProvider::new, LootContextParamSets.CHEST),
                 new LootTableProvider.SubProviderEntry(JSGEntityLootTableProvider::new, LootContextParamSets.ENTITY)
-        ));
+        ), registries);
     }
 }

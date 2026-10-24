@@ -15,7 +15,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
     protected final PackOutput.PathProvider pathProvider;
 
     public JSGReservedAddressesProvider(PackOutput pOutput) {
-        this.pathProvider = pOutput.createPathProvider(PackOutput.Target.DATA_PACK, ForgeHooks.prefixNamespace(JSGRegistries.RESERVED_ADDRESSES.location()));
+        this.pathProvider = pOutput.createPathProvider(PackOutput.Target.DATA_PACK, CommonHooks.prefixNamespace(JSGRegistries.RESERVED_ADDRESSES.location()));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
                         SymbolUniverseEnum.G18,
                         SymbolUniverseEnum.G6
                 )
-                .build(Level.OVERWORLD)).get().orThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "overworld"))));
+                .build(Level.OVERWORLD)).getOrThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "overworld"))));
 
         list.add(DataProvider.saveStable(pOutput, ReservedStargateAddress.CODEC.encodeStart(JsonOps.INSTANCE, ReservedStargateAddress.builder()
                 .setAddress(JSGSymbolTypes.MILKYWAY.get(),
@@ -99,7 +99,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
                         SymbolUniverseEnum.G22,
                         SymbolUniverseEnum.G31
                 )
-                .build(JSGDimensions.ABYDOS)).get().orThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "abydos"))));
+                .build(JSGDimensions.ABYDOS)).getOrThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "abydos"))));
 
         list.add(DataProvider.saveStable(pOutput, ReservedStargateAddress.CODEC.encodeStart(JsonOps.INSTANCE, ReservedStargateAddress.builder()
                 .setAddress(JSGSymbolTypes.MILKYWAY.get(),
@@ -132,7 +132,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
                         SymbolUniverseEnum.G22,
                         SymbolUniverseEnum.G31
                 )
-                .build(Level.NETHER)).get().orThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "nether"))));
+                .build(Level.NETHER)).getOrThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "nether"))));
 
         list.add(DataProvider.saveStable(pOutput, ReservedStargateAddress.CODEC.encodeStart(JsonOps.INSTANCE, ReservedStargateAddress.builder()
                 .setAddress(JSGSymbolTypes.MILKYWAY.get(),
@@ -165,7 +165,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
                         SymbolUniverseEnum.G1,
                         SymbolUniverseEnum.G22
                 )
-                .build(Level.END)).get().orThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "end"))));
+                .build(Level.END)).getOrThrow(), pathProvider.json(JSGMapping.rl(JSG.MOD_ID, "end"))));
 
         return CompletableFuture.allOf(list.toArray(CompletableFuture[]::new));
     }
