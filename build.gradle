@@ -56,10 +56,6 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-if (enable_oc != "true") {
-    sourceSets.main.java.exclude 'dev/tauri/jsg/common/integration/oc/**'
-}
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -78,6 +74,13 @@ repositories {
         url = "https://api.modrinth.com/maven"
         content {
             includeGroup "maven.modrinth"
+        }
+    }
+    // OC
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
         }
     }
 
@@ -108,9 +111,8 @@ dependencies {
 
     localRuntime "maven.modrinth:stellarview:${stellarview_version}"
 
-    // OC2 / Tinkers: no 1.21.x builds (see enable_oc2); Create/Mekanism runtime deps
-    // return in M9/M10 once integration code is ported.
-    //compileOnly "li.cil:oc2:1.0"
+    // OC: Rebooted
+    implementation "curse.maven:opencomputers-rebooted-1634364:8858759"
 
     // Metrics
     implementation "dev.faststats.metrics:neoforge:${faststats_version}"

@@ -14,6 +14,7 @@ import dev.tauri.jsg.common.config.data.ProgressJSON;
 import dev.tauri.jsg.common.injectors.JSGLootTableInjectors;
 import dev.tauri.jsg.common.injectors.JSGTemplatePoolInjectors;
 import dev.tauri.jsg.common.integration.cctweaked.CCDevices;
+import dev.tauri.jsg.common.integration.oc.OCDevices;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.registry.JSGRegistriesInit;
 import dev.tauri.jsg.common.stargate.StargateTypesLoader;
@@ -128,7 +129,7 @@ public class JSG implements JSGAddon {
         Runtime.getRuntime().addShutdownHook(new Thread(JSG::shutDown));
 
         Integrations.CCT.addOnLoad(CCDevices::load);
-        //Integrations.OCCE.addOnLoad(OCDevices::load);
+        Integrations.OCCE.addOnLoad(OCDevices::load);
 
         JSGAddons.registerAddon(this);
         JSGMetrics.load();
