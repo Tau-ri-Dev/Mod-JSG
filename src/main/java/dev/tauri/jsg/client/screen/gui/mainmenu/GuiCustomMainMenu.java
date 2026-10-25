@@ -541,7 +541,7 @@ public class GuiCustomMainMenu extends Screen {
      * Used to draw texts on the screen
      */
     public void drawTitles() {
-        if (JSGConfig.General.mainMenuDebugMode.get()) {
+        if (JSGConfig.Debug.mainMenuDebugMode.get()) {
             int[] center = getCenterPos(0, 0);
             center[1] -= 30;
             // Debug

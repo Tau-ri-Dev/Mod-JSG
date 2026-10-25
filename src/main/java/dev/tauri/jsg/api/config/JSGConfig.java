@@ -21,16 +21,6 @@ public class JSGConfig {
 
     public static class General {
         private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-        public static final JSGConfigValue.BooleanValue enableAutoUpdater = C_GENERAL.add(new JSGConfigValue.BooleanValue(BUILDER,
-                "Check for updates", true,
-                "Should JSG check for update on startup?",
-                "SIDE: CLIENT"
-        ));
-
-        public static final JSGConfigValue.DoubleValue volume = C_GENERAL.add(new JSGConfigValue.DoubleValue(BUILDER,
-                "JSG sounds volume", 1.0, 0, 3, true,
-                "SIDE: SERVER/CLIENT"
-        ));
 
         public static final JSGConfigValue.EnumValue<TemperatureHelper.EnumTemperatureUnit> temperatureUnit = C_GENERAL.add(new JSGConfigValue.EnumValue<>(BUILDER,
                 "Temperature unit", TemperatureHelper.EnumTemperatureUnit.CELSIUS,
@@ -57,11 +47,6 @@ public class JSGConfig {
                 "SIDE: CLIENT"
         ));
 
-        public static final JSGConfigValue.BooleanValue mainMenuDebugMode = C_GENERAL.add(new JSGConfigValue.BooleanValue(BUILDER,
-                "Enable debug mode in main menu", false,
-                "SIDE: CLIENT"
-        ));
-
         public static final JSGConfigValue.BooleanValue playMusic = C_GENERAL.add(new JSGConfigValue.BooleanValue(BUILDER,
                 "Play music in main menu", true,
                 "SIDE: CLIENT"
@@ -76,7 +61,11 @@ public class JSGConfig {
     public static class Debug {
         private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-        public static final JSGConfigValue.BooleanValue renderInvisibleBlocks = C_DEBUG.add(new JSGConfigValue.BooleanValue(BUILDER, "Render invisible blocks", false));
+        public static final JSGConfigValue.BooleanValue mainMenuDebugMode = C_GENERAL.add(new JSGConfigValue.BooleanValue(BUILDER,
+                "Enable debug mode in main menu", false,
+                "SIDE: CLIENT"
+        ));
+
         public static final JSGConfigValue.BooleanValue renderBoundingBoxes = C_DEBUG.add(new JSGConfigValue.BooleanValue(BUILDER, "Render bounding boxes", false));
     }
 
@@ -216,15 +205,21 @@ public class JSGConfig {
                 "SIDE: SERVER"
         ));
 
-        public static final JSGConfigValue.BooleanValue pegAndMilkUseEightChevrons = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER,
-                "Mechanics.Use 8 chevrons between MW and PG gates", true,
-                "Change this to true, if you want to use 8 chevrons between pegasus and milkyway gates",
+        public static final JSGConfigValue.BooleanValue useEightSymbolsBetweenDiffSymbolType = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER,
+                "Mechanics.Use 8 chevrons while dialing different symbol type", true,
+                "Change this to true, if you want to use 8 chevrons while dialing different symbol type (eg. MW -> PEG)",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue useNineSymbolsToDialUni = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER,
+                "Mechanics.Use 9 chevrons while dialing universe gate", true,
+                "Change this to true, if you want to use 9 chevrons while dialing from universe gate to other type gates and the other way",
                 "SIDE: SERVER"
         ));
 
         public static final JSGConfigValue.BooleanValue useStrictSevenSymbolsUniGate = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER,
                 "Mechanics.Need only 7 symbols between Uni gates", false,
-                "If you want to dial UNI-UNI only with seven symbols (interdimensional for example), set this to true",
+                "If you want to dial UNI-UNI always with 7 symbols only",
                 "SIDE: SERVER"
         ));
 
