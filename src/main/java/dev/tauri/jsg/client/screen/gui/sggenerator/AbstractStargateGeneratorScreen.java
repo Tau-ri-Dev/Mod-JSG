@@ -4,12 +4,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.tauri.jsg.api.client.screen.EnumMainMenuGateType;
 import dev.tauri.jsg.client.screen.gui.mainmenu.GuiCustomMainMenu;
 import dev.tauri.jsg.client.screen.gui.mainmenu.MainMenuGateRenderer;
-import dev.tauri.jsg.common.worldgen.generator.StargateGeneratorStepStatus;
+import dev.tauri.jsg.common.worldgen.generator.StargateDimensionStatusHolder;
 import dev.tauri.jsgcore.client.screen.util.GuiHelper;
 import dev.tauri.jsgcore.common.util.JSGColorUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -23,25 +25,31 @@ import java.util.function.Supplier;
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractStargateGeneratorScreen extends GenericDirtMessageScreen {
     final Supplier<String> step;
-    final Supplier<Integer> total;
     final Supplier<Component> message;
-    final Supplier<Map<String, StargateGeneratorStepStatus>> stats;
+    final Map<ResourceKey<Level>, StargateDimensionStatusHolder> stats;
     final double initTick;
 
-    public AbstractStargateGeneratorScreen(Component title, Supplier<String> step, Supplier<Integer> total, Supplier<Map<String, StargateGeneratorStepStatus>> stats, Supplier<Component> message) {
+    public AbstractStargateGeneratorScreen(Component title, Supplier<String> step, Map<ResourceKey<Level>, StargateDimensionStatusHolder> stats, Supplier<Component> message) {
         super(title);
         this.step = step;
-        this.total = total;
         this.stats = stats;
         this.message = message;
         this.initTick = System.currentTimeMillis() / 1000.0 * 20.0;
     }
 
     public float getProgress() {
-        var t = (float) this.total.get();
-        if (t == 0) t = 1;
-        var stats = this.stats.get();
-        return (stats.size() / t);
+        var t = (float) this.stats.size();
+        if (t == 0) return 1f;
+        return (getDone() / t);
+    }
+
+    protected int getDone() {
+        var done = new AtomicInteger(0);
+        this.stats.forEach((d, s) -> {
+            if (s.status().isDone())
+                done.getAndIncrement();
+        });
+        return done.get();
     }
 
     @Override
@@ -76,12 +84,12 @@ public abstract class AbstractStargateGeneratorScreen extends GenericDirtMessage
         var loaderXRight = Math.min(progressSize - 4, (loaderCoef * progressSize));
         graphics.fill((int) (x + 2 + loaderX), y + 2, (int) (x + 2 + loaderXRight), y + 8, 0xffffffff);
 
-        var t = (double) this.total.get();
-        final var stats = this.stats.get();
+        var t = (double) this.stats.size();
         var perDim = ((progressSize - 4) / t);
         AtomicInteger i = new AtomicInteger(0);
         synchronized (stats) {
-            stats.forEach((stepName, stepStatus) -> {
+            stats.forEach((dim, stepStatus) -> {
+                if (!stepStatus.status().isDone()) return;
                 var xOffset = (perDim * (double) i.get());
                 var pX = (int) (x + 2 + xOffset);
                 var pXMax = (int) (x + 2 + xOffset + perDim);
@@ -91,7 +99,7 @@ public abstract class AbstractStargateGeneratorScreen extends GenericDirtMessage
                 var pY = y + 2;
                 var pYMax = y + 8;
 
-                var color = stepStatus.getColor();
+                var color = stepStatus.status().getColor();
                 var hover = false;
                 if (GuiHelper.isPointInRegion(pX, pY, (pXMax - pX), (pYMax - pY), mouseX, mouseY)) {
                     color = JSGColorUtil.blendColors(color, 0xffffffff, 0.5f);
@@ -99,7 +107,7 @@ public abstract class AbstractStargateGeneratorScreen extends GenericDirtMessage
                 }
                 graphics.fill(pX, pY, pXMax, pYMax, color);
                 if (hover) {
-                    graphics.renderTooltip(font, List.of(Component.literal(stepName), stepStatus.getMessage()), Optional.empty(), mouseX, mouseY);
+                    graphics.renderTooltip(font, List.of(Component.literal(dim.location().toString()), stepStatus.status().getMessage()), Optional.empty(), mouseX, mouseY);
                 }
                 i.incrementAndGet();
             });
@@ -119,9 +127,7 @@ public abstract class AbstractStargateGeneratorScreen extends GenericDirtMessage
 
         var gateDisCof = (ticks % ASSEMBLY_DURATION) / ASSEMBLY_DURATION;
         var coef = (float) -Math.pow(Math.cos(Math.max(0, (gateDisCof * 1.25f) - 0.25f) * Math.PI), 6) + 1f;
-        var t = (double) total.get();
-        var stats = this.stats.get();
-        var percentDone = (stats.size() / t);
+        var percentDone = getProgress();
         GuiCustomMainMenu.poseStack = graphics.pose();
         GuiCustomMainMenu.graphics = graphics;
         MainMenuGateRenderer.disassemblyCoef = coef;
