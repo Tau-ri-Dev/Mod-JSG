@@ -5,6 +5,7 @@ import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.client.renderer.blockentity.dialhomedevice.DHDAbstractRendererState;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsg.common.capability.DHDFluidHandlerItemStack;
 import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsg.common.dialhomedevice.manager.AbstractDHDManager;
 import dev.tauri.jsgcore.common.entity.State;
@@ -13,20 +14,21 @@ import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.state.BiomeOverrideState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.Optional;
 
 public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S extends DHDAbstractRendererState> extends AbstractDHDManager<DHD> implements IDHDStateManager {
     private PacketDistributor.TargetPoint targetPoint;
     protected DHDButtonsState buttonsState;
-    protected final List<IDHDPartItem> assembledParts = new ArrayList<>();
+    protected final HashMap<IDHDPartItem, ItemStack> assembledParts = new HashMap<>();
 
     public DHDAbstractStateManager(DHD dhd) {
         super(dhd);
@@ -42,16 +44,29 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
 
     @ParametersAreNonnullByDefault
     public boolean isDHDPartAssembled(IDHDPartItem part) {
-        return assembledParts.contains(part);
+        return assembledParts.containsKey(part);
     }
 
-    public void disassemblePart(IDHDPartItem part) {
-        assembledParts.remove(part);
+    @ParametersAreNonnullByDefault
+    public ItemStack getAssembledPart(IDHDPartItem part) {
+        return Optional.ofNullable(assembledParts.get(part)).orElse(ItemStack.EMPTY);
+    }
+
+    @ParametersAreNonnullByDefault
+    public ItemStack disassemblePart(IDHDPartItem part, boolean simulate) {
+        if (simulate)
+            return getAssembledPart(part).copy();
+        var stack = assembledParts.remove(part);
         getAndSendState(CoreStateTypes.RENDERER_STATE.get());
+        return Optional.ofNullable(stack).orElse(ItemStack.EMPTY);
     }
 
-    public void assemblePart(IDHDPartItem part) {
-        assembledParts.add(part);
+    @ParametersAreNonnullByDefault
+    public void assemblePart(IDHDPartItem part, ItemStack stack) {
+        var newStack = stack.copy();
+        stack.shrink(1);
+        newStack.setCount(1);
+        assembledParts.put(part, newStack);
         getAndSendState(CoreStateTypes.RENDERER_STATE.get());
     }
 
@@ -90,7 +105,10 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
                 .tryType(CoreStateTypes.RENDERER_STATE, () -> {
                     setRendererStateClient(castState(state));
                     assembledParts.clear();
-                    assembledParts.addAll(rendererStateClient.assembledParts);
+                    rendererStateClient.assembledParts.forEach(part -> {
+                        // client only, so we can use generic ItemStack I guess
+                        assembledParts.put(part, new ItemStack(part.self()));
+                    });
                 })
                 .tryType(JSGStateTypes.BUTTONS_STATE, () -> {
                     buttonsState = (DHDButtonsState) state;
@@ -114,9 +132,9 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
 
     public S getRenderStateServer() {
         rendererStateClient.assembledParts.clear();
-        rendererStateClient.assembledParts.addAll(assembledParts);
-        rendererStateClient.naquadahAmount = dhd.getReactorManager().getTank().getFluidAmount();
-        rendererStateClient.naquadahMaxAmount = dhd.getReactorManager().getTank().getCapacity();
+        rendererStateClient.assembledParts.addAll(assembledParts.keySet());
+        rendererStateClient.naquadahAmount = Optional.ofNullable(dhd.getReactorManager().getTank()).map(t -> t.getFluid().getAmount()).orElse(0);
+        rendererStateClient.naquadahMaxAmount = Optional.ofNullable(dhd.getReactorManager().getTank()).map(DHDFluidHandlerItemStack::getCapacity).orElse(0);
         rendererStateClient.reactorState = dhd.getReactorManager().getState();
         rendererStateClient.upgradeSlots.clear();
         dhd.getBehaviorsUsedSlots().forEach(upgradeSlot -> rendererStateClient.upgradeSlots.put(upgradeSlot, true));
@@ -165,22 +183,26 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
 
     public CompoundTag serializeAssemblyToNBT() {
         var compound = new CompoundTag();
-        dhd.getAllParts().forEach(part -> compound.putBoolean(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString(), isDHDPartAssembled(part)));
+        dhd.getAllParts().forEach(part -> {
+            var partCompound = new CompoundTag();
+            var isAssembled = isDHDPartAssembled(part);
+            partCompound.putBoolean("assembled", isAssembled);
+            if (isAssembled)
+                partCompound.put("itemStack", assembledParts.get(part).serializeNBT());
+            compound.put(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString(), partCompound);
+        });
         return compound;
     }
 
     public void deserializeAssemblyFromNBT(CompoundTag compound) {
         assembledParts.clear();
         dhd.getAllParts().forEach(part -> {
-            if (compound.isEmpty() || compound.getBoolean(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString()))
-                assembledParts.add(part);
+            var partNBT = compound.getCompound(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString());
+            var isAssembled = (partNBT.isEmpty() || partNBT.getBoolean("assembled"));
+            if (isAssembled) {
+                assembledParts.put(part, (partNBT.isEmpty() ? new ItemStack(part.self()) : ItemStack.of(partNBT.getCompound("itemStack"))));
+            }
         });
-
-        // OLD versions compat
-        var stackHandler = dhd.getItemStackHandler();
-        if (!stackHandler.getStackInSlot(0).isEmpty() && !isDHDPartAssembled((IDHDPartItem) dhd.getControlCrystal())) {
-            assembledParts.add((IDHDPartItem) dhd.getControlCrystal());
-        }
 
         var level = dhd.getLevel();
         if (level != null && !level.isClientSide())

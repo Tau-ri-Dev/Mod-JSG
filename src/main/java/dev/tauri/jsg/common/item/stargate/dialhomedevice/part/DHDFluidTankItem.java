@@ -42,7 +42,7 @@ public class DHDFluidTankItem extends DHDAbstractPartItem implements IDHDFluidTa
     }
 
     @Override
-    public DHDFluidHandlerItemStack getTank(ItemStack stack) {
+    public DHDFluidHandlerItemStack getFluidTankCapability(ItemStack stack) {
         return (DHDFluidHandlerItemStack) stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElseThrow(IllegalStateException::new);
     }
 
@@ -50,6 +50,5 @@ public class DHDFluidTankItem extends DHDAbstractPartItem implements IDHDFluidTa
     @ParametersAreNonnullByDefault
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, level, components, tooltipFlag);
-
     }
 }

@@ -46,8 +46,8 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(JSGBlocks.ABYDOS_SAND.get());
         dropSelf(JSGBlocks.ABYDOS_SAND.get());
-        dropAndCopyNBT(JSGBlocks.DHD_MILKYWAY.get(), CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler").copy("reactorManager.tank", "tank"));
-        dropAndCopyNBT(JSGBlocks.DHD_PEGASUS.get(), CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler").copy("reactorManager.tank", "tank"));
+        dropAndCopyNBT(JSGBlocks.DHD_MILKYWAY.get(), CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler"));
+        dropAndCopyNBT(JSGBlocks.DHD_PEGASUS.get(), CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler"));
         dropSelf(JSGBlocks.TOASTER.get());
         dropSelf(JSGBlocks.PRINTER.get());
 

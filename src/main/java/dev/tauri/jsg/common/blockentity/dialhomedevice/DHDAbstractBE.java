@@ -23,7 +23,6 @@ import dev.tauri.jsgcore.common.blockentity.BEStateProvider;
 import dev.tauri.jsgcore.common.blockentity.ILinkable;
 import dev.tauri.jsgcore.common.blockentity.JSGBlockEntity;
 import dev.tauri.jsgcore.common.config.ingame.IConfigurable;
-import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
@@ -31,7 +30,6 @@ import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.sound.ISoundEvent;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
-import dev.tauri.jsgcore.common.util.FluidTank;
 import dev.tauri.jsgcore.common.util.JSGItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,7 +54,6 @@ import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.PacketDistributor;
@@ -82,17 +79,10 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     public DHDAbstractBE(BlockEntityType<?> entityType, BlockPos pos, BlockState state) {
         super(entityType, pos, state);
         this.stateManager = createStateManager();
-        this.reactorManager = new DHDReactorManager(this, () -> new FluidTank(new FluidStack(MaterialType.REFINED_NAQUADAH.getFluid().get(), 0), JSGConfig.DialHomeDevice.fluidCapacity.get()) {
-            @Override
-            public boolean isFluidValid(FluidStack fluid) {
-                if (fluid == null) return false;
-                return fluid.getFluid() == MaterialType.REFINED_NAQUADAH.getFluid().get();
-            }
-
-            @Override
-            protected void onContentsChanged() {
-                setChanged();
-            }
+        this.reactorManager = new DHDReactorManager(this, () -> {
+            var fluidTanKItemStack = getStateManager().getAssembledPart(getFluidTankItemPart());
+            if (fluidTanKItemStack.isEmpty()) return null;
+            return getFluidTankItemPart().getFluidTankCapability(fluidTanKItemStack);
         }, (tank) -> hasControlCrystal(), (tank) -> {
             double energyPerOne = JSGConfig.DialHomeDevice.energyPerNaquadah.get();
             for (var behavior : getBehaviors()) {
@@ -249,11 +239,10 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     private BlockPos linkedGate = null;
     private BlockPos lastPos = BlockPos.ZERO;
 
-    protected final ItemStackHandler itemStackHandler = new JSGItemStackHandler(6) {
+    protected final ItemStackHandler itemStackHandler = new JSGItemStackHandler(5) {
 
         @Override
         public boolean isItemValid(int slot, @NonNull ItemStack stack) {
-            if (slot == 0) return stack.getItem() == getControlCrystal();
             return stack.getItem() instanceof IDHDUpgradeItem upgrade && upgrade.getUpgrade() instanceof IDHDUpgrade;
         }
 
@@ -279,20 +268,15 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
-            if (slot == 0) {
-                if (!getStackInSlot(slot).isEmpty() && !isAssembled((IDHDPartItem) getControlCrystal()))
-                    getStateManager().assemblePart((IDHDPartItem) getControlCrystal());
-            } else {
-                var level = getLevel();
-                if (getStackInSlot(slot).isEmpty() && behaviors.containsKey(slot)) {
-                    if (level != null)
-                        Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onDetach(level));
-                    behaviors.remove(slot);
-                } else if (getStackInSlot(slot).getItem() instanceof IDHDUpgradeItem dhdUpgradeItem && dhdUpgradeItem.getUpgrade() instanceof IDHDUpgrade dhdUpgrade) {
-                    behaviors.put(slot, dhdUpgrade.createBehavior(DHDAbstractBE.this));
-                    if (level != null)
-                        Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onAttach(level));
-                }
+            var level = getLevel();
+            if (getStackInSlot(slot).isEmpty() && behaviors.containsKey(slot)) {
+                if (level != null)
+                    Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onDetach(level));
+                behaviors.remove(slot);
+            } else if (getStackInSlot(slot).getItem() instanceof IDHDUpgradeItem dhdUpgradeItem && dhdUpgradeItem.getUpgrade() instanceof IDHDUpgrade dhdUpgrade) {
+                behaviors.put(slot, dhdUpgrade.createBehavior(DHDAbstractBE.this));
+                if (level != null)
+                    Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onAttach(level));
             }
             setChanged();
         }
@@ -311,10 +295,10 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
         if (disassemble) {
             var eventCancel = MinecraftForge.EVENT_BUS.post(new BlockEvent.BreakEvent(level, getBlockPos(), getBlockState(), player));
             if (eventCancel) return;
-            var newStack = new ItemStack(part.self());
+            var newStack = getStateManager().disassemblePart(part, true);
             var result = onPartAssembled(part, newStack, true);
             if (!result) return;
-            getStateManager().disassemblePart(part);
+            newStack = getStateManager().disassemblePart(part, false);
             player.getInventory().add(newStack);
             level.playSound(null, getBlockPos(), part.getDisassembleSound(), SoundSource.BLOCKS, 1, 1);
         } else {
@@ -322,8 +306,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
             if (eventCanceled) return;
             var result = onPartAssembled(part, stack, false);
             if (!result) return;
-            getStateManager().assemblePart(part);
-            stack.shrink(1);
+            getStateManager().assemblePart(part, stack);
             level.playSound(null, getBlockPos(), part.getAssembleSound(), SoundSource.BLOCKS, 1, 1);
         }
         level.gameEvent(GameEvent.BLOCK_CHANGE, getBlockPos(), GameEvent.Context.of(player));
@@ -339,21 +322,6 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     @Override
     public boolean isAssembled() {
         return getAllParts().stream().filter(IDHDPartItem::isMandatory).allMatch(this::isAssembled);
-    }
-
-    @Override
-    public boolean onPartAssembled(IDHDPartItem part, ItemStack stack, boolean removed) {
-        if (part != getFluidTankItemPart()) return true;
-        var stackTank = getFluidTankItemPart().getTank(stack);
-        var dhdTank = getReactorManager().getTank();
-        if (removed) {
-            stackTank.setCapacity(dhdTank.getCapacity());
-            stackTank.setFluid(dhdTank.getFluid());
-            return true;
-        }
-        dhdTank.setCapacity(stackTank.getCapacity());
-        dhdTank.setFluid(stackTank.getFluid());
-        return true;
     }
 
     @Override
@@ -450,8 +418,11 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, Direction facing) {
         if (capability == ForgeCapabilities.FLUID_HANDLER) {
-            if (isAssembled(getFluidTankItemPart()))
-                return LazyOptional.of(() -> getReactorManager().getTank()).cast();
+            if (isAssembled(getFluidTankItemPart())) {
+                var tank = getReactorManager().getTank();
+                if (tank == null) return super.getCapability(capability, facing);
+                return LazyOptional.of(() -> tank).cast();
+            }
         }
         return super.getCapability(capability, facing);
     }
@@ -468,9 +439,8 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag compound) {
-        compound.put("stateManager", stateManager.serializeNBT());
-        compound.put("reactorManager", reactorManager.serializeNBT());
         super.saveAdditional(compound);
+        compound.put("stateManager", stateManager.serializeNBT());
 
 
         if (linkedGate != null) {
@@ -488,8 +458,6 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
     public void load(@Nonnull CompoundTag compound) {
         super.load(compound);
         stateManager.deserializeNBT(compound.getCompound("stateManager"));
-        reactorManager.deserializeNBT(compound.getCompound("reactorManager"));
-
 
         if (compound.contains("linkedGate")) {
             linkedGate = BlockPos.of(compound.getLong("linkedGate"));

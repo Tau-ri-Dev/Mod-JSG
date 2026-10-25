@@ -10,7 +10,6 @@ import dev.tauri.jsgcore.common.blockentity.*;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -126,17 +125,14 @@ public interface StargateDHD extends ILinkableBE<Stargate<?>>, ITickable, IPrepa
         var tag = stack.getOrCreateTag();
         tag.put("parts", getStateManager().serializeAssemblyToNBT());
         tag.put("itemHandler", getItemStackHandler().serializeNBT());
-        tag.put("tank", getReactorManager().getTank().writeToNBT(new CompoundTag()));
         stack.setTag(tag);
         return stack;
     }
 
     default void updateFromItemStack(ItemStack stack) {
         var tag = stack.getOrCreateTag();
-        //if (!tag.contains("parts")) return;
         getStateManager().deserializeAssemblyFromNBT(tag.getCompound("parts"));
         getItemStackHandler().deserializeNBT(tag.getCompound("itemHandler"));
-        getReactorManager().getTank().readFromNBT(tag.getCompound("tank"));
         setDHDChanged();
     }
 
