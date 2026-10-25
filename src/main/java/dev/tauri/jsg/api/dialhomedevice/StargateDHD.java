@@ -138,8 +138,10 @@ public interface StargateDHD extends ILinkableBE<Stargate<?>>, ITickable, IPrepa
 
     @ParametersAreNonnullByDefault
     static boolean isPartAssembledOnStack(ItemStack stack, IDHDPartItem part) {
-        var tag = stack.getOrCreateTag();
+        var tag = stack.getTag();
+        if (tag == null) return true;
         if (!tag.contains("parts")) return true;
-        return tag.getCompound("parts").getBoolean(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString());
+        return tag.getCompound("parts").getCompound(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(part.self())).toString())
+                .getBoolean("assembled");
     }
 }
