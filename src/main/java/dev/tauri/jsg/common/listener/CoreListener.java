@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class CoreListener {
     @SubscribeEvent
     public static void onDimensionConfigPreRegister(DimensionConfigPreRegisterEvent event) {
-        event.registerField("hasStargate", (ops) -> new Dynamic<>(ops, ops.createBoolean(true)));
+        event.registerField("generateStargates", (ops) -> new Dynamic<>(ops, ops.createInt(1)));
         event.registerField("lightingBoltChance", (ops) -> new Dynamic<>(ops, ops.createFloat(0)));
         event.registerField("isBlackHoleDim", (ops) -> new Dynamic<>(ops, ops.createBoolean(false)));
 
@@ -47,6 +47,7 @@ public class CoreListener {
         );
 
         event.registerEntry(Level.END.location().toString(), JSGDimensionConfig.Entry.createDefaultExcept(
+                Pair.of("generateStargates", (ops) -> new Dynamic<>(ops, ops.createInt(4))),
                 Pair.of("groups", (ops) -> new Dynamic<>(ops, ops.createList(Stream.of(ops.createString("milkyway"))))),
                 Pair.of("origins", (ops) -> new Dynamic<>(ops, ops.createMap(Map.of(
                         ops.createString(StargateTypes.MILKYWAY.get().getPoONamespaceIdentifier().toString()), ops.createMap(Map.of(

@@ -77,13 +77,16 @@ public class DimensionStargateGenerator {
                 continue;
             }
 
-            if (!JSGDimensionConfig.INSTANCE.getConfigEntrySafe(dimension).map(dimEntry -> dimEntry.getBool("hasStargate", true)).orElse(false)) {
+            int sgCount = JSGDimensionConfig.INSTANCE.getConfigEntrySafe(dimension)
+                    .map(dimEntry -> dimEntry.getInt("generateStargates", 1))
+                    .orElse(0);
+            if (sgCount <= 0) {
                 Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.SKIPPED));
                 continue;
             }
             var sg = getStargateFromNetwork(e.getServer().registryAccess(), network, dimension);
             if (sg.isEmpty()) {
-                if (findStructureAndGenerate(level, message)) {
+                if (findStructureAndGenerate(level, message, sgCount)) {
                     totalGenerated.getAndIncrement();
                     Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.GENERATED));
                 } else
@@ -109,13 +112,10 @@ public class DimensionStargateGenerator {
         return network.getStargateByDimension(dimension).map(Map.Entry::getKey);
     }
 
-    private static boolean findStructureAndGenerate(ServerLevel level, AtomicReference<Component> message) {
+    private static boolean findStructureAndGenerate(ServerLevel level, AtomicReference<Component> message, int maxStargates) {
         if (level == null)
             return false;
         var result = false;
-        var maxStargates = 1;
-        if (level.dimension() == Level.END)
-            maxStargates = 4;
         var tag = (level.dimension() == Level.OVERWORLD ? JSGStructureTags.HAS_MILKYWAY_STARGATE : JSGStructureTags.HAS_STARGATE);
         for (var i = 0; i < maxStargates; i++) {
             var holderSet = level.registryAccess().registry(tag.registry()).map(r -> r.getOrCreateTag(tag));
