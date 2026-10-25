@@ -128,7 +128,6 @@ public interface StargateDHD extends ILinkableBE<Stargate<?>>, ITickable, IPrepa
         var tag = ItemNBT.getOrCreateTag(stack);
         tag.put("parts", getStateManager().serializeAssemblyToNBT());
         tag.put("itemHandler", getItemStackHandler().serializeNBT(CurrentRegistries.getOrThrow()));
-        tag.put("tank", getReactorManager().getTank().writeToNBT(CurrentRegistries.getOrThrow(), new CompoundTag()));
         ItemNBT.setTag(stack, tag);
         return stack;
     }
@@ -138,7 +137,6 @@ public interface StargateDHD extends ILinkableBE<Stargate<?>>, ITickable, IPrepa
         //if (!tag.contains("parts")) return;
         getStateManager().deserializeAssemblyFromNBT(tag.getCompound("parts"));
         getItemStackHandler().deserializeNBT(CurrentRegistries.getOrThrow(), tag.getCompound("itemHandler"));
-        getReactorManager().getTank().readFromNBT(CurrentRegistries.getOrThrow(), tag.getCompound("tank"));
         setDHDChanged();
     }
 

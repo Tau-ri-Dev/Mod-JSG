@@ -88,6 +88,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     protected boolean needRegenerate = false;
 
     public Map<SymbolType<?>, StargateAddress> gateAddressMapClient = new HashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMapClientStatic = new HashMap<>();
 
     protected UUID uuid;
 
@@ -285,6 +286,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
             }
             setGateAddress(s, address);
         }
+        refreshStaticAddresses();
         updateFacing();
         setChanged();
     }
@@ -405,8 +407,12 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
 
     @Override
     public ItemStack getAddressPage(SymbolType<?> symbolType, ItemStack defaultStack, int[] symbolsToDisplay) {
+        return getAddressPage(symbolType, defaultStack, symbolsToDisplay, false);
+    }
+
+    public ItemStack getAddressPage(SymbolType<?> symbolType, ItemStack defaultStack, int[] symbolsToDisplay, boolean staticAddress) {
         ItemStack stack = defaultStack;
-        var gateAddressMap = getAddressMap();
+        var gateAddressMap = staticAddress ? getAddressMapStatic() : getAddressMap();
 
         if (stack.getItem() == JSGItems.UNIVERSE_DIALER.get()) {
             JSGUniverseDialerModes.MEMORY.get().addEntry(gateAddressMap.get(symbolType), symbolsToDisplay, 0, stack);

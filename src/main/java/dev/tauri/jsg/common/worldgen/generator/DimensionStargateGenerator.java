@@ -53,11 +53,12 @@ public class DimensionStargateGenerator {
         var levels = server.levelKeys();
         var lastPercentage = "";
         final int totalDimensions = levels.size();
-        final LinkedHashMap<String, StargateGeneratorStepStatus> stats = new LinkedHashMap<>();
+        final LinkedHashMap<ResourceKey<Level>, StargateDimensionStatusHolder> stats = new LinkedHashMap<>();
+        levels.forEach(l -> stats.put(l, new StargateDimensionStatusHolder(l)));
         AtomicInteger totalGenerated = new AtomicInteger();
         AtomicReference<Component> message = new AtomicReference<>(Component.empty());
         if (net.neoforged.fml.loading.FMLEnvironment.dist.isClient())
-            SGGeneratorGuiProvider.showProgress(() -> totalDimensions, () -> stats, message::get);
+            SGGeneratorGuiProvider.showProgress(stats, message::get);
         JSG.logger.info("Found {} total dimensions", totalDimensions);
         final long started = Util.getMillis();
         for (ResourceKey<Level> dimension : levels) {
@@ -68,24 +69,27 @@ public class DimensionStargateGenerator {
             }
             var level = server.getLevel(dimension);
             if (level == null) {
-                stats.put(dimension.location().toString(), StargateGeneratorDimStatus.ERROR);
+                Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.ERROR));
                 continue;
             }
             message.set(Component.translatable("createWorld.stargates_generating.trying", level.dimension().location().toString()));
             if (!level.structureManager().shouldGenerateStructures()) {
-                stats.put(dimension.location().toString(), StargateGeneratorDimStatus.SKIPPED);
+                Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.SKIPPED));
                 continue;
             }
 
-            if (!JSGDimensionConfig.INSTANCE.getConfigEntrySafe(dimension).map(dimEntry -> dimEntry.getBool("hasStargate", true)).orElse(false)) {
-                stats.put(dimension.location().toString(), StargateGeneratorDimStatus.SKIPPED);
+            int sgCount = JSGDimensionConfig.INSTANCE.getConfigEntrySafe(dimension)
+                    .map(dimEntry -> dimEntry.getInt("generateStargates", 1))
+                    .orElse(0);
+            if (sgCount <= 0) {
+                Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.SKIPPED));
                 continue;
             }
             var sg = getStargateFromNetwork(e.getServer().registryAccess(), network, dimension);
             if (sg.isEmpty()) {
                 boolean generated;
                 try {
-                    generated = findStructureAndGenerate(level, message);
+                    generated = findStructureAndGenerate(level, message, sgCount);
                 } catch (Exception ex) {
                     // Generating a stargate here forces chunk generation. Another mod's world
                     // generation may throw while those chunks generate (e.g. a placed feature
@@ -98,14 +102,16 @@ public class DimensionStargateGenerator {
                     JSG.logger.error("Failed to generate stargate in dimension {} - skipping it. "
                             + "World creation continues without a gate there.",
                             dimension.location(), ex);
-                    stats.put(dimension.location().toString(), StargateGeneratorDimStatus.ERROR);
+                    Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.ERROR));
                     continue;
                 }
                 if (generated) {
                     totalGenerated.getAndIncrement();
-                    stats.put(dimension.location().toString(), StargateGeneratorDimStatus.GENERATED);
-                } else stats.put(dimension.location().toString(), StargateGeneratorDimStatus.NO_STRUCTURE);
-            } else stats.put(dimension.location().toString(), StargateGeneratorDimStatus.ALREADY_GENERATED);
+                    Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.GENERATED));
+                } else
+                    Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.NO_STRUCTURE));
+            } else
+                Optional.ofNullable(stats.get(dimension)).ifPresent(h -> h.update(StargateGeneratorDimStatus.ALREADY_GENERATED));
         }
         message.set(Component.translatable("createWorld.stargates_generating.running_sg_regen"));
 
@@ -125,13 +131,10 @@ public class DimensionStargateGenerator {
         return network.getStargateByDimension(dimension).map(Map.Entry::getKey);
     }
 
-    private static boolean findStructureAndGenerate(ServerLevel level, AtomicReference<Component> message) {
+    private static boolean findStructureAndGenerate(ServerLevel level, AtomicReference<Component> message, int maxStargates) {
         if (level == null)
             return false;
         var result = false;
-        var maxStargates = 1;
-        if (level.dimension() == Level.END)
-            maxStargates = 4;
         var tag = (level.dimension() == Level.OVERWORLD ? JSGStructureTags.HAS_MILKYWAY_STARGATE : JSGStructureTags.HAS_STARGATE);
         for (var i = 0; i < maxStargates; i++) {
             var holderSet = level.registryAccess().registry(tag.registry()).map(r -> r.getOrCreateTag(tag));

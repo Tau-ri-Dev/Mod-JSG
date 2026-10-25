@@ -21,6 +21,7 @@ import dev.tauri.jsgcore.common.loader.PointOfOriginsLoader;
 import dev.tauri.jsgcore.common.multistructure.merging.IMergeHelper;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
+import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.sound.IPositionedSound;
 import dev.tauri.jsgcore.common.sound.ISoundEvent;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
@@ -179,9 +180,10 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         var level = blockPositionSable().level();
         if (level == null) return;
         initStargatePos();
+        var sgn = getNetwork();
         var stargatePos = getStargatePos();
         if (reset)
-            getNetwork().removeStargate(getStargatePos());
+            getNetwork().removeStargate(stargatePos);
         var seed = blockPositionSable().pos().hashCode() * 31L + level.dimension().location().hashCode();
         JSGApi.logger.debug("Seed for stargate {} address gen is {}", stargatePos.toString(), seed);
         Random random = new Random(seed);
@@ -189,7 +191,6 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
             var address = getStargateAddress(symbolType);
             if (address != null && !reset) continue;
-            var sgn = getNetwork();
             address = new StargateAddress(symbolType);
             StargatePos sgnPos;
             do {
@@ -208,17 +209,21 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
 
             setGateAddress(symbolType, address);
         }
+    }
 
-        // --------------
-        // GENERATE STATIC
-        seed = getId().getLeastSignificantBits();
+    default void refreshStaticAddresses() {
+        var level = getStargateLevel();
+        if (level == null) return;
+        initStargatePos();
+        var stargatePos = getStargatePos();
+        var sgn = getNetwork();
+        sgn.removeStaticStargate(stargatePos);
+        var seed = getId().getLeastSignificantBits();
         JSGApi.logger.debug("Seed for static stargate {} address gen is {}", stargatePos.toString(), seed);
-        random = new Random(seed);
+        var random = new Random(seed);
 
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
             var address = getStargateAddressStatic(symbolType);
-            if (address != null && !reset) continue;
-            var sgn = getNetwork();
             address = new StargateAddress(symbolType);
             StargatePos sgnPos;
             do {
@@ -229,6 +234,7 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
             } while (sgnPos != null && !sgnPos.equals(stargatePos));
             setStaticGateAddress(symbolType, address);
         }
+        getAndSendState(CoreStateTypes.GUI_STATE.get());
     }
 
     void renameStargatePos(String newName);
@@ -382,6 +388,7 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         if (!level.isClientSide()) {
             tryRegenerateStargateIfNeeded();
             generateAddresses(false);
+            refreshStaticAddresses();
             setStargateChanged();
             updateFacing();
             generateMergeHelper();

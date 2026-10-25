@@ -12,10 +12,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -31,14 +33,13 @@ public class DHDFluidTankItem extends DHDAbstractPartItem implements IDHDFluidTa
     }
 
     @Override
-    public DHDFluidHandlerItemStack getTank(ItemStack stack) {
-        return (DHDFluidHandlerItemStack) java.util.Objects.requireNonNull(stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM));
+    public DHDFluidHandlerItemStack getFluidTankCapability(ItemStack stack) {
+        return (DHDFluidHandlerItemStack) Objects.requireNonNull(stack.getCapability(Capabilities.FluidHandler.ITEM));
     }
 
     @Override
     @ParametersAreNonnullByDefault
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, components, tooltipFlag);
-
     }
 }

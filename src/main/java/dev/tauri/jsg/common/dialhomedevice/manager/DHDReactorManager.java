@@ -4,32 +4,31 @@ import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.dialhomedevice.DHDReactorState;
 import dev.tauri.jsg.api.dialhomedevice.manager.IDHDReactorManager;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
-import dev.tauri.jsg.common.helpers.CurrentRegistries;
+import dev.tauri.jsg.common.capability.DHDFluidHandlerItemStack;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.registry.CoreStateTypes;
-import dev.tauri.jsgcore.common.util.FluidTank;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class DHDReactorManager extends AbstractDHDManager<DHDAbstractBE> implements IDHDReactorManager {
-    protected final FluidTank tank;
+    protected final Supplier<DHDFluidHandlerItemStack> tank;
     protected DHDReactorState state = DHDReactorState.NO_CRYSTAL;
-    protected Predicate<FluidTank> canStartOrContinueReaction;
-    protected Function<FluidTank, Integer> energyFromOneMb;
+    protected Predicate<DHDFluidHandlerItemStack> canStartOrContinueReaction;
+    protected Function<DHDFluidHandlerItemStack, Integer> energyFromOneMb;
 
     protected int lastAmount = 0;
     protected DHDReactorState lastState = null;
 
-    public DHDReactorManager(DHDAbstractBE dhd, Supplier<FluidTank> tankSupplier, Predicate<FluidTank> canStartOrContinueReaction, Function<FluidTank, Integer> energyFromOneMb) {
+    public DHDReactorManager(DHDAbstractBE dhd, Supplier<DHDFluidHandlerItemStack> tankSupplier, Predicate<DHDFluidHandlerItemStack> canStartOrContinueReaction, Function<DHDFluidHandlerItemStack, Integer> energyFromOneMb) {
         super(dhd);
-        this.tank = tankSupplier.get();
+        this.tank = tankSupplier;
         this.canStartOrContinueReaction = canStartOrContinueReaction;
         this.energyFromOneMb = energyFromOneMb;
     }
@@ -40,24 +39,29 @@ public class DHDReactorManager extends AbstractDHDManager<DHDAbstractBE> impleme
     }
 
     @Override
-    public FluidTank getTank() {
-        return tank;
+    @Nullable
+    public DHDFluidHandlerItemStack getTank() {
+        return tank.get();
     }
 
     @Override
     public void tick(@NotNull Level level) {
         if (level.isClientSide()) return;
 
-        if ((lastAmount > getTank().getFluidAmount() && level.getGameTime() % 20 == 0) || lastAmount < getTank().getFluidAmount()) {
-            lastAmount = getTank().getFluidAmount();
+        var tank = getTank();
+        var actualAmount = (tank == null ? 0 : tank.getFluid().getAmount());
+
+        if ((lastAmount > actualAmount && level.getGameTime() % 20 == 0) || lastAmount < actualAmount) {
+            lastAmount = actualAmount;
             dhd.getStateManager().getAndSendState(CoreStateTypes.RENDERER_STATE.get());
+            dhd.setChanged();
         }
         if (state != lastState) {
             lastState = state;
             dhd.getStateManager().getAndSendState(CoreStateTypes.RENDERER_STATE.get());
         }
 
-        if (!dhd.isAssembled(dhd.getFluidTankItemPart())) {
+        if (tank == null) {
             state = DHDReactorState.NO_FLUID_TANK;
             return;
         }
@@ -98,17 +102,5 @@ public class DHDReactorManager extends AbstractDHDManager<DHDAbstractBE> impleme
                 energyStorage.receiveLongEnergy(energyFromOneMb.apply(tank), false);
             }
         }, () -> state = DHDReactorState.NOT_LINKED);
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        var compound = new CompoundTag();
-        compound.put("tank", tank.writeToNBT(CurrentRegistries.getOrThrow(), new CompoundTag()));
-        return compound;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag compound) {
-        tank.readFromNBT(CurrentRegistries.getOrThrow(), compound.getCompound("tank"));
     }
 }

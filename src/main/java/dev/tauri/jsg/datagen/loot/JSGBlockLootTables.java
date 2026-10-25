@@ -39,8 +39,8 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(JSGBlocks.ABYDOS_SAND.get());
         dropSelf(JSGBlocks.ABYDOS_SAND.get());
-        dropAndCopyNBT(JSGBlocks.DHD_MILKYWAY.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler").copy("reactorManager.tank", "tank"));
-        dropAndCopyNBT(JSGBlocks.DHD_PEGASUS.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler").copy("reactorManager.tank", "tank"));
+        dropAndCopyNBT(JSGBlocks.DHD_MILKYWAY.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler"));
+        dropAndCopyNBT(JSGBlocks.DHD_PEGASUS.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("stateManager.parts", "parts").copy("itemStackHandler", "itemHandler"));
         dropSelf(JSGBlocks.TOASTER.get());
         dropSelf(JSGBlocks.PRINTER.get());
 
@@ -50,23 +50,23 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
         dropSelf(JSGBlocks.ZPM_SLOT.get());
 
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
         dropSelf(JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_PEGASUS_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
         dropSelf(JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
         dropSelf(JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_MOVIE_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
         dropSelf(JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_TOLLAN_RING_BLOCK.get());
 
@@ -100,7 +100,7 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
                 .withPool(applyExplosionCondition(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get(), LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1f))
                         .setBonusRolls(ConstantValue.exactly(0))
-                        .add(LootItem.lootTableItem(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).apply(CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("openCount", "openCount").copy("notebook_page", "notebook_page").copy("stargateEnergyManager", "stargateEnergyManager")))
+                        .add(LootItem.lootTableItem(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).apply(CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("openCount", "openCount").copy("notebook_page", "notebook_page").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId")))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(JSGProperties.ORLIN_BROKEN, false)))
                 ))
                 .withPool(applyExplosionCondition(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get(), LootPool.lootPool()

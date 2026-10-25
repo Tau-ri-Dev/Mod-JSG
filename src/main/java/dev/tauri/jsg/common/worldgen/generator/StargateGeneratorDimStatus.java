@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import java.util.function.Supplier;
 
 public enum StargateGeneratorDimStatus implements StargateGeneratorStepStatus {
+    QUEUED(0, Component::empty),
     GENERATED(0xFF7CBC80, () -> Component.translatable("createWorld.stargates_generating.dim_status.ok")),
     ALREADY_GENERATED(0xFF7B7FBA, () -> Component.translatable("createWorld.stargates_generating.dim_status.already_there")),
     NO_STRUCTURE(0xFFCF97EB, () -> Component.translatable("createWorld.stargates_generating.dim_status.no_structure")),
@@ -27,5 +28,9 @@ public enum StargateGeneratorDimStatus implements StargateGeneratorStepStatus {
     @Override
     public int getColor() {
         return color;
+    }
+
+    public boolean isDone() {
+        return this != QUEUED;
     }
 }

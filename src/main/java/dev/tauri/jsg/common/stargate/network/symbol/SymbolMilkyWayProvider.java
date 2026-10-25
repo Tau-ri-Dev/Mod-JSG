@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import java.util.Objects;
 import java.util.Random;
 
 import static dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolMilkyWayEnum.*;
@@ -175,18 +174,16 @@ public class SymbolMilkyWayProvider extends SymbolType<SymbolMilkyWayEnum> {
 
     @Override
     public int getMinimalSymbolCountTo(SymbolType<?> symbolType, boolean localDial) {
-        boolean eightChevrons = JSGConfig.Stargate.pegAndMilkUseEightChevrons.get();
+        if (symbolType == null) return 9;
 
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.PEGASUS.getId()))
-            return (localDial && !eightChevrons) ? 7 : 8;
+        if (symbolType.equals(this))
+            return (localDial ? 7 : 8);
 
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.MILKYWAY.getId()))
-            return localDial ? 7 : 8;
-
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.UNIVERSE.getId()))
+        if (symbolType.equals(JSGSymbolTypes.UNIVERSE.get()) && JSGConfig.Stargate.useNineSymbolsToDialUni.get())
             return 9;
-        return symbolType.getMinimalSymbolCountTo(JSGSymbolTypes.MILKYWAY.get(), localDial);
 
+        boolean ignoreType = !JSGConfig.Stargate.useEightSymbolsBetweenDiffSymbolType.get();
+        return ((ignoreType || localDial) ? 7 : 8);
     }
 
     @Override
@@ -196,7 +193,7 @@ public class SymbolMilkyWayProvider extends SymbolType<SymbolMilkyWayEnum> {
 
     @Override
     public int getMaxSymbolsDisplay(boolean hasUpgrade) {
-        return hasUpgrade ? 8 : 6;
+        return hasUpgrade ? 7 : 6;
     }
 
     @Override

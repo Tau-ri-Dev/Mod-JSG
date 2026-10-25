@@ -22,7 +22,7 @@ public class LevelGenerationScreen extends AbstractStargateGeneratorScreen {
     protected final StoringChunkProgressListener progressListener;
 
     public LevelGenerationScreen() {
-        super(GameNarrator.NO_TITLE, () -> "menu.preparingSpawn", () -> 1, HashMap::new, Component::empty);
+        super(GameNarrator.NO_TITLE, () -> "menu.preparingSpawn", new HashMap<>(), Component::empty);
         this.progressListener = Minecraft.getInstance().getProgressListener();
     }
 

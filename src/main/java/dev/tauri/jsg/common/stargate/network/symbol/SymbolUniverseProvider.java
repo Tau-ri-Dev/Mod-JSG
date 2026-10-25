@@ -2,7 +2,6 @@ package dev.tauri.jsg.common.stargate.network.symbol;
 
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.config.JSGConfig;
-import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.api.registry.JSGSymbolUsages;
 import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolUniverseEnum;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import java.util.Objects;
 import java.util.Random;
 
 import static dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolUniverseEnum.*;
@@ -178,18 +176,13 @@ public class SymbolUniverseProvider extends SymbolType<SymbolUniverseEnum> {
 
     @Override
     public int getMinimalSymbolCountTo(SymbolType<?> symbolType, boolean localDial) {
-        if (JSGConfig.Stargate.useStrictSevenSymbolsUniGate.get())
-            localDial = true;
+        if (symbolType == null || JSGConfig.Stargate.useNineSymbolsToDialUni.get()) return 9;
 
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.PEGASUS.getId()))
-            return 9;
+        if (symbolType.equals(this))
+            return (localDial ? 7 : 8);
 
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.MILKYWAY.getId()))
-            return 9;
-
-        if (Objects.equals(symbolType.getId(), JSGSymbolTypes.UNIVERSE.getId()))
-            return localDial ? 7 : 8;
-        return symbolType.getMinimalSymbolCountTo(JSGSymbolTypes.UNIVERSE.get(), localDial);
+        boolean ignoreType = !JSGConfig.Stargate.useEightSymbolsBetweenDiffSymbolType.get();
+        return ((ignoreType || localDial) ? 7 : 8);
     }
 
     @Override
@@ -199,7 +192,7 @@ public class SymbolUniverseProvider extends SymbolType<SymbolUniverseEnum> {
 
     @Override
     public int getMaxSymbolsDisplay(boolean hasUpgrade) {
-        return hasUpgrade ? 8 : 6;
+        return hasUpgrade ? 7 : 6;
     }
 
     @Override

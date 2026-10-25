@@ -85,13 +85,16 @@ public class JSGItems {
     }
 
     /**
-     * These allow for dialing 8th glyph(cross dimension travel) and show different address spaces
+     * Upgrade crystals
      */
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_DHD = Constants.JSG_ITEM_HELPER.builder("crystal_glyph_dhd").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildGeneric(); //.buildUpgrade(() -> StargateDHD.DHDUpgradeEnum.CHEVRON_UPGRADE);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_STARGATE = Constants.JSG_ITEM_HELPER.builder("crystal_glyph_stargate").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.CHEVRON_UPGRADE);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("crystal_glyph_milkyway").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.MILKYWAY_GLYPHS);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_PEGASUS = Constants.JSG_ITEM_HELPER.builder("crystal_glyph_pegasus").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.PEGASUS_GLYPHS);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("crystal_glyph_universe").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.UNIVERSE_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_DIALING_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_dialing_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildGeneric(); //.buildUpgrade(() -> StargateDHD.DHDUpgradeEnum.CHEVRON_UPGRADE);
+
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_STATIC = Constants.JSG_ITEM_HELPER.builder("static_address_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.STATIC_ADDRESS_UPGRADE);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.CHEVRON_UPGRADE);
+
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.MILKYWAY_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.PEGASUS_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.UNIVERSE_GLYPHS);
 
     /**
      * Crafting items

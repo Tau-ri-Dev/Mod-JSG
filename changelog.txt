@@ -1,0 +1,68 @@
+CHANGELOG JSG 6.0.0.0 & 7.0.0.0:
+    VERSION IS NOT COMPATIBLE WITH OLDER ONES
+    Added:
+        - Added ability to rename entries in Universe Dialer - press INSERT key while the entry is selected then start typing. ESC to save and exit the edit.
+        - Support for WebP textures
+        - Compatibility (at least some) with Sable (Create: Aeronautics)
+        - New data-driven cauldron recipes system - see JEI & https://misode.github.io/jsg_core/recipes/
+        - Added new energy crystals (part of JSG: Core) as a replacement of Capacitors
+        - Added player name & player UUID into "stargate_event_horizon_traveler" OC/CC event - see https://docs.tauridev.eu/jsg
+        - Added in-game DHD assembly mechanic
+        - Added Aquila symbol (symbol is not in normal address generation pool, need to be manually added into address and can be dialed only via computer/AC)
+        - Added warning when server version runs on client
+        - Added proper Movie gate models and textures
+        - Added wormhole closing animation (ripple effect)
+        - Added transparent part of pegasus chevron
+        - Added custom names for PoOs
+        - Added sendMessage() OC/CC method
+        - Added animated icon for building blocks tab (part of JSG: Core)
+        - New admin controller model
+        - New GDO inventory model
+        - Creepers now drop JSG music discs
+        - Added static addresses for gates:
+            - When gate is moved on Sable contraption for example (or broken and placed again on different spot), it's address will change
+            - But now each gate has own set of STATIC addresses for each symbol type - these addresses don't change
+            - Added new crystal that displays these static addresses when inserted
+            - Each static address is 9 symbols long (including PoO)
+        - Added Puddle Jumper (from Lantea: Stargates mod) compatibility
+    Removed:
+        - Removed stargate sizes config option - now only MEDIUM gates are present
+        - Removed old cauldrons
+        - Removed capacitors
+        - Removed DHD GUI
+        - Removed custom updater notification from the main menu
+    Fixed:
+        Visual improvements:
+            - Fixed sometimes chevrons don't lit up when incoming animation occurs
+            - Fixed render issues in Admin Controller
+            - Fixed Admin Controller network map zoom
+            - Fixed stargate's ring jittery rotation animation
+            - One texture for all fluids
+        - Fixed OC/CC delay while trying to get minimal symbols to dial gate
+        - Fixed JSON transforms effecting custom OBJ model renderer
+        - Fixed special characters in strings breaking packets
+        - Fixed resource pack assets sometimes not loaded (mainly OBJ models)
+        - Fixed memory leaks while loading textures
+        - Cut large animated textures into frames, so they load smoothly without RAM alloc spikes
+        - Fixed crashes while stargates generation is in progress
+        - Fixed most minor stargate dialing issues
+        - Fixed StellarView moons on Abydos dimension
+        - Gates generation in the End should be fixed now (no gates in the void)
+    Edit:
+        - Separated utility features and common items/functions into JSG: Core mod. That mod will be from now a required dependency for JSG and all other modules.
+        - Tweaked structures generation (gates generation in villages can be now disabled via datapack)
+        - Tweaked loot on Abydos (and in other containers in structures)
+        - Made most of the custom things being registered by custom registries (Symbol types, stargate types etc.)
+        - Complete data and assets structure rework - see https://docs.tauridev.eu/jsg
+        - Complete change of dimensions config
+        - Some configs structures have been changed
+        - Tweaked handheld items renderer
+        - Complete change of overlays system - few overlay textures for all textures
+        - Tweaked recipes
+        - Made gate connection logging more useful in admin controller
+        - Changed energy buffers of stargates to support long - meaning whole energy calculations changed
+        - Removed OC2 (R.I.P.) & added OC: CE
+        - RIG waves are now data-driven - https://misode.github.io/jsg/rig_waves/
+        - Reserved addresses are now data-driven
+        - Priests now restock their trades every +-20 minutes (the period may differ - it's random)
+        - Changed IDs of most blocks/items to be more minecraft-style
