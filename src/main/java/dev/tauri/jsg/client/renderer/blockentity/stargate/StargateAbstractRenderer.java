@@ -427,12 +427,6 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
 
                         if (arg2 <= Math.PI / 6) rendererState.whiteOverlayAlpha = MathHelper.sin(arg2);
                         else {
-                            if (rendererState.backStrip == null)
-                                rendererState.backStrip = new StargateRendererStatic.QuadStrip(8, arg2, StargateRendererStatic.EVENT_HORIZON_RADIUS, tick);
-
-                            if (rendererState.frontStrip == null)
-                                rendererState.frontStrip = new StargateRendererStatic.QuadStrip(8, arg2, StargateRendererStatic.EVENT_HORIZON_RADIUS, tick);
-
                             rendererState.vortexState = EnumVortexState.SHRINKING;
                         }
                         if (arg3 >= StargateRendererStatic.EVENT_HORIZON_RADIUS + 0.1f) {
@@ -452,8 +446,8 @@ public abstract class StargateAbstractRenderer<S extends StargateAbstractRendere
 
         // Rendering stable wormhole EH
         if (rendererState.vortexState != null) {
-            if (rendererState.vortexState == EnumVortexState.STILL || rendererState.vortexState == EnumVortexState.CLOSING) {
-                if (rendererState.vortexState == EnumVortexState.CLOSING)
+            if (rendererState.vortexState == EnumVortexState.STILL || rendererState.vortexState.closing()) {
+                if (rendererState.vortexState.closing())
                     renderEventHorizon(true, rendererState.whiteOverlayAlpha, false, 1.7f);
                 else
                     renderEventHorizon(false, rendererState.horizonUnstable ? (0.05f + (float) (Math.sin(tick / 4f * Math.PI) * 0.05f)) : null, false, rendererState.horizonUnstable ? 1.2f : 1);
