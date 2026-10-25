@@ -208,7 +208,6 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         JSG.logger.debug("Removing stargate's addresses at {} from the network!", stargatePos);
 
         GATES_MAP_BY_POS.remove(stargatePos);
-        GATES_MAP_BY_POS_STATIC.remove(stargatePos);
 
         var del = new ArrayList<StargateAddress>();
         for (var e : GATES_MAP_BY_ADDRESS.entrySet()) {
@@ -220,6 +219,18 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
         for (var a : del) {
             GATES_MAP_BY_ADDRESS.remove(a);
         }
+
+        removeStaticStargate(stargatePos);
+
+        setDirty();
+    }
+
+    @Override
+    public void removeStaticStargate(StargatePos stargatePos) {
+        if (stargatePos == null) return;
+        JSG.logger.debug("Removing stargate's static addresses at {} from the network!", stargatePos);
+
+        GATES_MAP_BY_POS_STATIC.remove(stargatePos);
 
         var delStatic = new ArrayList<StargateAddress>();
         for (var e : GATES_MAP_BY_ADDRESS_STATIC.entrySet()) {

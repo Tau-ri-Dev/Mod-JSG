@@ -37,5 +37,7 @@ public interface IStargateNetwork {
 
     void removeStargate(StargatePos stargatePos);
 
+    void removeStaticStargate(StargatePos stargatePos);
+
     void renameStargate(StargatePos pos, String newName);
 }

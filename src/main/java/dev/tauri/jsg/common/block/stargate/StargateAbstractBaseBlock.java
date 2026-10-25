@@ -213,9 +213,9 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         if (level.isClientSide) return;
         BlockEntity e = level.getBlockEntity(blockPos);
         if (e instanceof Stargate<?> stargate) {
+            stargate.updateContainerItemsByItemStack(itemStack);
             stargate.getMergeHelper().updateMemberStateAndCheck(null);
             stargate.refresh();
-            stargate.updateContainerItemsByItemStack(itemStack);
         }
     }
 

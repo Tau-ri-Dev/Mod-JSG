@@ -278,6 +278,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
             }
             setGateAddress(s, address);
         }
+        refreshStaticAddresses();
         updateFacing();
         setChanged();
     }
