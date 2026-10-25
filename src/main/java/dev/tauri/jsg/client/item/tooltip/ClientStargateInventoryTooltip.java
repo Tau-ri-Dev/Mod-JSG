@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ClientStargateInventoryTooltip implements ClientTooltipComponent {
-    public static final ResourceLocation TEXTURE_LOCATION = JSGMapping.rl(JSG.MOD_ID, "textures/gui/itemstack_container_stargate.png");
+    public static final ResourceLocation TEXTURE_LOCATION = JSGMapping.rl(JSG.MOD_ID, "textures/gui/container/stargate/itemstack.png");
     protected final ItemStack stack;
 
     public ClientStargateInventoryTooltip(ServerStargateInventoryTooltip serverTooltip) {
