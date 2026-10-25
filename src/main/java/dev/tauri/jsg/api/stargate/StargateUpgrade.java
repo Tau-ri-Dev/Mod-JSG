@@ -24,6 +24,7 @@ public class StargateUpgrade implements IUpgrade {
     public static final StargateUpgrade PEGASUS_GLYPHS = new StargateUpgrade(JSGMapping.rl(JSGApi.MOD_ID, "pegasus"));
     public static final StargateUpgrade UNIVERSE_GLYPHS = new StargateUpgrade(JSGMapping.rl(JSGApi.MOD_ID, "universe"));
     public static final StargateUpgrade CHEVRON_UPGRADE = new StargateUpgrade(JSGMapping.rl(JSGApi.MOD_ID, "chevron"));
+    public static final StargateUpgrade STATIC_ADDRESS_UPGRADE = new StargateUpgrade(JSGMapping.rl(JSGApi.MOD_ID, "static_address"));
 
     public static boolean contains(Item item) {
         if (!(item instanceof IUpgradeItem upgradeItem)) return false;

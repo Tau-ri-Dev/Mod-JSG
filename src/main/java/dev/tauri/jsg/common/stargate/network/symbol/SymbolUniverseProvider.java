@@ -199,7 +199,7 @@ public class SymbolUniverseProvider extends SymbolType<SymbolUniverseEnum> {
 
     @Override
     public int getMaxSymbolsDisplay(boolean hasUpgrade) {
-        return hasUpgrade ? 8 : 6;
+        return hasUpgrade ? 7 : 6;
     }
 
     @Override

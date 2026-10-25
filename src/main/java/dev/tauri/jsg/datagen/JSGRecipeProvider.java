@@ -526,7 +526,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(pWriter);
 
         //upgrades
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.CRYSTAL_GLYPH_DHD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get())
                 .group("jsg:crystal_glyph_dhd")
                 .pattern("# #")
                 .pattern("PRE")
@@ -541,7 +541,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_ender_crystal", has(CoreItemTags.GEM_ENDER_SMALL))
                 .save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.CRYSTAL_GLYPH_STARGATE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.CRYSTAL_ADDRESS_EXTENDED.get())
                 .group("jsg:stargate_glyph_crystal")
                 .pattern("#B#")
                 .pattern("YRE")

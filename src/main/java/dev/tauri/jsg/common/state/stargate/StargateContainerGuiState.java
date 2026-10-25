@@ -16,11 +16,13 @@ public class StargateContainerGuiState extends State {
         this.config = config;
     }
 
-    public Map<SymbolType<?>, StargateAddress> gateAdddressMap = new HashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMap = new HashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new HashMap<>();
     public BEConfig config;
 
-    public StargateContainerGuiState(Map<SymbolType<?>, StargateAddress> gateAdddressMap, BEConfig config) {
-        this.gateAdddressMap = gateAdddressMap;
+    public StargateContainerGuiState(Map<SymbolType<?>, StargateAddress> gateAddressMap, Map<SymbolType<?>, StargateAddress> gateAddressMapStatic, BEConfig config) {
+        this.gateAddressMap = gateAddressMap;
+        this.gateAddressMapStatic = gateAddressMapStatic;
         this.config = config;
     }
 
@@ -28,7 +30,8 @@ public class StargateContainerGuiState extends State {
     public void toBytes(ByteBuf buff) {
         var buf = new FriendlyByteBuf(buff);
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
-            gateAdddressMap.get(symbolType).toBytes(buf);
+            gateAddressMap.get(symbolType).toBytes(buf);
+            gateAddressMapStatic.get(symbolType).toBytes(buf);
         }
 
         config.toBytes(buf);
@@ -37,12 +40,16 @@ public class StargateContainerGuiState extends State {
     @Override
     public void fromBytes(ByteBuf buff) {
         var buf = new FriendlyByteBuf(buff);
-        gateAdddressMap = new HashMap<>(3);
+        gateAddressMap = new HashMap<>(3);
 
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
             StargateAddress address = new StargateAddress(symbolType);
             address.fromBytes(buf);
-            gateAdddressMap.put(symbolType, address);
+            gateAddressMap.put(symbolType, address);
+
+            address = new StargateAddress(symbolType);
+            address.fromBytes(buf);
+            gateAddressMapStatic.put(symbolType, address);
         }
 
         config.fromBytes(buf);

@@ -389,6 +389,12 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
         return getStargateAddress(symbolType);
     }
 
+    @Nullable
+    public IAddress getAddressStatic(SymbolType<?> symbolType) {
+        if (level == null || level.isClientSide) return gateAddressMapClientStatic.get(symbolType);
+        return getStargateAddressStatic(symbolType);
+    }
+
     // ------------------------------------------------------------------------
     // Loading and ticking
 
@@ -712,7 +718,8 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
         } else if (scheduledTask == CoreScheduledTasks.GIVE_PAGE.get()) {
             if (pageSlotId < 9 || pageSymboltype == null) return;
             ItemStack stack = itemStackHandler.getStackInSlot(pageSlotId);
-            stack = getAddressPage(pageSymboltype, stack, (hasUpgrade(StargateUpgrade.CHEVRON_UPGRADE) ? new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9} : new int[]{1, 2, 3, 4, 5, 6, 9}));
+            var staticAddress = hasUpgrade(StargateUpgrade.STATIC_ADDRESS_UPGRADE);
+            stack = getAddressPage(pageSymboltype, stack, (staticAddress ? new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9} : (hasUpgrade(StargateUpgrade.CHEVRON_UPGRADE) ? new int[]{1, 2, 3, 4, 5, 6, 7, 9} : new int[]{1, 2, 3, 4, 5, 6, 9})), staticAddress);
             itemStackHandler.setStackInSlot(pageSlotId, stack);
         } else
             super.executeTask(scheduledTask, customData);

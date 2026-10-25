@@ -69,7 +69,8 @@ public abstract class StargateClassicStateManager<SG extends StargateClassicBase
                 .tryType(JSGStateTypes.IRIS_ANIMATION, () -> stargate.getIrisManager().setIrisAnimationState((IrisAnimationState) state))
                 .tryType(CoreStateTypes.GUI_STATE, () -> {
                     StargateContainerGuiState guiState = (StargateContainerGuiState) state;
-                    stargate.gateAddressMapClient = guiState.gateAdddressMap;
+                    stargate.gateAddressMapClient = guiState.gateAddressMap;
+                    stargate.gateAddressMapClientStatic = guiState.gateAddressMapStatic;
                     stargate.setConfig(guiState.config);
                     stargate.setChanged();
                 })
@@ -102,7 +103,7 @@ public abstract class StargateClassicStateManager<SG extends StargateClassicBase
     @Override
     public State getState(StateType stateType) {
         return stateType.stateSupplier()
-                .tryType(CoreStateTypes.GUI_STATE, () -> new StargateContainerGuiState(stargate.getAddressMap(), stargate.getConfig()))
+                .tryType(CoreStateTypes.GUI_STATE, () -> new StargateContainerGuiState(stargate.getAddressMap(), stargate.getAddressMapStatic(), stargate.getConfig()))
                 .tryType(CoreStateTypes.GUI_UPDATE, () -> new StargateContainerGuiUpdate(
                         stargate.getEnergyManager().getStorage().getEnergyStoredInternal(),
                         stargate.getEnergyManager().getTransferredLastTick(),

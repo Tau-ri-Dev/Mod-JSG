@@ -19,6 +19,7 @@ import dev.tauri.jsgcore.client.screen.tab.TabbedContainerScreen;
 import dev.tauri.jsgcore.client.screen.tab.tabs.*;
 import dev.tauri.jsgcore.client.screen.util.GuiHelper;
 import dev.tauri.jsgcore.client.texture.ITexture;
+import dev.tauri.jsgcore.common.blockentity.IAddressProvider;
 import dev.tauri.jsgcore.common.forgeutil.SlotHandler;
 import dev.tauri.jsgcore.common.helper.TemperatureHelper;
 import dev.tauri.jsgcore.common.item.IUpgradeItem;
@@ -27,6 +28,8 @@ import dev.tauri.jsgcore.common.packet.packets.SaveConfigToServer;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.registry.CoreFonts;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
+import dev.tauri.jsgcore.common.symbol.address.IAddress;
+import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
 import dev.tauri.jsgcore.common.util.I18n;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.ChatFormatting;
@@ -40,6 +43,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -58,6 +62,8 @@ public class StargateContainerGui extends TabbedContainerScreen<StargateContaine
     private long energyStored;
     private long energyStoredInternally;
     private long maxEnergyStored;
+
+    private boolean displayStaticAddresses = false;
 
     private final BlockPos pos;
 
@@ -83,7 +89,22 @@ public class StargateContainerGui extends TabbedContainerScreen<StargateContaine
         int i = 0;
         for (SymbolType<?> type : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
             var tab = TabAddress.builder()
-                    .setAddressProvider(menu.gateTile)
+                    .setAddressProvider(new IAddressProvider() {
+                        @Override
+                        public int getPageProgress() {
+                            return menu.gateTile.getPageProgress();
+                        }
+
+                        @Override
+                        public IAddress getAddress(SymbolType<?> symbolType) {
+                            return (displayStaticAddresses ? menu.gateTile.getAddressStatic(symbolType) : menu.gateTile.getAddress(symbolType));
+                        }
+
+                        @Override
+                        public @Nullable PointOfOrigin getPointOfOrigin(SymbolType<?> symbolType) {
+                            return menu.gateTile.getPointOfOrigin(symbolType);
+                        }
+                    })
                     .setSymbolType(type)
                     .setProgressColor(0x98BCF9)
                     .setGuiSize(imageWidth, imageHeight)
@@ -310,6 +331,7 @@ public class StargateContainerGui extends TabbedContainerScreen<StargateContaine
         this.renderBackground(graphics);
 
         boolean hasAddressUpgrade = false;
+        displayStaticAddresses = false;
         boolean hasIrisUpgrade = !menu.getSlot(8).getItem().isEmpty();
 
         for (var entry : addressTabs.entrySet()) {
@@ -325,14 +347,17 @@ public class StargateContainerGui extends TabbedContainerScreen<StargateContaine
                         entry.getValue().setVisible(true);
                     }
                 }
-                if ((itemStack.getItem() instanceof IUpgradeItem upgradeItem) && upgradeItem.getUpgrade() == StargateUpgrade.CHEVRON_UPGRADE) {
-                    hasAddressUpgrade = true;
+                if ((itemStack.getItem() instanceof IUpgradeItem upgradeItem)) {
+                    if (upgradeItem.getUpgrade() == StargateUpgrade.CHEVRON_UPGRADE)
+                        hasAddressUpgrade = true;
+                    else if (upgradeItem.getUpgrade() == StargateUpgrade.STATIC_ADDRESS_UPGRADE)
+                        displayStaticAddresses = true;
                 }
             }
         }
 
         for (var entry : addressTabs.entrySet()) {
-            entry.getValue().setMaxSymbols(entry.getKey().getMaxSymbolsDisplay(hasAddressUpgrade));
+            entry.getValue().setMaxSymbols(displayStaticAddresses ? 8 : entry.getKey().getMaxSymbolsDisplay(hasAddressUpgrade));
         }
         irisTab.setVisible(hasIrisUpgrade);
         configTab.setVisible(menu.hasCreative);

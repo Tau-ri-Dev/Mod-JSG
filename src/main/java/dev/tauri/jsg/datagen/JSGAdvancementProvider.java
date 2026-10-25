@@ -171,7 +171,7 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
         Advancement.Builder.advancement()
                 .parent(uni_crystal)
                 .display(
-                        JSGItems.CRYSTAL_GLYPH_STARGATE.get(),
+                        JSGItems.CRYSTAL_ADDRESS_EXTENDED.get(),
                         Component.translatable("advancement.jsg.obtain_stargate_glyph_crystal.title"),
                         Component.translatable("advancement.jsg.obtain_stargate_glyph_crystal.description"),
                         null,
@@ -180,7 +180,7 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                         true,
                         false
                 )
-                .addCriterion("get_stargate_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_GLYPH_STARGATE.get()))
+                .addCriterion("get_stargate_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_ADDRESS_EXTENDED.get()))
                 .save(saver, JSGAdvancements.OBTAIN_STARGATE_GLYPH_CRYSTAL, fileHelper);
 
         Advancement movie_gate = Advancement.Builder.advancement()
@@ -366,7 +366,7 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
         Advancement.Builder.advancement()
                 .parent(pg_dhd)
                 .display(
-                        JSGItems.CRYSTAL_GLYPH_DHD.get(),
+                        JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(),
                         Component.translatable("advancement.jsg.obtain_dhd_glyph_crystal.title"),
                         Component.translatable("advancement.jsg.obtain_dhd_glyph_crystal.description"),
                         null,
@@ -375,7 +375,7 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                         true,
                         false
                 )
-                .addCriterion("get_dhd_glyph_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_GLYPH_DHD.get()))
+                .addCriterion("get_dhd_glyph_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get()))
                 .save(saver, JSGAdvancements.OBTAIN_DHD_GLYPH_CRYSTAL, fileHelper);
     }
 

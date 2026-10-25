@@ -132,7 +132,7 @@ public class SymbolPegasusProvider extends SymbolType<SymbolPegasusEnum> {
 
     @Override
     public int getMaxSymbolsDisplay(boolean hasUpgrade) {
-        return hasUpgrade ? 8 : 6;
+        return hasUpgrade ? 7 : 6;
     }
 
     @Override

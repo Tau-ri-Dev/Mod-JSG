@@ -112,7 +112,7 @@ public class StargateGenerator implements IStargateGenerator {
             boolean isTypeCrystalIn = false;
             ItemHandlerHelper.clearInventory(upgradable.getItemHandler());
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_STARGATE))
-                upgradable.getItemHandler().insertItem(nextSlot++, new ItemStack(JSGItems.CRYSTAL_GLYPH_STARGATE.get(), 1), false);
+                upgradable.getItemHandler().insertItem(nextSlot++, new ItemStack(JSGItems.CRYSTAL_ADDRESS_EXTENDED.get(), 1), false);
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_MW)) {
                 upgradable.getItemHandler().insertItem(nextSlot++, new ItemStack(JSGItems.CRYSTAL_GLYPH_MILKYWAY.get(), 1), false);
                 if (conf.gateType.symbolType.get().getGlyphUpgrade() == JSGItems.CRYSTAL_GLYPH_MILKYWAY.get())
@@ -186,7 +186,7 @@ public class StargateGenerator implements IStargateGenerator {
             dhdTile.getItemStackHandler().setStackInSlot(0, crystal);
 
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_DHD))
-                dhdTile.getItemStackHandler().setStackInSlot(1, new ItemStack(JSGItems.CRYSTAL_GLYPH_DHD.get(), 1));
+                dhdTile.getItemStackHandler().setStackInSlot(1, new ItemStack(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(), 1));
             /*.if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_CAPACITY_DHD))
                 dhdTile.getItemStackHandler().setStackInSlot(2, new ItemStack(CoreItems.CRYSTAL_UPGRADE_CAPACITY.get(), 1));
             if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_EFFICIENCY_DHD))
