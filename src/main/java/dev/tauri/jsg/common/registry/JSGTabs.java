@@ -32,6 +32,7 @@ public class JSGTabs {
         }
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(JSGItems.FOOD_CHOCOLATE_BAR);
+            event.accept(JSGItems.JIBBARAN_ENHANCER);
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             for (var r : JSGItems.RECORDS.values()) {
