@@ -11,4 +11,10 @@ public interface IAddressDialSequence extends INBTSerializable<CompoundTag> {
     }
 
     IAddress getOriginalAddress();
+
+    EnumDialingType getDialingType();
+
+    boolean ignoreMaxChevrons();
+
+    boolean noEnergy();
 }
