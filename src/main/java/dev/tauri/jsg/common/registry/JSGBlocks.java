@@ -31,24 +31,24 @@ public class JSGBlocks {
     /**
      * STARGATE BLOCKS
      */
-    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_BASE_BLOCK = REGISTER.register("stargate_orlin_base_block", StargateOrlinBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_MEMBER_BLOCK = REGISTER.register("stargate_orlin_member_block", StargateOrlinMemberBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_BASE_BLOCK = REGISTER.register("orlins_stargate_base", StargateOrlinBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_MEMBER_BLOCK = REGISTER.register("orlins_stargate_ring", StargateOrlinMemberBlock::new);
 
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_BASE_BLOCK = REGISTER.register("milkyway_base_block", StargateMilkyWayBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_CHEVRON_BLOCK = REGISTER.register("milkyway_chevron_block", StargateMilkyWayMemberBlock.StargateMilkyWayChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_RING_BLOCK = REGISTER.register("milkyway_ring_block", StargateMilkyWayMemberBlock.StargateMilkyWayRingBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_BASE_BLOCK = REGISTER.register("stargate_pegasus_base_block", StargatePegasusBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_CHEVRON_BLOCK = REGISTER.register("stargate_pegasus_chevron_block", StargatePegasusMemberBlock.StargatePegasusChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_RING_BLOCK = REGISTER.register("stargate_pegasus_ring_block", StargatePegasusMemberBlock.StargatePegasusRingBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_BASE_BLOCK = REGISTER.register("stargate_universe_base_block", StargateUniverseBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_CHEVRON_BLOCK = REGISTER.register("stargate_universe_chevron_block", StargateUniverseMemberBlock.StargateUniverseChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_RING_BLOCK = REGISTER.register("stargate_universe_ring_block", StargateUniverseMemberBlock.StargateUniverseRingBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_BASE_BLOCK = REGISTER.register("stargate_tollan_base_block", StargateTollanBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_CHEVRON_BLOCK = REGISTER.register("stargate_tollan_chevron_block", StargateTollanMemberBlock.StargateTollanChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_RING_BLOCK = REGISTER.register("stargate_tollan_ring_block", StargateTollanMemberBlock.StargateTollanRingBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_BASE_BLOCK = REGISTER.register("stargate_movie_base_block", StargateMovieBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_CHEVRON_BLOCK = REGISTER.register("stargate_movie_chevron_block", StargateMovieMemberBlock.StargateMovieChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_RING_BLOCK = REGISTER.register("stargate_movie_ring_block", StargateMovieMemberBlock.StargateMovieRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_BASE_BLOCK = REGISTER.register("milkyway_stargate_base", StargateMilkyWayBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_CHEVRON_BLOCK = REGISTER.register("milkyway_stargate_chevron", StargateMilkyWayMemberBlock.StargateMilkyWayChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_RING_BLOCK = REGISTER.register("milkyway_stargate_ring", StargateMilkyWayMemberBlock.StargateMilkyWayRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_BASE_BLOCK = REGISTER.register("pegasus_stargate_base", StargatePegasusBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_CHEVRON_BLOCK = REGISTER.register("pegasus_stargate_chevron", StargatePegasusMemberBlock.StargatePegasusChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_RING_BLOCK = REGISTER.register("pegasus_stargate_ring", StargatePegasusMemberBlock.StargatePegasusRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_BASE_BLOCK = REGISTER.register("universe_stargate_base", StargateUniverseBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_CHEVRON_BLOCK = REGISTER.register("universe_stargate_chevron", StargateUniverseMemberBlock.StargateUniverseChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_UNIVERSE_RING_BLOCK = REGISTER.register("universe_stargate_ring", StargateUniverseMemberBlock.StargateUniverseRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_BASE_BLOCK = REGISTER.register("tollan_stargate_base", StargateTollanBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_CHEVRON_BLOCK = REGISTER.register("tollan_stargate_chevron", StargateTollanMemberBlock.StargateTollanChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_TOLLAN_RING_BLOCK = REGISTER.register("tollan_stargate_ring", StargateTollanMemberBlock.StargateTollanRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_BASE_BLOCK = REGISTER.register("movie_stargate_base", StargateMovieBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_CHEVRON_BLOCK = REGISTER.register("movie_stargate_chevron", StargateMovieMemberBlock.StargateMovieChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MOVIE_RING_BLOCK = REGISTER.register("movie_stargate_ring", StargateMovieMemberBlock.StargateMovieRingBlock::new);
 
     /**
      * DHD
@@ -66,8 +66,8 @@ public class JSGBlocks {
     /**
      * REDSTONE IO
      */
-    public static final RegistryObjectWrapper<Block> SG_REDSTONE_STATE_O_BLOCK = REGISTER.register("sg_redstone_state_output_block", StargateRedstoneStateO::new);
-    public static final RegistryObjectWrapper<Block> SG_REDSTONE_DIALER_I_BLOCK = REGISTER.register("sg_redstone_dialer_input_block", StargateRedstoneDialerI::new);
+    public static final RegistryObjectWrapper<Block> SG_REDSTONE_STATE_O_BLOCK = REGISTER.register("stargate_redstone_state_output", StargateRedstoneStateO::new);
+    public static final RegistryObjectWrapper<Block> SG_REDSTONE_DIALER_I_BLOCK = REGISTER.register("stargate_redstone_dialer", StargateRedstoneDialerI::new);
 
     /**
      * Natural Blocks
