@@ -2,8 +2,8 @@
   "credit": "Proudly bought by Carter and deconstructed by Orlin.",
   "texture_size": [64, 64],
   "textures": {
-    "0": "jsg:block/utils/toaster",
-    "particle": "jsg:block/utils/toaster"
+    "0": "jsg:block/toaster",
+    "particle": "jsg:block/toaster"
   },
   "elements": [
     {
