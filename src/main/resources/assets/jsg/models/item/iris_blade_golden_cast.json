@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "jsg:item/compat/cast/iris_blade_golden_cast"
-  }
-}

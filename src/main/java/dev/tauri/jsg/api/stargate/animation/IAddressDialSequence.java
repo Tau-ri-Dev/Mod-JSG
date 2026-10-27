@@ -10,4 +10,10 @@ public interface IAddressDialSequence extends LegacyNBTSerializable {
     }
 
     IAddress getOriginalAddress();
+
+    EnumDialingType getDialingType();
+
+    boolean ignoreMaxChevrons();
+
+    boolean noEnergy();
 }

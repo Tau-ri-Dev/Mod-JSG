@@ -38,6 +38,21 @@ public class StargateAddressDialSequence implements IAddressDialSequence {
         return new StargateAddressDynamic(originalAddress);
     }
 
+    @Override
+    public EnumDialingType getDialingType() {
+        return dialingType;
+    }
+
+    @Override
+    public boolean ignoreMaxChevrons() {
+        return ignoreMaxChevrons;
+    }
+
+    @Override
+    public boolean noEnergy() {
+        return noEnergy;
+    }
+
     public void dialNext() {
         consumeSymbol.accept(address.popFirst(), noEnergy, ignoreMaxChevrons, dialingType);
     }

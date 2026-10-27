@@ -38,9 +38,9 @@ public class JSGBlocks {
     public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_BASE_BLOCK = REGISTER.register("stargate_orlin_base_block", StargateOrlinBaseBlock::new);
     public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_MEMBER_BLOCK = REGISTER.register("stargate_orlin_member_block", StargateOrlinMemberBlock::new);
 
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_BASE_BLOCK = REGISTER.register("stargate_milkyway_base_block", StargateMilkyWayBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_CHEVRON_BLOCK = REGISTER.register("stargate_milkyway_chevron_block", StargateMilkyWayMemberBlock.StargateMilkyWayChevronBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_RING_BLOCK = REGISTER.register("stargate_milkyway_ring_block", StargateMilkyWayMemberBlock.StargateMilkyWayRingBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_BASE_BLOCK = REGISTER.register("milkyway_base_block", StargateMilkyWayBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_CHEVRON_BLOCK = REGISTER.register("milkyway_chevron_block", StargateMilkyWayMemberBlock.StargateMilkyWayChevronBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_RING_BLOCK = REGISTER.register("milkyway_ring_block", StargateMilkyWayMemberBlock.StargateMilkyWayRingBlock::new);
     public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_BASE_BLOCK = REGISTER.register("stargate_pegasus_base_block", StargatePegasusBaseBlock::new);
     public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_CHEVRON_BLOCK = REGISTER.register("stargate_pegasus_chevron_block", StargatePegasusMemberBlock.StargatePegasusChevronBlock::new);
     public static final RegistryObjectWrapper<Block> STARGATE_PEGASUS_RING_BLOCK = REGISTER.register("stargate_pegasus_ring_block", StargatePegasusMemberBlock.StargatePegasusRingBlock::new);

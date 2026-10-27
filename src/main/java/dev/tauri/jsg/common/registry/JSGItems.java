@@ -22,7 +22,6 @@ import dev.tauri.jsgcore.common.item.JSGItem;
 import dev.tauri.jsgcore.common.item.JSGMusicDiscItem;
 import dev.tauri.jsgcore.common.item.JSGSpawnEggItem;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
-import dev.tauri.jsgcore.common.registry.helper.CoreRegistryHelpers;
 import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import dev.tauri.jsgcore.common.sound.SoundEvent;
@@ -99,8 +98,8 @@ public class JSGItems {
     /**
      * Crafting items
      */
-    public static final RegistryObjectWrapper<JSGItem> HOLDER_CRYSTAL = Constants.JSG_ITEM_HELPER.builder("holder_crystal").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> HOLDER_CRYSTAL_PEGASUS = Constants.JSG_ITEM_HELPER.builder("holder_crystal_pegasus").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> HOLDER_CRYSTAL = Constants.JSG_ITEM_HELPER.builder("milkyway_crystal_holder").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> HOLDER_CRYSTAL_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_crystal_holder").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
 
     /**
      * TOOLS
@@ -113,38 +112,38 @@ public class JSGItems {
     /**
      * FRAGMENTS
      */
-    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("fragment_stargate_milkyway").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_PEGASUS = Constants.JSG_ITEM_HELPER.builder("fragment_stargate_pegasus").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("fragment_stargate_universe").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_TOLLAN = Constants.JSG_ITEM_HELPER.builder("fragment_stargate_tollan").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_stargate_fragment").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_stargate_fragment").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_stargate_fragment").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> FRAGMENT_TOLLAN = Constants.JSG_ITEM_HELPER.builder("tollan_stargate_fragment").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
 
     /**
      * SCHEMATICS
      */
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("schematic_milkyway").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_PEGASUS = Constants.JSG_ITEM_HELPER.builder("schematic_pegasus").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("schematic_universe").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_TOLLAN = Constants.JSG_ITEM_HELPER.builder("schematic_tollan").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_TOLLAN = Constants.JSG_ITEM_HELPER.builder("tollan_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
 
 
     /**
      * Iris/Shield upgrade
      */
-    public static final RegistryObjectWrapper<JSGItem> IRIS_BLADE = Constants.JSG_ITEM_HELPER.builder("iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> QUAD_IRIS_BLADE = Constants.JSG_ITEM_HELPER.builder("quad_iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS = REGISTER.register("upgrade_iris", () ->
+    public static final RegistryObjectWrapper<JSGItem> IRIS_BLADE = Constants.JSG_ITEM_HELPER.builder("titanium_iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> QUAD_IRIS_BLADE = Constants.JSG_ITEM_HELPER.builder("titanium_quad_iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS = REGISTER.register("titanium_iris", () ->
             IrisItem.createDurability(500, new ItemStack(MaterialType.TITANIUM.getItem(MaterialItemType.INGOT).get()), EnumIrisType.IRIS_TITANIUM)
     );
 
-    public static final RegistryObjectWrapper<JSGItem> IRIS_BLADE_TRINIUM = Constants.JSG_ITEM_HELPER.builder("iris_blade_trinium").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> QUAD_IRIS_BLADE_TRINIUM = Constants.JSG_ITEM_HELPER.builder("quad_iris_blade_trinium").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS_TRINIUM = REGISTER.register("upgrade_iris_trinium", () ->
+    public static final RegistryObjectWrapper<JSGItem> IRIS_BLADE_TRINIUM = Constants.JSG_ITEM_HELPER.builder("trinium_iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> QUAD_IRIS_BLADE_TRINIUM = Constants.JSG_ITEM_HELPER.builder("trinium_quad_iris_blade").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS_TRINIUM = REGISTER.register("trinium_iris", () ->
             IrisItem.createDurability(1000, new ItemStack(MaterialType.TRINIUM.getItem(MaterialItemType.INGOT).get()), EnumIrisType.IRIS_TRINIUM)
     );
 
-    public static final RegistryObjectWrapper<JSGItem> UPGRADE_SHIELD = REGISTER.register("upgrade_shield", IrisItem::createShield);
+    public static final RegistryObjectWrapper<JSGItem> UPGRADE_SHIELD = REGISTER.register("stargate_shield", IrisItem::createShield);
     public static final RegistryObjectWrapper<JSGItem> SHIELD_EMITTER = Constants.JSG_ITEM_HELPER.builder("shield_emitter").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS_CREATIVE = REGISTER.register("upgrade_iris_creative", IrisItem::createCreative);
+    public static final RegistryObjectWrapper<JSGItem> UPGRADE_IRIS_CREATIVE = REGISTER.register("creative_iris", IrisItem::createCreative);
 
 
     public static final RegistryObjectWrapper<CartridgeItem> CARTRIDGE_BLACK = REGISTER.register("black_cartridge", () -> new CartridgeItem(Color.BLACK, 0.08f));
@@ -157,7 +156,7 @@ public class JSGItems {
      */
 
     public static final RegistryObjectWrapper<JSGItem> FOOD_CHOCOLATE_BAR = Constants.JSG_ITEM_HELPER.builder("chocolate_bar").setProperties(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).fast().saturationModifier(0.2f).effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0, false, false), 1).alwaysEdible().build())).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> FOOD_ENHANCER = Constants.JSG_ITEM_HELPER.builder("jibbaran_enhancer").clearTooltip().setProperties(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.1f).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, true), 0.5f).alwaysEdible().build())).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> JIBBARAN_ENHANCER = Constants.JSG_ITEM_HELPER.builder("jibbaran_enhancer").clearTooltip().setProperties(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.1f).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 0, false, true), 0.5f).alwaysEdible().build())).buildGeneric();
 
     /**
      * SPAWN EGGS
@@ -186,13 +185,11 @@ public class JSGItems {
 
     public static void init() {
         Integrations.TCONSTRUCT.addOnLoad(() -> {
-            CoreRegistryHelpers.ITEM_HELPER.builder("iris_blade_golden_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
-            CoreRegistryHelpers.ITEM_HELPER.builder("iris_blade_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
-            CoreRegistryHelpers.ITEM_HELPER.builder("iris_blade_red_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
-            CoreRegistryHelpers.ITEM_HELPER.builder("iris_blade_stone").setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
+            Constants.JSG_ITEM_HELPER.builder("iris_blade_golden_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
+            Constants.JSG_ITEM_HELPER.builder("iris_blade_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
+            Constants.JSG_ITEM_HELPER.builder("iris_blade_red_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
+            Constants.JSG_ITEM_HELPER.builder("stone_iris_blade").setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
         });
-        Integrations.CREATE.addOnLoad(() -> {
-            CoreRegistryHelpers.ITEM_HELPER.builder("incomplete_chocolate_bar").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
-        });
+        Integrations.CREATE.addOnLoad(() -> Constants.JSG_ITEM_HELPER.builder("incomplete_chocolate_bar").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric());
     }
 }
