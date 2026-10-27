@@ -21,8 +21,9 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), JSGLootTableProvider.create(output, lookupProvider));
 
-        generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
-        generator.addProvider(event.includeClient(), new JSGItemModelProvider(output, exFileHelper));
+        // TODO: Fredy fix your datagen pls!
+        //generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
+        //generator.addProvider(event.includeClient(), new JSGItemModelProvider(output, exFileHelper));
 
         var blockTagGenerator = generator.addProvider(event.includeServer(), new JSGBlockTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGItemTagGenerator(output, lookupProvider, blockTagGenerator.contentsGetter(), exFileHelper));
