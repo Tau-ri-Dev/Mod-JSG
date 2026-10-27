@@ -1,6 +1,7 @@
 plugins {
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.141'
+    id "com.vanniktech.maven.publish" version "0.36.0"
 }
 
 group = mod_group_id
@@ -149,3 +150,42 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 }
 sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata
+
+
+// PUBLISHING
+mavenPublishing {
+    coordinates("eu.tauridev", mod_id.replaceAll("_", "-") + "-" + minecraft_version, version)
+
+    pom {
+        name = mod_name
+        description = mod_description
+        inceptionYear = "2026"
+        url = "https://docs.tauridev.eu/jsg/"
+        licenses {
+            license {
+                name = "All Rights Reserved"
+            }
+        }
+        developers {
+            developer {
+                id = "tau-ri-dev"
+                name = "Tau'ri Dev"
+                url = "https://github.com/Tau-ri-Dev"
+            }
+        }
+        scm {
+            url = "https://github.com/Tau-ri-Dev/Mod-JSG"
+        }
+
+        /*withXml {
+            var root = asNode()
+            // Find the <dependencies> node if it exists
+            var dependenciesNode = root.get("dependencies") as NodeList
+            if (dependenciesNode != null && !dependenciesNode.isEmpty()) {
+                dependenciesNode.forEach {
+                    root.remove(it)
+                }
+            }
+        }*/
+    }
+}
