@@ -53,8 +53,8 @@ public class JSGBlocks {
     /**
      * DHD
      */
-    public static final RegistryObjectWrapper<Block> DHD_MILKYWAY = REGISTER.register("dhd_milkyway", DHDMilkyWayBlock::new);
-    public static final RegistryObjectWrapper<Block> DHD_PEGASUS = REGISTER.register("dhd_pegasus", DHDPegasusBlock::new);
+    public static final RegistryObjectWrapper<Block> DHD_MILKYWAY = REGISTER.register("milkyway_dhd", DHDMilkyWayBlock::new);
+    public static final RegistryObjectWrapper<Block> DHD_PEGASUS = REGISTER.register("pegasus_dhd", DHDPegasusBlock::new);
 
     /**
      * ENERGY
