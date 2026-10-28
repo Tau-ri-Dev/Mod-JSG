@@ -616,14 +616,18 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, JSGItems.SHIELD_EMITTER.get())
                 .group(JSG.MOD_ID + ":shield_emitter")
-                .pattern("TET")
-                .pattern("ECE")
-                .pattern("TET")
+                .pattern(" P ")
+                .pattern("PBS")
+                .pattern("TCT")
+                .define('P', CrystalType.PEGASUS.forgeTags().gems())
+                .define('B', CrystalType.BLUE.forgeTags().gems())
+                .define('S', CrystalType.PEGASUS.forgeTags().gemsSmall())
                 .define('T', MaterialType.TRINIUM.forgeTags().ingots())
-                .define('E', CrystalType.ENDER.forgeTags().gems())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
                 .unlockedBy("has_ingot", has(MaterialType.TRINIUM.forgeTags().ingots()))
-                .unlockedBy("has_crystal", has(CrystalType.ENDER.forgeTags().gems()))
+                .unlockedBy("has_pegasus_crystal", has(CrystalType.PEGASUS.forgeTags().gems()))
+                .unlockedBy("has_blue_crystal", has(CrystalType.BLUE.forgeTags().gems()))
+                .unlockedBy("has_prgasus_small_crystal", has(CrystalType.PEGASUS.forgeTags().gemsSmall()))
                 .unlockedBy("has_circuit", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
                 .save(pWriter);
 
