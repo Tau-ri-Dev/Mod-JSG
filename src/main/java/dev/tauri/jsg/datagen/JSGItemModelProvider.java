@@ -20,6 +20,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 public class JSGItemModelProvider extends ItemModelProvider {
@@ -48,7 +49,7 @@ public class JSGItemModelProvider extends ItemModelProvider {
         });
 
         //ADVANCEMENTS
-        List.of(JSGItems.ICON_WORMHOLE, JSGItems.ICON_KAWOOSH_DEATH
+        List.of(JSGItems.ICON_WORMHOLE, JSGItems.ICON_KAWOOSH_DEATH, JSGItems.ICON_RA_REALM
         ).forEach( regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
