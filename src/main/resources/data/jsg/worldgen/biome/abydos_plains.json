@@ -114,5 +114,10 @@
       }
     ]
   },
-  "spawn_costs": {}
+  "spawn_costs": {
+    "jsg:mastadge": {
+      "energy_budget": 0.25,
+      "charge": 0.05
+    }
+  }
 }

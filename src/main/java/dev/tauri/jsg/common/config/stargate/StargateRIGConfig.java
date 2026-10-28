@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-// TODO: Refactor waves ids
 public class StargateRIGConfig {
     public static final Map<String, RIGWave> DEFAULT_VALUES = Util.make(new HashMap<>(), (map) -> {
         map.put("standard_hostile_wave", RIGWave.Builder.create()

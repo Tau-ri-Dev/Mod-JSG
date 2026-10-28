@@ -51,6 +51,11 @@ public class JSGBlockTagGenerator extends BlockTagsProvider {
         //"Worldgen" Tags
         tag(BlockTags.FEATURES_CANNOT_REPLACE).addTag(JSGBlockTags.ALL_STARGATE_PARTS);
 
+        //Allow Entity Spawn Tags
+        tag(JSGBlockTags.MASTADGE_SPAWNABLE_ON)
+                .add(Blocks.SAND)
+                .add(JSGBlocks.ABYDOS_SAND.get());
+
         //Crafting Tags
         tag(BlockTags.SMELTS_TO_GLASS).add(JSGBlocks.ABYDOS_SAND.get());
 

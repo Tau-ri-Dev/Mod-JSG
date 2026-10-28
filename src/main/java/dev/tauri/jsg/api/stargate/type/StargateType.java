@@ -8,10 +8,12 @@ import dev.tauri.jsgcore.common.config.ingame.option.ConfigOptionsHolder;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,6 +53,12 @@ public class StargateType<T extends SymbolType<?>> implements IPointOfOriginType
 
     public ResourceLocation getId() {
         return JSGRegistries.R_STARGATE_TYPE.get().getKey(this);
+    }
+
+    @NotNull
+    public ResourceLocation getAdminControllerIcon() {
+        var id = getId();
+        return JSGMapping.rl(id.getNamespace(), "textures/block/stargate/" + id.getPath() + "_stargate_base_front.png");
     }
 
     @Override

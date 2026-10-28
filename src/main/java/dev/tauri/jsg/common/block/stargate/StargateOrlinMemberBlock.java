@@ -2,6 +2,8 @@ package dev.tauri.jsg.common.block.stargate;
 
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.config.JSGConfig;
+import dev.tauri.jsg.api.stargate.type.StargateType;
+import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinMemberBE;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
@@ -27,6 +29,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -36,6 +39,11 @@ public class StargateOrlinMemberBlock extends StargateAbstractMemberBlock implem
     public StargateOrlinMemberBlock() {
         super(STARGATE_MEMBER_PROPS);
         this.registerDefaultState(defaultBlockState().setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN, false));
+    }
+
+    @Override
+    public @NonNull StargateType<?> getStargateType() {
+        return StargateTypes.ORLIN.get();
     }
 
     @Nullable

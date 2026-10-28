@@ -25,6 +25,14 @@
     }
   },
   "spawners": {
+    "creature": [
+      {
+        "type": "jsg:mastadge",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ],
     "monster": [
       {
         "type": "minecraft:spider",
@@ -58,7 +66,12 @@
       }
     ]
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "jsg:mastadge": {
+      "energy_budget": 0.10,
+      "charge": 0.05
+    }
+  },
   "carvers": {
     "air": [
       "minecraft:cave",

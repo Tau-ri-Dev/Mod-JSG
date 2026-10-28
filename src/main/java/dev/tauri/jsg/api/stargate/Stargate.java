@@ -234,7 +234,9 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
             } while (sgnPos != null && !sgnPos.equals(stargatePos));
             setStaticGateAddress(symbolType, address);
         }
-        getAndSendState(CoreStateTypes.GUI_STATE.get());
+        var state = getState(CoreStateTypes.GUI_STATE.get());
+        if (state != null)
+            sendState(CoreStateTypes.GUI_STATE.get(), state);
     }
 
     void renameStargatePos(String newName);
