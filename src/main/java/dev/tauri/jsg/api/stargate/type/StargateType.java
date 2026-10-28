@@ -58,7 +58,7 @@ public class StargateType<T extends SymbolType<?>> implements IPointOfOriginType
     @NotNull
     public ResourceLocation getAdminControllerIcon() {
         var id = getId();
-        return JSGMapping.rl(id.getNamespace(), "textures/block/stargate/stargate_" + id.getPath() + "_base_front.png");
+        return JSGMapping.rl(id.getNamespace(), "textures/block/stargate/" + id.getPath() + "_stargate_base_front.png");
     }
 
     @Override
