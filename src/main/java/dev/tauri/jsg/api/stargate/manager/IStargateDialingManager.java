@@ -1,6 +1,5 @@
 package dev.tauri.jsg.api.stargate.manager;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.Stargate;
@@ -16,6 +15,7 @@ import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.api.stargate.result.StargateCloseResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import it.unimi.dsi.fastutil.Pair;

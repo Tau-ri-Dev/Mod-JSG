@@ -1,11 +1,11 @@
 package dev.tauri.jsg.api.stargate.network;
 
 import dev.tauri.jsg.api.JSGApi;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.helper.DimensionsHelper;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import io.netty.buffer.ByteBuf;

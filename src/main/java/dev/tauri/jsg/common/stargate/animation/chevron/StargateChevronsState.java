@@ -2,7 +2,6 @@ package dev.tauri.jsg.common.stargate.animation.chevron;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.integration.StargateComputerEvents;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.api.sound.StargateSoundEventEnum;
@@ -21,6 +20,7 @@ import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.util.math.MathFunction;
 import dev.tauri.jsgcore.common.util.math.MathFunctionImpl;

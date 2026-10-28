@@ -1,8 +1,8 @@
 package dev.tauri.jsg.common.stargate.animation.incoming;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.common.stargate.manager.dialing.StargateAbstractDialingManager;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;

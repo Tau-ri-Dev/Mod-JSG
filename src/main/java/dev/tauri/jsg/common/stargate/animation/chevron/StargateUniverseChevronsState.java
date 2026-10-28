@@ -1,6 +1,5 @@
 package dev.tauri.jsg.common.stargate.animation.chevron;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
@@ -10,6 +9,7 @@ import dev.tauri.jsgcore.client.renderer.Activation;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.util.NBTUtils;
 import io.netty.buffer.ByteBuf;

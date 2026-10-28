@@ -17,7 +17,7 @@ public class JSGNotebookPageTypes {
 
     public static final RegistryObjectWrapper<NotebookPageType<StargateAddressData>> STARGATE_ADDRESS = JSGApi.REGISTRY_HELPER.notebookPage().register("stargate_address", () -> new AddressNotebookPageType<>(
             StargateAddressData::new,
-            stargateAddressData -> stargateAddressData != null ? stargateAddressData.serializeNBT() : null,
+            (registries, stargateAddressData) -> stargateAddressData != null ? stargateAddressData.serializeNBT(registries) : null,
             (level, pos, random, data) -> {
                 var symbolsToDisplay = Stargate.getRandomSymbolsToDisplay(8, (symbolIndex) -> {
                     if (symbolIndex == 9) return !(random.nextFloat() < 0.1f);

@@ -1,10 +1,10 @@
 package dev.tauri.jsg.api.stargate.network;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.manager.IStargateDialingManager;
 import dev.tauri.jsg.api.stargate.result.StargateConnectionStatus;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.Optional;

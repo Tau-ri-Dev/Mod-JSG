@@ -1,7 +1,7 @@
 package dev.tauri.jsg.api.stargate.animation;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import it.unimi.dsi.fastutil.Pair;
 import org.jetbrains.annotations.NotNull;

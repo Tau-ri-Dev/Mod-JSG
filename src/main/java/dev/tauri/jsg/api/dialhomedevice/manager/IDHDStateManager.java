@@ -2,9 +2,9 @@ package dev.tauri.jsg.api.dialhomedevice.manager;
 
 import dev.tauri.jsg.api.dialhomedevice.animation.IButtonsState;
 import dev.tauri.jsg.api.item.IDHDPartItem;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.blockentity.StateProviderInterface;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.packet.TargetPoint;
 import net.minecraft.world.item.ItemStack;
 

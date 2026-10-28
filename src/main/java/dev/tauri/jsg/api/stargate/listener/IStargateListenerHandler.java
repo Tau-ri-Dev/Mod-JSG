@@ -1,10 +1,10 @@
 package dev.tauri.jsg.api.stargate.listener;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
 import dev.tauri.jsg.api.stargate.iris.codesender.CodeSender;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 
 public interface IStargateListenerHandler extends LegacyNBTSerializable {

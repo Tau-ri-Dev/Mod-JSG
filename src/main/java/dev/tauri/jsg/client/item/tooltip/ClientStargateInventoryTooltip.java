@@ -9,6 +9,7 @@ import dev.tauri.jsgcore.client.texture.ITexture;
 import dev.tauri.jsgcore.common.config.ingame.BEConfig;
 import dev.tauri.jsgcore.common.power.JSGEnergyStorage;
 import dev.tauri.jsgcore.common.power.general.SmallEnergyStorage;
+import dev.tauri.jsgcore.common.util.CurrentRegistries;
 import dev.tauri.jsgcore.common.util.ItemNBT;
 import dev.tauri.jsgcore.common.util.JSGItemStackHandler;
 import dev.tauri.jsgcore.mapping.JSGMapping;
@@ -53,7 +54,7 @@ public class ClientStargateInventoryTooltip implements ClientTooltipComponent {
         var energyResult = new InventoryRenderEnergyResult(0, 0, 0);
         if (compound.contains("itemHandler")) {
             var handler = new JSGItemStackHandler(1);
-            handler.deserializeNBT(dev.tauri.jsg.common.helpers.CurrentRegistries.getOrThrow(), compound.getCompound("itemHandler"));
+            handler.deserializeNBT(CurrentRegistries.getOrThrow(), compound.getCompound("itemHandler"));
             energyResult = renderInventory(font, x, y, graphics, handler, compound);
             offsetY += 44;
         }

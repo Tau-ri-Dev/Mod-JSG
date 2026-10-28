@@ -1,7 +1,6 @@
 package dev.tauri.jsg.common.dialhomedevice.animation;
 
 import dev.tauri.jsg.api.dialhomedevice.animation.IButtonsState;
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.registry.JSGStateTypes;
 import dev.tauri.jsg.client.renderer.activation.DHDActivation;
 import dev.tauri.jsg.common.dialhomedevice.manager.state.DHDAbstractStateManager;
@@ -10,6 +9,7 @@ import dev.tauri.jsgcore.client.texture.ITextureLoader;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.entity.BiomeOverlayInstance;
 import dev.tauri.jsgcore.common.entity.State;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import io.netty.buffer.ByteBuf;

@@ -1,18 +1,20 @@
 package dev.tauri.jsg.api.entity;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsgcore.common.entity.IAddressNotebookPageData;
 import dev.tauri.jsgcore.common.entity.INotebookPageData;
 import dev.tauri.jsgcore.common.symbol.address.IAddress;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.PointOfOrigin;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-public class StargateAddressData implements LegacyNBTSerializable, IAddressNotebookPageData {
+public class StargateAddressData implements INBTSerializable<CompoundTag>, IAddressNotebookPageData {
     public StargateAddressDynamic address;
     public int[] symbolsToDisplay;
     public @Nullable PointOfOrigin pointOfOrigin;
@@ -36,12 +38,13 @@ public class StargateAddressData implements LegacyNBTSerializable, IAddressNoteb
         this.pointOfOrigin = null;
     }
 
-    public StargateAddressData(CompoundTag compound) {
-        deserializeNBT(compound);
+    public StargateAddressData(HolderLookup.Provider registries, CompoundTag compound) {
+        deserializeNBT(registries, compound);
     }
 
     @Override
-    public CompoundTag serializeNBT() {
+    @ParametersAreNonnullByDefault
+    public CompoundTag serializeNBT(HolderLookup.Provider registries) {
         var compound = new CompoundTag();
         compound.put("address", new StargateAddressDynamic(address).serializeNBT());
         compound.putIntArray("symbolsToDisplay", symbolsToDisplay);
@@ -51,7 +54,8 @@ public class StargateAddressData implements LegacyNBTSerializable, IAddressNoteb
     }
 
     @Override
-    public void deserializeNBT(CompoundTag compound) {
+    @ParametersAreNonnullByDefault
+    public void deserializeNBT(HolderLookup.Provider registries, CompoundTag compound) {
         address = new StargateAddressDynamic(compound.getCompound("address"));
         symbolsToDisplay = compound.getIntArray("symbolsToDisplay");
         if (compound.contains("pointOfOrigin"))

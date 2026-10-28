@@ -1,6 +1,6 @@
 package dev.tauri.jsg.api.stargate.iris.codesender;
 
-import dev.tauri.jsg.api.nbt.LegacyNBTSerializable;
+import dev.tauri.jsgcore.common.nbt.LegacyNBTSerializable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
