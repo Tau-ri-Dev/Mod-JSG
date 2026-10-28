@@ -4,10 +4,12 @@ import dev.tauri.jsg.api.block.stargate.IStargateBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateChevronBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.stargate.Stargate;
+import dev.tauri.jsg.common.helpers.ExplosionHelper;
 import dev.tauri.jsg.common.item.stargate.StargateBaseItem;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.helper.BlockPosHelper;
 import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
 import dev.tauri.jsgcore.common.helper.ItemHelper;
@@ -21,8 +23,10 @@ import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,11 +45,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -59,7 +65,8 @@ import java.util.function.Supplier;
 
 public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements dev.tauri.jsgcore.common.block.util.IItemBlock, IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_BASE_PROPS = Properties.of()
-            .strength(2.5F, 30.0F)
+            .strength(2.5f, 0.5f)
+            //.strength(2.5F, 30.0F)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
             .isViewBlocking((BlockState state, BlockGetter getter, BlockPos pos) -> false)
             .emissiveRendering((BlockState state, BlockGetter getter, BlockPos pos) -> false)
@@ -81,6 +88,27 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         );
     }
 
+    @Override
+    @ParametersAreNonnullByDefault
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, level, pos, explosion);
+        if (level instanceof ServerLevel serverLevel)
+            new ExplosionHelper.Crater(
+                    serverLevel,
+                    pos.getCenter(),
+                    new Vec3(0, 0, 0),
+                    100.0,
+                    level.random.nextLong(),
+                    new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                            .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
+                            .add(Blocks.BLACKSTONE.defaultBlockState(), 2)
+                            .add(Blocks.GRAVEL.defaultBlockState(), 1)
+                            .add(Blocks.MAGMA_BLOCK.defaultBlockState(), 1)
+                            .add(Blocks.BASALT.defaultBlockState(), 1)
+                            .add(MaterialType.REFINED_NAQUADAH.getStorage().get().defaultBlockState(), 10)
+                            .build())
+            ).create();
+    }
 
     @Override
     public JSGBlockItem getItemBlock() {
