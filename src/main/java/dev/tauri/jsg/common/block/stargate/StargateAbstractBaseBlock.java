@@ -4,10 +4,12 @@ import dev.tauri.jsg.api.block.stargate.IStargateBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateChevronBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.stargate.Stargate;
+import dev.tauri.jsg.common.helpers.ExplosionHelper;
 import dev.tauri.jsg.common.item.stargate.StargateBaseItem;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.helper.BlockPosHelper;
 import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
 import dev.tauri.jsgcore.common.helper.ItemHelper;
@@ -21,8 +23,10 @@ import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,15 +45,18 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -59,7 +66,8 @@ import java.util.function.Supplier;
 
 public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements dev.tauri.jsgcore.common.block.util.IItemBlock, IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_BASE_PROPS = Properties.of()
-            .strength(2.5F, 30.0F)
+            .strength(2.5f, 0.5f)
+            //.strength(2.5F, 30.0F)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
             .isViewBlocking((BlockState state, BlockGetter getter, BlockPos pos) -> false)
             .emissiveRendering((BlockState state, BlockGetter getter, BlockPos pos) -> false)
@@ -81,6 +89,27 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         );
     }
 
+    @Override
+    @ParametersAreNonnullByDefault
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, level, pos, explosion);
+        if (level instanceof ServerLevel serverLevel)
+            new ExplosionHelper.Crater(
+                    serverLevel,
+                    pos.getCenter(),
+                    new Vec3(0, 0, 0),
+                    100.0,
+                    level.random.nextLong(),
+                    new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                            .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
+                            .add(Blocks.BLACKSTONE.defaultBlockState(), 2)
+                            .add(Blocks.GRAVEL.defaultBlockState())
+                            .add(Blocks.MAGMA_BLOCK.defaultBlockState())
+                            .add(Blocks.BASALT.defaultBlockState())
+                            .add(MaterialType.REFINED_NAQUADAH.getStorage().get().defaultBlockState(), 10)
+                            .build())
+            ).create();
+    }
 
     @Override
     public JSGBlockItem getItemBlock() {
@@ -94,7 +123,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
         return blockState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.rotateDir(blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), rotation));
     }
@@ -123,7 +151,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public @NotNull BlockState mirror(BlockState blockState, Mirror mirror) {
         return blockState.setValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY, BlockPosHelper.flipDir(blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.FACING_HORIZONTAL_PROPERTY), mirror));
     }
@@ -137,6 +164,7 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag) {
         ItemHelper.applyGenericToolTip(this.getDescriptionId(), components, tooltipFlag);
     }
@@ -187,8 +215,8 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
             List<StargateAbstractMergeHelper.MemberAutoBuildBlock> posList = mergeHelper.getAbsentBlockPositions(world, chevron);
 
             if (!posList.isEmpty()) {
-                BlockPos pos = posList.get(0).pos;
-                BlockState state = posList.get(0).state;
+                BlockPos pos = posList.getFirst().pos;
+                BlockState state = posList.getFirst().state;
 
                 world.setBlock(pos, state, 3);
                 SoundType soundType = state.getSoundType();
@@ -221,7 +249,7 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
 
     @Override
     @ParametersAreNonnullByDefault
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState blockState, Player player) {
+    public @NonNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState blockState, Player player) {
         BlockState result = super.playerWillDestroy(level, pos, blockState, player);
         if (!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -274,7 +302,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public @NotNull FluidState getFluidState(BlockState p_152045_) {
         return p_152045_.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_152045_);
     }
@@ -293,7 +320,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     @ParametersAreNonnullByDefault
     @Nonnull
     public RenderShape getRenderShape(BlockState blockState) {
@@ -301,7 +327,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     @ParametersAreNonnullByDefault
     @Nonnull
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
@@ -310,7 +335,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getVisualShape(BlockState blockState, BlockGetter pReader, BlockPos pPos, CollisionContext pContext) {
         return (blockState.getValue(dev.tauri.jsgcore.common.blockstate.JSGProperties.RENDER_BLOCK_PROPERTY) ? Shapes.block() : Shapes.empty());
     }
@@ -362,7 +386,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }

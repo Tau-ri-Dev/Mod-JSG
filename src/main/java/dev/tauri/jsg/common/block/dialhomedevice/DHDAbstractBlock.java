@@ -36,12 +36,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@SuppressWarnings("deprecation")
 public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighlightBlock, IItemBlock {
     protected static final Properties DHD_PROPS = Properties.of()
             .explosionResistance(30f)
@@ -86,7 +86,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     @ParametersAreNonnullByDefault
     @MethodsReturnNonnullByDefault
@@ -103,7 +102,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public @NotNull FluidState getFluidState(BlockState p_152045_) {
         return p_152045_.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_152045_);
     }
@@ -142,8 +140,7 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("all")
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState blockState, Player player) {
+    public @NonNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState blockState, Player player) {
         BlockState result = super.playerWillDestroy(level, pos, blockState, player);
         if (!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -156,7 +153,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("all")
     public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
         super.wasExploded(level, pos, explosion);
         if (!level.isClientSide()) {
@@ -168,7 +164,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     @ParametersAreNonnullByDefault
     @Nonnull
     public RenderShape getRenderShape(BlockState blockState) {
@@ -176,7 +171,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     @ParametersAreNonnullByDefault
     @Nonnull
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
@@ -194,7 +188,6 @@ public abstract class DHDAbstractBlock extends TickableBEBlock implements IHighl
 
     @Override
     @ParametersAreNonnullByDefault
-    @SuppressWarnings("deprecation")
     public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
