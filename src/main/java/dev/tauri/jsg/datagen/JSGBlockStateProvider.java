@@ -1,6 +1,8 @@
 package dev.tauri.jsg.datagen;
 
 import dev.tauri.jsg.JSG;
+import dev.tauri.jsg.api.block.stargate.IStargateBlock;
+import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.blockstate.JSGProperties;
@@ -47,11 +49,11 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         createDHDBlock(JSGBlocks.DHD_PEGASUS);
 
         //CLASSIC STARGATES - MW, PG etc.
-        createClassicStargateBlocks(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK, JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK, JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK, "milkyway");
-        createClassicStargateBlocks(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK, JSGBlocks.STARGATE_PEGASUS_RING_BLOCK, JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK, "pegasus");
-        createClassicStargateBlocks(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK, JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK, JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK, "universe");
-        createClassicStargateBlocks(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK, JSGBlocks.STARGATE_TOLLAN_RING_BLOCK, JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK, "tollan");
-        createClassicStargateBlocks(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK, JSGBlocks.STARGATE_MOVIE_RING_BLOCK, JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK, "movie");
+        createClassicStargateBlocks(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK, JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK, JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK);
+        createClassicStargateBlocks(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK, JSGBlocks.STARGATE_PEGASUS_RING_BLOCK, JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK);
+        createClassicStargateBlocks(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK, JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK, JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK);
+        createClassicStargateBlocks(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK, JSGBlocks.STARGATE_TOLLAN_RING_BLOCK, JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK);
+        createClassicStargateBlocks(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK, JSGBlocks.STARGATE_MOVIE_RING_BLOCK, JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK);
 
         //ORLIN GATE
         createOrlinGateBlock(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK);
@@ -119,11 +121,12 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         itemModels().withExistingParent(blockName, JSGMapping.rl(JSG.MOD_ID, "block/" + blockName));
     }
 
-    private void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock, String gateType) {
-        var sides = JSGMapping.rl(JSG.MOD_ID, "block/" + gateType + "_sides");
-        var baseFront = JSGMapping.rl(JSG.MOD_ID, "block/" + gateType + "_base_front");
-        var ringFront = JSGMapping.rl(JSG.MOD_ID, "block/" + gateType + "_ring_front");
-        var chevronFront = JSGMapping.rl(JSG.MOD_ID, "block/" + gateType + "_chevron_front");
+    private void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock) {
+       var type = ((IStargateBlock) baseBlock.get()).getStargateType().getId().getPath();
+        var sides = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_sides");
+        var baseFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_base_front");
+        var ringFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_ring_front");
+        var chevronFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_chevron_front");
 
         buildClassicStargatePart(baseBlock, baseFront, sides);
         buildClassicStargatePart(ringBlock, ringFront, sides);
@@ -172,14 +175,15 @@ public class JSGBlockStateProvider extends BlockStateProvider {
     private void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
         var blockName = blockObj.getId().getPath();
 
-        var frontTexture = JSGMapping.rl(JSG.MOD_ID, "block/" + blockName + "_front");
-        var brokenFrontTexture = JSGMapping.rl(JSG.MOD_ID, "block/" + blockName + "_front_broken");
 
-        var southTexture = JSGMapping.rl(JSG.MOD_ID, "block/orlins_stargate_south");
-        var westTexture = JSGMapping.rl(JSG.MOD_ID, "block/orlins_stargate_west");
-        var eastTexture = JSGMapping.rl(JSG.MOD_ID, "block/orlins_stargate_east");
-        var upTexture = JSGMapping.rl(JSG.MOD_ID, "block/orlins_stargate_top_bottom");
-        var downTexture = JSGMapping.rl(JSG.MOD_ID, "block/orlins_stargate_top_bottom");
+        var frontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front");
+        var brokenFrontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front_broken");
+
+        var southTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_south");
+        var westTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_west");
+        var eastTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_east");
+        var upTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_top_bottom");
+        var downTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_top_bottom");
 
         var normalModel = models().cube(blockName, downTexture, upTexture, frontTexture, southTexture, westTexture, eastTexture)
                 .texture("particle", frontTexture);
