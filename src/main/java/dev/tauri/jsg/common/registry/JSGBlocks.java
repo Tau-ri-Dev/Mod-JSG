@@ -31,8 +31,8 @@ public class JSGBlocks {
     /**
      * STARGATE BLOCKS
      */
-    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_BASE_BLOCK = REGISTER.register("orlins_stargate_base", StargateOrlinBaseBlock::new);
-    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_MEMBER_BLOCK = REGISTER.register("orlins_stargate_ring", StargateOrlinMemberBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_BASE_BLOCK = REGISTER.register("orlin_stargate_base", StargateOrlinBaseBlock::new);
+    public static final RegistryObjectWrapper<Block> STARGATE_ORLIN_MEMBER_BLOCK = REGISTER.register("orlin_stargate_ring", StargateOrlinMemberBlock::new);
 
     public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_BASE_BLOCK = REGISTER.register("milkyway_stargate_base", StargateMilkyWayBaseBlock::new);
     public static final RegistryObjectWrapper<Block> STARGATE_MILKYWAY_CHEVRON_BLOCK = REGISTER.register("milkyway_stargate_chevron", StargateMilkyWayMemberBlock.StargateMilkyWayChevronBlock::new);
