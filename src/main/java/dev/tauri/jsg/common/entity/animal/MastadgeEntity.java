@@ -2,9 +2,12 @@ package dev.tauri.jsg.common.entity.animal;
 
 import dev.tauri.jsg.common.registry.JSGEntities;
 import dev.tauri.jsg.common.registry.JSGItems;
+import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -16,9 +19,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class MastadgeEntity extends Camel {
@@ -85,21 +90,25 @@ public class MastadgeEntity extends Camel {
         return pStack.is(JSGItems.FOOD_CHOCOLATE_BAR.get());
     }
 
-    @Nullable
+    @Nonnull
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.HOGLIN_AMBIENT;
     }
 
-    @Nullable
+    @Nonnull
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return SoundEvents.RAVAGER_HURT;
     }
 
-    @Nullable
+    @Nonnull
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.DOLPHIN_DEATH;
+    }
+
+    public static boolean checkSpawnRules(EntityType<?> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getBlockState(pPos.below()).is(JSGBlockTags.MASTADGE_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
     }
 }
