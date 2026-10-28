@@ -20,6 +20,7 @@ public class JSGDataGenerators {
 
         generator.addProvider(event.includeServer(), new JSGRecipeProvider(output));
         generator.addProvider(event.includeServer(), JSGLootTableProvider.create(output));
+        generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
 
         generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
         generator.addProvider(event.includeClient(), new JSGItemModelProvider(output, exFileHelper));
