@@ -24,8 +24,21 @@
       "sound": "minecraft:music.overworld.badlands"
     }
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "jsg:mastadge": {
+      "energy_budget": 0.15,
+      "charge": 0.05
+    }
+  },
   "spawners": {
+    "creature": [
+      {
+        "type": "jsg:mastadge",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
     "monster": [
       {
         "type": "minecraft:spider",
