@@ -4,8 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
-import dev.tauri.jsg.api.stargate.type.StargateType;
-import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.client.screen.gui.admincontroller.AdminControllerGUI;
 import dev.tauri.jsg.common.item.admincontroller.AdminControllerAction;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
@@ -19,7 +17,6 @@ import dev.tauri.jsgcore.mapping.JSGMapping;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -368,7 +365,6 @@ public class NetworkTab extends AdminControllerTab {
                                 (pMouseX - currentX - NetworkMap.this.getX()) < this.getX() + this.getWidth() &&
                                 (pMouseY - currentY - NetworkMap.this.getY()) < this.getY() + this.getHeight()) && NetworkMap.this.isMouseInside(pMouseX, pMouseY);
                 var wh = getWidth();
-                var id = Optional.ofNullable(sgPos.getStargateType()).map(StargateType::getId).orElseGet(() -> StargateTypes.MILKYWAY.get().getId());
 
                 var p = NetworkTab.this.baseGUI.player;
                 if (dimension.isEmpty() || p.level().dimension() == dimension.get()) {
@@ -385,7 +381,7 @@ public class NetworkTab extends AdminControllerTab {
                 if (outsideFactor >= 1f && !entry.getKey().getName().isEmpty()) {
                     graphics.drawCenteredString(NetworkTab.this.baseGUI.getMinecraft().font, entry.getKey().getName(), (int) (x + (wh / 2f)), (int) (y - 10), 0xffffff);
                 }
-                graphics.blit(JSGMapping.rl(id.getNamespace(), "textures/block/stargate/stargate_" + id.getPath() + "_base_front.png"),
+                graphics.blit(Objects.requireNonNull(sgPos.getStargateType()).getAdminControllerIcon(),
                         (int) x, (int) y, 0, 0.0F, 0.0F, wh, wh, wh, wh);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
                 RenderSystem.disableBlend();
@@ -527,12 +523,12 @@ public class NetworkTab extends AdminControllerTab {
             }
             graphics.pose().pushPose();
             graphics.pose().translate(-(currentX), -(currentY), 0);
-            var i = 0;
+            //var i = 0;
             //graphics.drawString(Minecraft.getInstance().font, "currentX: " + currentX, 10, 10 * (++i), 0xffffff);
             //graphics.drawString(Minecraft.getInstance().font, "currentY: " + currentY, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "scale: " + scale, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "mouseX: " + ((pMouseX - getX() - currentX)) / scale, 10, 10 * (++i), 0xffffff);
-            graphics.drawString(Minecraft.getInstance().font, "mouseY: " + ((pMouseY - getY() - currentY)) / scale, 10, 10 * (++i), 0xffffff);
+            //graphics.drawString(Minecraft.getInstance().font, "scale: " + scale, 10, 10 * (++i), 0xffffff);
+            //graphics.drawString(Minecraft.getInstance().font, "mouseX: " + ((pMouseX - getX() - currentX)) / scale, 10, 10 * (++i), 0xffffff);
+            //graphics.drawString(Minecraft.getInstance().font, "mouseY: " + ((pMouseY - getY() - currentY)) / scale, 10, 10 * (++i), 0xffffff);
             graphics.pose().popPose();
         }
 
