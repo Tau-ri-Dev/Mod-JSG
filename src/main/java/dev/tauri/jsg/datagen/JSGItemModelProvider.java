@@ -49,7 +49,8 @@ public class JSGItemModelProvider extends ItemModelProvider {
         });
 
         //ADVANCEMENTS
-        List.of(JSGItems.ICON_WORMHOLE, JSGItems.ICON_KAWOOSH_DEATH, JSGItems.ICON_RA_REALM
+        List.of(JSGItems.ICON_WORMHOLE, JSGItems.ICON_KAWOOSH_DEATH, JSGItems.ICON_RA_REALM,
+                JSGItems.ICON_PRIEST_TRADE
         ).forEach( regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")

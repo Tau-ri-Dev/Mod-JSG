@@ -49,6 +49,7 @@ public class JSGItems {
     public static final RegistryObjectWrapper<JSGItem> ICON_KAWOOSH_DEATH = Constants.JSG_ITEM_HELPER.builder("icon_kawoosh_death").clearTooltip().buildGeneric();
     public static final RegistryObjectWrapper<JSGItem> ICON_WORMHOLE = Constants.JSG_ITEM_HELPER.builder("icon_wormhole").clearTooltip().buildGeneric();
     public static final RegistryObjectWrapper<JSGItem> ICON_RA_REALM = Constants.JSG_ITEM_HELPER.builder("icon_ra_realm").clearTooltip().buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> ICON_PRIEST_TRADE = Constants.JSG_ITEM_HELPER.builder("icon_trade_with_priest").clearTooltip().buildGeneric();
 
     /**
      * DHD Parts
