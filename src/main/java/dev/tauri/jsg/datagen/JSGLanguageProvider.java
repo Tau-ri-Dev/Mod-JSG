@@ -1,13 +1,14 @@
 package dev.tauri.jsg.datagen;
 
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsg.common.registry.JSGSoundEvents;
+import dev.tauri.jsg.common.registry.*;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import dev.tauri.jsgcore.datagen.CoreLanguageProvider;
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.Item;
-import org.jetbrains.annotations.Nullable;
 
 public class JSGLanguageProvider extends CoreLanguageProvider {
     public JSGLanguageProvider(PackOutput output, String locate) {
@@ -19,21 +20,53 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add(object.get().getDescriptionId() + ".empty", "Empty " + pathToName(object.getId().getPath()));
     }
 
-    protected void addMusicDiscItem(RegistryObjectWrapper<? extends Item> object, String tooltip, @Nullable String extendedTooltip) {
-        String name = object.getId().getPath().contains("siren") ? "§3Siren Disc" : "§3Music Disc";
-        add(object.get(), name);
+    protected void addVillagerProfession(RegistryObjectWrapper<? extends VillagerProfession> object) {
+        var modID = object.getId().getNamespace();
+        var key = "entity.minecraft.villager." + modID + "." + object.getId().getPath();
+        var name = pathToName(object.getId().getPath());
+        add(key, name);
+    }
 
-        String tooltipKey = object.get().getDescriptionId() + ".desc";
-        add(tooltipKey, tooltip);
+    protected  void addVillagerType(RegistryObjectWrapper<VillagerType> object) {
+        var modID = object.getId().getNamespace();
 
-        if (extendedTooltip != null) {
-            String extendedKey = object.get().getDescriptionId() + ".desc.extended";
-            add(extendedKey, extendedTooltip);
-        }
+        var key = "entity.minecraft.villager." + modID + "." + object.getId().getPath();
+        var name = pathToName(object.getId().getPath());
+        add(key, name);
     }
 
     @Override
     protected void addTranslations() {
+        //SPECIAL BLOCKS
+        addBlockWithCustomName(JSGBlocks.IRIS_BLOCK, "Iris / Shield block");
+        addBlockWithCustomName(JSGBlocks.ABYDOS_SAND, "Sand");
+
+        //UTILITIES BLOCKS
+        addBlockWithTooltip(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK,"Dial a stargate using redstone signal" ,"To dial a symbol you need to set symbol ID%nl%using listed inputs then engage it.%nl%Selected symbol id = ((Right * 16) + Front)%nl%%nl%" +ChatFormatting.BOLD + "Inputs:" + "%nl%Top: Engage gate%nl%Bottom: Enable DHD Dialing animation%nl%Left: Engage symbol%nl%Right: 2nd bit of symbol ID%nl%Front: 1st bit of symbol ID");
+        addBlockWithTooltip(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK,"Get redstone output by current stargate state",ChatFormatting.BOLD + "Output:" + "%nl%0: Idle%nl%1: Dialing DHD%nl%2: Dialing Computer%nl%3: Engaged Incoming%nl%4: Engaged Outgoing%nl%5: Unstable%nl%6: Failing%nl%7: Incoming Wormhole");
+        addBlockWithTooltip(JSGBlocks.TOASTER, "Orlin still owes Carter a new one.", null);
+        addBlockWithTooltip(JSGBlocks.PRINTER, "Useful to print notebook pages", null);
+
+        //STARGATE BLOCKS
+        addBlock(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK);
+        addBlock(JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK);
+        addBlock(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK);
+        addBlock(JSGBlocks.STARGATE_PEGASUS_RING_BLOCK);
+        addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK);
+        addBlock(JSGBlocks.STARGATE_MOVIE_RING_BLOCK);
+        addBlock(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK);
+        addBlock(JSGBlocks.STARGATE_TOLLAN_RING_BLOCK);
+
+        addBlockWithCustomName(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK, "Orlin's Stargate Base");
+        addBlockWithCustomName(JSGBlocks.STARGATE_ORLIN_MEMBER_BLOCK, "Orlin's Stargate Ring");
+
         //ICONS FOR ADVANCEMENTS
         addItem(JSGItems.ICON_KAWOOSH_DEATH);
         addItem(JSGItems.ICON_WORMHOLE);
@@ -43,39 +76,39 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         //DHD PARTS
         addItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS);
         addItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE);
-        addItem(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL);
-        addItem(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON);
-        addItem(JSGItems.MILKYWAY_DHD_UPGRADES_COVER);
-        add("block." + JSG.MOD_ID + ".milkyway_dhd", "Milky Way Dial Home Device (DHD)");
+        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal","Main control crystal of DHD","Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
+        addItemWithCustomName(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)");
+        addItemWithCustomName(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate");
+        addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
+
 
         addItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS);
         addItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE);
-        addItem(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL);
-        addItem(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON);
-        addItem(JSGItems.PEGASUS_DHD_UPGRADES_COVER);
-        add("block." + JSG.MOD_ID + ".milkyway_dhd", "Pegasus Dial Home Device (DHD)");
+        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL, "Pegasus DHD Main Control Crystal","Main control crystal of DHD","Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
+        addItemWithCustomName(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)");
+        addItemWithCustomName(JSGItems.PEGASUS_DHD_UPGRADES_COVER, "Pegasus Upgrades Cover Plate");
+        addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Pegasus Dial Home Device (DHD)", "Control panel for Pegasus gates", null);
 
         addItem(JSGItems.DHD_NAQUADAH_TANK);
-        add("item." + JSG.MOD_ID + ".dhd.assembly_helper.needed", "Missing %s");
-
 
         //ADDRESS AND UPGRADE CRYSTALS
-        addItem(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED);
+        addItemWithTooltip(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED, "Upgrade for DHDs", "This crystal allows you to " + ChatFormatting.BOLD + "DIAL" + "%nl%8 and 9 symbol addresses when%nl%placed into a DHD.%nl%%nl%" + ChatFormatting.ITALIC +"This upgrade can be combined%nl%" + ChatFormatting.ITALIC + "with other DHD upgrades!");
+
         addItem(JSGItems.CRYSTAL_ADDRESS_STATIC);
         addItem(JSGItems.CRYSTAL_ADDRESS_EXTENDED);
         addItem(JSGItems.CRYSTAL_GLYPH_MILKYWAY);
         addItem(JSGItems.CRYSTAL_GLYPH_PEGASUS);
         addItem(JSGItems.CRYSTAL_GLYPH_UNIVERSE);
 
-        addItem(JSGItems.UPGRADE_IRIS);
-        addItem(JSGItems.UPGRADE_IRIS_TRINIUM);
-        addItem(JSGItems.UPGRADE_SHIELD);
-        addItem(JSGItems.UPGRADE_IRIS_CREATIVE);
+        addItemWithTooltip(JSGItems.UPGRADE_IRIS, "Iris upgrade tier I", "Iris works as in lore.%nl%Just install this into any gate.");
+        addItemWithTooltip(JSGItems.UPGRADE_IRIS_TRINIUM, "Iris upgrade tier II", "Iris works as in lore.%nl%Just install this into any gate.");
+        addItemWithTooltip(JSGItems.UPGRADE_SHIELD, "Iris upgrade tier III", "Shield blocks incoming travellers.%nl%Just install this into any gate.%nl%Instead of durability%nl%it consumes energy from the gate buffer.");
+        addItemWithTooltip(JSGItems.UPGRADE_IRIS_CREATIVE, "Iris with infinite durability", null);
 
         //TOOLS
-        addItem(JSGItems.ADMIN_CONTROLLER);
-        addItem(JSGItems.UNIVERSE_DIALER);
-        add("item." + JSG.MOD_ID + ".gdo", "Garage Door Opener (GDO)");
+        addItemWithTooltip(JSGItems.ADMIN_CONTROLLER, "Stargate controller and debugger", "This item shows you whole SG network when linked to a gate.%nl%It's capable of dialing the linked gate%nl%by spinning the ring, locking symbols like DHD%nl%and dialing all symbols at once like Nox did in series.");
+        addItemWithTooltip(JSGItems.UNIVERSE_DIALER, "A controller that works with Universe gates, along with much more!", null);
+        addItemWithCustomNameAndTooltip(JSGItems.GDO, "Garage Door Opener (GDO)",  "GDO is capable of sending an IDC code through an open wormhole to open the iris.", null);
 
         //CRAFTING ITEMS
         addItem(JSGItems.HOLDER_CRYSTAL);
@@ -130,7 +163,10 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("item." + JSG.MOD_ID + ".iris_blade_stone", "Stone Iris Blade");
         add("pattern." + JSG.MOD_ID + ".iris_blade", "Iris Blade");
 
-        add("pattern." + JSG.MOD_ID + ".incomplete_chocolate_bar", "Incomplete Chocolate Bar");
+        add("item." + JSG.MOD_ID + ".incomplete_chocolate_bar", "Incomplete Chocolate Bar");
+
+        //TABS
+        add("itemGroup." + JSG.MOD_ID + ".machines", "JSG: Machines");
 
         //MAIN MENU
         add("menu.about", "About JSG Mod");
@@ -143,12 +179,20 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("menu.tip.unstable_eh", "TIP: Travelling through an unstable wormhole can result in death.");
         add("menu.tip.abydos_cartouche", "TIP: Explore Abydos to find cartouches with stargate addresses.");
 
+        //GENERAL TOOLTIPS, HOTBAR MESSAGES
+        add("item." + JSG.MOD_ID + ".dhd.assembly_helper.needed", "Missing %s");
+        add("item." + JSG.MOD_ID + ".iris.tooltip.integrity", "Integrity:");
+        add("item." + JSG.MOD_ID + ".iris.tooltip.durability", "Durability:");
+
+
+        add("item." + JSG.MOD_ID + ".iris_blade_stone.tooltip", "Use this blade to craft cast");
+
 
         //SDG - STARGATE DIMENSION GENERATOR
         add("createWorld.stargates_generating", "Generating stargates in dimensions... %s%%");
         add("createWorld.stargates_generating.trying", "Trying generation in %s");
         add("createWorld.stargates_generating.searching", "Searching for structure in %s");
-        add("createWorld.stargates_generating.genearating", "Generating stargate in %s");
+        add("createWorld.stargates_generating.generating", "Generating stargate in %s");
         add("createWorld.stargates_generating.searching_stargate", "Searching for stargate in %s (%s) attempt %s");
         add("createWorld.stargates_generating.running_sg_regen", "Running stargate regeneration...");
 
@@ -167,19 +211,19 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("createWorld.dhd_disassemble.milkyway.buttons_plate", "Buttons Plate");
         add("createWorld.dhd_disassemble.milkyway.buttons", "DHD Buttons");
 
-        add("createWorld..stargates_generating.dim_status.ok", "Generated");
-        add("createWorld..stargates_generating.dim_status.already_there", "Already there");
-        add("createWorld..stargates_generating.dim_status.no_structure", "No structure available");
-        add("createWorld..stargates_generating.dim_status.skipped", "Skipped by config");
-        add("createWorld..stargates_generating.dim_status.error", "Error");
+        add("createWorld.stargates_generating.dim_status.ok", "Generated");
+        add("createWorld.stargates_generating.dim_status.already_there", "Already there");
+        add("createWorld.stargates_generating.dim_status.no_structure", "No structure available");
+        add("createWorld.stargates_generating.dim_status.skipped", "Skipped by config");
+        add("createWorld.stargates_generating.dim_status.error", "Error");
 
         //IN-GAME CONFIG
-        add("gui." + JSG.MOD_ID + ",config", "Just Stargate Mod Configuration");
-        add("gui." + JSG.MOD_ID + ",config.child.debug", "Debug Settings");
-        add("gui." + JSG.MOD_ID + ",config.child.general", "General Configuration");
-        add("gui." + JSG.MOD_ID + ",config.child.dialhomedevide", "DHD Configuration");
-        add("gui." + JSG.MOD_ID + ",config.child.stargate", "Stargates Configuration");
-        add("gui." + JSG.MOD_ID + ",config.child.computersintegration", "Computers Integration Configuration");
+        add("gui." + JSG.MOD_ID + ".config", "Just Stargate Mod Configuration");
+        add("gui." + JSG.MOD_ID + ".config.child.debug", "Debug Settings");
+        add("gui." + JSG.MOD_ID + ".config.child.general", "General Configuration");
+        add("gui." + JSG.MOD_ID + ".config.child.dialhomedevide", "DHD Configuration");
+        add("gui." + JSG.MOD_ID + ".config.child.stargate", "Stargates Configuration");
+        add("gui." + JSG.MOD_ID + ".config.child.computersintegration", "Computers Integration Configuration");
 
         add("gui." + JSG.MOD_ID + ".ingame_config.default_value", "Default: %s");
         add("gui." + JSG.MOD_ID + ".ingame_config.time_limit_mode.title", "Stargate Time Limit Mode");
@@ -215,22 +259,23 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui." + JSG.MOD_ID + ".ingame_config.orange_shield.comment", "Switch shield to orange color on this gate");
 
         //TREASURE MAPS
-                add("filled_map.burried_stargate", "Chappa'ai Location Map");
-                add("filled_map.abydos_treasure", "Old Abydos Map");
+        add("filled_map.burried_stargate", "Chappa'ai Location Map");
+        add("filled_map.abydos_treasure", "Old Abydos Map");
 
         //ENTITIES
-        //TODO: Add Method to get villager type and professions!
-        //TODO: check out other providers -> maybe do it same way as here...
-                /*"entity.minecraft.villager.jsg.priest_desert": "Priest",
-                "entity.minecraft.villager.jsg.priest_jungle": "Priest",
-                "entity.minecraft.villager.jsg.priest_plains": "Priest",
-                "entity.minecraft.villager.jsg.priest_savanna": "Priest",
-                "entity.minecraft.villager.jsg.priest_snow": "Priest",
-                "entity.minecraft.villager.jsg.priest_swamp": "Priest",
-                "entity.minecraft.villager.jsg.priest_taiga": "Priest",
-                "entity.minecraft.villager.jsg.slave_miner": "Slave Miner",
+        addEntity(JSGEntities.MASTADGE);
 
-                "entity.jsg.mastadge": "Mastadge",*/
+        addVillagerProfession(JSGVillagers.PRIEST_DESERT);
+        addVillagerProfession(JSGVillagers.PRIEST_JUNGLE);
+        addVillagerProfession(JSGVillagers.PRIEST_PLAINS);
+        addVillagerProfession(JSGVillagers.PRIEST_SAVANNA);
+        addVillagerProfession(JSGVillagers.PRIEST_SNOW);
+        addVillagerProfession(JSGVillagers.PRIEST_SWAMP);
+        addVillagerProfession(JSGVillagers.PRIEST_TAIGA);
+        addVillagerProfession(JSGVillagers.SLAVE_MINER);
+
+        addVillagerType(JSGVillagers.ABYDOS_TYPE);
+
 
 
                  /*"block.jsg.iris_block": "Iris / Shield block",

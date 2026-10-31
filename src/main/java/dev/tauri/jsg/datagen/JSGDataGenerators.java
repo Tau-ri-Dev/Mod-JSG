@@ -37,5 +37,6 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
 
         generator.addProvider(event.includeServer(), new JSGDamageTypeProvider(output, lookupProvider));
+        generator.addProvider(event.includeClient(), new JSGLanguageProvider(output, "en_us"));
     }
 }

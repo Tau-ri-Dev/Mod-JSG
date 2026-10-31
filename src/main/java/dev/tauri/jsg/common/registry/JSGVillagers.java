@@ -41,13 +41,13 @@ public class JSGVillagers {
 
     public static final RegistryObjectWrapper<PoiType> NAQUADAH_CAULDRON_POI = POI_REGISTER.register("naquadah_cauldron", () -> new PoiType(ImmutableSet.copyOf(CoreBlocks.CAULDRON.get().getStateDefinition().getPossibleStates()), 4, 1));
 
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_DESERT = PROFESSION_REGISTER.register("priest_desert", () -> new VillagerProfession("priest_desert", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_JUNGLE = PROFESSION_REGISTER.register("priest_jungle", () -> new VillagerProfession("priest_jungle", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_PLAINS = PROFESSION_REGISTER.register("priest_plains", () -> new VillagerProfession("priest_plains", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SAVANNA = PROFESSION_REGISTER.register("priest_savanna", () -> new VillagerProfession("priest_savanna", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SNOW = PROFESSION_REGISTER.register("priest_snow", () -> new VillagerProfession("priest_snow", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SWAMP = PROFESSION_REGISTER.register("priest_swamp", () -> new VillagerProfession("priest_swamp", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
-    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_TAIGA = PROFESSION_REGISTER.register("priest_taiga", () -> new VillagerProfession("priest_taiga", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_DESERT = PROFESSION_REGISTER.register("desert_priest", () -> new VillagerProfession("priest_desert", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_JUNGLE = PROFESSION_REGISTER.register("jungle_priest", () -> new VillagerProfession("priest_jungle", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_PLAINS = PROFESSION_REGISTER.register("plains_priest", () -> new VillagerProfession("priest_plains", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SAVANNA = PROFESSION_REGISTER.register("savanna_priest", () -> new VillagerProfession("priest_savanna", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SNOW = PROFESSION_REGISTER.register("snow_priest", () -> new VillagerProfession("priest_snow", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_SWAMP = PROFESSION_REGISTER.register("swamp_priest", () -> new VillagerProfession("priest_swamp", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
+    public static final RegistryObjectWrapper<VillagerProfession> PRIEST_TAIGA = PROFESSION_REGISTER.register("taiga_priest", () -> new VillagerProfession("priest_taiga", holder -> false, holder -> false, ImmutableSet.of(), ImmutableSet.of(), null));
 
     public static final RegistryObjectWrapper<VillagerProfession> SLAVE_MINER = PROFESSION_REGISTER.register("slave_miner", () -> new VillagerProfession("slave_miner", holder -> holder.is(Objects.requireNonNull(NAQUADAH_CAULDRON_POI.getKey())), holder ->
             holder.is(Objects.requireNonNull(NAQUADAH_CAULDRON_POI.getKey())),
