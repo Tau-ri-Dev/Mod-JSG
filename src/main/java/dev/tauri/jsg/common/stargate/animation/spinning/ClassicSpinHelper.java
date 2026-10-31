@@ -234,9 +234,21 @@ public class ClassicSpinHelper extends State implements ISpinHelper {
      */
     @Override
     public boolean rotateFreely(@NotNull EnumSpinDirection direction) {
+        return rotateFreely(direction, getRingSpeedFromConfig());
+    }
+
+    /**
+     * Start the spinning animation of the gate's ring and spin until told to stop
+     *
+     * @param direction direction in which the ring should spin
+     * @param speed     speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true if success, otherwise false
+     */
+    @Override
+    public boolean rotateFreely(@NotNull EnumSpinDirection direction, float speed) {
         if (isSpinning()) return false;
         this.isSpinning = true;
-        updateRingSpeedFromConfig();
+        this.speedFactor = speed;
         this.direction = direction;
         this.ringRotationStart = stargate.getTime();
         //this.lastStableRingAngle = apply(stargate.getTime());
@@ -259,10 +271,23 @@ public class ClassicSpinHelper extends State implements ISpinHelper {
      */
     @Override
     public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction) {
+        return moveTo(angle, direction, getRingSpeedFromConfig());
+    }
+
+    /**
+     * Start spinning the ring to get it under specified angle. Stops automatically if reaches the angle or when told to stop.
+     *
+     * @param angle     target angle
+     * @param direction direction in which the ring should spin
+     * @param speed     speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true is success, otherwise false
+     */
+    @Override
+    public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction, float speed) {
         if (isSpinning()) return Pair.of(false, -1f);
         this.isSpinning = true;
         this.rotateFreely = null;
-        updateRingSpeedFromConfig();
+        this.speedFactor = speed;
         this.direction = direction;
         this.targetRingAngle = angle;
         this.ringRotationStart = stargate.getTime();
@@ -289,6 +314,19 @@ public class ClassicSpinHelper extends State implements ISpinHelper {
     }
 
     /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop.
+     *
+     * @param symbol    target symbol
+     * @param direction direction in which the ring should spin
+     * @param speed     speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true is success, otherwise false
+     */
+    @Override
+    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, @NotNull EnumSpinDirection direction, float speed) {
+        return moveTo(symbol.getAngle(), direction, speed);
+    }
+
+    /**
      * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop.<br>
      * Direction of the spin is the opposite of the previous spin.
      *
@@ -301,28 +339,69 @@ public class ClassicSpinHelper extends State implements ISpinHelper {
         return moveTo(symbol.getAngle(), direction);
     }
 
+    /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop.<br>
+     * Direction of the spin is the opposite of the previous spin.
+     *
+     * @param symbol target symbol
+     * @param speed  speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true is success, otherwise false
+     */
+    @Override
+    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, float speed) {
+        var direction = (this.direction != null ? this.direction.opposite() : EnumSpinDirection.CLOCKWISE);
+        return moveTo(symbol.getAngle(), direction, speed);
+    }
+
     public void setSpinStopData(@Nullable CompoundTag compound) {
         this.stopSpinData = compound;
         stargate.setChanged();
     }
 
+    /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop. If stopped automatically after reaching target symbol, the symbol will engage.
+     * <p>
+     * Will use ring rotation speed configured inside the BE config.
+     *
+     * @param symbolInterface   target symbol
+     * @param isFinal           should lock top chevron?
+     * @param noEnergy          should be engaged without energy consumption?
+     * @param ignoreMaxChevrons ignore maximum dialable symbol count?
+     * @return true is success, otherwise false;
+     */
     @Override
     public Pair<Boolean, Float> moveToAndEngage(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons) {
+        return moveToAndEngage(symbolInterface, isFinal, noEnergy, ignoreMaxChevrons, getRingSpeedFromConfig());
+    }
+
+    /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop. If stopped automatically after reaching target symbol, the symbol will engage.
+     *
+     * @param symbolInterface   target symbol
+     * @param isFinal           should lock top chevron?
+     * @param noEnergy          should be engaged without energy consumption?
+     * @param ignoreMaxChevrons ignore maximum dialable symbol count?
+     * @param speed             speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true is success, otherwise false;
+     */
+    @Override
+    public Pair<Boolean, Float> moveToAndEngage(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons, float speed) {
         var data = new CompoundTag();
         data.putInt("symbol", symbolInterface.getId());
         data.putBoolean("isFinal", isFinal);
         data.putBoolean("noEnergy", noEnergy);
         data.putBoolean("ignoreMaxChevrons", ignoreMaxChevrons);
-        var r = moveTo(symbolInterface);
+        var r = moveTo(symbolInterface, speed);
         if (r.first())
             setSpinStopData(data);
         return r;
     }
 
-    protected void updateRingSpeedFromConfig() {
-        if (stargate instanceof StargateClassicBaseBE<?> configBe) {
-            speedFactor = configBe.getSpeedFactor();
-        }
+    @Override
+    public float getRingSpeedFromConfig() {
+        if (stargate instanceof StargateClassicBaseBE<?> configBe)
+            return configBe.getSpeedFactor();
+        return 1f;
     }
 
     @Override

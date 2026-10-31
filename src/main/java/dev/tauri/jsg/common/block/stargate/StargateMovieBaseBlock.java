@@ -18,7 +18,7 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-public class StargateMovieBaseBlock extends StargateClassicBaseBlock {
+public class StargateMovieBaseBlock extends StargateMilkyWayBaseBlock {
     @Override
     public @NonNull StargateType<?> getStargateType() {
         return StargateTypes.MOVIE.get();

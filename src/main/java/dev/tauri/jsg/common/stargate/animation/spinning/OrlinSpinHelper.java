@@ -55,27 +55,27 @@ public class OrlinSpinHelper extends ClassicSpinHelper {
     }
 
     @Override
-    public boolean rotateFreely(@NotNull EnumSpinDirection direction) {
+    public boolean rotateFreely(@NotNull EnumSpinDirection direction, float speed) {
         return false;
     }
 
     @Override
-    public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction) {
+    public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction, float speed) {
         return Pair.of(false, -1f);
     }
 
     @Override
-    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, @NotNull EnumSpinDirection direction) {
+    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, @NotNull EnumSpinDirection direction, float speed) {
         return Pair.of(false, -1f);
     }
 
     @Override
-    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol) {
+    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, float speed) {
         return Pair.of(false, -1f);
     }
 
     @Override
-    public Pair<Boolean, Float> moveToAndEngage(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons) {
+    public Pair<Boolean, Float> moveToAndEngage(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons, float speed) {
         return Pair.of(false, -1f);
     }
 

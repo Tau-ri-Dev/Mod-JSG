@@ -109,9 +109,13 @@ public class PegasusSpinHelper extends ClassicSpinHelper {
 
     @ParametersAreNonnullByDefault
     public Pair<Boolean, Float> moveTo(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, EnumSpinDirection direction, ChevronEnum startingPoint, boolean playRingRollStart) {
+        return moveTo(targetSymbol, chevronToMoveTo, direction, startingPoint, playRingRollStart, getRingSpeedFromConfig());
+    }
+
+    public Pair<Boolean, Float> moveTo(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, EnumSpinDirection direction, ChevronEnum startingPoint, boolean playRingRollStart, float speed) {
         if (isSpinning()) return Pair.of(false, -1f);
         this.isSpinning = true;
-        updateRingSpeedFromConfig();
+        this.speedFactor = speed;
         this.direction = direction;
         this.targetSymbol = targetSymbol;
         this.ringRotationStart = stargate.getTime();
@@ -142,39 +146,47 @@ public class PegasusSpinHelper extends ClassicSpinHelper {
     }
 
     public Pair<Boolean, Float> moveToAndEngage(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, ChevronEnum startingPoint, boolean noEnergy, boolean ignoreMaxChevrons, boolean playRingRollStart, boolean stopRingRollAfterStop) {
+        return moveToAndEngage(targetSymbol, chevronToMoveTo, startingPoint, noEnergy, ignoreMaxChevrons, playRingRollStart, stopRingRollAfterStop, getRingSpeedFromConfig());
+    }
+
+    public Pair<Boolean, Float> moveToAndEngage(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, ChevronEnum startingPoint, boolean noEnergy, boolean ignoreMaxChevrons, boolean playRingRollStart, boolean stopRingRollAfterStop, float speed) {
         var direction = (startingPoint == ChevronEnum.getFinal() ? EnumSpinDirection.CLOCKWISE : (this.direction != null ? this.direction.opposite() : EnumSpinDirection.CLOCKWISE));
-        return moveToAndEngage(targetSymbol, chevronToMoveTo, direction, startingPoint, noEnergy, ignoreMaxChevrons, playRingRollStart, stopRingRollAfterStop);
+        return moveToAndEngage(targetSymbol, chevronToMoveTo, direction, startingPoint, noEnergy, ignoreMaxChevrons, playRingRollStart, stopRingRollAfterStop, speed);
     }
 
     public Pair<Boolean, Float> moveToAndEngage(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, EnumSpinDirection direction, ChevronEnum startingPoint, boolean noEnergy, boolean ignoreMaxChevrons, boolean playRingRollStart, boolean stopRingRollAfterStop) {
+        return moveToAndEngage(targetSymbol, chevronToMoveTo, direction, startingPoint, noEnergy, ignoreMaxChevrons, playRingRollStart, stopRingRollAfterStop, getRingSpeedFromConfig());
+    }
+
+    public Pair<Boolean, Float> moveToAndEngage(SymbolInterface targetSymbol, ChevronEnum chevronToMoveTo, EnumSpinDirection direction, ChevronEnum startingPoint, boolean noEnergy, boolean ignoreMaxChevrons, boolean playRingRollStart, boolean stopRingRollAfterStop, float speed) {
         var data = new CompoundTag();
         data.putInt("symbol", targetSymbol.getId());
         data.putBoolean("isFinal", chevronToMoveTo.isFinal());
         data.putBoolean("noEnergy", noEnergy);
         data.putBoolean("ignoreMaxChevrons", ignoreMaxChevrons);
         data.putBoolean("keepRingRoll", !stopRingRollAfterStop);
-        var r = moveTo(targetSymbol, chevronToMoveTo, direction, startingPoint, playRingRollStart);
+        var r = moveTo(targetSymbol, chevronToMoveTo, direction, startingPoint, playRingRollStart, speed);
         if (r.first())
             setSpinStopData(data);
         return r;
     }
 
     @Override
-    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, @NotNull EnumSpinDirection direction) {
+    public Pair<Boolean, Float> moveTo(@NotNull SymbolInterface symbol, @NotNull EnumSpinDirection direction, float speed) {
         JSG.logger.error("Move to without start offset parameter is unsupported in pegasus spin helper!");
         stargate.getLogManager().error(Component.literal("Move to without start offset parameter is unsupported in pegasus spin helper!"));
         return Pair.of(false, -1f);
     }
 
     @Override
-    public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction) {
+    public Pair<Boolean, Float> moveTo(double angle, @NotNull EnumSpinDirection direction, float speed) {
         JSG.logger.error("Move to with angle parameter is unsupported in pegasus spin helper!");
         stargate.getLogManager().error(Component.literal("Move to with angle parameter is unsupported in pegasus spin helper!"));
         return Pair.of(false, -1f);
     }
 
     @Override
-    public boolean rotateFreely(@NotNull EnumSpinDirection direction) {
+    public boolean rotateFreely(@NotNull EnumSpinDirection direction, float speed) {
         JSG.logger.error("Rotate freely is unsupported in pegasus spin helper!");
         stargate.getLogManager().error(Component.literal("Rotate freely is unsupported in pegasus spin helper!"));
         return false;

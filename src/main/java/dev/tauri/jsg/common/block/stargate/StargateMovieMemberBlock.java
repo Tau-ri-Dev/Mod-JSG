@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Supplier;
 
-public abstract class StargateMovieMemberBlock extends StargateClassicMemberBlock {
+public abstract class StargateMovieMemberBlock extends StargateMilkyWayMemberBlock {
 
     @Override
     public @NonNull StargateType<?> getStargateType() {

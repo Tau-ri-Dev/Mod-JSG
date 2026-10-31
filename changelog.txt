@@ -25,6 +25,7 @@ CHANGELOG JSG 6.0.0.0 & 7.0.0.0:
             - Added new crystal that displays these static addresses when inserted
             - Each static address is 9 symbols long (including PoO)
         - Added Puddle Jumper (from Lantea: Stargates mod) compatibility
+        - Added manual dialing for Milky Way and Movie gates
     Removed:
         - Removed stargate sizes config option - now only MEDIUM gates are present
         - Removed old cauldrons

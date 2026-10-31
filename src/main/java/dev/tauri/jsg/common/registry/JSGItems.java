@@ -10,6 +10,7 @@ import dev.tauri.jsg.common.item.CartridgeItem;
 import dev.tauri.jsg.common.item.admincontroller.AdminControllerItem;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerItem;
 import dev.tauri.jsg.common.item.linkable.gdo.GDOItem;
+import dev.tauri.jsg.common.item.stargate.DialingGlovesItem;
 import dev.tauri.jsg.common.item.stargate.IrisItem;
 import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDAbstractPartItem;
 import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDFluidTankItem;
@@ -110,6 +111,7 @@ public class JSGItems {
 
     public static final RegistryObjectWrapper<JSGItem> UNIVERSE_DIALER = REGISTER.register("universe_dialer", UniverseDialerItem::new);
     public static final RegistryObjectWrapper<JSGItem> GDO = REGISTER.register("gdo", GDOItem::new);
+    public static final RegistryObjectWrapper<JSGItem> DIALING_GLOVES = REGISTER.register("dialing_gloves", DialingGlovesItem::new);
 
     /**
      * FRAGMENTS

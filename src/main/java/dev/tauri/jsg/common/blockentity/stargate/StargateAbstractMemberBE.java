@@ -2,6 +2,7 @@ package dev.tauri.jsg.common.blockentity.stargate;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.stargate.Stargate;
+import dev.tauri.jsg.api.stargate.StargateMemberBE;
 import dev.tauri.jsg.common.config.JSGConfigUtil;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public abstract class StargateAbstractMemberBE extends CamouflageBE implements ITickable {
+public abstract class StargateAbstractMemberBE extends CamouflageBE implements ITickable, StargateMemberBE {
 
     public abstract Block getBaseBlock();
 
@@ -101,6 +102,7 @@ public abstract class StargateAbstractMemberBE extends CamouflageBE implements I
         super.saveAdditional(compound);
     }
 
+    @Override
     @Nullable
     public StargateAbstractBaseBE<?, ?> getBaseTile(Level world) {
         if (basePos == null) return null;

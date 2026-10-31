@@ -301,7 +301,7 @@ public class StargateClassicCCMethods extends StargateAbstractCCMethods<Stargate
         var state = deviceTile.getDialingManager().getStargateState();
         if (!state.idle())
             return new Object[]{false, "stargate_busy", "Stargate must be idle!"};
-        var result = deviceTile.getDialingManager().engageCurrentSymbol();
+        var result = deviceTile.getDialingManager().engageCurrentSymbol(false);
         if (result.ok()) {
             return new Object[]{true, "chevron_engaged", "Chevron engaged"};
         }

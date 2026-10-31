@@ -172,7 +172,7 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     }
 
     @Override
-    public StargateChevronEngageResult engageCurrentSymbol() {
+    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons) {
         JSG.logger.error("", new StargateException("Tried to engage current top symbol on pegasus gate. This will not work...", stargate));
         return StargateChevronEngageResult.BLOCKED_BY_EVENT;
     }

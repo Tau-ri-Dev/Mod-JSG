@@ -10,15 +10,15 @@ import dev.tauri.jsg.api.stargate.animation.ISpinHelper;
 import dev.tauri.jsg.api.stargate.network.IStargateConnection;
 import dev.tauri.jsg.api.stargate.network.StargatePos;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
-import dev.tauri.jsg.api.stargate.result.StargateAddressCheckResult;
-import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
-import dev.tauri.jsg.api.stargate.result.StargateCloseResult;
-import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
+import dev.tauri.jsg.api.stargate.result.*;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +67,7 @@ public interface IStargateDialingManager extends INBTSerializable<CompoundTag>, 
      */
     StargateOpenResult attemptOpenDialed();
 
-    StargateChevronEngageResult engageCurrentSymbol();
+    StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons);
 
     boolean engageSymbolBySpin(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons);
 
@@ -84,4 +84,8 @@ public interface IStargateDialingManager extends INBTSerializable<CompoundTag>, 
     boolean abortDialingSequence();
 
     boolean canAbortDialing();
+
+    boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand);
+
+    StargateManualDialingAttemptResult updateManualDialingByHand(Player player, ItemStack heldItem, InteractionHand usedHand);
 }

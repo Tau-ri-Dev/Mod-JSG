@@ -55,8 +55,8 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addBlock(JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK);
         addBlock(JSGBlocks.STARGATE_PEGASUS_RING_BLOCK);
         addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
-        addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
-        addBlock(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK);
+        addBlock(JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK);
+        addBlock(JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK);
         addBlock(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK);
         addBlock(JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK);
         addBlock(JSGBlocks.STARGATE_MOVIE_RING_BLOCK);
@@ -79,7 +79,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal","Main control crystal of DHD","Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
         addItemWithCustomName(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)");
         addItemWithCustomName(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate");
-        addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
+        addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_MILKYWAY, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
 
 
         addItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS);
