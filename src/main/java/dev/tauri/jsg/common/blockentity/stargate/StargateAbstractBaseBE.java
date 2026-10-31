@@ -559,8 +559,18 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     // NBT
 
     @Override
+    public void deserializeStaticAddresses(CompoundTag compound) {
+        for (var symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
+            var tag = compound.getCompound(symbolType.toString());
+            if (tag.isEmpty()) continue;
+            gateAddressMapStatic.put(symbolType, new StargateAddress(tag));
+        }
+    }
+
+    @Override
     public void saveAdditional(CompoundTag compound) {
         compound.putUUID("stargateId", uuid);
+        compound.put("staticAddresses", serializeStaticAddresses());
         compound.put("soundManager", getSoundManager().serializeNBT());
         compound.put("stargateEnergyManager", getEnergyManager().serializeNBT());
         compound.put("stargateDialingManager", getDialingManager().serializeNBT());
@@ -584,6 +594,7 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     public void load(CompoundTag compound) {
         if (compound.contains("stargateId"))
             uuid = compound.getUUID("stargateId");
+        deserializeStaticAddresses(compound.getCompound("staticAddresses"));
         if (compound.contains("soundManager")) {
             getSoundManager().deserializeNBT(compound.getCompound("soundManager"));
             getEnergyManager().deserializeNBT(compound.getCompound("stargateEnergyManager"));

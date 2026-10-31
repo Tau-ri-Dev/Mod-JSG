@@ -14,6 +14,7 @@ public class JSGCommands {
             new CommandPrepare(),
             new CommandBuildGate(),
             new CommandSGSetAddress(),
+            new CommandSGSetStaticAddress(),
             new CommandRIGActivate(),
             new CommandTest()
     );

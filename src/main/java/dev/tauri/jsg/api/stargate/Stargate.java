@@ -33,6 +33,7 @@ import dev.tauri.jsgcore.common.util.RotationUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -222,6 +223,10 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
 
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
             var address = getStargateAddressStatic(symbolType);
+            if (address != null) {
+                setStaticGateAddress(symbolType, address);
+                continue;
+            }
             address = new StargateAddress(symbolType);
             StargatePos sgnPos;
             do {
@@ -495,11 +500,23 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         return RotationUtil.rotate(vector, rotationToRelative);
     }
 
+    default CompoundTag serializeStaticAddresses() {
+        var staticAddresses = new CompoundTag();
+        getAddressMapStatic().forEach((symbolType, address) -> {
+            if (address == null) return;
+            staticAddresses.put(symbolType.toString(), address.serializeNBT());
+        });
+        return staticAddresses;
+    }
+
+    void deserializeStaticAddresses(CompoundTag compound);
+
     default ItemStack getDropBaseBlock(ServerPlayer player) {
         var stack = new ItemStack(this.getStargateType().getBaseBlock());
         var tag = stack.getOrCreateTag();
         tag.put("stargateEnergyManager", getEnergyManager().serializeNBT());
         tag.putUUID("stargateId", getId());
+        tag.put("staticAddresses", serializeStaticAddresses());
         stack.setTag(tag);
         return stack;
     }
@@ -508,6 +525,8 @@ public interface Stargate<E extends JSGEnergyStorage> extends IPreparable, ITick
         var tag = stack.getOrCreateTag();
         if (tag.contains("stargateId"))
             setId(tag.getUUID("stargateId"));
+        if (tag.contains("staticAddresses"))
+            deserializeStaticAddresses(tag.getCompound("staticAddresses"));
         if (!tag.contains("stargateEnergyManager")) return;
         getEnergyManager().deserializeNBT(tag.getCompound("stargateEnergyManager"));
         setStargateChanged();
