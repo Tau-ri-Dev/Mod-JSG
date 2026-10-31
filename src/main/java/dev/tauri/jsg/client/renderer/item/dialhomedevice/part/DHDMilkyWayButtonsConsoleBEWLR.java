@@ -1,6 +1,7 @@
 package dev.tauri.jsg.client.renderer.item.dialhomedevice.part;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.stargate.StargatePointOfOriginsDefaults;
 import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolMilkyWayEnum;
@@ -15,16 +16,20 @@ import net.minecraft.world.item.ItemStack;
 public class DHDMilkyWayButtonsConsoleBEWLR extends DHDAbstractBEWLR {
     @Override
     public void renderDHD(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack stack, MultiBufferSource bufferSource, int light, int overlay, float partialTick) {
-        if(itemDisplayContext == ItemDisplayContext.GROUND){
+        if (itemDisplayContext == ItemDisplayContext.GROUND) {
             stack.scale(2, 2, 2);
             stack.translate(0, -0.7, 0);
-        }
-        else if(itemDisplayContext.firstPerson()){
+        } else if (itemDisplayContext.firstPerson()) {
             stack.translate(0, 0.2, 0);
-        }
-        else if(itemDisplayContext == ItemDisplayContext.GUI){
+        } else if (itemDisplayContext == ItemDisplayContext.GUI) {
             stack.scale(1.8f, 1.8f, 1.8f);
             stack.translate(0, -0.7, 0);
+        } else if (itemDisplayContext == ItemDisplayContext.FIXED) {
+            stack.translate(0.825, 1.65, -1.7);
+            stack.mulPose(Axis.YP.rotationDegrees(180));
+            stack.mulPose(Axis.XP.rotationDegrees(-60));
+        } else if (itemDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || itemDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND) {
+            stack.translate(0, -0.5, 0);
         }
         ElementEnum.MILKYWAY_DHD_BUTTON_CONSOLE.bindTexture().render(stack, bufferSource, light, false, 1, true);
         // render symbols
@@ -53,6 +58,7 @@ public class DHDMilkyWayButtonsConsoleBEWLR extends DHDAbstractBEWLR {
             stack.popPose();
         }
     }
+
     @Override
     public boolean renderHands(ItemDisplayContext itemDisplayContext) {
         return true;

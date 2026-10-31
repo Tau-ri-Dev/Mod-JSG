@@ -39,7 +39,7 @@ public class DHDUpgradeBehaviorImpl implements IDHDUpgradeBehavior {
     }
 
     @Override
-    public int modifyMaxSymbolsInAddress(int symbolsCount, StargateAddressDynamic dialedAddress) {
+    public int modifyMaxSymbolsInAddress(int symbolsCount, @Nullable StargateAddressDynamic dialedAddress) {
         return symbolsCount;
     }
 

@@ -1,6 +1,7 @@
 package dev.tauri.jsg.client.renderer.item.dialhomedevice;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.dialhomedevice.StargateDHD;
@@ -23,6 +24,11 @@ public class DHDPegasusBEWLR extends DHDAbstractBEWLR {
 
     @Override
     public void renderDHD(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack stack, MultiBufferSource bufferSource, int light, int overlay, float partialTick) {
+        if (itemDisplayContext == ItemDisplayContext.FIXED) {
+            stack.translate(0.825, 1.65, -1.2);
+            stack.mulPose(Axis.YP.rotationDegrees(180));
+            stack.mulPose(Axis.XP.rotationDegrees(-40));
+        }
         if (Block.byItem(itemStack.getItem()) == JSGBlocks.DHD_PEGASUS.get()) {
             // render DHD
             ElementEnum.PEGASUS_DHD_BASE.bindTexture().render(stack, bufferSource, light);
