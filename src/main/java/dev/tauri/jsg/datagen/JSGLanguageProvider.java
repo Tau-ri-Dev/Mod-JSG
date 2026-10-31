@@ -237,6 +237,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addAdvancement(JSGAdvancements.USE_GDO, "Code accepted!" , "Use a GDO to open the iris");
         addAdvancement(JSGAdvancements.OBTAIN_TOASTER, "Carter's Toaster" , "You wouldn't believe the things that you can make from common items.");
         addAdvancement(JSGAdvancements.ACTIVATE_ORLIN_GATE, "So you built one?" , "Ohh... and you're going to need a new toaster!");
+        addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_CRYSTAL, "Not Incorrect, Incomplete" , "Obtain Extended Address Crystal");
         addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_DIALING_CRYSTAL, "We Determined 7th Symbol" , "Obtain Extended Address Dialing Crystal");
         addAdvancement(JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, "Its Not Address, Its a Code" , "Obtain Static Address Crystal");
         addAdvancement(JSGAdvancements.ACTIVATE_MOVIE_GATE, "Giza, 1928" , "Activate Movie Stargate");
@@ -247,7 +248,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addAdvancement(JSGAdvancements.KAWOOSH_DEATH, "Escaping Hadante" , "Get cremated by the Unstable Vortex");
         addAdvancement(JSGAdvancements.IRIS_IMPACT, "Like bugs on a windshield" , "Witness an object hit the iris");
         addAdvancement(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "Bon Voyage!" , "Activate Pegasus Stargate");
-        addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years" , "Activate Pegasus Stargate");
+        addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years" , "Activate Universe Stargate");
         addAdvancement(JSGAdvancements.CRAFT_SHIELD, "Using power, using power..." , "Obtain stargate shield");
 
         //CHAT AND HOTBAR MESSAGES:
