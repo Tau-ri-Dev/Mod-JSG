@@ -85,6 +85,8 @@ public interface IStargateDialingManager extends INBTSerializable<CompoundTag>, 
 
     boolean canAbortDialing();
 
+    boolean isManuallyDialingByHand();
+
     boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand);
 
     StargateManualDialingAttemptResult updateManualDialingByHand(Player player, ItemStack heldItem, InteractionHand usedHand);

@@ -41,7 +41,7 @@
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_open",
     "sounds": [
-      "jsg:gate/gate_milkyway_open"
+      "jsg:gate/milkyway/gate_milkyway_open"
     ]
   },
   "block.stargate.pegasus.open": {
@@ -62,21 +62,35 @@
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_close",
     "sounds": [
-      "jsg:gate/gate_milkyway_close"
+      "jsg:gate/milkyway/gate_milkyway_close"
     ]
   },
   "block.stargate.milkyway.ring_roll.start": {
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_ring_roll",
     "sounds": [
-      "jsg:gate/gate_milkyway_ring_roll_start"
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_start"
     ]
   },
   "block.stargate.milkyway.ring_roll.loop": {
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_ring_roll",
     "sounds": [
-      "jsg:gate/gate_milkyway_ring_roll"
+      "jsg:gate/milkyway/gate_milkyway_ring_roll"
+    ]
+  },
+  "block.stargate.milkyway.ring_roll.manual.start": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.gate_milkyway_ring_roll_manual",
+    "sounds": [
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_manual_start"
+    ]
+  },
+  "block.stargate.milkyway.ring_roll.manual.loop": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.gate_milkyway_ring_roll_manual",
+    "sounds": [
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_manual"
     ]
   },
   "block.stargate.pegasus.ring_roll.loop": {
@@ -97,14 +111,14 @@
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_dial_fail",
     "sounds": [
-      "jsg:gate/gate_milkyway_dial_fail"
+      "jsg:gate/milkyway/gate_milkyway_dial_fail"
     ]
   },
   "block.stargate.milkyway.fail_computer": {
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_dial_fail_computer",
     "sounds": [
-      "jsg:gate/gate_milkyway_dial_fail_computer"
+      "jsg:gate/milkyway/gate_milkyway_dial_fail_computer"
     ]
   },
   "block.stargate.pegasus.fail": {
@@ -118,7 +132,7 @@
     "category": "ambient",
     "subtitle": "jsg.subtitle.gate_milkyway_incoming",
     "sounds": [
-      "jsg:gate/gate_milkyway_incoming"
+      "jsg:gate/milkyway/gate_milkyway_incoming"
     ]
   },
   "block.stargate.pegasus.chevron.incoming": {

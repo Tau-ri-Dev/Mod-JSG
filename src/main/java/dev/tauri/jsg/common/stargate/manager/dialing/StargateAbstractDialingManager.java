@@ -353,6 +353,11 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
     }
 
     @Override
+    public boolean isManuallyDialingByHand() {
+        return false;
+    }
+
+    @Override
     public boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
         return false;
     }

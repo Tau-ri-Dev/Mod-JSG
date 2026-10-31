@@ -83,6 +83,12 @@ public class StargateMilkyWayBaseBE extends StargateClassicBaseBE<StargateMilkyW
 
     @Override
     public PositionedSound getPositionedSound(StargateSoundPositionedEnum soundEnum) {
+        if (getDialingManager().isManuallyDialingByHand()) {
+            return switch (soundEnum) {
+                case GATE_RING_ROLL -> JSGPositionedSounds.MILKYWAY_RING_ROLL_MANUAL;
+                case GATE_RING_ROLL_START -> JSGPositionedSounds.MILKYWAY_RING_ROLL_MANUAL_START;
+            };
+        }
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.MILKYWAY_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.MILKYWAY_RING_ROLL_START;

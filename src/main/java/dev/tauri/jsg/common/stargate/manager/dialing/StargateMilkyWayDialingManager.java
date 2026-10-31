@@ -5,9 +5,11 @@ import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
+import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
 import dev.tauri.jsg.api.stargate.animation.EnumSpinDirection;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.api.stargate.result.StargateManualDialingAttemptResult;
+import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.blockentity.stargate.StargateMilkyWayBaseBE;
 import dev.tauri.jsg.common.registry.tags.JSGItemTags;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
@@ -72,6 +74,20 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
             }
             stargate.setChanged();
         }
+    }
+
+    @Override
+    public void dialingFailed(StargateOpenResult reason) {
+        super.dialingFailed(reason);
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
+    }
+
+    @Override
+    protected boolean disconnectWormhole(StargateClosedReasonEnum reason) {
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
+        return super.disconnectWormhole(reason);
     }
 
     @Override
@@ -175,6 +191,11 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     }
 
     @Override
+    public boolean isManuallyDialingByHand() {
+        return manualDialingState != ManualDialingState.IDLE;
+    }
+
+    @Override
     public boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
         return heldItem.is(JSGItemTags.DIALING_GLOVES);
     }
@@ -199,6 +220,21 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
         var result = getSpinHelper().rotateFreely(EnumSpinDirection.valueOf(player.isShiftKeyDown()), 0.3f);
         if (!result) return StargateManualDialingAttemptResult.BUSY;
         return StargateManualDialingAttemptResult.SPIN_STARTED;
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        var tag = super.serializeNBT();
+        tag.putLong("manualDialingLastUpdated", manualDialingLastUpdated);
+        tag.putInt("manualDialingState", manualDialingState.ordinal());
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag compound) {
+        super.deserializeNBT(compound);
+        manualDialingLastUpdated = compound.getLong("manualDialingLastUpdated");
+        manualDialingState = ManualDialingState.values()[compound.getInt("manualDialingState")];
     }
 
     public enum ManualDialingState {
