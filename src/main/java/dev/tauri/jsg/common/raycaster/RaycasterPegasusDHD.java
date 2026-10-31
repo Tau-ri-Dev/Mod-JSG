@@ -218,7 +218,7 @@ public class RaycasterPegasusDHD extends RaycasterDHD {
             )),
 
             //Poco Re
-            new RayCastedButton(POCORE.id, JSGSymbolTypes.PEGASUS, List.of(
+            new RayCastedButton(POCO_RE.id, JSGSymbolTypes.PEGASUS, List.of(
                     new Vector3f(-0.293893f, 0.166092f, 0.952186f),
                     new Vector3f(-0.155502f, 0.103892f, 1.02204f),
                     new Vector3f(-0.178964f, 0.058053f, 1.0496f),
