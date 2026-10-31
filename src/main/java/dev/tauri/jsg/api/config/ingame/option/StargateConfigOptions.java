@@ -49,7 +49,7 @@ public class StargateConfigOptions {
 
         public static final BEConfigOptionProvider<Boolean> DHD_POO_LOCK = HOLDER.register("dhd_last_lock", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.DialHomeDevice.dhdLastOpen.get()));
         public static final BEConfigOptionProvider<Boolean> INCOMING_RING_SPIN = HOLDER.register("spin_ring_incoming", (onChanged) -> new BooleanBEConfigOption(onChanged, true));
-
+        public static final BEConfigOptionProvider<Boolean> SPIN_WHILE_DIALING_DHD = HOLDER.register("spin_ring_dialing_dhd", (onChanged) -> new BooleanBEConfigOption(onChanged, false));
     }
 
     public static class Pegasus {

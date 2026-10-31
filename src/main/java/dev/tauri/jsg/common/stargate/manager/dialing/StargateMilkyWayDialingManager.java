@@ -105,6 +105,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
         }
         int plusTime = new Random().nextInt(5);
         if (isLockChevron(symbol, ignoreMaxChevrons)) {
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.SPIN_WHILE_DIALING_DHD))
+                getSpinHelper().stopSpinning(true);
             if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_POO_LOCK)) {
                 stargate.getStateManager().getChevronsState().scheduleChevronFinalOpenAndActivate(5 + plusTime, null, true);
                 if (addressDialSequence != null)
@@ -115,6 +117,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
                     addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));
             }
         } else {
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.SPIN_WHILE_DIALING_DHD))
+                getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 15f * getSpinHelper().getRingSpeedFromConfig());
             stargate.getStateManager().getChevronsState().scheduleChevronActivate(10 + plusTime, getNextChevron(symbol, true, ignoreMaxChevrons), null, true);
             if (addressDialSequence != null)
                 addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));
