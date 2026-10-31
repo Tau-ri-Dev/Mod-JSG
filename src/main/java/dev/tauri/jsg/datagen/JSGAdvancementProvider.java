@@ -4,6 +4,7 @@ import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.registry.*;
 import dev.tauri.jsgcore.common.registry.CoreAdvancements;
+import dev.tauri.jsgcore.datagen.CoreAdvancementProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
@@ -23,7 +24,7 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class JSGAdvancementProvider implements ForgeAdvancementProvider.AdvancementGenerator {
+public class JSGAdvancementProvider extends CoreAdvancementProvider {
 
     @Override
     @ParametersAreNonnullByDefault
@@ -32,8 +33,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.PAGE_EMPTY)
                 .display(
                         JSGBlocks.PRINTER.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".craft_printer.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".craft_printer.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.CRAFT_PRINTER, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.CRAFT_PRINTER, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -50,8 +51,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.PAGE_EMPTY)
                 .display(
                         JSGItems.ICON_PRIEST_TRADE.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".priest_trade.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".priest_trade.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.TRADE_WITH_PRIEST, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.TRADE_WITH_PRIEST, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -75,8 +76,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.PAGE_EMPTY)
                 .display(
                         JSGItems.ICON_RA_REALM.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".visit_abydos.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".visit_abydos.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.VISIT_ABYDOS, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.VISIT_ABYDOS, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -90,8 +91,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.COPPER)
                 .display(
                         JSGItems.GDO.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".use_gdo.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".use_gdo.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.USE_GDO, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.USE_GDO, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -105,8 +106,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.COPPER)
                 .display(
                         JSGBlocks.TOASTER.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_toaster.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_toaster.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_TOASTER, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_TOASTER, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -120,8 +121,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(toaster)
                 .display(
                         JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_orlin_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_orlin_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_ORLIN_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_ORLIN_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -135,8 +136,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.CIRCUIT_CONTROL_CRYSTAL)
                 .display(
                         JSGItems.CRYSTAL_ADDRESS_EXTENDED.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_extended_address_crystal.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_extended_address_crystal.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_CRYSTAL, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_CRYSTAL, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -150,8 +151,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(extraGlyphGate)
                 .display(
                         JSGItems.CRYSTAL_ADDRESS_STATIC.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_static_address_crystal.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_static_address_crystal.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -166,8 +167,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(extraGlyphGate)
                 .display(
                         JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_extended_address_dialing_crystal.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".obtain_extended_address_dialing_crystal.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_DIALING_CRYSTAL, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_DIALING_CRYSTAL, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -181,8 +182,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(CoreAdvancements.TITANIUM)
                 .display(
                         JSGBlocks.STARGATE_MOVIE_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_movie_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_movie_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_MOVIE_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_MOVIE_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -196,8 +197,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(movie_gate)
                 .display(
                         JSGItems.ICON_WORMHOLE.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".wormhole_go.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".wormhole_go.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.WORMHOLE_GO, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.WORMHOLE_GO, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -211,8 +212,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(wormhole)
                 .display(
                         Blocks.SKELETON_SKULL,
-                        Component.translatable("advancement." + JSG.MOD_ID + ".unstable_wormhole.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".unstable_wormhole.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.UNSTABLE_GO, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.UNSTABLE_GO, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -226,8 +227,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(movie_gate)
                 .display(
                         JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_mw_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_mw_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_MILKYWAY_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_MILKYWAY_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -241,8 +242,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(mw_gate)
                 .display(
                         JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_tollan_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_tollan_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -256,8 +257,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(mw_gate)
                 .display(
                         JSGItems.ICON_KAWOOSH_DEATH.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".kawoosh_death.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".kawoosh_death.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.KAWOOSH_DEATH, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.KAWOOSH_DEATH, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -271,8 +272,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(mw_gate)
                 .display(
                         JSGItems.UPGRADE_IRIS.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".iris_impact.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".iris_impact.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.IRIS_IMPACT, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.IRIS_IMPACT, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -286,8 +287,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(mw_gate)
                 .display(
                         JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_pg_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_pg_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -301,8 +302,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(pg_gate)
                 .display(
                         JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_uni_gate.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".activate_uni_gate.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "description")),
                         null,
                         FrameType.TASK,
                         true,
@@ -316,8 +317,8 @@ public class JSGAdvancementProvider implements ForgeAdvancementProvider.Advancem
                 .parent(pg_gate)
                 .display(
                         JSGItems.UPGRADE_SHIELD.get(),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".craft_shield.title"),
-                        Component.translatable("advancement." + JSG.MOD_ID + ".craft_shield.description"),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.CRAFT_SHIELD, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.CRAFT_SHIELD, "description")),
                         null,
                         FrameType.TASK,
                         true,
