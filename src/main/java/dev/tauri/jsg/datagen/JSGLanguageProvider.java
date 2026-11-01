@@ -151,6 +151,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addItemWithTooltip(JSGItems.ADMIN_CONTROLLER, "Stargate controller and debugger", "This item shows you whole SG network when linked to a gate.%nl%It's capable of dialing the linked gate%nl%by spinning the ring, locking symbols like DHD%nl%and dialing all symbols at once like Nox did in series.");
         addItemWithTooltip(JSGItems.UNIVERSE_DIALER, "A controller that works with Universe gates, along with much more!", null);
         addItemWithCustomNameAndTooltip(JSGItems.GDO, "Garage Door Opener (GDO)", "GDO is capable of sending an IDC code through an open wormhole to open the iris.", null);
+        addItemWithTooltip(JSGItems.DIALING_GLOVES, "Allows to manually dial Milky Way stargate", null);
 
         //CRAFTING ITEMS
         addItem(JSGItems.HOLDER_CRYSTAL);
@@ -479,6 +480,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("commands.rig.not_stargate","No Stargate nearby that could initiate RIG");
         add("commands.rig.already.active","Stargate already has an active RIG");
         add("commands.sgsetaddress.notstargate","Target block isn't stargate base block");
+        add("commands.sgsetaddress.wrongsymbol","Wrong glyph name or Map");
         add("commands.sgsetaddress.success","Target stargate address is successfully changed");
 
         //SUBTITLES

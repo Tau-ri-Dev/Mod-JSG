@@ -9,13 +9,16 @@ import dev.tauri.jsgcore.client.model.JSGOBJModelLoaderBuilder;
 import dev.tauri.jsgcore.common.item.JSGMusicDiscItem;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import dev.tauri.jsgcore.mapping.JSGMapping;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -30,6 +33,9 @@ public class JSGItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+
+        //2D INVENTORY MODELS + BLOCKBENCH MODELS IN OTHER PERSPECTIVES
+        differentInventoryItem(JSGItems.DIALING_GLOVES, true);
 
         //All INVENTORY OBJ MODELS
         List.of(JSGItems.DHD_NAQUADAH_TANK, JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE, JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE,
@@ -51,7 +57,7 @@ public class JSGItemModelProvider extends ItemModelProvider {
         //ADVANCEMENTS
         List.of(JSGItems.ICON_WORMHOLE, JSGItems.ICON_KAWOOSH_DEATH, JSGItems.ICON_RA_REALM,
                 JSGItems.ICON_PRIEST_TRADE
-        ).forEach( regObj -> {
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
                     .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/advancement/" + path));
@@ -62,17 +68,17 @@ public class JSGItemModelProvider extends ItemModelProvider {
                 JSGItems.CRYSTAL_ADDRESS_EXTENDED, JSGItems.CRYSTAL_ADDRESS_STATIC, JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED,
                 JSGItems.UPGRADE_IRIS, JSGItems.UPGRADE_IRIS_TRINIUM, JSGItems.UPGRADE_IRIS_CREATIVE,
                 JSGItems.UPGRADE_SHIELD
-                        ).forEach( regObj -> {
-                            var path = regObj.getId().getPath();
-                            withExistingParent(path, "item/generated")
-                                    .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/upgrade/" + path));
+        ).forEach(regObj -> {
+            var path = regObj.getId().getPath();
+            withExistingParent(path, "item/generated")
+                    .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/upgrade/" + path));
         });
 
         //CRAFTING ELEMENTS
         List.of(JSGItems.FRAGMENT_MILKYWAY, JSGItems.FRAGMENT_PEGASUS, JSGItems.FRAGMENT_UNIVERSE,
                 JSGItems.FRAGMENT_TOLLAN, JSGItems.SHIELD_EMITTER, JSGItems.IRIS_BLADE,
                 JSGItems.IRIS_BLADE_TRINIUM, JSGItems.QUAD_IRIS_BLADE, JSGItems.QUAD_IRIS_BLADE_TRINIUM
-        ).forEach( regObj -> {
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
                     .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/crafting_element/" + path));
@@ -81,7 +87,7 @@ public class JSGItemModelProvider extends ItemModelProvider {
         //SCHEMATICS
         List.of(JSGItems.SCHEMATIC_MILKYWAY, JSGItems.SCHEMATIC_PEGASUS, JSGItems.SCHEMATIC_UNIVERSE,
                 JSGItems.SCHEMATIC_TOLLAN
-        ).forEach( regObj -> {
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
                     .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/schematic/" + path));
@@ -91,23 +97,23 @@ public class JSGItemModelProvider extends ItemModelProvider {
         List.of(JSGItems.HOLDER_CRYSTAL, JSGItems.HOLDER_CRYSTAL_PEGASUS, JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS,
                 JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS, JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON,
                 JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, JSGItems.PEGASUS_DHD_MAIN_CRYSTAL
-        ).forEach( regObj -> {
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
                     .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/dhd_element/" + path));
         });
 
         //FOOD
-        List.of( JSGItems.FOOD_CHOCOLATE_BAR, JSGItems.JIBBARAN_ENHANCER
-        ).forEach( regObj -> {
+        List.of(JSGItems.FOOD_CHOCOLATE_BAR, JSGItems.JIBBARAN_ENHANCER
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, "item/generated")
                     .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/food/" + path));
         });
 
         //SPAWN EGGS
-        List.of( JSGItems.EGG_MASTADGE
-        ).forEach( regObj -> {
+        List.of(JSGItems.EGG_MASTADGE
+        ).forEach(regObj -> {
             var path = regObj.getId().getPath();
             withExistingParent(path, JSGMapping.rl("minecraft", "item/template_spawn_egg"));
         });
@@ -138,28 +144,56 @@ public class JSGItemModelProvider extends ItemModelProvider {
                 });
 
         //COMPATIBILITY
-        List.of("iris_blade_golden_cast", "iris_blade_sand_cast",  "iris_blade_red_sand_cast",
+        List.of("iris_blade_golden_cast", "iris_blade_sand_cast", "iris_blade_red_sand_cast",
                 "stone_iris_blade", "incomplete_chocolate_bar"
-        ).forEach( name -> withExistingParent(name, "item/generated")
+        ).forEach(name -> withExistingParent(name, "item/generated")
                 .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/compat/" + name)));
-
-
-
     }
 
-    private void blockOBJModel(RegistryObjectWrapper<? extends Block> block, ItemDisplayContext... renderTypes) {
-        itemOBJModel(requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())), renderTypes);
+    private void differentInventoryItem(RegistryObjectWrapper<? extends Item> object, boolean customFirstPerson) {
+        var modID = object.getId().getNamespace();
+        var path = object.getId().getPath();
+
+        var model3dName = path + "_3d";
+        var texturePath = "item/" + path;
+
+        var model3dLocation = JSGMapping.rl(modID, "item/" + model3dName);
+        var inventoryPath = path + "_inventory";
+        var mainModelPath = "item/" + path;
+
+        ItemModelBuilder inventoryModel = withExistingParent(inventoryPath, "item/generated")
+                .texture("layer0", JSGMapping.rl(modID, texturePath));
+
+        ItemModelBuilder baseBuilder = new ItemModelBuilder(model3dLocation, this.existingFileHelper)
+                .parent(new ModelFile.UncheckedModelFile(model3dLocation));
+
+        var builder = getBuilder(mainModelPath)
+                .guiLight(BlockModel.GuiLight.FRONT)
+                .customLoader(SeparateTransformsModelBuilder::begin)
+                .base(baseBuilder)
+                .perspective(ItemDisplayContext.GUI, inventoryModel)
+                .perspective(ItemDisplayContext.GROUND, inventoryModel)
+                .perspective(ItemDisplayContext.FIXED, inventoryModel);
+        if (!customFirstPerson) {
+            builder.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, inventoryModel)
+                    .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, inventoryModel);
+        }
     }
 
-    private void itemOBJModel(RegistryObjectWrapper<? extends Item> item, ItemDisplayContext... renderTypes) {
-        itemOBJModel(requireNonNull(ForgeRegistries.ITEMS.getKey(item.get())), renderTypes);
-    }
 
-    private void itemOBJModel(ResourceLocation item, ItemDisplayContext... renderTypes) {
-        getBuilder(item.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", JSGMapping.rl(JSGApi.MOD_ID, "block/wip"))
-                .customLoader((parent, existingFileHelper) -> new JSGOBJModelLoaderBuilder<>(parent, existingFileHelper).renderTypes(renderTypes))
-                .visibility("override_transformations", true);
-    }
+private void blockOBJModel(RegistryObjectWrapper<? extends Block> block, ItemDisplayContext... renderTypes) {
+    itemOBJModel(requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())), renderTypes);
+}
+
+private void itemOBJModel(RegistryObjectWrapper<? extends Item> item, ItemDisplayContext... renderTypes) {
+    itemOBJModel(requireNonNull(ForgeRegistries.ITEMS.getKey(item.get())), renderTypes);
+}
+
+private void itemOBJModel(ResourceLocation item, ItemDisplayContext... renderTypes) {
+    getBuilder(item.toString())
+            .parent(new ModelFile.UncheckedModelFile("item/generated"))
+            .texture("layer0", JSGMapping.rl(JSGApi.MOD_ID, "block/wip"))
+            .customLoader((parent, existingFileHelper) -> new JSGOBJModelLoaderBuilder<>(parent, existingFileHelper).renderTypes(renderTypes))
+            .visibility("override_transformations", true);
+}
 }

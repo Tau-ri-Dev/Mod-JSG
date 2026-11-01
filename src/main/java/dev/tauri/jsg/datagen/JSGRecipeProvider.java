@@ -9,7 +9,7 @@ import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.item.Items;
+import net.minecraft.tags.ItemTags;import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -612,6 +612,19 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_button", has(Items.STONE_BUTTON))
                 .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES))
                 .unlockedBy("has_repeater", has(Items.REPEATER))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.DIALING_GLOVES.get())
+                .group(JSG.MOD_ID + ":dialing_gloves")
+                .pattern("LLL")
+                .pattern("LWL")
+                .pattern("DDD")
+                .define('L', Tags.Items.LEATHER)
+                .define('W', ItemTags.WOOL)
+                .define('D', Tags.Items.DYES_BLACK)
+                .unlockedBy("has_leather", has(Tags.Items.LEATHER))
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .unlockedBy("has_dye", has(Tags.Items.DYES_BLACK))
                 .save(pWriter);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, JSGItems.SHIELD_EMITTER.get())
