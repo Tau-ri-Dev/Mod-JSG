@@ -156,6 +156,13 @@
       "jsg:eh/wormhole_loop"
     ]
   },
+  "misc.stargate.movie_wormhole.loop": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.wormhole_loop",
+    "sounds": [
+      "jsg:eh/movie_wormhole_loop"
+    ]
+  },
   "misc.stargate.wormhole.go": {
     "category": "ambient",
     "subtitle": "jsg.subtitle.wormhole_go",
