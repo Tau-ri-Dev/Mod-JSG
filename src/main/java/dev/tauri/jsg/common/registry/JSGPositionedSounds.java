@@ -19,7 +19,7 @@ public class JSGPositionedSounds {
     public static final PositionedSound MOVIE_RING_ROLL_START = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.movie.ring_roll.start"), false, 1).register(JSGApi.REGISTRY_HELPER.sound());
     // loops
     public static final PositionedSound WORMHOLE_LOOP = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "misc.stargate.wormhole.loop"), true, 1).register(JSGApi.REGISTRY_HELPER.sound());
-    public static final PositionedSound MOVIE_WORMHOLE_LOOP = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "misc.stargate.movie_wormhole.loop"), true, 1).register(JSGApi.REGISTRY_HELPER.sound());
+    public static final PositionedSound MOVIE_WORMHOLE_LOOP = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "misc.stargate.wormhole.movie.loop"), true, 1).register(JSGApi.REGISTRY_HELPER.sound());
     public static final PositionedSound SHIELD_HUMMING = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "misc.stargate.shield.humming"), true, 1).register(JSGApi.REGISTRY_HELPER.sound());
     // main menu
     public static final PositionedSound MAINMENU_INTRO = new PositionedSound(JSGMapping.rl(JSGApi.MOD_ID, "music.menu.intro"), false, 1).register(JSGApi.REGISTRY_HELPER.sound());

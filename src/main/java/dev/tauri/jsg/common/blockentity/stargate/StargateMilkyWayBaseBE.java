@@ -87,11 +87,13 @@ public class StargateMilkyWayBaseBE extends StargateClassicBaseBE<StargateMilkyW
             return switch (soundEnum) {
                 case GATE_RING_ROLL -> JSGPositionedSounds.MILKYWAY_RING_ROLL_MANUAL;
                 case GATE_RING_ROLL_START -> JSGPositionedSounds.MILKYWAY_RING_ROLL_MANUAL_START;
+                case WORMHOLE_LOOP -> JSGPositionedSounds.WORMHOLE_LOOP;
             };
         }
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.MILKYWAY_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.MILKYWAY_RING_ROLL_START;
+            case WORMHOLE_LOOP -> JSGPositionedSounds.WORMHOLE_LOOP;
         };
     }
 

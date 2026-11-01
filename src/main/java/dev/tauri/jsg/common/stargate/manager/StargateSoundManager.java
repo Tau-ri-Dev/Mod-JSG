@@ -29,7 +29,8 @@ public class StargateSoundManager<BE extends Stargate<?>> extends AbstractStarga
     @Override
     public void updateWormholeSound(boolean play) {
         wormholeSound = play;
-        JSGSoundHelper.playPositionedSound(stargate.getStargateLevel(), stargate.getGateCenterPos(), JSGPositionedSounds.WORMHOLE_LOOP, play);
+        stargate.playPositionedSound(StargateSoundPositionedEnum.WORMHOLE_LOOP, play);
+        //JSGSoundHelper.playPositionedSound(stargate.getStargateLevel(), stargate.getGateCenterPos(), JSGPositionedSounds.WORMHOLE_LOOP, play);
         stargate.setStargateChanged();
     }
 

@@ -77,6 +77,7 @@ public class StargatePegasusBaseBE extends StargateClassicBaseBE<StargatePegasus
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.PEGASUS_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.PEGASUS_RING_ROLL_START;
+            case WORMHOLE_LOOP -> JSGPositionedSounds.WORMHOLE_LOOP;
         };
     }
 

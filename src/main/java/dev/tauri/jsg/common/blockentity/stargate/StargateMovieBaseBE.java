@@ -59,6 +59,7 @@ public class StargateMovieBaseBE extends StargateMilkyWayBaseBE {
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.MOVIE_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.MOVIE_RING_ROLL_START;
+            case WORMHOLE_LOOP -> JSGPositionedSounds.MOVIE_WORMHOLE_LOOP;
         };
     }
 

@@ -179,6 +179,7 @@ public class StargateUniverseBaseBE extends StargateClassicBaseBE<StargateUniver
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.UNIVERSE_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.UNIVERSE_RING_ROLL_START;
+            case WORMHOLE_LOOP -> JSGPositionedSounds.WORMHOLE_LOOP;
         };
 
     }
