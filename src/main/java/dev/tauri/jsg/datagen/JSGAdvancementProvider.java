@@ -66,10 +66,9 @@ public class JSGAdvancementProvider extends CoreAdvancementProvider {
                 .addCriterion("trade_snow", createVillagerTradeCriterion(Objects.requireNonNull(JSGVillagers.PRIEST_SNOW.getKey()).location()))
                 .addCriterion("trade_swamp", createVillagerTradeCriterion(Objects.requireNonNull(JSGVillagers.PRIEST_SWAMP.getKey()).location()))
                 .addCriterion("trade_taiga", createVillagerTradeCriterion(Objects.requireNonNull(JSGVillagers.PRIEST_TAIGA.getKey()).location()))
-                .requirements(new String[][]{ allPriestCriteria })
+                .requirements(new String[][]{allPriestCriteria})
 
                 .save(saver, JSGAdvancements.TRADE_WITH_PRIEST, fileHelper);
-
 
 
         Advancement.Builder.advancement()
@@ -282,6 +281,31 @@ public class JSGAdvancementProvider extends CoreAdvancementProvider {
                 )
                 .addCriterion("iris_impact", JSGCriterions.IRIS_IMPACT.createInstance())
                 .save(saver, JSGAdvancements.IRIS_IMPACT, fileHelper);
+
+        Advancement.Builder.advancement()
+                .parent(mw_gate)
+                .display(
+                        JSGItems.DIALING_GLOVES.get(),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.HIT_WITH_GLOVES, "title")),
+                        Component.translatable(getAdvancementKey(JSGAdvancements.HIT_WITH_GLOVES, "description")),
+                        null,
+                        FrameType.TASK,
+                        true,
+                        true,
+                        false
+                )
+                .addCriterion("hit_with_glove", PlayerHurtEntityTrigger.TriggerInstance.playerHurtEntity(
+                        new DamagePredicate.Builder()
+                                .type(DamageSourcePredicate.Builder.damageType()
+                                        .source(new EntityPredicate.Builder()
+                                                .equipment(new EntityEquipmentPredicate.Builder()
+                                                        .mainhand(ItemPredicate.Builder.item()
+                                                                .of(JSGItems.DIALING_GLOVES.get())
+                                                                .build())
+                                                        .build()))
+                                        .build())
+                                .build()))
+                .save(saver, JSGAdvancements.HIT_WITH_GLOVES, fileHelper);
 
         Advancement pg_gate = Advancement.Builder.advancement()
                 .parent(mw_gate)

@@ -248,6 +248,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addAdvancement(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "Ours is bigger" , "Activate Tollan Stargate");
         addAdvancement(JSGAdvancements.KAWOOSH_DEATH, "Escaping Hadante" , "Get cremated by the Unstable Vortex");
         addAdvancement(JSGAdvancements.IRIS_IMPACT, "Like bugs on a windshield" , "Witness an object hit the iris");
+        addAdvancement(JSGAdvancements.HIT_WITH_GLOVES, "Gotta bend those kosars" , "Hit player or mob while wearing dialing gloves");
         addAdvancement(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "Bon Voyage!" , "Activate Pegasus Stargate");
         addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years" , "Activate Universe Stargate");
         addAdvancement(JSGAdvancements.CRAFT_SHIELD, "Using power, using power..." , "Obtain stargate shield");

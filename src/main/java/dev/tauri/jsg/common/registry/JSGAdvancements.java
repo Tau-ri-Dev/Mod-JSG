@@ -24,4 +24,5 @@ public class JSGAdvancements {
     public static final ResourceLocation ACTIVATE_PEGASUS_GATE = JSGMapping.rl(JSG.MOD_ID, "progress/activate_pegasus_gate");
     public static final ResourceLocation ACTIVATE_UNIVERSE_GATE = JSGMapping.rl(JSG.MOD_ID, "progress/activate_universe_gate");
     public static final ResourceLocation CRAFT_SHIELD = JSGMapping.rl(JSG.MOD_ID, "progress/crafted_shield");
+    public static final ResourceLocation HIT_WITH_GLOVES = JSGMapping.rl(JSG.MOD_ID, "progress/hit_with_gloves");
 }
