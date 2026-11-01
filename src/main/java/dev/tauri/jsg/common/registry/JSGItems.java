@@ -13,6 +13,7 @@ import dev.tauri.jsg.common.item.linkable.gdo.GDOItem;
 import dev.tauri.jsg.common.item.stargate.DialingGlovesItem;
 import dev.tauri.jsg.common.item.stargate.IrisItem;
 import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.*;
+import dev.tauri.jsg.common.item.stargate.dialhomedevice.upgrade.ExtendedAddressDialingCrystal;
 import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.integration.Integrations;
@@ -86,7 +87,7 @@ public class JSGItems {
     /**
      * Upgrade crystals
      */
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_DIALING_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_dialing_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildGeneric(); //.buildUpgrade(() -> StargateDHD.DHDUpgradeEnum.CHEVRON_UPGRADE);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_DIALING_EXTENDED = REGISTER.register("extended_address_dialing_crystal", ExtendedAddressDialingCrystal::new);
 
     public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_STATIC = Constants.JSG_ITEM_HELPER.builder("static_address_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.STATIC_ADDRESS_UPGRADE);
     public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.CHEVRON_UPGRADE);

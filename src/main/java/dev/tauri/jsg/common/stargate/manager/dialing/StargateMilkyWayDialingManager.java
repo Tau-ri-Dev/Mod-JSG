@@ -118,7 +118,7 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
             }
         } else {
             if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.SPIN_WHILE_DIALING_DHD))
-                getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 15f * getSpinHelper().getRingSpeedFromConfig());
+                getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 1.5f * getSpinHelper().getRingSpeedFromConfig());
             stargate.getStateManager().getChevronsState().scheduleChevronActivate(10 + plusTime, getNextChevron(symbol, true, ignoreMaxChevrons), null, true);
             if (addressDialSequence != null)
                 addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));

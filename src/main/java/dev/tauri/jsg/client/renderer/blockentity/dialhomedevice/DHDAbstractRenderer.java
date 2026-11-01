@@ -46,12 +46,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
+import org.joml.Vector2d;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class DHDAbstractRenderer<S extends DHDAbstractRendererState> implements LinkableRenderer, BlockEntityRenderer<DHDAbstractBE>, IRaycasterButtonsRenderer {
+    public static final List<Vector2d> UPGRADE_POSES = List.of(
+            new Vector2d(0.120, 0.3825),
+            new Vector2d(-0.120, 0.3825),
+            new Vector2d(0.08, 0.251),
+            new Vector2d(-0.076, 0.251),
+            new Vector2d(0, 0.108)
+    );
 
     public DHDAbstractRenderer(BlockEntityRendererProvider.Context ignored) {
     }
