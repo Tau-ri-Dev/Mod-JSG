@@ -34,6 +34,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
     @ParametersAreNonnullByDefault
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
 
+        //TODO: EXTENDS CORE PROVIDER
         //TODO: refactor JSG ITEM TAGS to forge tags
 
         //Machine and Devices

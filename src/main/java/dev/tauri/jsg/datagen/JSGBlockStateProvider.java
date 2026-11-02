@@ -28,6 +28,9 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         super(output, JSG.MOD_ID, exFileHelper);
     }
 
+    //TODO: EXTENDS CORE PROVIDER
+    //TODO: Refactors methods to use also in addons
+
     @Override
     protected void registerStatesAndModels() {
 

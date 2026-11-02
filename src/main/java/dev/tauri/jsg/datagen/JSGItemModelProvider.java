@@ -31,6 +31,8 @@ public class JSGItemModelProvider extends ItemModelProvider {
         super(output, JSG.MOD_ID, existingFileHelper);
     }
 
+    //TODO: EXTENDS CORE PROVIDER
+
     @Override
     protected void registerModels() {
 
