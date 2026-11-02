@@ -384,7 +384,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         add("gui.stargate.info", "Stargate information");
         add("gui.stargate.state_closed", "Stargate closed!");
-        add("gui.stargate.state_opened", "Open time:");
+        add("gui.stargate.state.opened", "Open time:");
         add("gui.stargate.state.gate_temp", "Gate temp:");
         add("gui.stargate.state.iris_temp", "Iris temp:");
 
