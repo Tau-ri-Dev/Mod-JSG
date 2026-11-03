@@ -1,5 +1,5 @@
 {
-  "name": "jsg:containers/abydos/cartouche/regular",
+  "name": "jsg:containers/abydos/cartouche/chest",
   "fallback": "minecraft:empty",
   "elements": [
     {
