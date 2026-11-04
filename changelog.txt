@@ -25,13 +25,15 @@ CHANGELOG JSG 6.0.0.0 & 7.0.0.0:
             - Added new crystal that displays these static addresses when inserted
             - Each static address is 9 symbols long (including PoO)
         - Added Puddle Jumper (from Lantea: Stargates mod) compatibility
-        - Added manual dialing for Milky Way and Movie gates
+        - Added manual dialing for Milky Way and Movie gates - only possible with new item Dialing gloves
+        - Added new advancement - Hitting entity with dialing gloves
     Removed:
         - Removed stargate sizes config option - now only MEDIUM gates are present
         - Removed old cauldrons
         - Removed capacitors
         - Removed DHD GUI
         - Removed custom updater notification from the main menu
+        - Removed excess advancements
     Fixed:
         Visual improvements:
             - Fixed sometimes chevrons don't lit up when incoming animation occurs
@@ -58,7 +60,9 @@ CHANGELOG JSG 6.0.0.0 & 7.0.0.0:
         - Complete change of dimensions config
         - Some configs structures have been changed
         - Tweaked handheld items renderer
-        - Complete change of overlays system - few overlay textures for all textures
+        - Complete change of overlays system
+            - Few overlay textures for all textures
+            - You can still make overlay texture for individual base textures, by creating the texture and naming it with suffix of the overlay for example gdo_frost.webp
         - Tweaked recipes
         - Made gate connection logging more useful in admin controller
         - Changed energy buffers of stargates to support long - meaning whole energy calculations changed
@@ -67,3 +71,4 @@ CHANGELOG JSG 6.0.0.0 & 7.0.0.0:
         - Reserved addresses are now data-driven
         - Priests now restock their trades every +-20 minutes (the period may differ - it's random)
         - Changed IDs of most blocks/items to be more minecraft-style
+        - Edited advancements conditions and icons
