@@ -6,7 +6,7 @@
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
         "projection": "rigid",
-        "location": "jsg:containers/villages/snow/barel_up",
+        "location": "jsg:containers/villages/snow/barrel_up",
         "processors": "minecraft:empty"
       }
     },
@@ -15,7 +15,7 @@
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
         "projection": "rigid",
-        "location": "jsg:containers/villages/snow/barel_side",
+        "location": "jsg:containers/villages/snow/barrel_side",
         "processors": "minecraft:empty"
       }
     },
