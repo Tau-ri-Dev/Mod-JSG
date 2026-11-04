@@ -3,12 +3,6 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:empty_pool_element"
-      }
-    },
-    {
       "weight": 3,
       "element": {
         "location": "jsg:containers/abydos/dungeon/barrel_up",

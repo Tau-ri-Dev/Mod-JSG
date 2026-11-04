@@ -5,12 +5,6 @@
     {
       "weight": 1,
       "element": {
-        "element_type": "minecraft:empty_pool_element"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
         "location": "jsg:containers/abydos/cartouche/barrel_up",
         "processors": "minecraft:empty",
         "projection": "rigid",
