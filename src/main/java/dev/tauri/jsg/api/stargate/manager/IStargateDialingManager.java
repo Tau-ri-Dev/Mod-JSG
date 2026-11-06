@@ -69,6 +69,8 @@ public interface IStargateDialingManager extends INBTSerializable<CompoundTag>, 
 
     StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons);
 
+    StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons, boolean tryOpenAfter);
+
     boolean engageSymbolBySpin(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons);
 
     StargateChevronEngageResult dialAddress(StargateAddressDynamic address, boolean noEnergy, boolean ignoreMaxChevrons, EnumDialingType dialingType);

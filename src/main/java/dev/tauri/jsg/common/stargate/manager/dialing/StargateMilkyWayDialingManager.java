@@ -50,27 +50,17 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     public void tick(Level level) {
         super.tick(level);
         if (level.isClientSide()) return;
-        if (manualDialingState == ManualDialingState.IDLE) return;
-        if (manualDialingState == ManualDialingState.WAITING_FOR_OPEN) {
-            if ((level.getGameTime() - manualDialingLastUpdated) > MANUAL_OPEN_GATE_AFTER_ORIGIN_ENGAGE_TIME) {
-                attemptOpenDialed();
-                manualDialingState = ManualDialingState.IDLE;
-                stargate.setChanged();
-            }
-            return;
-        }
+        if (manualDialingState != ManualDialingState.DIALING) return;
         if (getSpinHelper().isSpinning() && (level.getGameTime() - manualDialingLastUpdated) > MANUAL_MAX_SPINNING_UPDATE_TIME) {
             getSpinHelper().stopSpinning(true);
             return;
         }
         if (!getSpinHelper().isSpinning() && (level.getGameTime() - manualDialingLastUpdated) > MANUAL_ENGAGE_CHEVRON_AFTER_SPIN_STOP_TIME) {
             manualDialingState = ManualDialingState.IDLE;
-            var result = engageCurrentSymbol(false);
-            if (!result.ok()) return;
             var symbol = getSpinHelper().getCurrentTopSymbol();
+            engageCurrentSymbol(false, symbol.origin());
             if (symbol.origin()) {
                 manualDialingState = ManualDialingState.WAITING_FOR_OPEN;
-                manualDialingLastUpdated = stargate.getTime();
             }
             stargate.setChanged();
         }
@@ -170,6 +160,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void failGate() {
         super.failGate();
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
             dhd.clearSymbols();
@@ -179,6 +171,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void onWormholeDisconnected() {
         super.onWormholeDisconnected();
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         getSpinHelper().stopSpinning(true);
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
@@ -189,6 +183,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void onGateOpen(boolean initiating) {
         super.onGateOpen(initiating);
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         getSpinHelper().stopSpinning(true);
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
@@ -212,7 +208,7 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
 
     @Override
     public boolean isManuallyDialingByHand() {
-        return manualDialingState != ManualDialingState.IDLE;
+        return manualDialingState == ManualDialingState.DIALING;
     }
 
     @Override

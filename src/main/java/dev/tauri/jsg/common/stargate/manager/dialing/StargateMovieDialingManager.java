@@ -86,13 +86,13 @@ public class StargateMovieDialingManager extends StargateMilkyWayDialingManager 
     }
 
     @Override
-    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons) {
+    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons, boolean tryOpenAfter) {
         var symbol = getSpinHelper().getCurrentTopSymbol();
         if (symbol == null) return StargateChevronEngageResult.BLOCKED_BY_EVENT;
         if (isLockChevron(symbol, true, ignoreMaxChevrons)) {
             getConnection().runOnConnected((conn, sg) -> ((StargateAbstractDialingManager<?>) sg.getDialingManager()).runIncomingWormhole(dialedAddress.addOriginIfMissingAndImmutable().size(), 30));
         }
-        stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, false), symbol, false, true, true);
+        stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, false), symbol, false, true, true, false, ignoreMaxChevrons, tryOpenAfter);
         return StargateChevronEngageResult.OK;
     }
 }
