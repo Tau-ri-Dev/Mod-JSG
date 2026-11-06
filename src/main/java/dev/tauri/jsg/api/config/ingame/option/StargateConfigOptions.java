@@ -6,6 +6,7 @@ import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsgcore.common.config.ingame.BEConfigOptionProvider;
 import dev.tauri.jsgcore.common.config.ingame.option.ConfigOptionsHolder;
 import dev.tauri.jsgcore.common.config.ingame.option.type.BooleanBEConfigOption;
+import dev.tauri.jsgcore.common.config.ingame.option.type.EnumBEConfigOption;
 import dev.tauri.jsgcore.common.config.ingame.option.type.IntegerBEConfigOption;
 import dev.tauri.jsgcore.common.symbol.pointoforigin.IPointOfOriginType;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +15,7 @@ public class StargateConfigOptions {
     public static class Common {
         public static final ConfigOptionsHolder HOLDER = new ConfigOptionsHolder();
 
-        public static final BEConfigOptionProvider<StargateTimeLimitModeEnum> TIME_LIMIT_MODE = HOLDER.register("time_limit_mode", (onChanged) -> new dev.tauri.jsgcore.common.config.ingame.option.type.EnumBEConfigOption<>(onChanged, JSGConfig.Stargate.maxOpenedWhat.get(), StargateTimeLimitModeEnum::values, (object) -> {
+        public static final BEConfigOptionProvider<StargateTimeLimitModeEnum> TIME_LIMIT_MODE = HOLDER.register("time_limit_mode", (onChanged) -> new EnumBEConfigOption<>(onChanged, JSGConfig.Stargate.maxOpenedWhat.get(), StargateTimeLimitModeEnum::values, (object) -> {
             if (object instanceof StargateTimeLimitModeEnum mode)
                 return mode;
             return null;
@@ -49,7 +50,29 @@ public class StargateConfigOptions {
 
         public static final BEConfigOptionProvider<Boolean> DHD_POO_LOCK = HOLDER.register("dhd_last_lock", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.DialHomeDevice.dhdLastOpen.get()));
         public static final BEConfigOptionProvider<Boolean> INCOMING_RING_SPIN = HOLDER.register("spin_ring_incoming", (onChanged) -> new BooleanBEConfigOption(onChanged, true));
-        public static final BEConfigOptionProvider<Boolean> SPIN_WHILE_DIALING_DHD = HOLDER.register("spin_ring_dialing_dhd", (onChanged) -> new BooleanBEConfigOption(onChanged, false));
+        public static final BEConfigOptionProvider<DHDDialingType> DHD_DIALING_TYPE = HOLDER.register("dhd_dialing_type", (onChanged) -> new EnumBEConfigOption<>(onChanged, DHDDialingType.NORMAL, DHDDialingType::values, obj -> {
+            if (obj instanceof DHDDialingType dhdDialingType)
+                return dhdDialingType;
+            return null;
+        }));
+
+        public enum DHDDialingType {
+            NORMAL,
+            FREE_SPIN,
+            SPIN_ENGAGE;
+
+            public boolean freeSpin() {
+                return this == FREE_SPIN;
+            }
+
+            public boolean normal() {
+                return this == NORMAL;
+            }
+
+            public boolean spinEngage() {
+                return this == SPIN_ENGAGE;
+            }
+        }
     }
 
     public static class Pegasus {

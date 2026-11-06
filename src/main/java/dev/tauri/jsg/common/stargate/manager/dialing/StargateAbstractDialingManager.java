@@ -151,6 +151,12 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
         return builder;
     }
 
+    public void allowDialNextFromBuffer() {
+    }
+
+    public void clearDialingBuffer() {
+    }
+
     // -----------------------------------------
     // SCHEDULING THE CHEVRONS OPERATIONS
 
@@ -166,7 +172,7 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
         if (stopSpinData.contains("symbol")) {
             var symbol = stargate.getSymbolType().valueOf(stopSpinData.getInt("symbol"));
             stargate.getStateManager().getChevronsState().scheduleChevronOpen(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY, ChevronEnum.getFinal(), false);
-            stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, stopSpinData.getBoolean("ignoreMaxChevrons")), symbol, false, true, true, stopSpinData.getBoolean("noEnergy"), stopSpinData.getBoolean("ignoreMaxChevrons"));
+            stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, stopSpinData.getBoolean("ignoreMaxChevrons")), symbol, false, true, true, stopSpinData.getBoolean("noEnergy"), stopSpinData.getBoolean("ignoreMaxChevrons"), stopSpinData.getBoolean("tryOpenAfter"));
         } else if (getStargateState().dialingComputer())
             setStargateState(EnumStargateState.IDLE);
     }

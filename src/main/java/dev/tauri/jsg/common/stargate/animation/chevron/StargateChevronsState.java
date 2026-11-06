@@ -270,7 +270,11 @@ public abstract class StargateChevronsState extends State implements INBTSeriali
                         get(ChevronEnum.getFinal().getKey(), true).lock();
                         scheduleChevronDim(A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY + 2, ChevronEnum.getFinal(), true);
                     }
+                } else {
+                    stargate.getDialingManager().allowDialNextFromBuffer();
                 }
+                if (customData.getBoolean("tryOpenAfter"))
+                    dialingManager.attemptOpenDialed();
             }
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_OPEN.get()) {
             stargate.playSoundEvent(StargateSoundEventEnum.CHEVRON_OPEN);
@@ -285,11 +289,13 @@ public abstract class StargateChevronsState extends State implements INBTSeriali
                     .close();
             if (customData.getBoolean("setIdle"))
                 dialingManager.setStargateState(EnumStargateState.IDLE);
+            stargate.getDialingManager().allowDialNextFromBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_FAIL.get()) {
             if (customData.getBoolean("setIdle"))
                 dialingManager.dialingFailed(StargateOpenResult.ADDRESS_MALFORMED);
             get(customData.getInt("chevron"), customData.getBoolean("isFinal"))
                     .close();
+            stargate.getDialingManager().clearDialingBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_DIM.get()) {
             get(customData.getInt("chevron"), customData.getBoolean("isFinal"))
                     .dim();
@@ -300,6 +306,7 @@ public abstract class StargateChevronsState extends State implements INBTSeriali
             closeAll();
             if (customData.getBoolean("setIdle"))
                 dialingManager.setStargateState(EnumStargateState.IDLE);
+            stargate.getDialingManager().clearDialingBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.LIGHT_UP_CHEVRONS.get()) {
             if (customData.getBoolean("playSound"))
                 stargate.playSoundEvent(StargateSoundEventEnum.CHEVRON_OPEN);
@@ -315,21 +322,26 @@ public abstract class StargateChevronsState extends State implements INBTSeriali
         }
     }
 
-    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle) {
+    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle) {
         scheduleChevronActivate(waitTicks, chevron, symbolToLock, setIdle, false, false);
     }
 
-    public void scheduleChevronFinalOpenAndActivate(int waitTicks, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle) {
+    public void scheduleChevronFinalOpenAndActivate(int waitTicks, @Nullable SymbolInterface symbolToLock, boolean setIdle) {
         scheduleChevronOpen(waitTicks, ChevronEnum.getFinal(), false);
         scheduleChevronActivate(waitTicks + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, ChevronEnum.getFinal(), symbolToLock, false);
         scheduleChevronClose(waitTicks + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY + A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY, ChevronEnum.getFinal(), setIdle);
     }
 
-    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock) {
+    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock) {
         scheduleChevronActivate(waitTicks, chevron, symbolToLock, setIdle, checkConnection, animateTopChevronLock, false, false);
     }
 
-    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons) {
+    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons) {
+        scheduleChevronActivate(waitTicks, chevron, symbolToLock, setIdle, checkConnection, animateTopChevronLock, noEnergy, ignoreMaxChevrons, false);
+    }
+
+    @Override
+    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons, boolean tryOpenAfterEngage) {
         var data = new CompoundTag();
         data.putInt("chevron", chevron.getKey());
         data.putBoolean("isFinal", chevron.isFinal());
@@ -338,6 +350,7 @@ public abstract class StargateChevronsState extends State implements INBTSeriali
         data.putBoolean("noEnergy", noEnergy);
         data.putBoolean("ignoreMaxChevrons", ignoreMaxChevrons);
         data.putBoolean("animateTopChevronLock", animateTopChevronLock);
+        data.putBoolean("tryOpenAfter", tryOpenAfterEngage);
         if (symbolToLock != null)
             data.putInt("symbol", symbolToLock.getId());
         addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_CHEVRON_LIGHT_UP, waitTicks, data));

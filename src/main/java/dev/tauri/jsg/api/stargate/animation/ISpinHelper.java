@@ -184,4 +184,29 @@ public interface ISpinHelper extends INBTSerializable<CompoundTag>, ITickable {
      * @return true is success, otherwise false;
      */
     Pair<Boolean, Float> moveToAndEngage(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons, float speed);
+
+    /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop. If stopped automatically after reaching target symbol, the symbol will engage and gate will try to open (or fail).
+     * <p>
+     * Will use ring rotation speed configured inside the BE config.
+     *
+     * @param symbolInterface   target symbol
+     * @param isFinal           should lock top chevron?
+     * @param noEnergy          should be engaged without energy consumption?
+     * @param ignoreMaxChevrons ignore maximum dialable symbol count?
+     * @return true is success, otherwise false;
+     */
+    Pair<Boolean, Float> moveToEngageAndActivate(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons);
+
+    /**
+     * Start spinning the ring to get target symbol under the top chevron. Stops automatically if reaches the symbol or when told to stop. If stopped automatically after reaching target symbol, the symbol will engage and gate will try to open (or fail).
+     *
+     * @param symbolInterface   target symbol
+     * @param isFinal           should lock top chevron?
+     * @param noEnergy          should be engaged without energy consumption?
+     * @param ignoreMaxChevrons ignore maximum dialable symbol count?
+     * @param speed             speed coefficient of the rotation (1 = 100% of the ring speed - normal speed)
+     * @return true is success, otherwise false;
+     */
+    Pair<Boolean, Float> moveToEngageAndActivate(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons, float speed);
 }

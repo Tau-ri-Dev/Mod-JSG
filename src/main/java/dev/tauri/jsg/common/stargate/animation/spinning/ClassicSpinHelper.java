@@ -398,6 +398,25 @@ public class ClassicSpinHelper extends State implements ISpinHelper {
     }
 
     @Override
+    public Pair<Boolean, Float> moveToEngageAndActivate(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons) {
+        return moveToEngageAndActivate(symbolInterface, isFinal, noEnergy, ignoreMaxChevrons, getRingSpeedFromConfig());
+    }
+
+    @Override
+    public Pair<Boolean, Float> moveToEngageAndActivate(@NotNull SymbolInterface symbolInterface, boolean isFinal, boolean noEnergy, boolean ignoreMaxChevrons, float speed) {
+        var data = new CompoundTag();
+        data.putInt("symbol", symbolInterface.getId());
+        data.putBoolean("isFinal", isFinal);
+        data.putBoolean("noEnergy", noEnergy);
+        data.putBoolean("tryOpenAfter", true);
+        data.putBoolean("ignoreMaxChevrons", ignoreMaxChevrons);
+        var r = moveTo(symbolInterface, speed);
+        if (r.first())
+            setSpinStopData(data);
+        return r;
+    }
+
+    @Override
     public float getRingSpeedFromConfig() {
         if (stargate instanceof StargateClassicBaseBE<?> configBe)
             return configBe.getSpeedFactor();

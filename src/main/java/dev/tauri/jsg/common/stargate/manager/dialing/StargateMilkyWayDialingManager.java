@@ -92,6 +92,20 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
 
     @Override
     public StargateChevronEngageResult engageSymbolDHD(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons) {
+
+        // dial using buffer - spinning the ring while dialing with DHD
+        if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).spinEngage()) {
+            var result = engageSymbolToBuffer(symbol, noEnergy, ignoreMaxChevrons);
+            if (result != StargateChevronEngageResult.OK) return result;
+            var dhd = stargate.getLinkedDevice();
+            if (stargate.isLinkedAndDHDOperational() && dhd != null) {
+                dhd.activateSymbol(symbol);
+            }
+            if (addressDialSequence != null)
+                addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 10));
+            return StargateChevronEngageResult.OK;
+        }
+
         if (!getStargateState().idle())
             return StargateChevronEngageResult.BUSY;
         var r = engageSymbolInternal(symbol, false, noEnergy, ignoreMaxChevrons);
@@ -105,7 +119,7 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
         }
         int plusTime = new Random().nextInt(5);
         if (isLockChevron(symbol, ignoreMaxChevrons)) {
-            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.SPIN_WHILE_DIALING_DHD))
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).freeSpin())
                 getSpinHelper().stopSpinning(true);
             if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_POO_LOCK)) {
                 stargate.getStateManager().getChevronsState().scheduleChevronFinalOpenAndActivate(5 + plusTime, null, true);
@@ -117,7 +131,7 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
                     addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));
             }
         } else {
-            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.SPIN_WHILE_DIALING_DHD))
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).freeSpin())
                 getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 1.5f * getSpinHelper().getRingSpeedFromConfig());
             stargate.getStateManager().getChevronsState().scheduleChevronActivate(10 + plusTime, getNextChevron(symbol, true, ignoreMaxChevrons), null, true);
             if (addressDialSequence != null)
@@ -185,6 +199,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected StargateChevronEngageResult engageSymbolInternal(SymbolInterface symbol, boolean isNox, boolean noEnergy, boolean ignoreMaxChevrons) {
         var result = super.engageSymbolInternal(symbol, isNox, noEnergy, ignoreMaxChevrons);
+        canDialNextFromBuffer = false;
+        stargate.setChanged();
         if (result.ok()) {
             var dhd = stargate.getLinkedDevice();
             if (stargate.isLinkedAndDHDOperational() && dhd != null) {

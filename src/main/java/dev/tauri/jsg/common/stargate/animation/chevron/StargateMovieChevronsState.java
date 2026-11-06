@@ -74,7 +74,7 @@ public abstract class StargateMovieChevronsState extends StargateChevronsState {
     }
 
     @Override
-    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons) {
+    public void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @org.jetbrains.annotations.Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons, boolean tryOpenAfterEngage) {
         var data = new CompoundTag();
         data.putInt("chevron", chevron.getKey());
         data.putBoolean("isFinal", chevron.isFinal());
@@ -83,6 +83,7 @@ public abstract class StargateMovieChevronsState extends StargateChevronsState {
         data.putBoolean("noEnergy", noEnergy);
         data.putBoolean("ignoreMaxChevrons", ignoreMaxChevrons);
         data.putBoolean("animateTopChevronLock", animateTopChevronLock);
+        data.putBoolean("tryOpenAfter", tryOpenAfterEngage);
         if (symbolToLock != null)
             data.putInt("symbol", symbolToLock.getId());
         addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_CHEVRON_OPEN, waitTicks, data));
@@ -124,6 +125,8 @@ public abstract class StargateMovieChevronsState extends StargateChevronsState {
                     else
                         stargate.getDialingManager().setStargateState(EnumStargateState.IDLE);
                 }
+                if (customData.getBoolean("tryOpenAfter"))
+                    dialingManager.attemptOpenDialed();
             }
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_CLOSE.get()) {
             stargate.playSoundEvent(StargateSoundEventEnum.CHEVRON_SHUT);
