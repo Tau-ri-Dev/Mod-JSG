@@ -128,7 +128,7 @@ public class StargateOrlinRenderer extends StargateAbstractRenderer<StargateOrli
 
     @Override
     protected void renderKawoosh() {
-        stack.translate(0, 3.80873f - 1.7f * GATE_SCALE + 0.11, 0);
+        stack.translate(0, 3.80873f - 1.7f * GATE_SCALE + 0.105, 0);
         stack.scale(0.13f, 0.13f, 0.13f);
 
         super.renderKawoosh();
