@@ -62,6 +62,7 @@ public class StargateOrlinDialingManager extends StargateAbstractDialingManager<
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_ORLIN_OPEN.get()) {
             if (!getStargateState().dialing()) return;
             if (getDialedAddressSize() < 7) return;
+            stargate.playSoundEvent(JSGSoundEvents.GATE_ORLIN_COOKING_DONE);
             setStargateState(EnumStargateState.IDLE);
             attemptOpenDialed();
         } else super.executeTask(scheduledTask, customData);

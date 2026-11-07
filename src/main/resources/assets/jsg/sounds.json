@@ -338,6 +338,13 @@
       "jsg:gate/orlin/gate_orlin_broke"
     ]
   },
+  "block.stargate.orlin.cooking_done": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.block.stargate.orlin.cooking_done",
+    "sounds": [
+      "jsg:gate/orlin/gate_orlin_cooking_done"
+    ]
+  },
   "block.stargate.universe.dial": {
     "category": "ambient",
     "subtitle": "jsg.subtitle.block.stargate.universe.dial",
