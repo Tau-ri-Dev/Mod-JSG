@@ -29,9 +29,9 @@ import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import dev.tauri.jsgcore.common.packet.JSGCorePacketHandler;
 import dev.tauri.jsgcore.common.packet.packets.StateUpdatePacketToClient;
-import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.util.JSGAxisAlignedBB;
 import dev.tauri.jsgcore.common.util.RotationUtil;
+import dev.tauri.jsgcore.common.util.TimeUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -603,7 +603,10 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
 
             if (isCurrentlyUnstable && flashIndex == 1) {
                 tryTriggerRangedAdvancement(sg, JSGAdvancementsUtil.EnumAdvancementType.GATE_FLICKER);
-                JSGSoundHelper.playSoundEvent(sg.getStargateLevel(), sg.getGateCenterPos(), JSGSoundEvents.WORMHOLE_FLICKER, 0.9f + (sg.getRandom().nextFloat() * 0.2f));
+                if (TimeUtils.isAprilFirst())
+                    sg.playSoundEvent(JSGSoundEvents.GATE_ORLIN_COOKING_DONE);
+                else
+                    sg.playSoundEvent(JSGSoundEvents.WORMHOLE_FLICKER, 0.9f + (sg.getRandom().nextFloat() * 0.2f));
             }
         });
     }
