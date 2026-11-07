@@ -1,10 +1,12 @@
 package dev.tauri.jsg.common.block.stargate;
 
 import dev.tauri.jsg.api.config.JSGConfig;
+import dev.tauri.jsg.api.registry.JSGSymbolTypes;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsgcore.common.item.notebook.PageNotebookItemFilled;
+import dev.tauri.jsgcore.common.registry.CoreItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -52,6 +54,14 @@ public class StargateOrlinBaseBlock extends StargateAbstractBaseBlock {
     protected boolean showGateInfo(Player player, InteractionHand hand, Level world, BlockPos pos) {
         if (world.isClientSide) return false;
         if (!(world.getBlockEntity(pos) instanceof StargateOrlinBaseBE baseTile)) return false;
+
+        var heldStack = player.getItemInHand(hand);
+        if (heldStack.is(CoreItems.NOTEBOOK_PAGE_EMPTY.get())) {
+            heldStack.shrink(1);
+            player.addItem(baseTile.getAddressPage(JSGSymbolTypes.MILKYWAY.get(), heldStack, new int[]{1, 2, 3, 4, 5, 6}));
+            return true;
+        }
+
         var energyStorage = baseTile.getCapability(ForgeCapabilities.ENERGY).resolve();
         if (energyStorage.isEmpty()) return false;
         long energyStored = baseTile.getEnergyManager().getStorage().getTrueEnergyStored();
