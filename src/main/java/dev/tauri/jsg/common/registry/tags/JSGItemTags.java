@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 
 public class JSGItemTags {
     public static final TagKey<Item> IRIS_BLADES = tag("iris_blades");
-    public static final TagKey<Item> STARGATE_CAPACITORS = tag("stargate_capacitors");
+    public static final TagKey<Item> STARGATE_ENERGY_CRYSTALS = tag("stargate_energy_crystals");
     public static final TagKey<Item> DIALING_GLOVES = tag("dialing_gloves");
 
     private static TagKey<Item> tag(String name) {

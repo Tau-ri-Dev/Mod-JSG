@@ -90,7 +90,7 @@ public class ClientStargateInventoryTooltip implements ClientTooltipComponent {
                 var config = new BEConfig(() -> {
                 }, StargateConfigOptions.Classic.HOLDER);
                 config.deserializeNBT(compound.getCompound("config"));
-                var capsMaybe = config.getValue(StargateConfigOptions.Classic.MAX_CAPACITORS);
+                var capsMaybe = config.getValue(StargateConfigOptions.Classic.MAX_CRYSTALS);
                 if (capsMaybe.isPresent())
                     maxCapacitors = capsMaybe.get();
             } catch (Exception ignored) {

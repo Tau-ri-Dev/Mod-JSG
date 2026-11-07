@@ -809,7 +809,7 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             Item item = stack.getItem();
-            boolean isItemCapacitor = stack.is(JSGItemTags.STARGATE_CAPACITORS) && stack.getCapability(ForgeCapabilities.ENERGY).isPresent();
+            boolean isItemCapacitor = stack.is(JSGItemTags.STARGATE_ENERGY_CRYSTALS) && stack.getCapability(ForgeCapabilities.ENERGY).isPresent();
             return switch (slot) {
                 case 0, 1, 2, 3 -> StargateUpgrade.contains(item) && !hasUpgrade(item);
                 case 4 -> isItemCapacitor && getSupportedCapacitors() >= 1;
@@ -880,7 +880,7 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
     };
 
     public int getSupportedCapacitors() {
-        return getConfig().getValueOrDefault(StargateConfigOptions.Classic.MAX_CAPACITORS);
+        return getConfig().getValueOrDefault(StargateConfigOptions.Classic.MAX_CRYSTALS);
     }
 
 // -----------------------------------------------------------

@@ -45,7 +45,7 @@ public class JSGItemTagGenerator extends ItemTagsProvider {
                 .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_stone"));
 
         // Stargate energy extenders
-        tag(JSGItemTags.STARGATE_CAPACITORS)
+        tag(JSGItemTags.STARGATE_ENERGY_CRYSTALS)
                 .add(CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .add(CoreItems.CRYSTAL_ENERGY_ADVANCED.get())
                 .add(CoreItems.CRYSTAL_ENERGY_ULTIMATE.get())

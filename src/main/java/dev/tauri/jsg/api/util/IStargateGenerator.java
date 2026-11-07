@@ -62,8 +62,9 @@ public interface IStargateGenerator {
         public Direction gateVerticalFacing = Direction.SOUTH;
         @Nonnull
         public StargateType<?> gateType = StargateTypes.MILKYWAY.get();
+        // TODO: Refactor to be able to change crystal type (basic, advanced...)
         @Nonnull
-        public List<Pair<Long, Boolean>> capacitors = new ArrayList<>(); // List<Pair<[capacity], [isCreative]>>
+        public List<Pair<Long, Boolean>> crystals = new ArrayList<>(); // List<Pair<[capacity], [isCreative]>>
         public long stargateEnergyInternal = -1;
         public Function<BEConfig, BEConfig> stargateConfig = null;
         @Nonnull

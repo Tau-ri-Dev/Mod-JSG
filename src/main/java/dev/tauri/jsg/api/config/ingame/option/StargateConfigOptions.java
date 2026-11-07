@@ -33,7 +33,7 @@ public class StargateConfigOptions {
         public static final BEConfigOptionProvider<Boolean> FORCE_UNSTABLE = HOLDER.register("force_unstable", (onChanged) -> new BooleanBEConfigOption(onChanged, false));
         public static final BEConfigOptionProvider<Boolean> ENABLE_BURY_STATE = HOLDER.register("enable_bury_state", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.Stargate.enableBurriedState.get()));
         public static final BEConfigOptionProvider<Boolean> ALLOW_RIG = HOLDER.register("allow_rig", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.Stargate.enableRandomIncoming.get()));
-        public static final BEConfigOptionProvider<Integer> MAX_CAPACITORS = HOLDER.register("max_capacitors", (onChanged) -> new IntegerBEConfigOption(onChanged, 3, 0, 3));
+        public static final BEConfigOptionProvider<Integer> MAX_CRYSTALS = HOLDER.register("max_crystals", (onChanged) -> new IntegerBEConfigOption(onChanged, 3, 0, 3));
         public static final BEConfigOptionProvider<Boolean> DHD_OC_PRESS_SOUND = HOLDER.register("dhd_oc_press_sound", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.DialHomeDevice.computerDialSound.get()));
         public static final BEConfigOptionProvider<Boolean> INCOMING_ANIMATION = HOLDER.register("allow_incoming_animation", (onChanged) -> new BooleanBEConfigOption(onChanged, JSGConfig.Stargate.allowIncomingAnimations.get()));
     }
@@ -89,7 +89,7 @@ public class StargateConfigOptions {
         public static final BEConfigOptionProvider<ResourceLocation> POINT_OF_ORIGIN = IPointOfOriginType.registerBEConfigOption(StargateTypes.UNIVERSE, HOLDER);
 
         // we are overriding the classic one here
-        public static final BEConfigOptionProvider<Integer> MAX_CAPACITORS = HOLDER.register("max_capacitors", (onChanged) -> new IntegerBEConfigOption(onChanged, JSGConfig.Stargate.universeCapacitors.get(), JSGConfig.Stargate.universeCapacitors.getMin(), JSGConfig.Stargate.universeCapacitors.getMax()));
+        public static final BEConfigOptionProvider<Integer> MAX_CRYSTALS = HOLDER.register("max_crystals", (onChanged) -> new IntegerBEConfigOption(onChanged, JSGConfig.Stargate.universeCrystalSlots.get(), JSGConfig.Stargate.universeCrystalSlots.getMin(), JSGConfig.Stargate.universeCrystalSlots.getMax()));
 
         public static final BEConfigOptionProvider<Boolean> FAST_DIALING = HOLDER.register("fast_dialing", (onChanged) -> new BooleanBEConfigOption(onChanged, false));
         public static final BEConfigOptionProvider<Boolean> ORANGE_SHIELD = HOLDER.register("orange_shield", (onChanged) -> new BooleanBEConfigOption(onChanged, false));

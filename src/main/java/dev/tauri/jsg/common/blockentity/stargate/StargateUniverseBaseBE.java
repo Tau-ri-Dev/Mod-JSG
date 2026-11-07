@@ -167,7 +167,7 @@ public class StargateUniverseBaseBE extends StargateClassicBaseBE<StargateUniver
 
     @Override
     public int getSupportedCapacitors() {
-        return getConfig().getValueOrDefault(StargateConfigOptions.Universe.MAX_CAPACITORS);
+        return getConfig().getValueOrDefault(StargateConfigOptions.Universe.MAX_CRYSTALS);
     }
 
     // --------------------------------------------------------------------------------
