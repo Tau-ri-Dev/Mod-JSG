@@ -15,6 +15,7 @@ import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nonnull;
@@ -39,8 +40,13 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
         return 1.14;
     }
 
+    public int getLightsColor() {
+        return 0xffffffff;
+    }
+
     @Override
     protected void renderGate() {
+        var rgb = getLightsColor();
         stack.pushPose();
         tileEntity.getDialingManager().getSpinHelper().correctClientRingStartTime(level.getGameTime(), Minecraft.getInstance().gui.getGuiTicks());
         angularRotation = (float) tileEntity.getDialingManager().getSpinHelper().apply(Minecraft.getInstance().gui.getGuiTicks() + partialTicks, true);
@@ -60,7 +66,15 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
             stack.pushPose();
             int symbolLight = (int) (((StargateUniverseChevronsState) tileEntity.getStateManager().getChevronsState()).getSymbol(symbol).getLightStage() * 15D);
             float maxLight = Math.max((LightTexture.FULL_BRIGHT * 0.15f), Math.max(combinedLight / 2, LightTexture.pack(symbolLight, symbolLight)));
-            symbol.getModel(StargateTypes.UNIVERSE.get(), tileEntity.getPointOfOrigin(), StargatePointOfOriginsDefaults.VARIANT_GATE).render(stack, source, combinedLight, symbolLight > 2, maxLight / LightTexture.FULL_BRIGHT);
+            var symbolLightCoef = maxLight / LightTexture.FULL_BRIGHT;
+            symbol.getModel(StargateTypes.UNIVERSE.get(), tileEntity.getPointOfOrigin(), StargatePointOfOriginsDefaults.VARIANT_GATE).render(stack, source, combinedLight, OverlayTexture.NO_OVERLAY,
+                    symbolLight > 2,
+                    symbolLightCoef * ((rgb >> 8 & 0xff) / 255f),
+                    symbolLightCoef * ((rgb >> 4 & 0xff) / 255f),
+                    symbolLightCoef * ((rgb & 0xff) / 255f),
+                    1f,
+                    false
+            );
             stack.popPose();
         }
         stack.popPose();
@@ -101,10 +115,17 @@ public class StargateUniverseRenderer extends StargateClassicRenderer<StargateUn
 
     @Override
     protected void renderChevron(ChevronEnum chevron, StargateChevronsState.ChevronState state, float color, boolean onlyLight) {
+        var rgb = (onlyLight ? getLightsColor() : 0xffffff);
         stack.pushPose();
         stack.mulPose(Axis.ZP.rotationDegrees(chevron.rotation));
         getTextureLoader().getTexture(state.getTexture(rendererState.getBiomeOverlay(), onlyLight)).bindTexture();
-        ElementEnum.UNIVERSE_CHEVRON.render(stack, source, combinedLight, onlyLight && state.isLocked(), color);
+        ElementEnum.UNIVERSE_CHEVRON.render(stack, source, combinedLight, OverlayTexture.NO_OVERLAY, onlyLight && state.isLocked(),
+                color * ((rgb >> 8 & 0xff) / 255f),
+                color * ((rgb >> 4 & 0xff) / 255f),
+                color * ((rgb & 0xff) / 255f),
+                1f,
+                false
+        );
         stack.popPose();
     }
 

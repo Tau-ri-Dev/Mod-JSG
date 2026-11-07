@@ -390,7 +390,8 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         //GDO - GUI
         add("item." + JSG.MOD_ID + ".gdo.in_menu.alert", "Type code or press ESC");
-        add("item." + JSG.MOD_ID + ".gdo.code_accepted", "CODE INVALID");
+        add("item." + JSG.MOD_ID + ".gdo.code_accepted", "Code accepted! Opening iris...");
+        add("item." + JSG.MOD_ID + ".gdo.code_rejected", "CODE INVALID");
         add("item." + JSG.MOD_ID + ".gdo.iris_busy", "Iris is busy!");
         add("item." + JSG.MOD_ID + ".gdo.iris_opened", "Iris is open!");
         add("item." + JSG.MOD_ID + ".gdo.operator", "T-Mobile 5G");
