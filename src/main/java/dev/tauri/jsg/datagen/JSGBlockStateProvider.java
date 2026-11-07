@@ -11,18 +11,12 @@ import dev.tauri.jsgcore.datagen.CoreBlockStateProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-
-import java.util.List;
-import java.util.Map;
 
 public class JSGBlockStateProvider extends CoreBlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -39,10 +33,10 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         createSimpleVanillaTextureBlock(JSGBlocks.ABYDOS_SAND, Blocks.SAND);
 
         //BLOCKS WITH CUSTOM JSON MODEL
-            createRotatableJsonModel(JSGBlocks.TOASTER);
-            createRotatableJsonModel(JSGBlocks.PRINTER);
-            createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
-            createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
+        createRotatableJsonModel(JSGBlocks.TOASTER);
+        createRotatableJsonModel(JSGBlocks.PRINTER);
+        createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
+        createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
 
         //DHD - Handheld models are generated in ItemsProvider because of OBJModels
         models().getBuilder("dhd_generic").texture("particle", JSGMapping.rl(JSGCore.MOD_ID, "block/materials/naquadah_alloy_block"));
@@ -107,54 +101,15 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
     }
 
     private void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock) {
-       var type = ((IStargateBlock) baseBlock.get()).getStargateType().getId().getPath();
+        var type = ((IStargateBlock) baseBlock.get()).getStargateType().getId().getPath();
         var sides = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_sides");
         var baseFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_base_front");
         var ringFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_ring_front");
         var chevronFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_chevron_front");
 
-        buildClassicStargatePart(baseBlock, baseFront, sides);
-        buildClassicStargatePart(ringBlock, ringFront, sides);
-        buildClassicStargatePart(chevronBlock, chevronFront, sides);
-
-    }
-
-    private void buildClassicStargatePart(RegistryObjectWrapper<Block> blockObj, ResourceLocation frontTexture, ResourceLocation sidesTexture) {
-        var block = blockObj.get();
-        var blockName = blockObj.getId().getPath();
-
-        BlockModelBuilder model = models().withExistingParent(blockName, "block/cube")
-                .texture("particle", sidesTexture)
-                .texture("north", frontTexture)
-                .texture("south", sidesTexture)
-                .texture("west", sidesTexture)
-                .texture("east", sidesTexture)
-                .texture("up", sidesTexture)
-                .texture("down", sidesTexture);
-
-        VariantBlockStateBuilder builder = getVariantBuilder(block);
-
-        Map<Direction, Integer> yRotations = Map.of(
-                Direction.NORTH, 0,
-                Direction.EAST, 90,
-                Direction.SOUTH, 180,
-                Direction.WEST, 270
-        );
-
-        Map<Integer, Integer> xRotations = Map.of(
-                0, 0,
-                2, 90,
-                1, 270
-        );
-
-        yRotations.forEach((direction, yRot) ->
-                xRotations.forEach((vertical, xRot) ->
-                        List.of(false, true).forEach((renderState) -> builder.partialState()
-                                .with(JSGProperties.FACING_HORIZONTAL_PROPERTY, direction)
-                                .with(JSGProperties.FACING_VERTICAL_PROPERTY, vertical)
-                                .with(JSGProperties.RENDER_BLOCK_PROPERTY, renderState)
-                                .setModels(new ConfiguredModel(model, xRot, yRot, false)))));
-        itemModels().withExistingParent(blockName, JSGMapping.rl(JSG.MOD_ID, "block/" + blockName));
+        buildBlockWithCustomSides(baseBlock, baseFront, sides);
+        buildBlockWithCustomSides(ringBlock, ringFront, sides);
+        buildBlockWithCustomSides(chevronBlock, chevronFront, sides);
     }
 
     private void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
