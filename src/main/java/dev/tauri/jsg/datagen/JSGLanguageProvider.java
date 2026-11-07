@@ -6,13 +6,7 @@ import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import dev.tauri.jsgcore.datagen.CoreLanguageProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.Item;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 
 public class JSGLanguageProvider extends CoreLanguageProvider {
     public JSGLanguageProvider(PackOutput output, String locate) {
@@ -22,51 +16,6 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
     protected void addCartridgeItem(RegistryObjectWrapper<? extends Item> object) {
         add(object.get(), pathToName(object.getId().getPath()));
         add(object.get().getDescriptionId() + ".empty", "Empty " + pathToName(object.getId().getPath()));
-    }
-
-    //TODO: Move AddVillagers and Subtitles to CORE
-    protected void addVillagerProfession(RegistryObjectWrapper<? extends VillagerProfession> object) {
-        var modID = object.getId().getNamespace();
-        var key = "entity.minecraft.villager." + modID + "." + object.getId().getPath();
-        var name = pathToName(object.getId().getPath());
-        add(key, name);
-    }
-
-    protected void addVillagerType(RegistryObjectWrapper<VillagerType> object) {
-        var modID = object.getId().getNamespace();
-
-        var key = "entity.minecraft.villager." + modID + "." + object.getId().getPath();
-        var name = pathToName(object.getId().getPath());
-        add(key, name);
-    }
-
-    public void addAllSubtitles(Class<?> soundEventsClass) {
-        for (Field field : soundEventsClass.getDeclaredFields()) {
-            if (!Modifier.isPublic(field.getModifiers())) continue;
-            if (!Modifier.isStatic(field.getModifiers())) continue;
-            if (field.getType() != SoundEvent.class) continue;
-            if (field.getName().startsWith("RECORD_") || field.getName().startsWith("SIREN_")) {continue;}
-
-            try {
-                var sound = (SoundEvent) field.get(null);
-                var rl = sound.getLocation();
-                var modId = rl.getNamespace();
-                var path = rl.getPath();
-
-                var formattedPath = path.replace('.', '_');
-                var generatedSubtitle = pathToName(formattedPath);
-
-                generatedSubtitle = generatedSubtitle
-                        .replace("Block ", "")
-                        .replace("Item ", "")
-                        .replace("Misc ", "");
-
-                add(modId + ".subtitle." + path, generatedSubtitle);
-
-            } catch (IllegalAccessException e) {
-                JSG.logger.error("Failed to automatically generate subtitle for field: {}", field.getName(), e);
-            }
-        }
     }
 
     @Override
@@ -334,6 +283,8 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui." + JSG.MOD_ID + ".ingame_config.time_limit_power.comment", "Specifies multiplier of stargate's power draw when the gate opened for more than Stargate Time Limit Time and Stargate Time Limit Mode is set to DRAW_MORE_POWER");
         add("gui." + JSG.MOD_ID + ".ingame_config.spin_speed.title", "Stargate's Ring Rotation Speed");
         add("gui." + JSG.MOD_ID + ".ingame_config.spin_speed.comment", "Ring rotation speed in %");
+        add("gui." + JSG.MOD_ID + ".ingame_config.max_crystals.title", "Max crystals");
+        add("gui." + JSG.MOD_ID + ".ingame_config.max_crystals.comment", "How many Energy Crystals can be inserted in stagate");
 
         add("gui." + JSG.MOD_ID + ".ingame_config.force_unstable.title", "Force Unstable Event Horizon");
         add("gui." + JSG.MOD_ID + ".ingame_config.force_unstable.comment", "If set to Enabled, stargate's event horizon will be unstable permanently (this also effects connected gate on the other side)");
@@ -447,7 +398,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui.admincontroller.response.stargate.dial_address.error.already_engaged","One or more symbols have already been engaged");
         add("gui.admincontroller.response.stargate.dial_address.error.blocked_by_event","Dialling blocked by an error (Check logs)");
         add("gui.admincontroller.response.stargate.dial_address.success","Begun dialling...");
-        add("gui.admincontroller.stargate.give_address.success","Giving address book...");
+        add("gui.admincontroller.response.stargate.give_address.success","Giving address book...");
         add("gui.admincontroller.response.stargate.abort.error","Stargate is not dialing");
         add("gui.admincontroller.response.stargate.abort.success","Dialing aborted");
         add("gui.admincontroller.response.stargate.iris.empty","Stargate doesn't have an iris");

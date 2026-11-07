@@ -6,8 +6,8 @@ import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
 import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.datagen.loot.CoreChestLootTables;
 import dev.tauri.jsgcore.mapping.JSGMapping;
-import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +24,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.function.BiConsumer;
 
 @SuppressWarnings("deprecation")
-public class JSGChestLootTableProvider implements LootTableSubProvider {
+public class JSGChestLootTableProvider extends CoreChestLootTables {
 
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> writer) {

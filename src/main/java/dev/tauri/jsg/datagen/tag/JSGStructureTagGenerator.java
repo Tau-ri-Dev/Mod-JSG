@@ -3,9 +3,9 @@ package dev.tauri.jsg.datagen.tag;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGStructures;
 import dev.tauri.jsg.common.registry.tags.JSGStructureTags;
+import dev.tauri.jsgcore.datagen.tag.CoreStructureTagGenerator;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.StructureTagsProvider;
 import net.minecraft.tags.StructureTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
 
-public class JSGStructureTagGenerator extends StructureTagsProvider {
+public class JSGStructureTagGenerator extends CoreStructureTagGenerator {
     public JSGStructureTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, JSG.MOD_ID, existingFileHelper);
     }

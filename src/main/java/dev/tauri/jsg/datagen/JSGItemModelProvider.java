@@ -2,23 +2,13 @@ package dev.tauri.jsg.datagen;
 
 import com.mojang.datafixers.util.Pair;
 import dev.tauri.jsg.JSG;
-import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsgcore.client.model.JSGOBJModelLoaderBuilder;
 import dev.tauri.jsgcore.common.item.JSGMusicDiscItem;
-import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.datagen.CoreItemModelProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -26,12 +16,10 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class JSGItemModelProvider extends ItemModelProvider {
+public class JSGItemModelProvider extends CoreItemModelProvider {
     public JSGItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, JSG.MOD_ID, existingFileHelper);
     }
-
-    //TODO: EXTENDS CORE PROVIDER
 
     @Override
     protected void registerModels() {
@@ -44,14 +32,14 @@ public class JSGItemModelProvider extends ItemModelProvider {
                 JSGItems.MILKYWAY_DHD_UPGRADES_COVER, JSGItems.PEGASUS_DHD_UPGRADES_COVER, JSGItems.GDO,
                 JSGItems.ADMIN_CONTROLLER, JSGItems.UNIVERSE_DIALER
         ).forEach(regObj -> {
-            ItemDisplayContext[] allContext = ItemDisplayContext.values();
+            var allContext = ItemDisplayContext.values();
 
             itemOBJModel(regObj, allContext);
         });
 
         List.of(JSGBlocks.DHD_MILKYWAY, JSGBlocks.DHD_PEGASUS
         ).forEach(regObj -> {
-            ItemDisplayContext[] allContext = ItemDisplayContext.values();
+            var allContext = ItemDisplayContext.values();
 
             blockOBJModel(regObj, allContext);
         });
@@ -151,51 +139,4 @@ public class JSGItemModelProvider extends ItemModelProvider {
         ).forEach(name -> withExistingParent(name, "item/generated")
                 .texture("layer0", JSGMapping.rl(JSG.MOD_ID, "item/compat/" + name)));
     }
-
-    private void differentInventoryItem(RegistryObjectWrapper<? extends Item> object, boolean customFirstPerson) {
-        var modID = object.getId().getNamespace();
-        var path = object.getId().getPath();
-
-        var model3dName = path + "_3d";
-        var texturePath = "item/" + path;
-
-        var model3dLocation = JSGMapping.rl(modID, "item/" + model3dName);
-        var inventoryPath = path + "_inventory";
-        var mainModelPath = "item/" + path;
-
-        ItemModelBuilder inventoryModel = withExistingParent(inventoryPath, "item/generated")
-                .texture("layer0", JSGMapping.rl(modID, texturePath));
-
-        ItemModelBuilder baseBuilder = new ItemModelBuilder(model3dLocation, this.existingFileHelper)
-                .parent(new ModelFile.UncheckedModelFile(model3dLocation));
-
-        var builder = getBuilder(mainModelPath)
-                .guiLight(BlockModel.GuiLight.FRONT)
-                .customLoader(SeparateTransformsModelBuilder::begin)
-                .base(baseBuilder)
-                .perspective(ItemDisplayContext.GUI, inventoryModel)
-                .perspective(ItemDisplayContext.GROUND, inventoryModel)
-                .perspective(ItemDisplayContext.FIXED, inventoryModel);
-        if (!customFirstPerson) {
-            builder.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, inventoryModel)
-                    .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, inventoryModel);
-        }
-    }
-
-
-private void blockOBJModel(RegistryObjectWrapper<? extends Block> block, ItemDisplayContext... renderTypes) {
-    itemOBJModel(requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())), renderTypes);
-}
-
-private void itemOBJModel(RegistryObjectWrapper<? extends Item> item, ItemDisplayContext... renderTypes) {
-    itemOBJModel(requireNonNull(ForgeRegistries.ITEMS.getKey(item.get())), renderTypes);
-}
-
-private void itemOBJModel(ResourceLocation item, ItemDisplayContext... renderTypes) {
-    getBuilder(item.toString())
-            .parent(new ModelFile.UncheckedModelFile("item/generated"))
-            .texture("layer0", JSGMapping.rl(JSGApi.MOD_ID, "block/wip"))
-            .customLoader((parent, existingFileHelper) -> new JSGOBJModelLoaderBuilder<>(parent, existingFileHelper).renderTypes(renderTypes))
-            .visibility("override_transformations", true);
-}
 }

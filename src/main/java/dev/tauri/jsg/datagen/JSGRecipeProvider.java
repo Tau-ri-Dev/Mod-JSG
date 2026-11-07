@@ -8,30 +8,27 @@ import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.integration.Integrations;
 import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.datagen.CoreRecipeProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 import java.util.function.Consumer;
 
-public class JSGRecipeProvider extends RecipeProvider implements IConditionBuilder {
+public class JSGRecipeProvider extends CoreRecipeProvider {
     public JSGRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
@@ -39,9 +36,6 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     @ParametersAreNonnullByDefault
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-
-        //TODO: EXTENDS CORE PROVIDER
-        //TODO: refactor JSG ITEM TAGS to forge tags
 
         //Machine and Devices
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGBlocks.TOASTER.get())
@@ -951,25 +945,5 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                                 ::save
                 )
                 .build(pWriter, JSGMapping.rl(JSG.MOD_ID + JSGItems.FOOD_CHOCOLATE_BAR.getId().getPath()));
-    }
-
-
-    @ParametersAreNonnullByDefault
-    protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
-        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.SMELTING_RECIPE, pIngredients, pCategory, pResult, pExperience, pCookingTIme, pGroup, "_from_smelting");
-    }
-
-    @ParametersAreNonnullByDefault
-    protected static void oreBlasting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
-        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.BLASTING_RECIPE, pIngredients, pCategory, pResult, pExperience, pCookingTime, pGroup, "_from_blasting");
-    }
-
-    @ParametersAreNonnullByDefault
-    protected static void oreCooking(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
-        for (ItemLike itemlike : pIngredients) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer)
-                    .group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pFinishedRecipeConsumer, JSG.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
-        }
     }
 }

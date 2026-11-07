@@ -5,38 +5,25 @@ import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsgcore.common.blockstate.JSGProperties;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import dev.tauri.jsgcore.datagen.loot.CoreBlockLootTables;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
-
-public class JSGBlockLootTables extends BlockLootSubProvider {
-    protected static final LootItemCondition.Builder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
+public class JSGBlockLootTables extends CoreBlockLootTables {
 
     public JSGBlockLootTables() {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        super();
     }
 
     @Override
@@ -130,27 +117,5 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
     @NotNull
     protected Iterable<Block> getKnownBlocks() {
         return JSGApi.REGISTRY_HELPER.block().getEntries().stream().map(RegistryObjectWrapper::get)::iterator;
-    }
-
-    protected void dropNothing(Block block) {
-        add(block, LootTable.lootTable());
-    }
-
-    protected void dropOre(Block block, Item item) {
-        add(block, createOreDrop(block, item));
-    }
-
-    protected void dropOre(Block block, Item item, NumberProvider dropsCount) {
-        add(block, createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(dropsCount)).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));
-    }
-
-    protected void dropAndCopyNBT(Block block, CopyNbtFunction.Builder copyNbtFunctionBuilder) {
-        add(block, LootTable.lootTable()
-                .withPool(applyExplosionCondition(block, LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1f))
-                        .setBonusRolls(ConstantValue.exactly(0))
-                        .add(LootItem.lootTableItem(block).apply(copyNbtFunctionBuilder))
-                ))
-        );
     }
 }

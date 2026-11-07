@@ -5,10 +5,10 @@ import dev.tauri.jsg.common.registry.JSGBiomes;
 import dev.tauri.jsg.common.registry.tags.JSGBiomeTags;
 import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import dev.tauri.jsgcore.common.registry.tag.CoreBiomeTags;
+import dev.tauri.jsgcore.datagen.tag.CoreBiomeTagGenerator;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-public class JSGBiomeTagGenerator extends BiomeTagsProvider {
+public class JSGBiomeTagGenerator extends CoreBiomeTagGenerator {
     public JSGBiomeTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pProvider, JSG.MOD_ID, existingFileHelper);
     }
