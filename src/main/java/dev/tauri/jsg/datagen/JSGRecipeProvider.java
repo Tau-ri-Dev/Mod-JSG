@@ -3,13 +3,19 @@ package dev.tauri.jsg.datagen;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
-import dev.tauri.jsgcore.common.definition.crystal.CrystalType;import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsg.datagen.builder.NbtShapedRecipeBuilder;
+import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.integration.Integrations;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.mapping.JSGMapping;
+import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -542,7 +548,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
 
         //TODO: FINISH WHEN DHD IS DONE:
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.DHD_MILKYWAY.get())
+        NbtShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Util.make(new ItemStack(JSGBlocks.DHD_MILKYWAY.get()), dhd -> dhd.getOrCreateTag().put("parts", new CompoundTag())), 1)
                 .group(JSG.MOD_ID + ":milkyway_dhd_elements")
                 .pattern("N N")
                 .pattern("CHC")
@@ -559,7 +565,7 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_naquadah_block", has(MaterialType.NAQUADAH_ALLOY.forgeTags().storagesItem()))
                 .save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.DHD_PEGASUS.get())
+        NbtShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Util.make(new ItemStack(JSGBlocks.DHD_PEGASUS.get()), dhd -> dhd.getOrCreateTag().put("parts", new CompoundTag())), 1)
                 .group(JSG.MOD_ID + ":pegasus_dhd_elements")
                 .pattern("N N")
                 .pattern("CHC")
