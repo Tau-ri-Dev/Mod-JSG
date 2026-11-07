@@ -1,5 +1,6 @@
 package dev.tauri.jsg.client.screen.gui.mainmenu;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -278,6 +279,24 @@ public class GuiCustomMainMenu extends Screen {
     }
 
     public static boolean soundIntroPlayed = false;
+
+    @Override
+    public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+        if (super.keyPressed(pKeyCode, pScanCode, pModifiers))
+            return true;
+        if (!JSGConfig.General.enableLogo.get()) return false;
+        double current = (tick - firstTransitionStart);
+        if (current > FIRST_TRANSITION_LENGTH) {
+            return false;
+        }
+        if (pKeyCode == InputConstants.KEY_RETURN || pKeyCode == InputConstants.KEY_SPACE) {
+            firstTransitionStart = (tick - FIRST_TRANSITION_LENGTH);
+            soundIntroPlayed = true;
+            JSGSoundHelperClient.playMainMenuTheme(GuiCustomMainMenu::getMusicVolume, JSGPositionedSounds.MAINMENU_INTRO, false);
+            return true;
+        }
+        return false;
+    }
 
     public void drawFirstAnimation() {
         if (!JSGConfig.General.enableLogo.get()) return;
