@@ -11,12 +11,18 @@ import dev.tauri.jsgcore.datagen.CoreBlockStateProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.util.List;
+import java.util.Map;
 
 public class JSGBlockStateProvider extends CoreBlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -107,9 +113,48 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         var ringFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_ring_front");
         var chevronFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_chevron_front");
 
-        buildBlockWithCustomSides(baseBlock, baseFront, sides);
-        buildBlockWithCustomSides(ringBlock, ringFront, sides);
-        buildBlockWithCustomSides(chevronBlock, chevronFront, sides);
+        buildClassicStargateBlock(baseBlock, baseFront, sides);
+        buildClassicStargateBlock(ringBlock, ringFront, sides);
+        buildClassicStargateBlock(chevronBlock, chevronFront, sides);
+    }
+
+    protected void buildClassicStargateBlock(RegistryObjectWrapper<? extends Block> blockObj, ResourceLocation frontTexture, ResourceLocation sidesTexture) {
+        var modID = blockObj.getId().getNamespace();
+        var block = blockObj.get();
+        var blockName = blockObj.getId().getPath();
+
+        BlockModelBuilder model = models().withExistingParent(blockName, "block/cube")
+                .texture("particle", sidesTexture)
+                .texture("north", frontTexture)
+                .texture("south", sidesTexture)
+                .texture("west", sidesTexture)
+                .texture("east", sidesTexture)
+                .texture("up", sidesTexture)
+                .texture("down", sidesTexture);
+
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+
+        Map<Direction, Integer> yRotations = Map.of(
+                Direction.NORTH, 0,
+                Direction.EAST, 90,
+                Direction.SOUTH, 180,
+                Direction.WEST, 270
+        );
+
+        Map<Integer, Integer> xRotations = Map.of(
+                0, 0,
+                2, 90,
+                1, 270
+        );
+
+        yRotations.forEach((direction, yRot) ->
+                xRotations.forEach((vertical, xRot) ->
+                        List.of(false, true).forEach((renderState) -> builder.partialState()
+                                .with(JSGProperties.FACING_HORIZONTAL_PROPERTY, direction)
+                                .with(JSGProperties.FACING_VERTICAL_PROPERTY, vertical)
+                                .with(JSGProperties.RENDER_BLOCK_PROPERTY, renderState)
+                                .setModels(new ConfiguredModel(model, xRot, yRot, false)))));
+        itemModels().withExistingParent(blockName, JSGMapping.rl(modID, "block/" + blockName));
     }
 
     private void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
