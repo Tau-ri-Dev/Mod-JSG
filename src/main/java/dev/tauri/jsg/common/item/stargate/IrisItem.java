@@ -45,7 +45,7 @@ public class IrisItem extends JSGItem implements ICreativeThing, IIrisItem {
     public ItemStack repairableItem = ItemStack.EMPTY;
 
     public IrisItem(Item.Properties props, EnumIrisType type) {
-        super(props, () -> CoreTabs.TAB_UPGRADES);
+        super(props, CoreTabs.TAB_UPGRADES::get);
         this.type = type;
     }
 

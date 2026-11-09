@@ -24,7 +24,6 @@ import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class MastadgeEntity extends Camel {

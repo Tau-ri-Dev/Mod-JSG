@@ -45,7 +45,7 @@ public class StargateGenerator implements IStargateGenerator {
         var toCaps = (energy - config.stargateEnergyInternal);
         while (toCaps > 0) {
             var capacity = Math.min(stargateCapacity, toCaps);
-            config.capacitors.add(Pair.of(capacity, false));
+            config.crystals.add(Pair.of(capacity, false));
             toCaps -= stargateCapacity;
         }
     }
@@ -142,7 +142,7 @@ public class StargateGenerator implements IStargateGenerator {
                 upgradable.getItemHandler().insertItem(8, new ItemStack(JSGItems.UPGRADE_IRIS_CREATIVE.get(), 1), false);
 
             nextSlot = 4;
-            for (Pair<Long, Boolean> e : conf.capacitors) {
+            for (Pair<Long, Boolean> e : conf.crystals) {
                 if (nextSlot >= 7) break;
                 ItemStack capacitor;
                 if (e.second()) {

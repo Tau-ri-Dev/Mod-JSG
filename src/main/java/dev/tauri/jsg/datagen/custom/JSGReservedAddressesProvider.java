@@ -153,7 +153,7 @@ public class JSGReservedAddressesProvider implements DataProvider {
                         SymbolPegasusEnum.TAHNAN,
                         SymbolPegasusEnum.ILLUME,
                         SymbolPegasusEnum.ZEO,
-                        SymbolPegasusEnum.POCORE
+                        SymbolPegasusEnum.POCO_RE
                 )
                 .setAddress(JSGSymbolTypes.UNIVERSE.get(),
                         SymbolUniverseEnum.G3,

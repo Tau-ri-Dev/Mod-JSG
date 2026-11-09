@@ -300,7 +300,7 @@ public class JSGConfig {
                 "SIDE: SERVER/CLIENT"
         ));
 
-        public static final JSGConfigValue.IntValue universeCapacitors = C_SG.add(new JSGConfigValue.IntValue(BUILDER, "Power.Capacitors supported by Universe gates", 1, 0, 3,
+        public static final JSGConfigValue.IntValue universeCrystalSlots = C_SG.add(new JSGConfigValue.IntValue(BUILDER, "Power.Crystals count supported by Universe gates", 1, 0, 3,
                 "THIS OPTION CAN BE OVERRIDE BY SETTING IT IN STARGATE GUI",
                 "SIDE: SERVER/CLIENT"
         ));

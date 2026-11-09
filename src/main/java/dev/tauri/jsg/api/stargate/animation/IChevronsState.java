@@ -15,6 +15,8 @@ public interface IChevronsState {
 
     void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons);
 
+    void scheduleChevronActivate(int waitTicks, ChevronEnum chevron, @Nullable SymbolInterface symbolToLock, boolean setIdle, boolean checkConnection, boolean animateTopChevronLock, boolean noEnergy, boolean ignoreMaxChevrons, boolean tryOpenAfterEngage);
+
     void scheduleChevronDim(int waitTicks, ChevronEnum chevron, boolean setIdle);
 
     void scheduleChevronOpen(int waitTicks, ChevronEnum chevron, boolean setIdle);

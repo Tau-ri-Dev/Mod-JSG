@@ -73,7 +73,7 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
                 ));
     }
 
-    private SuggestionProvider<CommandSourceStack> getSymbolSuggestion() {
+    protected SuggestionProvider<CommandSourceStack> getSymbolSuggestion() {
         return (CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) -> {
             try {
                 var symbolTypeString = StringArgumentType.getString(context, "map");
@@ -86,7 +86,7 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
                     for (int i = 1; i <= 8; i++) {
                         var s = StringArgumentType.getString(context, "glyph" + i);
                         if (s == null) break;
-                        var symbol = SymbolUtil.getSymbolFromNameIndex(symbolType, s.replaceAll("_", " "));
+                        var symbol = SymbolUtil.getSymbolFromNameIndex(symbolType, s.replace("_", " "));
                         if (symbol == null || !symbol.isValidForAddress()) {
                             continue;
                         }
@@ -109,7 +109,7 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
         };
     }
 
-    private ArgumentBuilder<CommandSourceStack, ?> getGlyphArguments(int glyph, Command<CommandSourceStack> cmd) {
+    protected ArgumentBuilder<CommandSourceStack, ?> getGlyphArguments(int glyph, Command<CommandSourceStack> cmd) {
         var last = Commands.argument("glyph" + glyph, StringArgumentType.word()).suggests(getSymbolSuggestion());
         if (glyph >= 8) return last.executes(cmd);
         var next = getGlyphArguments(glyph + 1, cmd);
@@ -118,7 +118,7 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
     }
 
 
-    private int setAddress(@Nullable BlockPos position, ResourceLocation map, List<String> glyphs, @NotNull CommandContext<CommandSourceStack> ctx) {
+    protected int setAddress(@Nullable BlockPos position, ResourceLocation map, List<String> glyphs, @NotNull CommandContext<CommandSourceStack> ctx) {
         var stargate = getStargate(position, ctx);
         if (stargate == null) return 0;
 
@@ -133,13 +133,13 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
             return 0;
         }
 
-        StargateAddressDynamic address = new StargateAddressDynamic(symbolType);
+        var address = new StargateAddressDynamic(symbolType);
         var i = 0;
         for (var s : glyphs) {
             i++;
             if (i > 8)
                 break;
-            var symbol = SymbolUtil.getSymbolFromNameIndex(symbolType, s.replaceAll("_", " "));
+            var symbol = SymbolUtil.getSymbolFromNameIndex(symbolType, s.replace("_", " "));
             if (symbol == null || !symbol.isValidForAddress()) {
                 baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.wrongsymbol", i);
                 return 0;

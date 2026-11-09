@@ -42,7 +42,11 @@ public enum EnumSpinDirection {
     }
 
     public static EnumSpinDirection valueOf(int id) {
-        return id == 0 ? COUNTER_CLOCKWISE : CLOCKWISE;
+        return valueOf(id == 0);
+    }
+
+    public static EnumSpinDirection valueOf(boolean counterClockwise) {
+        return counterClockwise ? COUNTER_CLOCKWISE : CLOCKWISE;
     }
 
     public static EnumSpinDirection random(@NotNull Random random) {

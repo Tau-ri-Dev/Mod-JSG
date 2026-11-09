@@ -94,16 +94,20 @@ public class StargateNetwork extends SavedData implements IStargateNetwork {
             return null;
 
         StargatePos pos = null;
-        if (address.getSize() >= 8)
+        boolean usedStatic = false;
+        if (address.getSize() >= 8) {
             pos = GATES_MAP_BY_ADDRESS_STATIC.get(address);
-        if (pos == null)
+            if (pos != null)
+                usedStatic = true;
+        }
+        if (!usedStatic)
             pos = GATES_MAP_BY_ADDRESS.get(address);
 
         if (pos == null) return null;
         if (pos.getWorld() == null) return null;
 
         // check 7th and 8th symbol
-        var gateAddress = GATES_MAP_BY_POS.get(pos);
+        var gateAddress = (usedStatic ? GATES_MAP_BY_POS_STATIC.get(pos) : GATES_MAP_BY_POS.get(pos));
         if (gateAddress == null || !Objects.equals(gateAddress.get(address.getSymbolType()), address))
             return null;
 

@@ -98,7 +98,7 @@ public class CommandBuildGate extends JSGAbstractCommand {
 
                     genCfg.gateType = typeEnum;
                     genCfg.stargateConfig = (config) -> {
-                        config.getOption(StargateConfigOptions.Classic.MAX_CAPACITORS).ifPresent(option -> option.parseAndSetValue(genCfg.capacitors.size()));
+                        config.getOption(StargateConfigOptions.Classic.MAX_CRYSTALS).ifPresent(option -> option.parseAndSetValue(genCfg.crystals.size()));
                         return config;
                     };
 

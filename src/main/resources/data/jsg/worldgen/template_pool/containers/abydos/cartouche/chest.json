@@ -1,13 +1,7 @@
 {
-  "name": "jsg:containers/abydos/cartouche/regular",
+  "name": "jsg:containers/abydos/cartouche/chest",
   "fallback": "minecraft:empty",
   "elements": [
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:empty_pool_element"
-      }
-    },
     {
       "weight": 1,
       "element": {

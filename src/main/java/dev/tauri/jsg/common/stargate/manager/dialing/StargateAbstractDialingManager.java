@@ -47,6 +47,9 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.ApiStatus;
@@ -148,6 +151,12 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
         return builder;
     }
 
+    public void allowDialNextFromBuffer() {
+    }
+
+    public void clearDialingBuffer() {
+    }
+
     // -----------------------------------------
     // SCHEDULING THE CHEVRONS OPERATIONS
 
@@ -163,7 +172,7 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
         if (stopSpinData.contains("symbol")) {
             var symbol = stargate.getSymbolType().valueOf(stopSpinData.getInt("symbol"));
             stargate.getStateManager().getChevronsState().scheduleChevronOpen(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY, ChevronEnum.getFinal(), false);
-            stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, stopSpinData.getBoolean("ignoreMaxChevrons")), symbol, false, true, true, stopSpinData.getBoolean("noEnergy"), stopSpinData.getBoolean("ignoreMaxChevrons"));
+            stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, stopSpinData.getBoolean("ignoreMaxChevrons")), symbol, false, true, true, stopSpinData.getBoolean("noEnergy"), stopSpinData.getBoolean("ignoreMaxChevrons"), stopSpinData.getBoolean("tryOpenAfter"));
         } else if (getStargateState().dialingComputer())
             setStargateState(EnumStargateState.IDLE);
     }
@@ -207,11 +216,24 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
      *
      * @return
      */
-    public StargateChevronEngageResult engageCurrentSymbol() {
+    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons) {
+        return engageCurrentSymbol(ignoreMaxChevrons, false);
+    }
+
+    /**
+     * SAFE METHOD TO USE
+     * <p>
+     *
+     * @return
+     */
+    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons, boolean tryOpenAfter) {
         var symbol = getSpinHelper().getCurrentTopSymbol();
         if (symbol == null) return StargateChevronEngageResult.BLOCKED_BY_EVENT;
+        if (isLockChevron(symbol, true, ignoreMaxChevrons)) {
+            getConnection().runOnConnected((conn, sg) -> ((StargateAbstractDialingManager<?>) sg.getDialingManager()).runIncomingWormhole(dialedAddress.addOriginIfMissingAndImmutable().size(), 30));
+        }
         stargate.getStateManager().getChevronsState().scheduleChevronOpen(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY, ChevronEnum.getFinal(), false);
-        stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, false), symbol, false, true, true);
+        stargate.getStateManager().getChevronsState().scheduleChevronActivate(A_CHEVRON_OPEN_AFTER_STOPPED_DELAY + A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY, getNextChevron(symbol, false, ignoreMaxChevrons), symbol, false, true, true, false, ignoreMaxChevrons, tryOpenAfter);
         return StargateChevronEngageResult.OK;
     }
 
@@ -344,6 +366,21 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
         if (lastGate.isEmpty() || !getConnection().getTarget().map(target -> target.equals(lastGate.get())).orElse(false))
             return StargateChevronEngageResult.OK_CONNECTED;
         return StargateChevronEngageResult.OK;
+    }
+
+    @Override
+    public boolean isManuallyDialingByHand() {
+        return false;
+    }
+
+    @Override
+    public boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
+        return false;
+    }
+
+    @Override
+    public StargateManualDialingAttemptResult updateManualDialingByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
+        return StargateManualDialingAttemptResult.FAILED;
     }
 
     public StargateCloseResult disconnectSafe(StargateClosedReasonEnum reason) {

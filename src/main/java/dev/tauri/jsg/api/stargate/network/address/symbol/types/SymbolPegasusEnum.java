@@ -29,7 +29,7 @@ public enum SymbolPegasusEnum implements SymbolInterface {
     RAMNON(28, "Ramnon", "28.obj", 24),
     OLAVII(27, "Olavii", "27.obj", 14),
     HACEMILL(26, "Hacemill", "26.obj", 16),
-    POCORE(25, "Poco Re", "25.obj", 13),
+    POCO_RE(25, "Poco Re", "25.obj", 13),
     ABRIN(24, "Abrin", "24.obj", 12),
     SALMA(23, "Salma", "23.obj", 17),
     HAMLINTO(22, "Hamlinto", "22.obj", 15),

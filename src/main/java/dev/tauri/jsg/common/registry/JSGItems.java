@@ -10,11 +10,10 @@ import dev.tauri.jsg.common.item.CartridgeItem;
 import dev.tauri.jsg.common.item.admincontroller.AdminControllerItem;
 import dev.tauri.jsg.common.item.linkable.dialer.UniverseDialerItem;
 import dev.tauri.jsg.common.item.linkable.gdo.GDOItem;
+import dev.tauri.jsg.common.item.stargate.DialingGlovesItem;
 import dev.tauri.jsg.common.item.stargate.IrisItem;
-import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDAbstractPartItem;
-import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDFluidTankItem;
-import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDMilkyWayButtonsConsoleItem;
-import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.DHDPegasusButtonsConsoleItem;
+import dev.tauri.jsg.common.item.stargate.dialhomedevice.part.*;
+import dev.tauri.jsg.common.item.stargate.dialhomedevice.upgrade.ExtendedAddressDialingCrystal;
 import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.integration.Integrations;
@@ -48,6 +47,8 @@ public class JSGItems {
 
     public static final RegistryObjectWrapper<JSGItem> ICON_KAWOOSH_DEATH = Constants.JSG_ITEM_HELPER.builder("icon_kawoosh_death").clearTooltip().buildGeneric();
     public static final RegistryObjectWrapper<JSGItem> ICON_WORMHOLE = Constants.JSG_ITEM_HELPER.builder("icon_wormhole").clearTooltip().buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> ICON_RA_REALM = Constants.JSG_ITEM_HELPER.builder("icon_ra_realm").clearTooltip().buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> ICON_PRIEST_TRADE = Constants.JSG_ITEM_HELPER.builder("icon_trade_with_priest").clearTooltip().buildGeneric();
 
     /**
      * DHD Parts
@@ -69,15 +70,15 @@ public class JSGItems {
     static {
         MILKYWAY_DHD_CONTROL_CRYSTALS = REGISTER.register("milkyway_dhd_control_crystals", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, 100).withPartsNeededBeforeRemoval(List.of(MILKYWAY_DHD_BUTTONS_CONSOLE)).withPartsNeededRemovedBeforeAssembly(List.of(MILKYWAY_DHD_BUTTONS_CONSOLE)));
         MILKYWAY_DHD_BUTTONS_CONSOLE = REGISTER.register("milkyway_dhd_buttons_console", () -> new DHDMilkyWayButtonsConsoleItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, 100).withPartsNeededBeforeRemoval(List.of(MILKYWAY_DHD_ACTIVATION_BUTTON)));
-        MILKYWAY_DHD_MAIN_CRYSTAL = REGISTER.register("milkyway_dhd_main_control_crystal", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.UNCOMMON), List.of(() -> CoreTabs.TAB_RESOURCES, () -> CoreTabs.TAB_UPGRADES, CoreTabs.TAB_TRANSPORTATION), true, 101).withPartsNeededBeforeRemoval(List.of(MILKYWAY_DHD_ACTIVATION_BUTTON)).withPartsNeededRemovedBeforeAssembly(List.of(MILKYWAY_DHD_ACTIVATION_BUTTON)));
+        MILKYWAY_DHD_MAIN_CRYSTAL = REGISTER.register("milkyway_dhd_main_control_crystal", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.UNCOMMON), List.of(() -> CoreTabs.TAB_RESOURCES, CoreTabs.TAB_UPGRADES, CoreTabs.TAB_TRANSPORTATION), true, 101).withPartsNeededBeforeRemoval(List.of(MILKYWAY_DHD_ACTIVATION_BUTTON)).withPartsNeededRemovedBeforeAssembly(List.of(MILKYWAY_DHD_ACTIVATION_BUTTON)));
         MILKYWAY_DHD_ACTIVATION_BUTTON = REGISTER.register("milkyway_dhd_activation_button", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, SymbolMilkyWayEnum.BRB.id).withPartsNeededBeforeAssembly(List.of(MILKYWAY_DHD_BUTTONS_CONSOLE)));
-        MILKYWAY_DHD_UPGRADES_COVER = REGISTER.register("milkyway_dhd_upgrades_cover", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), false, 108));
+        MILKYWAY_DHD_UPGRADES_COVER = REGISTER.register("milkyway_dhd_upgrades_cover", () -> new DHDMilkyWayUpgradesCoverItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), false, 108));
 
         PEGASUS_DHD_CONTROL_CRYSTALS = REGISTER.register("pegasus_dhd_control_crystals", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, 100).withPartsNeededBeforeRemoval(List.of(PEGASUS_DHD_BUTTONS_CONSOLE)).withPartsNeededRemovedBeforeAssembly(List.of(PEGASUS_DHD_BUTTONS_CONSOLE)));
         PEGASUS_DHD_BUTTONS_CONSOLE = REGISTER.register("pegasus_dhd_buttons_console", () -> new DHDPegasusButtonsConsoleItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, 100).withPartsNeededBeforeRemoval(List.of(PEGASUS_DHD_ACTIVATION_BUTTON)));
-        PEGASUS_DHD_MAIN_CRYSTAL = REGISTER.register("pegasus_dhd_main_control_crystal", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.UNCOMMON), List.of(() -> CoreTabs.TAB_RESOURCES, () -> CoreTabs.TAB_UPGRADES, CoreTabs.TAB_TRANSPORTATION), true, 101).withPartsNeededBeforeRemoval(List.of(PEGASUS_DHD_ACTIVATION_BUTTON)).withPartsNeededRemovedBeforeAssembly(List.of(PEGASUS_DHD_ACTIVATION_BUTTON)));
+        PEGASUS_DHD_MAIN_CRYSTAL = REGISTER.register("pegasus_dhd_main_control_crystal", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.UNCOMMON), List.of(() -> CoreTabs.TAB_RESOURCES, CoreTabs.TAB_UPGRADES, CoreTabs.TAB_TRANSPORTATION), true, 101).withPartsNeededBeforeRemoval(List.of(PEGASUS_DHD_ACTIVATION_BUTTON)).withPartsNeededRemovedBeforeAssembly(List.of(PEGASUS_DHD_ACTIVATION_BUTTON)));
         PEGASUS_DHD_ACTIVATION_BUTTON = REGISTER.register("pegasus_dhd_activation_button", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), true, SymbolPegasusEnum.BBB.id).withPartsNeededBeforeAssembly(List.of(PEGASUS_DHD_BUTTONS_CONSOLE)));
-        PEGASUS_DHD_UPGRADES_COVER = REGISTER.register("pegasus_dhd_upgrades_cover", () -> new DHDAbstractPartItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), false, 108));
+        PEGASUS_DHD_UPGRADES_COVER = REGISTER.register("pegasus_dhd_upgrades_cover", () -> new DHDPegasusUpgradesCoverItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), false, 108));
 
 
         DHD_NAQUADAH_TANK = REGISTER.register("dhd_naquadah_tank", () -> (DHDFluidTankItem) (new DHDFluidTankItem(new Item.Properties().rarity(Rarity.COMMON), List.of(() -> CoreTabs.TAB_RESOURCES), false, 107).withPartsNeededBeforeRemoval(List.of(MILKYWAY_DHD_UPGRADES_COVER, PEGASUS_DHD_UPGRADES_COVER))));
@@ -86,14 +87,14 @@ public class JSGItems {
     /**
      * Upgrade crystals
      */
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_DIALING_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_dialing_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildGeneric(); //.buildUpgrade(() -> StargateDHD.DHDUpgradeEnum.CHEVRON_UPGRADE);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_DIALING_EXTENDED = REGISTER.register("extended_address_dialing_crystal", ExtendedAddressDialingCrystal::new);
 
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_STATIC = Constants.JSG_ITEM_HELPER.builder("static_address_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.STATIC_ADDRESS_UPGRADE);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.CHEVRON_UPGRADE);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_STATIC = Constants.JSG_ITEM_HELPER.builder("static_address_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.STATIC_ADDRESS_UPGRADE);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_ADDRESS_EXTENDED = Constants.JSG_ITEM_HELPER.builder("extended_address_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.CHEVRON_UPGRADE);
 
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.MILKYWAY_GLYPHS);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.PEGASUS_GLYPHS);
-    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_glyph_crystal").setInTabs(List.of(() -> CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.UNIVERSE_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_glyph_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.MILKYWAY_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_glyph_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.PEGASUS_GLYPHS);
+    public static final RegistryObjectWrapper<JSGItem> CRYSTAL_GLYPH_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_glyph_crystal").setInTabs(List.of(CoreTabs.TAB_UPGRADES)).buildUpgrade(() -> StargateUpgrade.UNIVERSE_GLYPHS);
 
     /**
      * Crafting items
@@ -108,6 +109,7 @@ public class JSGItems {
 
     public static final RegistryObjectWrapper<JSGItem> UNIVERSE_DIALER = REGISTER.register("universe_dialer", UniverseDialerItem::new);
     public static final RegistryObjectWrapper<JSGItem> GDO = REGISTER.register("gdo", GDOItem::new);
+    public static final RegistryObjectWrapper<JSGItem> DIALING_GLOVES = REGISTER.register("dialing_gloves", DialingGlovesItem::new);
 
     /**
      * FRAGMENTS

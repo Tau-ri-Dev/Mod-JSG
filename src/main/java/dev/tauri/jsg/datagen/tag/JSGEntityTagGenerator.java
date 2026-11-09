@@ -12,6 +12,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
+//TODO: extend Core thing...
 public class JSGEntityTagGenerator extends EntityTypeTagsProvider {
 
     public JSGEntityTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {

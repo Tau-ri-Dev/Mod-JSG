@@ -218,7 +218,7 @@ public class RaycasterPegasusDHD extends RaycasterDHD {
             )),
 
             //Poco Re
-            new RayCastedButton(POCORE.id, JSGSymbolTypes.PEGASUS, List.of(
+            new RayCastedButton(POCO_RE.id, JSGSymbolTypes.PEGASUS, List.of(
                     new Vector3f(-0.293893f, 0.166092f, 0.952186f),
                     new Vector3f(-0.155502f, 0.103892f, 1.02204f),
                     new Vector3f(-0.178964f, 0.058053f, 1.0496f),
@@ -418,42 +418,42 @@ public class RaycasterPegasusDHD extends RaycasterDHD {
 
             //DHD Glyph crystal - Top left slot
             new RayCastedButton(UPGRADE_SLOT_TL_IMM_BUTTON_ID, List.of(
-                    new Vector3f(0.127088f, 0.058796f, 0.396972f),
-                    new Vector3f(0.127088f, 0.058796f, 0.461906f),
-                    new Vector3f(0.11727f, 0.058796f, 0.461906f),
-                    new Vector3f(0.11727f, 0.058796f, 0.396972f)
+                    new Vector3f(0.127088f + 0.005f, 0.058796f, 0.396972f),
+                    new Vector3f(0.127088f + 0.005f, 0.058796f, 0.461906f),
+                    new Vector3f(0.11727f - 0.005f, 0.058796f, 0.461906f),
+                    new Vector3f(0.11727f - 0.005f, 0.058796f, 0.396972f)
             )),
 
             //Efficiency crystal - Top right slot
             new RayCastedButton(UPGRADE_SLOT_TR_IMM_BUTTON_ID, List.of(
-                    new Vector3f(-0.115337f, 0.058793f, 0.396972f),
-                    new Vector3f(-0.115337f, 0.058796f, 0.461906f),
-                    new Vector3f(-0.125155f, 0.058796f, 0.461906f),
-                    new Vector3f(-0.125155f, 0.058793f, 0.396972f)
+                    new Vector3f(-0.115337f + 0.005f, 0.058793f, 0.396972f),
+                    new Vector3f(-0.115337f + 0.005f, 0.058796f, 0.461906f),
+                    new Vector3f(-0.125155f - 0.005f, 0.058796f, 0.461906f),
+                    new Vector3f(-0.125155f - 0.005f, 0.058793f, 0.396972f)
             )),
 
             //Capacity crystal - Middle left slot
             new RayCastedButton(UPGRADE_SLOT_ML_IMM_BUTTON_ID, List.of(
-                    new Vector3f(0.083992f, 0.058793f, 0.266573f),
-                    new Vector3f(0.083992f, 0.058796f, 0.331507f),
-                    new Vector3f(0.074174f, 0.058796f, 0.331507f),
-                    new Vector3f(0.074174f, 0.058793f, 0.266573f)
+                    new Vector3f(0.083992f + 0.005f, 0.058793f, 0.266573f),
+                    new Vector3f(0.083992f + 0.005f, 0.058796f, 0.331507f),
+                    new Vector3f(0.074174f - 0.005f, 0.058796f, 0.331507f),
+                    new Vector3f(0.074174f - 0.005f, 0.058793f, 0.266573f)
             )),
 
             //Avenger Virus crystal - Middle right slot
             new RayCastedButton(UPGRADE_SLOT_MR_IMM_BUTTON_ID, List.of(
-                    new Vector3f(-0.072241f, 0.058793f, 0.266573f),
-                    new Vector3f(-0.072241f, 0.058796f, 0.331507f),
-                    new Vector3f(-0.082059f, 0.058796f, 0.331507f),
-                    new Vector3f(-0.082059f, 0.058793f, 0.266573f)
+                    new Vector3f(-0.072241f + 0.005f, 0.058793f, 0.266573f),
+                    new Vector3f(-0.072241f + 0.005f, 0.058796f, 0.331507f),
+                    new Vector3f(-0.082059f - 0.005f, 0.058796f, 0.331507f),
+                    new Vector3f(-0.082059f - 0.005f, 0.058793f, 0.266573f)
             )),
 
             //Redirect crystal slot - Bottom slot
             new RayCastedButton(UPGRADE_SLOT_B_IMM_BUTTON_ID, List.of(
-                    new Vector3f(0.005876f, 0.058793f, 0.123055f),
-                    new Vector3f(0.005876f, 0.058796f, 0.187989f),
-                    new Vector3f(-0.003942f, 0.058796f, 0.187989f),
-                    new Vector3f(-0.003942f, 0.058793f, 0.123055f)
+                    new Vector3f(0.005876f + 0.005f, 0.058793f, 0.123055f),
+                    new Vector3f(0.005876f + 0.005f, 0.058796f, 0.187989f),
+                    new Vector3f(-0.003942f - 0.005f, 0.058796f, 0.187989f),
+                    new Vector3f(-0.003942f - 0.005f, 0.058793f, 0.123055f)
             )),
 
             //Naqudah tank

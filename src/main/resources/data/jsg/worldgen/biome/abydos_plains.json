@@ -76,9 +76,9 @@
     "creature": [
       {
         "type": "jsg:mastadge",
-        "weight": 1,
+        "weight": 10,
         "minCount": 1,
-        "maxCount": 3
+        "maxCount": 1
       }
     ],
     "monster": [
@@ -115,9 +115,5 @@
     ]
   },
   "spawn_costs": {
-    "jsg:mastadge": {
-      "energy_budget": 0.25,
-      "charge": 0.05
-    }
   }
 }

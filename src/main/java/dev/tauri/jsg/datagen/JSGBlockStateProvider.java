@@ -7,23 +7,24 @@ import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.blockstate.JSGProperties;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.datagen.CoreBlockStateProvider;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.*;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Objects.requireNonNull;
-
-public class JSGBlockStateProvider extends BlockStateProvider {
+public class JSGBlockStateProvider extends CoreBlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, JSG.MOD_ID, exFileHelper);
     }
@@ -35,7 +36,7 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         simpleBlock(JSGBlocks.IRIS_BLOCK.get(), models().getExistingFile(JSGMapping.rl("minecraft", "block/air")));
         itemModels().withExistingParent(JSGBlocks.IRIS_BLOCK.getId().getPath(), "item/generated").texture("layer0", JSGMapping.rl(JSG.MOD_ID, "block/wip"));
 
-        createSandLikeBlocks(JSGBlocks.ABYDOS_SAND, Blocks.SAND);
+        createSimpleVanillaTextureBlock(JSGBlocks.ABYDOS_SAND, Blocks.SAND);
 
         //BLOCKS WITH CUSTOM JSON MODEL
         createRotatableJsonModel(JSGBlocks.TOASTER);
@@ -45,8 +46,8 @@ public class JSGBlockStateProvider extends BlockStateProvider {
 
         //DHD - Handheld models are generated in ItemsProvider because of OBJModels
         models().getBuilder("dhd_generic").texture("particle", JSGMapping.rl(JSGCore.MOD_ID, "block/materials/naquadah_alloy_block"));
-        createDHDBlock(JSGBlocks.DHD_MILKYWAY);
-        createDHDBlock(JSGBlocks.DHD_PEGASUS);
+        createObjModelBlock(JSGBlocks.DHD_MILKYWAY, "dhd_generic", null);
+        createObjModelBlock(JSGBlocks.DHD_PEGASUS, "dhd_generic", null);
 
         //CLASSIC STARGATES - MW, PG etc.
         createClassicStargateBlocks(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK, JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK, JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK);
@@ -105,22 +106,6 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         itemModels().withExistingParent(blockName, blockLoc);
     }
 
-    private void createDHDBlock(RegistryObjectWrapper<Block> block) {
-        models().withExistingParent(block.getId().getPath(), JSGMapping.rl(JSG.MOD_ID, "block/dhd_generic"));
-        simpleBlock(block.get(), models().getExistingFile(JSGMapping.rl(JSG.MOD_ID, "block/dhd_generic")));
-    }
-
-    private void createSandLikeBlocks(RegistryObjectWrapper<Block> blockObj, Block mcBlock) {
-        var blockName = blockObj.getId().getPath();
-        var mcBlockPath = requireNonNull(BuiltInRegistries.BLOCK.getKey(mcBlock)).getPath();
-        var blockModel = models().withExistingParent(blockName, "minecraft:block/" + mcBlockPath);
-
-        getVariantBuilder(blockObj.get())
-                .partialState()
-                .setModels(ConfiguredModel.allYRotations(blockModel, 0, false));
-        itemModels().withExistingParent(blockName, JSGMapping.rl(JSG.MOD_ID, "block/" + blockName));
-    }
-
     private void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock) {
         var type = ((IStargateBlock) baseBlock.get()).getStargateType().getId().getPath();
         var sides = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_sides");
@@ -128,13 +113,13 @@ public class JSGBlockStateProvider extends BlockStateProvider {
         var ringFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_ring_front");
         var chevronFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_chevron_front");
 
-        buildClassicStargatePart(baseBlock, baseFront, sides);
-        buildClassicStargatePart(ringBlock, ringFront, sides);
-        buildClassicStargatePart(chevronBlock, chevronFront, sides);
-
+        buildClassicStargateBlock(baseBlock, baseFront, sides);
+        buildClassicStargateBlock(ringBlock, ringFront, sides);
+        buildClassicStargateBlock(chevronBlock, chevronFront, sides);
     }
 
-    private void buildClassicStargatePart(RegistryObjectWrapper<Block> blockObj, ResourceLocation frontTexture, ResourceLocation sidesTexture) {
+    protected void buildClassicStargateBlock(RegistryObjectWrapper<? extends Block> blockObj, ResourceLocation frontTexture, ResourceLocation sidesTexture) {
+        var modID = blockObj.getId().getNamespace();
         var block = blockObj.get();
         var blockName = blockObj.getId().getPath();
 
@@ -169,7 +154,7 @@ public class JSGBlockStateProvider extends BlockStateProvider {
                                 .with(JSGProperties.FACING_VERTICAL_PROPERTY, vertical)
                                 .with(JSGProperties.RENDER_BLOCK_PROPERTY, renderState)
                                 .setModels(new ConfiguredModel(model, xRot, yRot, false)))));
-        itemModels().withExistingParent(blockName, JSGMapping.rl(JSG.MOD_ID, "block/" + blockName));
+        itemModels().withExistingParent(blockName, JSGMapping.rl(modID, "block/" + blockName));
     }
 
     private void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {

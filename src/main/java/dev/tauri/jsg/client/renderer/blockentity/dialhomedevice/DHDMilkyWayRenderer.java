@@ -28,21 +28,12 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector2d;
 
 import java.awt.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DHDMilkyWayRenderer extends DHDAbstractRenderer<DHDMilkyWayRendererState> {
-    public static final List<Vector2d> UPGRADE_POSES = List.of(
-            new Vector2d(0, 0.108),
-            new Vector2d(0.08, 0.251),
-            new Vector2d(-0.076, 0.251),
-            new Vector2d(-0.120, 0.3825),
-            new Vector2d(0.120, 0.3825)
-    );
-
     public DHDMilkyWayRenderer(BlockEntityRendererProvider.Context ignored) {
         super(ignored);
     }

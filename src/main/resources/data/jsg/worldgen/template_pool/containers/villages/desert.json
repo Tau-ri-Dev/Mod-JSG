@@ -5,8 +5,8 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "projection": "terrain_matching",
-        "location": "jsg:containers/villages/desert/barel_up",
+        "projection": "rigid",
+        "location": "jsg:containers/villages/desert/barrel_up",
         "processors": "minecraft:empty"
       }
     },
@@ -14,8 +14,8 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "projection": "terrain_matching",
-        "location": "jsg:containers/villages/desert/barel_side",
+        "projection": "rigid",
+        "location": "jsg:containers/villages/desert/barrel_side",
         "processors": "minecraft:empty"
       }
     },
@@ -23,7 +23,7 @@
       "weight": 1,
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "location": "jsg:containers/villages/desert/chest",
         "processors": "minecraft:empty"
       }

@@ -6,11 +6,11 @@ import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.tags.JSGItemTags;
 import dev.tauri.jsgcore.common.integration.Integrations;
 import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.datagen.tag.CoreItemTagGenerator;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
 
-public class JSGItemTagGenerator extends ItemTagsProvider {
+public class JSGItemTagGenerator extends CoreItemTagGenerator {
     public JSGItemTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pLookupProvider, pBlockTags, JSG.MOD_ID, existingFileHelper);
     }
@@ -45,7 +45,7 @@ public class JSGItemTagGenerator extends ItemTagsProvider {
                 .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_stone"));
 
         // Stargate energy extenders
-        tag(JSGItemTags.STARGATE_CAPACITORS)
+        tag(JSGItemTags.STARGATE_ENERGY_CRYSTALS)
                 .add(CoreItems.CRYSTAL_ENERGY_BASIC.get())
                 .add(CoreItems.CRYSTAL_ENERGY_ADVANCED.get())
                 .add(CoreItems.CRYSTAL_ENERGY_ULTIMATE.get())
@@ -79,5 +79,9 @@ public class JSGItemTagGenerator extends ItemTagsProvider {
         tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/single_use")))
                 .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_sand_cast"))
                 .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_red_sand_cast"));
+
+        // Tools
+        tag(JSGItemTags.DIALING_GLOVES)
+                .add(JSGItems.DIALING_GLOVES.get());
     }
 }

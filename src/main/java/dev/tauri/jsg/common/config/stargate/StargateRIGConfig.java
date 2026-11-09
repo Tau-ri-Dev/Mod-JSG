@@ -1,5 +1,6 @@
 package dev.tauri.jsg.common.config.stargate;
 
+import dev.tauri.jsg.common.registry.JSGVillagers;
 import dev.tauri.jsg.common.stargate.rig.RIGEntity;
 import dev.tauri.jsg.common.stargate.rig.RIGWave;
 import net.minecraft.Util;
@@ -150,8 +151,8 @@ public class StargateRIGConfig {
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:leatherworker,level:1,type:plains}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:armorer,level:1,type:plains}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:nitwit,level:1,type:plains}}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_plains\",level:1,type:plains}, Xp: 1}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_jungle\",level:1,type:jungle}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_PLAINS.getId().toString() + "\",level:1,type:plains}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_PLAINS.getId().toString() + "\",level:1,type:jungle}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:chicken", 1))
                 .addDifficulty(Difficulty.PEACEFUL)
                 .allowedBiomes(List.of("#minecraft:has_structure/village_plains", "#minecraft:has_structure/village_savanna"))
@@ -166,7 +167,7 @@ public class StargateRIGConfig {
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:mason,level:1,type:desert}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:toolsmith,level:1,type:desert}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:nitwit,level:1,type:desert}}"))
-                .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:\"jsg:priest_desert\",level:1,type:desert}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_DESERT.getId().toString() + "\",level:1,type:desert}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:rabbit", 1))
                 .addDifficulty(Difficulty.PEACEFUL)
                 .allowedBiomes(List.of("#minecraft:has_structure/village_desert", "#minecraft:has_structure/village_savanna"))
@@ -181,8 +182,8 @@ public class StargateRIGConfig {
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:leatherworker,level:1,type:savanna}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:butcher,level:1,type:savanna}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:nitwit,level:1,type:savanna}}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_savanna\",level:1,type:savanna}, Xp: 1}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_swamp\",level:1,type:swamp}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_SAVANNA.getId().toString() + "\",level:1,type:savanna}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_SWAMP.getId().toString() + "\",level:1,type:swamp}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:cat", 1, "{variant:red}"))
                 .addEntity(new RIGEntity("minecraft:sheep", 1))
                 .addDifficulty(Difficulty.PEACEFUL)
@@ -197,7 +198,7 @@ public class StargateRIGConfig {
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:armorer,level:1,type:snow}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:librarian,level:1,type:snow}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:nitwit,level:1,type:snow}}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_snow\",level:1,type:snow}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_SNOW.getId().toString() +"\",level:1,type:snow}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:iron_golem", 1))
                 .addDifficulty(Difficulty.PEACEFUL)
                 .allowedBiomes(List.of("#minecraft:has_structure/village_snowy", "#minecraft:has_structure/village_taiga"))
@@ -213,7 +214,7 @@ public class StargateRIGConfig {
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:weaponsmith,level:1,type:taiga}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 5, "{VillagerData:{profession:leatherworker,level:1,type:taiga}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:villager", 10, "{VillagerData:{profession:nitwit,level:1,type:taiga}}"))
-                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"jsg:priest_taiga\",level:1,type:taiga}, Xp: 1}"))
+                .addEntity(new RIGEntity("minecraft:villager", 1, "{VillagerData:{profession:\"" + JSGVillagers.PRIEST_TAIGA.getId().toString() + "\",level:1,type:taiga}, Xp: 1}"))
                 .addEntity(new RIGEntity("minecraft:pig", 1))
                 .addDifficulty(Difficulty.PEACEFUL)
                 .allowedBiomes(List.of("#minecraft:has_structure/village_taiga", "#minecraft:has_structure/village_snowy"))

@@ -85,7 +85,7 @@ public class DHDPegasusRenderer extends DHDAbstractRenderer<DHDPegasusRendererSt
         ElementEnum.PEGASUS_DHD_CRYSTAL_HOLDER.render(poseStack, bufferSource, combinedLight, combinedOverlay);
 
         var slot = new AtomicInteger(0);
-        DHDMilkyWayRenderer.UPGRADE_POSES.forEach(pose -> {
+        UPGRADE_POSES.forEach(pose -> {
             if (!rendererState.hasUpgrade(slot.getAndIncrement())) return;
             poseStack.pushPose();
             poseStack.translate(pose.x(), pose.y(), -0.083);

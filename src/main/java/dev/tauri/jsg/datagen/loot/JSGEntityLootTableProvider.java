@@ -23,6 +23,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
 
+// TODO: Extend Core thing later
 public class JSGEntityLootTableProvider implements LootTableSubProvider {
     private final HolderLookup.Provider registries;
 

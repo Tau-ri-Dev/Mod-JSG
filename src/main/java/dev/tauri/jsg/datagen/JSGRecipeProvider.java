@@ -3,39 +3,38 @@ package dev.tauri.jsg.datagen;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
+import dev.tauri.jsg.datagen.builder.NbtShapedRecipeBuilder;
 import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.integration.Integrations;
 import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.common.util.ItemNBT;
+import dev.tauri.jsgcore.datagen.CoreRecipeProvider;
+import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-public class JSGRecipeProvider extends RecipeProvider implements IConditionBuilder {
-    public JSGRecipeProvider(PackOutput pOutput, java.util.concurrent.CompletableFuture<net.minecraft.core.HolderLookup.Provider> registries) {
+public class JSGRecipeProvider extends CoreRecipeProvider {
+    public JSGRecipeProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> registries) {
         super(pOutput, registries);
     }
 
     @Override
     @ParametersAreNonnullByDefault
     protected void buildRecipes(net.minecraft.data.recipes.RecipeOutput pWriter) {
-
-        //TODO: refactor JSG ITEM TAGS to forge tags
 
         //Machine and Devices
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGBlocks.TOASTER.get())
@@ -540,9 +539,11 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_circuit", has(CoreItems.CIRCUIT_CONTROL_NAQUADAH.get()))
                 .save(pWriter);
 
-        //TODO: FINISH WHEN DHD IS DONE:
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.DHD_MILKYWAY.get())
+        NbtShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Util.make(new ItemStack(JSGBlocks.DHD_MILKYWAY.get()), dhd -> {
+                    var tag = ItemNBT.getOrCreateTag(dhd);
+                    tag.put("parts", new CompoundTag());
+                    ItemNBT.setTag(dhd, tag);
+                }), 1)
                 .group(JSG.MOD_ID + ":milkyway_dhd_elements")
                 .pattern("N N")
                 .pattern("CHC")
@@ -559,7 +560,11 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_naquadah_block", has(MaterialType.NAQUADAH_ALLOY.forgeTags().storagesItem()))
                 .save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, JSGBlocks.DHD_PEGASUS.get())
+        NbtShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Util.make(new ItemStack(JSGBlocks.DHD_PEGASUS.get()), dhd -> {
+                    var tag = ItemNBT.getOrCreateTag(dhd);
+                    tag.put("parts", new CompoundTag());
+                    ItemNBT.setTag(dhd, tag);
+                }), 1)
                 .group(JSG.MOD_ID + ":pegasus_dhd_elements")
                 .pattern("N N")
                 .pattern("CHC")
@@ -615,16 +620,33 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_repeater", has(Items.REPEATER))
                 .save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, JSGItems.DIALING_GLOVES.get())
+                .group(JSG.MOD_ID + ":dialing_gloves")
+                .pattern("LLL")
+                .pattern("LWL")
+                .pattern("DDD")
+                .define('L', Tags.Items.LEATHERS)
+                .define('W', ItemTags.WOOL)
+                .define('D', Tags.Items.DYES_BLACK)
+                .unlockedBy("has_leather", has(Tags.Items.LEATHERS))
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .unlockedBy("has_dye", has(Tags.Items.DYES_BLACK))
+                .save(pWriter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, JSGItems.SHIELD_EMITTER.get())
                 .group(JSG.MOD_ID + ":shield_emitter")
-                .pattern("TET")
-                .pattern("ECE")
-                .pattern("TET")
+                .pattern(" P ")
+                .pattern("PBS")
+                .pattern("TCT")
+                .define('P', CrystalType.PEGASUS.forgeTags().gems())
+                .define('B', CrystalType.BLUE.forgeTags().gems())
+                .define('S', CrystalType.PEGASUS.forgeTags().gemsSmall())
                 .define('T', MaterialType.TRINIUM.forgeTags().ingots())
-                .define('E', CrystalType.ENDER.forgeTags().gems())
                 .define('C', CoreItems.CIRCUIT_CONTROL_CRYSTAL.get())
                 .unlockedBy("has_ingot", has(MaterialType.TRINIUM.forgeTags().ingots()))
-                .unlockedBy("has_crystal", has(CrystalType.ENDER.forgeTags().gems()))
+                .unlockedBy("has_pegasus_crystal", has(CrystalType.PEGASUS.forgeTags().gems()))
+                .unlockedBy("has_blue_crystal", has(CrystalType.BLUE.forgeTags().gems()))
+                .unlockedBy("has_prgasus_small_crystal", has(CrystalType.PEGASUS.forgeTags().gemsSmall()))
                 .unlockedBy("has_circuit", has(CoreItems.CIRCUIT_CONTROL_CRYSTAL.get()))
                 .save(pWriter);
 
@@ -923,25 +945,5 @@ public class JSGRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_cocoa", has(Items.COCOA_BEANS))
                 .unlockedBy("has_cookie", has(Items.COOKIE))
                 .save(pWriter.withConditions(modNotLoadedCondition));
-    }
-
-
-    @ParametersAreNonnullByDefault
-    protected static void oreSmelting(net.minecraft.data.recipes.RecipeOutput pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
-        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.SMELTING_RECIPE, net.minecraft.world.item.crafting.SmeltingRecipe::new, pIngredients, pCategory, pResult, pExperience, pCookingTIme, pGroup, "_from_smelting");
-    }
-
-    @ParametersAreNonnullByDefault
-    protected static void oreBlasting(net.minecraft.data.recipes.RecipeOutput pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
-        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.BLASTING_RECIPE, net.minecraft.world.item.crafting.BlastingRecipe::new, pIngredients, pCategory, pResult, pExperience, pCookingTime, pGroup, "_from_blasting");
-    }
-
-    @ParametersAreNonnullByDefault
-    protected static <T extends AbstractCookingRecipe> void oreCooking(net.minecraft.data.recipes.RecipeOutput pFinishedRecipeConsumer, RecipeSerializer<T> pCookingSerializer, net.minecraft.world.item.crafting.AbstractCookingRecipe.Factory<T> pFactory, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
-        for (ItemLike itemlike : pIngredients) {
-            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer, pFactory)
-                    .group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pFinishedRecipeConsumer, JSG.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
-        }
     }
 }

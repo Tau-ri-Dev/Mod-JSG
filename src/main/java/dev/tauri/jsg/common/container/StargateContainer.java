@@ -147,7 +147,7 @@ public class StargateContainer extends JSGContainer implements OpenTabHolderInte
             )).toList();
 
             // Capacitors
-            if (stack.is(JSGItemTags.STARGATE_CAPACITORS) && (stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM) != null)) {
+            if (stack.is(JSGItemTags.STARGATE_ENERGY_CRYSTALS) && (stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM) != null)) {
                 for (int i = 4; i < 7; i++) {
                     if (!getSlot(i).hasItem() && getSlot(i).mayPlace(stack)) {
                         ItemStack stack1 = stack.copy();

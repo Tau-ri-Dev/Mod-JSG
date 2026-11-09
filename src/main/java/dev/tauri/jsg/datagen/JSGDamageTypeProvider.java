@@ -13,6 +13,7 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
+//TODO: When we add Allergy this extend Core thing
 public class JSGDamageTypeProvider extends DatapackBuiltinEntriesProvider {
 
     public JSGDamageTypeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

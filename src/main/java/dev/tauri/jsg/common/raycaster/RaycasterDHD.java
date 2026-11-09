@@ -137,7 +137,7 @@ public abstract class RaycasterDHD extends Raycaster {
                 }
                 if (buttonId >= UPGRADE_SLOT_TL_IMM_BUTTON_ID && buttonId <= UPGRADE_SLOT_B_IMM_BUTTON_ID) {
                     // upgrades
-                    JSGPacketHandler.sendToServer(new DHDUpgradeAssemblyClickToServer(pos, buttonId - UPGRADE_SLOT_TL_IMM_BUTTON_ID, hand, isSneaking || player.getItemInHand(hand).isEmpty()));
+                    JSGPacketHandler.sendToServer(new DHDUpgradeAssemblyClickToServer(pos, buttonId - UPGRADE_SLOT_TL_IMM_BUTTON_ID, hand, player.getItemInHand(hand).isEmpty()));
                     return true;
                 }
                 if (dhdTile.isAssembled() && buttonId != -1 && buttonId < 100) {

@@ -12,6 +12,7 @@ import net.neoforged.bus.api.IEventBus;
 public class JSGRegistriesInit {
     public static void init() {
         CoreTabs.registerTransportationTab(() -> JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK);
+        CoreTabs.registerUpgradesTab(() -> JSGItems.CRYSTAL_ADDRESS_EXTENDED);
 
         JSGSymbolTypes.init();
         JSGScheduledTaskTypes.init();

@@ -13,7 +13,7 @@
       "element": {
         "location": "jsg:containers/abydos/camp/barrel",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     },
@@ -22,7 +22,7 @@
       "element": {
         "location": "jsg:containers/abydos/camp/chest",
         "processors": "minecraft:empty",
-        "projection": "terrain_matching",
+        "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
     }

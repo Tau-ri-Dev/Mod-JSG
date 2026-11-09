@@ -18,6 +18,7 @@ import dev.tauri.jsg.api.util.IStargateGenerator;
 import dev.tauri.jsg.client.renderer.blockentity.stargate.StargateOrlinRendererState;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateOrlinMergeHelper;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
+import dev.tauri.jsg.common.registry.JSGPositionedSounds;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.stargate.manager.StargateEnergyManager;
 import dev.tauri.jsg.common.stargate.manager.StargateEventHorizonManager;
@@ -173,6 +174,8 @@ public class StargateOrlinBaseBE extends StargateAbstractBaseBE<StargateOrlinRen
 
     @Override
     public @Nullable PositionedSound getPositionedSound(StargateSoundPositionedEnum soundEnum) {
+        if (soundEnum == StargateSoundPositionedEnum.WORMHOLE_LOOP)
+            return JSGPositionedSounds.WORMHOLE_LOOP;
         return null;
     }
 

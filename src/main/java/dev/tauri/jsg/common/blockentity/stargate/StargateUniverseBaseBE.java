@@ -167,7 +167,7 @@ public class StargateUniverseBaseBE extends StargateClassicBaseBE<StargateUniver
 
     @Override
     public int getSupportedCapacitors() {
-        return getConfig().getValueOrDefault(StargateConfigOptions.Universe.MAX_CAPACITORS);
+        return getConfig().getValueOrDefault(StargateConfigOptions.Universe.MAX_CRYSTALS);
     }
 
     // --------------------------------------------------------------------------------
@@ -179,6 +179,7 @@ public class StargateUniverseBaseBE extends StargateClassicBaseBE<StargateUniver
         return switch (soundEnum) {
             case GATE_RING_ROLL -> JSGPositionedSounds.UNIVERSE_RING_ROLL;
             case GATE_RING_ROLL_START -> JSGPositionedSounds.UNIVERSE_RING_ROLL_START;
+            case WORMHOLE_LOOP -> JSGPositionedSounds.WORMHOLE_LOOP;
         };
 
     }

@@ -1,0 +1,15 @@
+{
+  "name": "jsg:containers/abydos/dungeon/chest_ground",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "jsg:containers/abydos/dungeon/chest_ground",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

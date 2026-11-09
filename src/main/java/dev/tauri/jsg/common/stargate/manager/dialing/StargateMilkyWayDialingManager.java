@@ -5,8 +5,13 @@ import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.ChevronEnum;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
+import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
+import dev.tauri.jsg.api.stargate.animation.EnumSpinDirection;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
+import dev.tauri.jsg.api.stargate.result.StargateManualDialingAttemptResult;
+import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
 import dev.tauri.jsg.common.blockentity.stargate.StargateMilkyWayBaseBE;
+import dev.tauri.jsg.common.registry.tags.JSGItemTags;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.MilkyWayIncomingAnimation;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
@@ -14,6 +19,10 @@ import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
@@ -25,12 +34,68 @@ import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsSt
 @ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
 public class StargateMilkyWayDialingManager extends StargateClassicDialingManager<StargateMilkyWayBaseBE> {
+    public static final long MANUAL_MAX_SPINNING_UPDATE_TIME = 5;
+    public static final long MANUAL_ENGAGE_CHEVRON_AFTER_SPIN_STOP_TIME = 80;
+    public static final long MANUAL_OPEN_GATE_AFTER_ORIGIN_ENGAGE_TIME = 100;
+
+    protected long manualDialingLastUpdated = -1;
+
+    protected ManualDialingState manualDialingState = ManualDialingState.IDLE;
+
     public StargateMilkyWayDialingManager(StargateMilkyWayBaseBE stargate) {
         super(stargate);
     }
 
     @Override
+    public void tick(Level level) {
+        super.tick(level);
+        if (level.isClientSide()) return;
+        if (manualDialingState != ManualDialingState.DIALING) return;
+        if (getSpinHelper().isSpinning() && (level.getGameTime() - manualDialingLastUpdated) > MANUAL_MAX_SPINNING_UPDATE_TIME) {
+            getSpinHelper().stopSpinning(true);
+            return;
+        }
+        if (!getSpinHelper().isSpinning() && (level.getGameTime() - manualDialingLastUpdated) > MANUAL_ENGAGE_CHEVRON_AFTER_SPIN_STOP_TIME) {
+            manualDialingState = ManualDialingState.IDLE;
+            var symbol = getSpinHelper().getCurrentTopSymbol();
+            engageCurrentSymbol(false, symbol.origin());
+            if (symbol.origin()) {
+                manualDialingState = ManualDialingState.WAITING_FOR_OPEN;
+            }
+            stargate.setChanged();
+        }
+    }
+
+    @Override
+    public void dialingFailed(StargateOpenResult reason) {
+        super.dialingFailed(reason);
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
+    }
+
+    @Override
+    protected boolean disconnectWormhole(StargateClosedReasonEnum reason) {
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
+        return super.disconnectWormhole(reason);
+    }
+
+    @Override
     public StargateChevronEngageResult engageSymbolDHD(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons) {
+
+        // dial using buffer - spinning the ring while dialing with DHD
+        if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).spinEngage()) {
+            var result = engageSymbolToBuffer(symbol, noEnergy, ignoreMaxChevrons);
+            if (result != StargateChevronEngageResult.OK) return result;
+            var dhd = stargate.getLinkedDevice();
+            if (stargate.isLinkedAndDHDOperational() && dhd != null) {
+                dhd.activateSymbol(symbol);
+            }
+            if (addressDialSequence != null)
+                addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 10));
+            return StargateChevronEngageResult.OK;
+        }
+
         if (!getStargateState().idle())
             return StargateChevronEngageResult.BUSY;
         var r = engageSymbolInternal(symbol, false, noEnergy, ignoreMaxChevrons);
@@ -44,6 +109,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
         }
         int plusTime = new Random().nextInt(5);
         if (isLockChevron(symbol, ignoreMaxChevrons)) {
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).freeSpin())
+                getSpinHelper().stopSpinning(true);
             if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_POO_LOCK)) {
                 stargate.getStateManager().getChevronsState().scheduleChevronFinalOpenAndActivate(5 + plusTime, null, true);
                 if (addressDialSequence != null)
@@ -54,6 +121,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
                     addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));
             }
         } else {
+            if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).freeSpin())
+                getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 1.5f * getSpinHelper().getRingSpeedFromConfig());
             stargate.getStateManager().getChevronsState().scheduleChevronActivate(10 + plusTime, getNextChevron(symbol, true, ignoreMaxChevrons), null, true);
             if (addressDialSequence != null)
                 addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime));
@@ -91,6 +160,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void failGate() {
         super.failGate();
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
             dhd.clearSymbols();
@@ -100,6 +171,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void onWormholeDisconnected() {
         super.onWormholeDisconnected();
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         getSpinHelper().stopSpinning(true);
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
@@ -110,6 +183,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected void onGateOpen(boolean initiating) {
         super.onGateOpen(initiating);
+        manualDialingState = ManualDialingState.IDLE;
+        stargate.setChanged();
         getSpinHelper().stopSpinning(true);
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
@@ -120,6 +195,8 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
     @Override
     protected StargateChevronEngageResult engageSymbolInternal(SymbolInterface symbol, boolean isNox, boolean noEnergy, boolean ignoreMaxChevrons) {
         var result = super.engageSymbolInternal(symbol, isNox, noEnergy, ignoreMaxChevrons);
+        canDialNextFromBuffer = false;
+        stargate.setChanged();
         if (result.ok()) {
             var dhd = stargate.getLinkedDevice();
             if (stargate.isLinkedAndDHDOperational() && dhd != null) {
@@ -127,5 +204,58 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean isManuallyDialingByHand() {
+        return manualDialingState == ManualDialingState.DIALING;
+    }
+
+    @Override
+    public boolean canDialManuallyByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
+        return heldItem.is(JSGItemTags.DIALING_GLOVES);
+    }
+
+    @Override
+    public StargateManualDialingAttemptResult updateManualDialingByHand(Player player, ItemStack heldItem, InteractionHand usedHand) {
+        if (!getStargateState().idle()) return StargateManualDialingAttemptResult.BUSY;
+        if (manualDialingState == ManualDialingState.WAITING_FOR_OPEN)
+            return StargateManualDialingAttemptResult.BUSY;
+        if (getSpinHelper().isSpinning() && manualDialingState == ManualDialingState.IDLE)
+            return StargateManualDialingAttemptResult.BUSY;
+
+        // TODO: Make the test value not static
+        if (stargate.getEnergyManager().getStorage().getTrueEnergyStored() < 1000)
+            return StargateManualDialingAttemptResult.NO_ENERGY;
+
+        manualDialingLastUpdated = stargate.getTime();
+        manualDialingState = ManualDialingState.DIALING;
+        stargate.setChanged();
+        if (getSpinHelper().isSpinning())
+            return StargateManualDialingAttemptResult.SPIN_CONTINUES;
+        var result = getSpinHelper().rotateFreely(EnumSpinDirection.valueOf(player.isShiftKeyDown()), 0.3f);
+        if (!result) return StargateManualDialingAttemptResult.BUSY;
+        return StargateManualDialingAttemptResult.SPIN_STARTED;
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        var tag = super.serializeNBT();
+        tag.putLong("manualDialingLastUpdated", manualDialingLastUpdated);
+        tag.putInt("manualDialingState", manualDialingState.ordinal());
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag compound) {
+        super.deserializeNBT(compound);
+        manualDialingLastUpdated = compound.getLong("manualDialingLastUpdated");
+        manualDialingState = ManualDialingState.values()[compound.getInt("manualDialingState")];
+    }
+
+    public enum ManualDialingState {
+        IDLE,
+        DIALING,
+        WAITING_FOR_OPEN
     }
 }

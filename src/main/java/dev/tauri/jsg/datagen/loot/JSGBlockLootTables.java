@@ -5,31 +5,24 @@ import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsgcore.common.blockstate.JSGProperties;
 import dev.tauri.jsgcore.common.registry.CoreItems;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
+import dev.tauri.jsgcore.datagen.loot.CoreBlockLootTables;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyCustomDataFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
-
-public class JSGBlockLootTables extends BlockLootSubProvider {
+public class JSGBlockLootTables extends CoreBlockLootTables {
     public JSGBlockLootTables(net.minecraft.core.HolderLookup.Provider registries) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        super(registries);
     }
 
     @Override
@@ -50,23 +43,23 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
         dropSelf(JSGBlocks.ZPM_SLOT.get());
 
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_PEGASUS_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_PEGASUS_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_PEGASUS_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_UNIVERSE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_UNIVERSE_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_UNIVERSE_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_MOVIE_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_MOVIE_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_MOVIE_RING_BLOCK.get());
 
-        dropAndCopyNBT(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId"));
+        dropAndCopyNBT(JSGBlocks.STARGATE_TOLLAN_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_TOLLAN_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_TOLLAN_RING_BLOCK.get());
 
@@ -100,7 +93,7 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
                 .withPool(applyExplosionCondition(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get(), LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1f))
                         .setBonusRolls(ConstantValue.exactly(0))
-                        .add(LootItem.lootTableItem(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).apply(CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("openCount", "openCount").copy("notebook_page", "notebook_page").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId")))
+                        .add(LootItem.lootTableItem(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).apply(CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("openCount", "openCount").copy("notebook_page", "notebook_page").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses")))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(JSGProperties.ORLIN_BROKEN, false)))
                 ))
                 .withPool(applyExplosionCondition(JSGBlocks.STARGATE_ORLIN_BASE_BLOCK.get(), LootPool.lootPool()
@@ -130,25 +123,7 @@ public class JSGBlockLootTables extends BlockLootSubProvider {
         return JSGApi.REGISTRY_HELPER.block().getEntries().stream().map(RegistryObjectWrapper::get)::iterator;
     }
 
-    protected void dropNothing(Block block) {
-        add(block, LootTable.lootTable());
-    }
-
-    protected void dropOre(Block block, Item item) {
-        add(block, createOreDrop(block, item));
-    }
-
-    protected void dropOre(Block block, Item item, NumberProvider dropsCount) {
-        add(block, createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(dropsCount)).apply(ApplyBonusCount.addOreBonusCount(this.registries.lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE))))));
-    }
-
     protected void dropAndCopyNBT(Block block, CopyCustomDataFunction.Builder copyNbtFunctionBuilder) {
-        add(block, LootTable.lootTable()
-                .withPool(applyExplosionCondition(block, LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1f))
-                        .setBonusRolls(ConstantValue.exactly(0))
-                        .add(LootItem.lootTableItem(block).apply(copyNbtFunctionBuilder))
-                ))
-        );
+        this.add(block, LootTable.lootTable().withPool((LootPool.Builder) this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).setBonusRolls(ConstantValue.exactly(0.0F)).add(LootItem.lootTableItem(block).apply(copyNbtFunctionBuilder)))));
     }
 }

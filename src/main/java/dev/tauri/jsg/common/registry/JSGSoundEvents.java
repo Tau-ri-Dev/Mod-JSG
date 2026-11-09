@@ -47,6 +47,7 @@ public class JSGSoundEvents {
     public static final SoundEvent GATE_ORLIN_DIAL = new SoundEvent(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.orlin.dial"), 1).register(JSGApi.REGISTRY_HELPER.sound());
     public static final SoundEvent GATE_ORLIN_FAIL = new SoundEvent(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.orlin.fail"), 1).register(JSGApi.REGISTRY_HELPER.sound());
     public static final SoundEvent GATE_ORLIN_BROKE = new SoundEvent(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.orlin.broke"), 1).register(JSGApi.REGISTRY_HELPER.sound());
+    public static final SoundEvent GATE_ORLIN_COOKING_DONE = new SoundEvent(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.orlin.cooking_done"), 1).register(JSGApi.REGISTRY_HELPER.sound());
     // ----------------------------------------------------------
     // Stargate - Movie
     public static final SoundEvent GATE_MOVIE_CHEVRON_CLOSE = new SoundEvent(JSGMapping.rl(JSGApi.MOD_ID, "block.stargate.movie.chevron.close"), 1).register(JSGApi.REGISTRY_HELPER.sound());

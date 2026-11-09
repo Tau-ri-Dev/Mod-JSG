@@ -1,5 +1,6 @@
 package dev.tauri.jsg.common.packet.packets.dialhomedevice;
 
+import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
 import dev.tauri.jsgcore.common.packet.NetworkDirection;
 import dev.tauri.jsgcore.common.packet.PacketContext;
 import dev.tauri.jsgcore.common.packet.packets.PositionedPacket;
@@ -19,6 +20,7 @@ public class DHDUpgradeAssemblyClickToServer extends PositionedPacket {
         super(pos);
         this.slot = slot;
         this.hand = hand;
+        this.disassemble = disassemble;
     }
 
     public DHDUpgradeAssemblyClickToServer(FriendlyByteBuf buf) {
@@ -49,7 +51,21 @@ public class DHDUpgradeAssemblyClickToServer extends PositionedPacket {
         if (player == null) return;
         var world = player.level();
         ctx.enqueueWork(() -> {
-            // TODO: Logic to assemble and disassemble upgrade crystals
+            DHDAbstractBE dhdTile = (DHDAbstractBE) world.getBlockEntity(pos);
+            if (dhdTile == null) return;
+            var itemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+            var handler = dhdTile.getItemHandler();
+            if (handler == null) return;
+            if (handler.getSlots() <= slot) return;
+            var stackIn = handler.getStackInSlot(slot);
+            if (stackIn.isEmpty() == disassemble) return;
+            if (disassemble)
+                player.addItem(handler.extractItem(slot, 1, false));
+            else {
+                handler.insertItem(slot, itemStack.copyWithCount(1), false);
+                itemStack.shrink(1);
+            }
+            player.swing(InteractionHand.MAIN_HAND);
         });
     }
 }

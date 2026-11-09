@@ -20,6 +20,7 @@ public class JSGDataGenerators {
 
         generator.addProvider(event.includeServer(), new JSGRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), JSGLootTableProvider.create(output, lookupProvider));
+        generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
 
         // TODO: Fredy fix this pls pls
         //generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
@@ -37,5 +38,6 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
 
         generator.addProvider(event.includeServer(), new JSGDamageTypeProvider(output, lookupProvider));
+        generator.addProvider(event.includeClient(), new JSGLanguageProvider(output, "en_us"));
     }
 }

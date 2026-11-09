@@ -17,16 +17,12 @@ import dev.tauri.jsg.common.stargate.animation.spinning.ClassicSpinHelper;
 import dev.tauri.jsg.common.stargate.animation.spinning.PegasusSpinHelper;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
-import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
 
 import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState.A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY;
 
@@ -94,61 +90,16 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
         return StargateChevronEngageResult.OK;
     }
 
-    protected Pair<List<SymbolInterface>, Pair<Boolean, Boolean>> addressBuffer = Pair.of(new ArrayList<>(), Pair.of(false, false));
-    protected boolean canDialNextFromBuffer = true;
-
-    @Override
-    public void tick(Level level) {
-        super.tick(level);
-        if (level.isClientSide) return;
-        if (canDialNextFromBuffer && !addressBuffer.first().isEmpty() && level.getGameTime() % 10 == 0) {
-            var symbol = addressBuffer.first().get(0);
-            if (symbol == null) {
-                addressBuffer.first().remove(0);
-                stargate.setChanged();
-                return;
-            }
-            if (symbol.brb()) {
-                addressBuffer.first().clear();
-                canDialNextFromBuffer = false;
-                attemptOpenDialed();
-                return;
-            }
-            if (engageSymbolBySpin(symbol, addressBuffer.second().first(), addressBuffer.second().second())) {
-                canDialNextFromBuffer = false;
-                addressBuffer.first().remove(0);
-                stargate.setChanged();
-            } else {
-                addressBuffer.first().remove(0);
-                stargate.setChanged();
-            }
-        }
-    }
-
     @Override
     public StargateChevronEngageResult engageSymbolDHD(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons) {
-        var r = canAddSymbolToBuffer(symbol, ignoreMaxChevrons);
-        if (r != StargateChevronEngageResult.OK) return r;
+        var result = engageSymbolToBuffer(symbol, noEnergy, ignoreMaxChevrons);
+        if (result != StargateChevronEngageResult.OK) return result;
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
             dhd.activateSymbol(symbol);
         }
-        setStargateState(EnumStargateState.DIALING);
-        addressBuffer = Pair.of(addressBuffer.first(), Pair.of(noEnergy, ignoreMaxChevrons));
-        addressBuffer.first().add(symbol);
         if (addressDialSequence != null)
             addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 10));
-        return StargateChevronEngageResult.OK;
-    }
-
-    public StargateChevronEngageResult canAddSymbolToBuffer(SymbolInterface symbol, boolean ignoreMaxChevrons) {
-        if (isFinalActive && !symbol.brb()) return StargateChevronEngageResult.ADDRESS_FULL;
-        if (addressBuffer.first().contains(symbol))
-            return StargateChevronEngageResult.ALREADY_ENGAGED;
-        if (symbol.brb()) return StargateChevronEngageResult.OK;
-        if ((dialedAddress.size() + addressBuffer.first().size() - (addressBuffer.first().contains(stargate.getSymbolType().getBRB()) || symbol.brb() ? 1 : 0)) >= (ignoreMaxChevrons ? 9 : stargate.getMaxChevrons())) {
-            return StargateChevronEngageResult.ADDRESS_FULL;
-        }
         return StargateChevronEngageResult.OK;
     }
 
@@ -172,15 +123,13 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     }
 
     @Override
-    public StargateChevronEngageResult engageCurrentSymbol() {
+    public StargateChevronEngageResult engageCurrentSymbol(boolean ignoreMaxChevrons, boolean tryOpenAfter) {
         JSG.logger.error("", new StargateException("Tried to engage current top symbol on pegasus gate. This will not work...", stargate));
         return StargateChevronEngageResult.BLOCKED_BY_EVENT;
     }
 
     @Override
     protected void clearIncomingWormholeOnSelf() {
-        canDialNextFromBuffer = true;
-        addressBuffer.first().clear();
         getSpinHelper().stopSpinning(true);
         stargate.getStateManager().getChevronsState().scheduleChevronsDimAll(0, true);
     }
@@ -188,9 +137,6 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     @Override
     public void runIncomingWormhole(int addressSize, int duration) {
         super.runIncomingWormhole(addressSize, duration);
-        canDialNextFromBuffer = true;
-        addressBuffer.first().clear();
-        stargate.setChanged();
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
             dhd.clearSymbols();
@@ -200,10 +146,7 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     @Override
     protected void failGate() {
         super.failGate();
-        canDialNextFromBuffer = true;
-        addressBuffer.first().clear();
         getSpinHelper().stopSpinning(true);
-        stargate.setChanged();
         var dhd = stargate.getLinkedDevice();
         if (stargate.isLinkedAndDHDOperational() && dhd != null) {
             dhd.clearSymbols();
@@ -213,8 +156,6 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     @Override
     protected void onWormholeDisconnected() {
         super.onWormholeDisconnected();
-        canDialNextFromBuffer = true;
-        addressBuffer.first().clear();
         getSpinHelper().stopSpinning(true);
         stargate.getStateManager().getChevronsState().scheduleChevronsDimAll(0, true);
         stargate.setChanged();
@@ -227,8 +168,6 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     @Override
     protected void onGateOpen(boolean initiating) {
         super.onGateOpen(initiating);
-        canDialNextFromBuffer = true;
-        addressBuffer.first().clear();
         getSpinHelper().stopSpinning(true);
         stargate.setChanged();
         var dhd = stargate.getLinkedDevice();
@@ -246,8 +185,6 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
                 dhd.activateSymbol(symbol);
             }
         }
-        canDialNextFromBuffer = true;
-        stargate.setChanged();
         return result;
     }
 
@@ -259,26 +196,5 @@ public class StargatePegasusDialingManager extends StargateClassicDialingManager
     @Override
     protected IncomingAnimation<?> getIncomingAnimation(int addressSize, int duration) {
         return new PegasusIncomingAnimation(stargate.getTime(), this, addressSize, duration);
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        var c = super.serializeNBT();
-        c.putIntArray("addressBufferAddress", addressBuffer.first().stream().map(SymbolInterface::getId).toList());
-        c.putBoolean("addressBufferNoEnergy", addressBuffer.second().first());
-        c.putBoolean("addressBufferIgnoreMaxChevrons", addressBuffer.second().second());
-        c.putBoolean("addressBufferCanDialNext", canDialNextFromBuffer);
-        return c;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag compound) {
-        super.deserializeNBT(compound);
-        var list = new ArrayList<SymbolInterface>();
-        for (var i : compound.getIntArray("addressBufferAddress")) {
-            list.add(stargate.getSymbolType().valueOf(i));
-        }
-        addressBuffer = Pair.of(list, Pair.of(compound.getBoolean("addressBufferNoEnergy"), compound.getBoolean("addressBufferIgnoreMaxChevrons")));
-        canDialNextFromBuffer = compound.getBoolean("addressBufferCanDialNext");
     }
 }

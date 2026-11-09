@@ -5,7 +5,9 @@ import com.mojang.math.Axis;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.entity.StargateAddressData;
 import dev.tauri.jsg.api.item.IDHDPartItem;
+import dev.tauri.jsg.client.renderer.blockentity.stargate.StargateAbstractRendererState;
 import dev.tauri.jsg.common.blockentity.dialhomedevice.DHDAbstractBE;
+import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsgcore.client.renderer.BlockRenderer;
 import dev.tauri.jsgcore.client.renderer.IRaycasterButtonsRenderer;
@@ -15,6 +17,7 @@ import dev.tauri.jsgcore.common.config.values.JSGConfigValue;
 import dev.tauri.jsgcore.common.entity.NotebookPageType;
 import dev.tauri.jsgcore.common.helper.JSGMinecraftHelper;
 import dev.tauri.jsgcore.common.item.notebook.NotebookItem;
+import dev.tauri.jsgcore.common.registry.CoreBiomeOverlays;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import dev.tauri.jsgcore.common.symbol.SymbolType;
 import dev.tauri.jsgcore.common.util.I18n;
@@ -44,12 +47,20 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
+import org.joml.Vector2d;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class DHDAbstractRenderer<S extends DHDAbstractRendererState> implements LinkableRenderer, BlockEntityRenderer<DHDAbstractBE>, IRaycasterButtonsRenderer {
+    public static final List<Vector2d> UPGRADE_POSES = List.of(
+            new Vector2d(0.120, 0.3825),
+            new Vector2d(-0.120, 0.3825),
+            new Vector2d(0.08, 0.251),
+            new Vector2d(-0.076, 0.251),
+            new Vector2d(0, 0.108)
+    );
 
     @Override
     public net.minecraft.world.phys.AABB getRenderBoundingBox(DHDAbstractBE blockEntity) {
@@ -75,6 +86,12 @@ public abstract class DHDAbstractRenderer<S extends DHDAbstractRendererState> im
         this.level = te.getLevel();
         if (rendererState == null || level == null) return;
         level.updateSkyBrightness();
+
+        rendererState.biomeOverlay = te.getLinkedDeviceOptional()
+                .flatMap(sg -> (sg instanceof StargateAbstractBaseBE<?, ?> sga ? Optional.of(sga) : Optional.empty()))
+                .map(sg -> sg.getStateManager().getRendererStateClient())
+                .map(StargateAbstractRendererState::getBiomeOverlay)
+                .orElse(CoreBiomeOverlays.NORMAL.get());
 
         BlockState state = level.getBlockState(te.getBlockPos());
         if (state.getBlock() != getDHDBlock()) return;

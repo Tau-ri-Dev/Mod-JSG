@@ -1,7 +1,7 @@
 {
   "block.dhd.milkyway.press": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.dhd_milkyway_press",
+    "subtitle": "jsg.subtitle.block.dhd.milkyway.press",
     "sounds": [
       "jsg:dhd/dhd_milkyway_press_1",
       "jsg:dhd/dhd_milkyway_press_2",
@@ -14,7 +14,7 @@
   },
   "block.dhd.pegasus.press": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.dhd_pegasus_press",
+    "subtitle": "jsg.subtitle.block.dhd.pegasus.press",
     "sounds": [
       "jsg:dhd/dhd_pegasus_press_1",
       "jsg:dhd/dhd_pegasus_press_2",
@@ -25,126 +25,147 @@
   },
   "block.dhd.milkyway.press.brb": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.dhd_milkyway_press_brb",
+    "subtitle": "jsg.subtitle.block.dhd.milkyway.press.brb",
     "sounds": [
       "jsg:dhd/dhd_milkyway_press_brb"
     ]
   },
   "block.dhd.pegasus.press.brb": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.dhd_pegasus_press_brb",
+    "subtitle": "jsg.subtitle.block.dhd.pegasus.press.brb",
     "sounds": [
       "jsg:dhd/dhd_pegasus_press_brb"
     ]
   },
   "block.stargate.milkyway.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_open",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.open",
     "sounds": [
-      "jsg:gate/gate_milkyway_open"
+      "jsg:gate/milkyway/gate_milkyway_open"
     ]
   },
   "block.stargate.pegasus.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_open",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.open",
     "sounds": [
       "jsg:gate/pegasus/gate_pegasus_open"
     ]
   },
   "block.stargate.nox.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_open",
+    "subtitle": "jsg.subtitle.block.stargate.nox.open",
     "sounds": [
       "jsg:gate/gate_nox_open"
     ]
   },
   "block.stargate.milkyway.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_close",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.close",
     "sounds": [
-      "jsg:gate/gate_milkyway_close"
+      "jsg:gate/milkyway/gate_milkyway_close"
     ]
   },
   "block.stargate.milkyway.ring_roll.start": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_ring_roll",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.ring_roll.start",
     "sounds": [
-      "jsg:gate/gate_milkyway_ring_roll_start"
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_start"
     ]
   },
   "block.stargate.milkyway.ring_roll.loop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_ring_roll",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.ring_roll.loop",
     "sounds": [
-      "jsg:gate/gate_milkyway_ring_roll"
+      "jsg:gate/milkyway/gate_milkyway_ring_roll"
+    ]
+  },
+  "block.stargate.milkyway.ring_roll.manual.start": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.ring_roll.manual.start",
+    "sounds": [
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_manual_start"
+    ]
+  },
+  "block.stargate.milkyway.ring_roll.manual.loop": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.ring_roll.manual.loop",
+    "sounds": [
+      "jsg:gate/milkyway/gate_milkyway_ring_roll_manual"
     ]
   },
   "block.stargate.pegasus.ring_roll.loop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_ring_roll",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.ring_roll.loop",
     "sounds": [
       "jsg:gate/pegasus/gate_pegasus_ring_roll"
     ]
   },
   "block.stargate.pegasus.ring_roll.start": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_ring_roll",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.ring_roll.start",
     "sounds": [
       "jsg:gate/pegasus/gate_pegasus_ring_roll_start"
     ]
   },
   "block.stargate.milkyway.fail": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_dial_fail",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.fail",
     "sounds": [
-      "jsg:gate/gate_milkyway_dial_fail"
+      "jsg:gate/milkyway/gate_milkyway_dial_fail"
     ]
   },
   "block.stargate.milkyway.fail_computer": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_dial_fail_computer",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.fail_computer",
     "sounds": [
-      "jsg:gate/gate_milkyway_dial_fail_computer"
+      "jsg:gate/milkyway/gate_milkyway_dial_fail_computer"
     ]
   },
   "block.stargate.pegasus.fail": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_dial_fail",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.fail",
     "sounds": [
       "jsg:gate/pegasus/gate_pegasus_dial_fail"
     ]
   },
   "block.stargate.milkyway.chevron.incoming": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_incoming",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.chevron.incoming",
     "sounds": [
-      "jsg:gate/gate_milkyway_incoming"
+      "jsg:gate/milkyway/gate_milkyway_incoming"
     ]
   },
   "block.stargate.pegasus.chevron.incoming": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_incoming",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.chevron.incoming",
     "sounds": [
       "jsg:gate/pegasus/gate_pegasus_incoming"
     ]
   },
   "misc.stargate.wormhole.travel": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.wormhole_travel",
+    "subtitle": "jsg.subtitle.misc.stargate.wormhole.travel",
     "sounds": [
       "jsg:gate/gate_travel"
     ]
   },
   "misc.stargate.wormhole.loop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.wormhole_loop",
+    "subtitle": "jsg.subtitle.misc.stargate.wormhole.loop",
     "sounds": [
       "jsg:eh/wormhole_loop"
     ]
   },
+  "misc.stargate.wormhole.movie.loop": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.misc.stargate.wormhole.movie.loop",
+    "sounds": [
+      "jsg:eh/movie_wormhole_loop"
+    ]
+  },
   "misc.stargate.wormhole.go": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.wormhole_go",
+    "subtitle": "jsg.subtitle.misc.stargate.wormhole.go",
     "sounds": [
       "jsg:eh/eh_go_1",
       "jsg:eh/eh_go_2",
@@ -158,7 +179,7 @@
   },
   "misc.stargate.wormhole.flicker": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.wormhole_flicker",
+    "subtitle": "jsg.subtitle.misc.stargate.wormhole.flicker",
     "sounds": [
       "jsg:eh/wormhole_flicker_1",
       "jsg:eh/wormhole_flicker_2",
@@ -167,7 +188,7 @@
   },
   "misc.stargate.iris.hit": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.iris_hit",
+    "subtitle": "jsg.subtitle.misc.stargate.iris.hit",
     "sounds": [
       "jsg:iris/iris_hit_1",
       "jsg:iris/iris_hit_2",
@@ -176,28 +197,28 @@
   },
   "misc.stargate.iris.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.iris_opening",
+    "subtitle": "jsg.subtitle.misc.stargate.iris.open",
     "sounds": [
       "jsg:iris/iris_opening"
     ]
   },
   "misc.stargate.iris.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.iris_closing",
+    "subtitle": "jsg.subtitle.misc.stargate.iris.close",
     "sounds": [
       "jsg:iris/iris_closing"
     ]
   },
   "misc.stargate.shield.humming": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.shield_humming",
+    "subtitle": "jsg.subtitle.misc.stargate.shield.humming",
     "sounds": [
       "jsg:shield/shield_humming"
     ]
   },
   "misc.stargate.shield.hit": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.shield_hit",
+    "subtitle": "jsg.subtitle.misc.stargate.shield.hit",
     "sounds": [
       "jsg:shield/shield_hit_1",
       "jsg:shield/shield_hit_2",
@@ -206,21 +227,21 @@
   },
   "misc.stargate.shield.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.shield_opening",
+    "subtitle": "jsg.subtitle.misc.stargate.shield.open",
     "sounds": [
       "jsg:shield/shield_opening"
     ]
   },
   "misc.stargate.shield.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.shield_closing",
+    "subtitle": "jsg.subtitle.misc.stargate.shield.close",
     "sounds": [
       "jsg:shield/shield_closing"
     ]
   },
   "block.stargate.milkyway.chevron.shut": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_chevron_shut",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.chevron.shut",
     "sounds": [
       "jsg:gate/chevron/gate_milkyway_chevron_shut_1",
       "jsg:gate/chevron/gate_milkyway_chevron_shut_2",
@@ -229,7 +250,7 @@
   },
   "block.stargate.milkyway.chevron.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_milkyway_chevron_open",
+    "subtitle": "jsg.subtitle.block.stargate.milkyway.chevron.open",
     "sounds": [
       "jsg:gate/chevron/gate_milkyway_chevron_open_1",
       "jsg:gate/chevron/gate_milkyway_chevron_open_2",
@@ -238,7 +259,7 @@
   },
   "block.stargate.movie.chevron.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_chevron_close",
+    "subtitle": "jsg.subtitle.block.stargate.movie.chevron.close",
     "sounds": [
       "jsg:gate/movie/chevron_movie_closing_1",
       "jsg:gate/movie/chevron_movie_closing_2"
@@ -246,7 +267,7 @@
   },
   "block.stargate.movie.chevron.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_chevron_open",
+    "subtitle": "jsg.subtitle.block.stargate.movie.chevron.open",
     "sounds": [
       "jsg:gate/movie/chevron_movie_opening_1",
       "jsg:gate/movie/chevron_movie_opening_2"
@@ -254,42 +275,42 @@
   },
   "block.stargate.movie.ring_roll.start": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_ring_roll_start",
+    "subtitle": "jsg.subtitle.block.stargate.movie.ring_roll.start",
     "sounds": [
       "jsg:gate/movie/gate_movie_ring_roll_start"
     ]
   },
   "block.stargate.movie.ring_roll.loop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_ring_roll_loop",
+    "subtitle": "jsg.subtitle.block.stargate.movie.ring_roll.loop",
     "sounds": [
       "jsg:gate/movie/gate_movie_ring_roll_loop"
     ]
   },
   "block.stargate.movie.ring_roll.stop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_ring_roll_stop",
+    "subtitle": "jsg.subtitle.block.stargate.movie.ring_roll.stop",
     "sounds": [
       "jsg:gate/movie/gate_movie_ring_roll_stop"
     ]
   },
   "block.stargate.movie.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_open",
+    "subtitle": "jsg.subtitle.block.stargate.movie.open",
     "sounds": [
       "jsg:gate/movie/gate_movie_open"
     ]
   },
   "block.stargate.movie.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_movie_close",
+    "subtitle": "jsg.subtitle.block.stargate.movie.close",
     "sounds": [
       "jsg:gate/movie/gate_movie_close"
     ]
   },
   "block.stargate.pegasus.chevron.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_pegasus_chevron_open",
+    "subtitle": "jsg.subtitle.block.stargate.pegasus.chevron.open",
     "sounds": [
       "jsg:gate/chevron/gate_pegasus_chevron_open_1",
       "jsg:gate/chevron/gate_pegasus_chevron_open_2",
@@ -298,84 +319,91 @@
   },
   "block.stargate.orlin.dial": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_orlin_dial",
+    "subtitle": "jsg.subtitle.block.stargate.orlin.dial",
     "sounds": [
       "jsg:gate/orlin/gate_orlin_dial"
     ]
   },
   "block.stargate.orlin.fail": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_orlin_dial_fail",
+    "subtitle": "jsg.subtitle.block.stargate.orlin.fail",
     "sounds": [
       "jsg:gate/orlin/gate_orlin_dial_fail"
     ]
   },
   "block.stargate.orlin.broke": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_orlin_broke",
+    "subtitle": "jsg.subtitle.block.stargate.orlin.broke",
     "sounds": [
       "jsg:gate/orlin/gate_orlin_broke"
     ]
   },
+  "block.stargate.orlin.cooking_done": {
+    "category": "ambient",
+    "subtitle": "jsg.subtitle.block.stargate.orlin.cooking_done",
+    "sounds": [
+      "jsg:gate/orlin/gate_orlin_cooking_done"
+    ]
+  },
   "block.stargate.universe.dial": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_dial_start",
+    "subtitle": "jsg.subtitle.block.stargate.universe.dial",
     "sounds": [
       "jsg:gate/universe/gate_universe_dial_start"
     ]
   },
   "block.stargate.universe.ring_roll.loop": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_roll",
+    "subtitle": "jsg.subtitle.block.stargate.universe.ring_roll.loop",
     "sounds": [
       "jsg:gate/universe/gate_universe_roll"
     ]
   },
   "block.stargate.universe.ring_roll.start": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_roll",
+    "subtitle": "jsg.subtitle.block.stargate.universe.ring_roll.start",
     "sounds": [
       "jsg:gate/universe/gate_universe_roll_start"
     ]
   },
   "block.stargate.universe.chevron.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_chevron_lock",
+    "subtitle": "jsg.subtitle.block.stargate.universe.chevron.open",
     "sounds": [
       "jsg:gate/universe/gate_universe_chevron_lock"
     ]
   },
   "block.stargate.universe.fail": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_fail",
+    "subtitle": "jsg.subtitle.block.stargate.universe.fail",
     "sounds": [
       "jsg:gate/universe/gate_universe_fail"
     ]
   },
   "block.stargate.universe.chevron.lock": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_chevron_top_lock",
+    "subtitle": "jsg.subtitle.block.stargate.universe.chevron.lock",
     "sounds": [
       "jsg:gate/universe/gate_universe_chevron_top_lock"
     ]
   },
   "block.stargate.universe.open": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_open",
+    "subtitle": "jsg.subtitle.block.stargate.universe.open",
     "sounds": [
       "jsg:gate/universe/gate_universe_open"
     ]
   },
   "block.stargate.universe.close": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gate_universe_close",
+    "subtitle": "jsg.subtitle.block.stargate.universe.close",
     "sounds": [
       "jsg:gate/universe/gate_universe_close"
     ]
   },
   "misc.printer.printing": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.printer.print",
+    "subtitle": "jsg.subtitle.misc.printer.printing",
     "sounds": [
       "jsg:misc/printer"
     ]
@@ -503,42 +531,42 @@
   },
   "misc.gui.gdo.button": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.gdo_button_beep",
+    "subtitle": "jsg.subtitle.misc.gui.gdo.button",
     "sounds": [
       "jsg:misc/button_press"
     ]
   },
   "item.dialer.error": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.universe_dialer_error",
+    "subtitle": "jsg.subtitle.item.dialer.error",
     "sounds": [
       "jsg:misc/dialer/button_error_universe"
     ]
   },
   "item.dialer.dial.start": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.universe_dialer_beep",
+    "subtitle": "jsg.subtitle.item.dialer.dial.start",
     "sounds": [
       "jsg:misc/dialer/button_startdial_universe"
     ]
   },
   "item.dialer.mode.change": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.universe_dialer_change_mode",
+    "subtitle": "jsg.subtitle.item.dialer.mode.change",
     "sounds": [
       "jsg:misc/dialer/button_changemode_universe"
     ]
   },
   "item.dialer.connect": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.universe_dialer_connect",
+    "subtitle": "jsg.subtitle.item.dialer.connect",
     "sounds": [
       "jsg:misc/dialer/button_connect_universe"
     ]
   },
   "misc.kino.flyby": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.kino_fly",
+    "subtitle": "jsg.subtitle.misc.kino.flyby",
     "sounds": [
       "jsg:misc/kino/kino_fly"
     ]
@@ -644,14 +672,14 @@
   },
   "misc.jub.device.connected": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.jub_device_connected",
+    "subtitle": "jsg.subtitle.misc.jub.device.connected",
     "sounds": [
       "jsg:misc/jub/connected"
     ]
   },
   "misc.jub.device.disconnected": {
     "category": "ambient",
-    "subtitle": "jsg.subtitle.jub_device_disconnected",
+    "subtitle": "jsg.subtitle.misc.jub.device.disconnected",
     "sounds": [
       "jsg:misc/jub/disconnected"
     ]

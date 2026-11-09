@@ -28,6 +28,7 @@ import dev.tauri.jsgcore.common.entity.State;
 import dev.tauri.jsgcore.common.entity.StateType;
 import dev.tauri.jsgcore.common.helper.LinkingHelper;
 import dev.tauri.jsgcore.common.packet.TargetPoint;
+import dev.tauri.jsgcore.common.registry.CoreStateTypes;
 import dev.tauri.jsgcore.common.sound.ISoundEvent;
 import dev.tauri.jsgcore.common.sound.JSGSoundHelper;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
@@ -271,12 +272,15 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                 if (level != null)
                     Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onDetach(level));
                 behaviors.remove(slot);
+                setChanged();
+                getAndSendState(CoreStateTypes.RENDERER_STATE.get());
             } else if (getStackInSlot(slot).getItem() instanceof IDHDUpgradeItem dhdUpgradeItem && dhdUpgradeItem.getUpgrade() instanceof IDHDUpgrade dhdUpgrade) {
                 behaviors.put(slot, dhdUpgrade.createBehavior(DHDAbstractBE.this));
                 if (level != null)
                     Optional.ofNullable(behaviors.get(slot)).ifPresent(behavior -> behavior.onAttach(level));
+                setChanged();
+                getAndSendState(CoreStateTypes.RENDERER_STATE.get());
             }
-            setChanged();
         }
     };
 

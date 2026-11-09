@@ -1,6 +1,7 @@
 package dev.tauri.jsg.client.renderer.item.dialhomedevice.part;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.stargate.StargatePointOfOriginsDefaults;
 import dev.tauri.jsg.api.stargate.network.address.symbol.types.SymbolPegasusEnum;
@@ -23,6 +24,10 @@ public class DHDPegasusButtonsConsoleBEWLR extends DHDAbstractBEWLR {
         } else if (itemDisplayContext == ItemDisplayContext.GUI) {
             stack.scale(1.8f, 1.8f, 1.8f);
             stack.translate(0, -0.7, 0);
+        } else if (itemDisplayContext == ItemDisplayContext.FIXED) {
+            stack.translate(0.825, 1.65, -1.7);
+            stack.mulPose(Axis.YP.rotationDegrees(180));
+            stack.mulPose(Axis.XP.rotationDegrees(-60));
         }
         ElementEnum.PEGASUS_DHD_BUTTON_CONSOLE.bindTexture().render(stack, bufferSource, light, false, 1, true);
         // render symbols

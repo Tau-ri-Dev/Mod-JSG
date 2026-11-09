@@ -6,11 +6,11 @@ import dev.tauri.jsgcore.common.definition.crystal.CrystalType;
 import dev.tauri.jsgcore.common.definition.material.MaterialItemType;
 import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.registry.CoreItems;
+import dev.tauri.jsgcore.datagen.loot.CoreChestLootTables;
 import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.network.Filterable;
@@ -28,8 +28,9 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class JSGChestLootTableProvider implements LootTableSubProvider {
+public class JSGChestLootTableProvider extends CoreChestLootTables {
     public JSGChestLootTableProvider(HolderLookup.Provider registries) {
+        super(registries);
     }
 
     @Override
