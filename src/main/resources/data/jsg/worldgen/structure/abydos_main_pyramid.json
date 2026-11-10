@@ -4,7 +4,7 @@
   "size": 17,
   "max_distance_from_center": 1000,
   "biomes": "#jsg:has_structure/abydos_main_pyramid",
-  "terrain_adaptation": "encapsulate",
+  "terrain_adaptation": "beard_box",
   "step": "strongholds",
   "start_height": {
     "type": "minecraft:uniform",
