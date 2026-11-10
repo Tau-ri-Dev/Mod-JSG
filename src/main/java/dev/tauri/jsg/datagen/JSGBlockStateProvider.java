@@ -24,8 +24,6 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.util.List;
 import java.util.Map;
 
-import static net.minecraft.core.registries.BuiltInRegistries.BLOCK;
-
 public class JSGBlockStateProvider extends CoreBlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, JSG.MOD_ID, exFileHelper);
@@ -40,14 +38,11 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
 
         createSimpleVanillaTextureBlock(JSGBlocks.ABYDOS_SAND, Blocks.SAND);
 
-        //TODO: These models maybe need to be exported again from blockbench (for never versions) or maybe wrong Blockstate datagen...
-        // But why dialing gloves works?
-        // Maybe create these as OBJ?
         //BLOCKS WITH CUSTOM JSON MODEL
-        //createRotatableJsonModel(JSGBlocks.TOASTER);
-        //createRotatableJsonModel(JSGBlocks.PRINTER);
-        //createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
-        //createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
+        createRotatableJsonModel(JSGBlocks.TOASTER);
+        createRotatableJsonModel(JSGBlocks.PRINTER);
+        createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
+        createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
 
         //DHD - Handheld models are generated in ItemsProvider because of OBJModels
         models().getBuilder("dhd_generic").texture("particle", JSGMapping.rl(JSGCore.MOD_ID, "block/materials/naquadah_alloy_block"));
@@ -73,10 +68,10 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
 
         var builder = getVariantBuilder(blockObj.get());
 
-        builder.partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH).setModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(0).build());
-        builder.partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST).setModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(90).build());
-        builder.partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH).setModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(180).build());
-        builder.partialState().with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST).setModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(270).build());
+        builder.partialState().with(JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.NORTH).addModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(0).build());
+        builder.partialState().with(JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.EAST).addModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(90).build());
+        builder.partialState().with(JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.SOUTH).addModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(180).build());
+        builder.partialState().with(JSGProperties.FACING_HORIZONTAL_PROPERTY, Direction.WEST).addModels(ConfiguredModel.builder().modelFile(blockModel).rotationY(270).build());
 
         itemModels().withExistingParent(blockName, blockLoc);
     }
@@ -90,12 +85,12 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
 
         var builder = getVariantBuilder(blockObj.get());
 
-        for (boolean isLit : new boolean[]{false, true}) {
-            ModelFile currentModel = isLit ? blockLitModel : blockModel;
+        for (var isLit : new boolean[]{false, true}) {
+            var currentModel = isLit ? blockLitModel : blockModel;
 
-            for (Direction facing : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            for (var facing : JSGProperties.FACING_HORIZONTAL_PROPERTY.getPossibleValues()) {
 
-                int rotationY = switch (facing) {
+                var rotationY = switch (facing) {
                     case EAST -> 90;
                     case SOUTH -> 180;
                     case WEST -> 270;
@@ -103,9 +98,9 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
                 };
 
                 builder.partialState()
-                        .with(BlockStateProperties.HORIZONTAL_FACING, facing)
+                        .with(JSGProperties.FACING_HORIZONTAL_PROPERTY, facing)
                         .with(BlockStateProperties.LIT, isLit)
-                        .setModels(ConfiguredModel.builder().modelFile(currentModel).rotationY(rotationY).build());
+                        .addModels(ConfiguredModel.builder().modelFile(currentModel).rotationY(rotationY).build());
             }
         }
         itemModels().withExistingParent(blockName, blockLoc);
@@ -163,7 +158,7 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
     }
 
     protected void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
-        var blockName = BLOCK.getKey(blockObj.get()).getPath();
+        var blockName = blockObj.getId().getPath();
         var frontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front");
         var brokenFrontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front_broken");
 
