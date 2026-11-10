@@ -298,6 +298,7 @@ public class StargateOrlinBaseBE extends StargateAbstractBaseBE<StargateOrlinRen
         generator.setStargateEnergyInternalSmart(pConfig, (int) (JSGConfig.Stargate.stargateEnergyStorage.get() * level.random.nextFloat()));
         generator.generateStargate(pConfig, false);
         generateAddresses(true);
+        refreshStaticAddresses();
         setChanged();
     }
 }
