@@ -23,7 +23,7 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
 
         // TODO: Fredy fix this pls pls
-        //generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
+        generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
         generator.addProvider(event.includeClient(), new JSGItemModelProvider(output, exFileHelper));
 
         var blockTagGenerator = generator.addProvider(event.includeServer(), new JSGBlockTagGenerator(output, lookupProvider, exFileHelper));

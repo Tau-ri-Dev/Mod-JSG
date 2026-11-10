@@ -24,6 +24,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.util.List;
 import java.util.Map;
 
+import static net.minecraft.core.registries.BuiltInRegistries.BLOCK;
+
 public class JSGBlockStateProvider extends CoreBlockStateProvider {
     public JSGBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, JSG.MOD_ID, exFileHelper);
@@ -38,11 +40,14 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
 
         createSimpleVanillaTextureBlock(JSGBlocks.ABYDOS_SAND, Blocks.SAND);
 
+        //TODO: These models maybe need to be exported again from blockbench (for never versions) or maybe wrong Blockstate datagen...
+        // But why dialing gloves works?
+        // Maybe create these as OBJ?
         //BLOCKS WITH CUSTOM JSON MODEL
-        createRotatableJsonModel(JSGBlocks.TOASTER);
-        createRotatableJsonModel(JSGBlocks.PRINTER);
-        createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
-        createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
+        //createRotatableJsonModel(JSGBlocks.TOASTER);
+        //createRotatableJsonModel(JSGBlocks.PRINTER);
+        //createRedstoneIO(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK);
+        //createRedstoneIO(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK);
 
         //DHD - Handheld models are generated in ItemsProvider because of OBJModels
         models().getBuilder("dhd_generic").texture("particle", JSGMapping.rl(JSGCore.MOD_ID, "block/materials/naquadah_alloy_block"));
@@ -61,7 +66,7 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         createOrlinGateBlock(JSGBlocks.STARGATE_ORLIN_MEMBER_BLOCK);
     }
 
-    private void createRotatableJsonModel(RegistryObjectWrapper<Block> blockObj) {
+    protected void createRotatableJsonModel(RegistryObjectWrapper<Block> blockObj) {
         var blockName = blockObj.getId().getPath();
         var blockLoc = JSGMapping.rl(JSG.MOD_ID, "block/" + blockName);
         var blockModel = new ModelFile.UncheckedModelFile(blockLoc);
@@ -76,7 +81,7 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         itemModels().withExistingParent(blockName, blockLoc);
     }
 
-    private void createRedstoneIO(RegistryObjectWrapper<Block> blockObj) {
+    protected void createRedstoneIO(RegistryObjectWrapper<Block> blockObj) {
         var blockName = blockObj.getId().getPath();
         var blockLoc = JSGMapping.rl(JSG.MOD_ID, "block/" + blockName + "_off");
         var blockLitLoc = JSGMapping.rl(JSG.MOD_ID, "block/" + blockName + "_on");
@@ -106,7 +111,7 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         itemModels().withExistingParent(blockName, blockLoc);
     }
 
-    private void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock) {
+    protected void createClassicStargateBlocks(RegistryObjectWrapper<Block> baseBlock, RegistryObjectWrapper<Block> ringBlock, RegistryObjectWrapper<Block> chevronBlock) {
         var type = ((IStargateBlock) baseBlock.get()).getStargateType().getId().getPath();
         var sides = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_sides");
         var baseFront = JSGMapping.rl(JSG.MOD_ID, "block/stargate/" + type + "_stargate_base_front");
@@ -157,10 +162,8 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
         itemModels().withExistingParent(blockName, JSGMapping.rl(modID, "block/" + blockName));
     }
 
-    private void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
-        var blockName = blockObj.getId().getPath();
-
-
+    protected void createOrlinGateBlock(RegistryObjectWrapper<Block> blockObj) {
+        var blockName = BLOCK.getKey(blockObj.get()).getPath();
         var frontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front");
         var brokenFrontTexture = JSGMapping.rl(JSG.MOD_ID, "block/stargate/orlin_stargate_" + (blockObj.get() instanceof IStargateRingBlock ? "ring" : "base") + "_front_broken");
 
@@ -180,21 +183,21 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
 
         var builder = getVariantBuilder(blockObj.get());
 
-        for (boolean isBroken : new boolean[]{false, true}) {
-            ModelFile currentModel = isBroken ? brokenModel : normalModel;
+        for (var isBroken : new boolean[]{false, true}) {
+            var currentModel = isBroken ? brokenModel : normalModel;
 
-            for (boolean renderBlock : new boolean[]{false, true}) {
+            for (var renderBlock : new boolean[]{false, true}) {
                 for (int vertical : new int[]{0, 1, 2}) {
 
-                    int rotationX = switch (vertical) {
+                    var rotationX = switch (vertical) {
                         case 1 -> 270;
                         case 2 -> 90;
                         default -> 0;
                     };
 
-                    for (Direction facing : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+                    for (var facing : JSGProperties.FACING_HORIZONTAL_PROPERTY.getPossibleValues()) {
 
-                        int rotationY = switch (facing) {
+                        var rotationY = switch (facing) {
                             case EAST -> 90;
                             case SOUTH -> 180;
                             case WEST -> 270;
@@ -202,11 +205,11 @@ public class JSGBlockStateProvider extends CoreBlockStateProvider {
                         };
 
                         builder.partialState()
-                                .with(BlockStateProperties.HORIZONTAL_FACING, facing)
+                                .with(JSGProperties.FACING_HORIZONTAL_PROPERTY, facing)
                                 .with(JSGProperties.FACING_VERTICAL_PROPERTY, vertical)
                                 .with(JSGProperties.RENDER_BLOCK_PROPERTY, renderBlock)
                                 .with(JSGProperties.ORLIN_BROKEN, isBroken)
-                                .setModels(ConfiguredModel.builder()
+                                .addModels(ConfiguredModel.builder()
                                         .modelFile(currentModel)
                                         .rotationX(rotationX)
                                         .rotationY(rotationY)
