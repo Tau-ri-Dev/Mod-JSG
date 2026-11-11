@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//TODO: UPDATE AFTER UPDATE - ADD BOGGED SKELETON, BUT MAINLY MODIFY NBTs - ARMOR AND ITEMS... Not NECESSARY FOR THIS UPDATE ...
+// IT WILL ONLY COST ME TIME THAT I CAN USE FOR LOWPOLY PACK, TESTING OR FIXING MY STUPID MISTAKES
+
 public class StargateRIGConfig {
     public static final Map<String, RIGWave> DEFAULT_VALUES = Util.make(new HashMap<>(), (map) -> {
         map.put("standard_hostile_wave", RIGWave.Builder.create()
