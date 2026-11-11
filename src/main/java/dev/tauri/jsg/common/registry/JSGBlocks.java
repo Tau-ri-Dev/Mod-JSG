@@ -65,6 +65,8 @@ public class JSGBlocks {
      */
 
     //public static final RegistryObjectWrapper<Block> ORBAN_NAQUADAH_GENERATOR_BLOCK = REGISTER.register("orban_naquadah_generator_block", OrbanNaquadahGeneratorBlock::new);
+
+    //TODO: MINEDRAGON ZPM HERE
     public static final RegistryObjectWrapper<Block> ZPM = REGISTER.register("zpm", ZPMBlock::new);
     public static final RegistryObjectWrapper<Block> CREATIVE_ZPM = REGISTER.register("creative_zpm", ZPMBlockCreative::new);
     public static final RegistryObjectWrapper<Block> ZPM_HUB = REGISTER.register("zpm_hub_block", ZPMHubBlock::new);

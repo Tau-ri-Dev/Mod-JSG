@@ -47,6 +47,7 @@ public class JSGBlockEntities {
     public static final RegistryObjectWrapper<BlockEntityType<DHDMilkyWayBE>> DHD_MILKYWAY = JSGApi.REGISTRY_HELPER.be().register("dhd_milkyway", RegistryHelper.beSupplier(DHDMilkyWayBE::new, JSGBlocks.DHD_MILKYWAY));
     public static final RegistryObjectWrapper<BlockEntityType<DHDPegasusBE>> DHD_PEGASUS = JSGApi.REGISTRY_HELPER.be().register("dhd_pegasus", RegistryHelper.beSupplier(DHDPegasusBE::new, JSGBlocks.DHD_PEGASUS));
 
+    //TODO: MINEDRAGON ZPM HERE :D
     public static final RegistryObjectWrapper<BlockEntityType<OrbanNaquadahGeneratorBE>> ORBAN_NAQUADAH_GENERATOR = null; //registerBE("orban_naquadah_generator", OrbanNaquadahGeneratorBE::new, BlockRegistry.ORBAN_NAQUADAH_GENERATOR_BLOCK);
     public static final RegistryObjectWrapper<BlockEntityType<ZPMBE>> ZPM = JSGApi.REGISTRY_HELPER.be().register("zpm", RegistryHelper.beSupplier(ZPMBE::new, JSGBlocks.ZPM));
     public static final RegistryObjectWrapper<BlockEntityType<ZPMCreativeBE>> ZPM_CREATIVE = JSGApi.REGISTRY_HELPER.be().register("creative_zpm", RegistryHelper.beSupplier(ZPMCreativeBE::new, JSGBlocks.CREATIVE_ZPM));
@@ -57,6 +58,7 @@ public class JSGBlockEntities {
 
     public static final RegistryObjectWrapper<BlockEntityType<JUBCableBE>> JUB_CABLE = null; //registerBE("jub_cable", JUBCableBE::new, BlockRegistry.JUB_CABLE);
 
+    //TODO: AND HERE
     public static void init() {
         JSGApi.REGISTRY_HELPER.beRenderers(() -> List.of(
                 new RegistryHelper.BlockEntityRendererPair<>(STARGATE_ORLIN_BASE_BE.get(), StargateOrlinRenderer::new),

@@ -37,12 +37,6 @@ public class JSGBlockLootTables extends CoreBlockLootTables {
         dropSelf(JSGBlocks.TOASTER.get());
         dropSelf(JSGBlocks.PRINTER.get());
 
-        // ZPM keeps its stored energy when broken; the item reads it from the "energy" custom-data key
-        dropAndCopyNBT(JSGBlocks.ZPM.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energyStorage.energy", "energy"));
-        dropSelf(JSGBlocks.ZPM_HUB.get());
-        dropSelf(JSGBlocks.ZPM_SLOT.get());
-
-
         dropAndCopyNBT(JSGBlocks.STARGATE_MILKYWAY_BASE_BLOCK.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("itemHandler", "itemHandler").copy("config", "config").copy("stargateEnergyManager", "stargateEnergyManager").copy("stargateId", "stargateId").copy("staticAddresses", "staticAddresses"));
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_CHEVRON_BLOCK.get());
         dropSelf(JSGBlocks.STARGATE_MILKYWAY_RING_BLOCK.get());

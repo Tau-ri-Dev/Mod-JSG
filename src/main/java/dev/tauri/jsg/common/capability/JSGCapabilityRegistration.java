@@ -69,7 +69,8 @@ public class JSGCapabilityRegistration {
                 (stack, ctx) -> new DHDFluidHandlerItemStack(stack, JSGConfig.DialHomeDevice.fluidCapacity.get()),
                 JSGItems.DHD_NAQUADAH_TANK.get());
 
-        event.registerItem(Capabilities.EnergyStorage.ITEM,
+        //TODO: Minedragon ZPM HERE
+       event.registerItem(Capabilities.EnergyStorage.ITEM,
                 (stack, ctx) -> ((ZPMItemBlock) stack.getItem()).createEnergyStorage(stack),
                 JSGBlocks.ZPM.get().asItem(), JSGBlocks.CREATIVE_ZPM.get().asItem());
     }
