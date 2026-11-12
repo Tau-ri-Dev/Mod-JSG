@@ -19,10 +19,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.conditions.NotCondition;
+import net.neoforged.neoforge.common.crafting.IntersectionIngredient;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
@@ -505,7 +507,7 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .pattern("BPB")
                 .pattern("PCP")
                 .pattern("BPB")
-                .define('B', Items.WHITE_STAINED_GLASS_PANE)
+                .define('B', IntersectionIngredient.of(Ingredient.of(Tags.Items.GLASS_PANES), Ingredient.of(Tags.Items.DYED_WHITE)))
                 .define('P', MaterialType.NAQUADAH_ALLOY.forgeTags().plates())
                 .define('C', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .unlockedBy("has_white_pane", has(Items.WHITE_STAINED_GLASS_PANE))
@@ -590,7 +592,7 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .define('1', CoreItems.COPPER_INGOT_EXPOSED.get())
                 .define('2', CoreItems.COPPER_INGOT_WEATHERED.get())
                 .define('3', CoreItems.COPPER_INGOT_OXIDIZED.get())
-                .define('P', Items.BLACK_STAINED_GLASS_PANE)
+                .define('P', IntersectionIngredient.of(Ingredient.of(Tags.Items.GLASS_PANES), Ingredient.of(Tags.Items.DYED_BLACK)))
                 .define('C', CoreItems.CIRCUIT_CONTROL_NAQUADAH.get())
                 .define('B', Items.STONE_BUTTON)
                 .unlockedBy("has_exposed_copper", has(CoreItems.COPPER_INGOT_EXPOSED.get()))
@@ -610,13 +612,13 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .define('D', Tags.Items.DYES_BLACK)
                 .define('L', Items.LIGHTNING_ROD)
                 .define('B', Items.STONE_BUTTON)
-                .define('P', Tags.Items.GLASS_PANES)
+                .define('P', Tags.Items.GLASS_PANES_COLORLESS)
                 .define('R', Items.REPEATER)
                 .unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON))
                 .unlockedBy("has_black_dye", has(Tags.Items.DYES_BLACK))
                 .unlockedBy("has_rod", has(Items.LIGHTNING_ROD))
                 .unlockedBy("has_button", has(Items.STONE_BUTTON))
-                .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES))
+                .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES_COLORLESS))
                 .unlockedBy("has_repeater", has(Items.REPEATER))
                 .save(pWriter);
 
@@ -660,7 +662,7 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .define('P', CrystalType.PEGASUS.forgeTags().gemsSmall())
                 .define('R', CrystalType.RED.forgeTags().gemsSmall())
                 .define('E', CrystalType.ENDER.forgeTags().gemsSmall())
-                .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES))
+                .unlockedBy("has_pane", has(Tags.Items.GLASS_PANES_COLORLESS))
                 .unlockedBy("has_pegasus_crystal", has(CrystalType.PEGASUS.forgeTags().gemsSmall()))
                 .unlockedBy("has_red_crystal", has(CrystalType.RED.forgeTags().gemsSmall()))
                 .unlockedBy("has_ender_crystal", has(CrystalType.ENDER.forgeTags().gemsSmall()))
@@ -911,7 +913,7 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .pattern("X#X")
                 .define('X', MaterialType.TITANIUM.forgeTags().nuggets())
                 .define('#', MaterialType.TITANIUM.forgeTags().plates())
-                .define('G', Items.RED_STAINED_GLASS_PANE)
+                .define('G', IntersectionIngredient.of(Ingredient.of(Tags.Items.GLASS_PANES), Ingredient.of(Tags.Items.DYED_RED)))
                 .unlockedBy("has_nugget", has(MaterialType.TITANIUM.forgeTags().nuggets()))
                 .unlockedBy("has_plate", has(MaterialType.TITANIUM.forgeTags().plates()))
                 .unlockedBy("has_pane", has(Items.RED_STAINED_GLASS_PANE))
@@ -924,7 +926,7 @@ public class JSGRecipeProvider extends CoreRecipeProvider {
                 .pattern("X#X")
                 .define('X', MaterialType.TITANIUM.forgeTags().nuggets())
                 .define('#', MaterialType.TITANIUM.forgeTags().plates())
-                .define('G', Items.CYAN_STAINED_GLASS_PANE)
+                .define('G', IntersectionIngredient.of(Ingredient.of(Tags.Items.GLASS_PANES), Ingredient.of(Tags.Items.DYED_CYAN)))
                 .unlockedBy("has_nugget", has(MaterialType.TITANIUM.forgeTags().nuggets()))
                 .unlockedBy("has_plate", has(MaterialType.TITANIUM.forgeTags().plates()))
                 .unlockedBy("has_pane", has(Items.CYAN_STAINED_GLASS_PANE))
