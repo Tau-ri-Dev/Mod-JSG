@@ -22,7 +22,6 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), JSGLootTableProvider.create(output, lookupProvider));
         generator.addProvider(event.includeServer(), JSGAdvancementProvider.create(output, lookupProvider, exFileHelper));
 
-        // TODO: Fredy fix this pls pls
         generator.addProvider(event.includeClient(), new JSGBlockStateProvider(output, exFileHelper));
         generator.addProvider(event.includeClient(), new JSGItemModelProvider(output, exFileHelper));
 
@@ -34,6 +33,7 @@ public class JSGDataGenerators {
         generator.addProvider(event.includeServer(), new JSGStructureTagGenerator(output, lookupProvider, exFileHelper));
         generator.addProvider(event.includeServer(), new JSGEntityTagGenerator(output, lookupProvider, exFileHelper));
 
+        //TODO: WE NEED TO FIX IT!!!
         generator.addProvider(event.includeServer(), new JSGRIGWavesProvider(output));
         generator.addProvider(event.includeServer(), new JSGReservedAddressesProvider(output));
 
