@@ -12,7 +12,7 @@
   "loops": 1,
   "results": [
     {
-      "item": "jsg:chocolate_bar"
+      "id": "jsg:chocolate_bar"
     }
   ],
   "sequence": [
@@ -28,7 +28,7 @@
       ],
       "results": [
         {
-          "item": "jsg:incomplete_chocolate_bar"
+          "id": "jsg:incomplete_chocolate_bar"
         }
       ]
     },
@@ -39,14 +39,14 @@
           "item": "jsg:incomplete_chocolate_bar"
         },
         {
-          "amount": 250,
+          "type": "neoforge:single",
           "fluid": "create:chocolate",
-          "nbt": {}
+          "amount": 250
         }
       ],
       "results": [
         {
-          "item": "jsg:incomplete_chocolate_bar"
+          "id": "jsg:incomplete_chocolate_bar"
         }
       ]
     },
@@ -62,7 +62,7 @@
       ],
       "results": [
         {
-          "item": "jsg:incomplete_chocolate_bar"
+          "id": "jsg:incomplete_chocolate_bar"
         }
       ]
     },
@@ -75,12 +75,12 @@
       ],
       "results": [
         {
-          "item": "jsg:incomplete_chocolate_bar"
+          "id": "jsg:incomplete_chocolate_bar"
         }
       ]
     }
   ],
-  "transitionalItem": {
-    "item": "jsg:incomplete_chocolate_bar"
+  "transitional_item": {
+    "id": "jsg:incomplete_chocolate_bar"
   }
 }
