@@ -27,6 +27,11 @@ public class JSGBlockLootTables extends CoreBlockLootTables {
 
     @Override
     protected void generate() {
+        //TODO: DELETED WITH ZPMS!
+        dropAndCopyNBT(JSGBlocks.ZPM.get(), CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("energyStorage.energy", "energy"));
+        dropSelf(JSGBlocks.ZPM_HUB.get());
+        dropSelf(JSGBlocks.ZPM_SLOT.get());
+
         dropSelf(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK.get());
         dropSelf(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK.get());
 
