@@ -5,6 +5,7 @@ import dev.tauri.jsg.api.block.stargate.IStargateBlock;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.config.ingame.option.StargateConfigOptions;
 import dev.tauri.jsg.api.integration.StargateComputerEvents;
+import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.power.PowerUtils;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.registry.JSGSymbolTypes;
@@ -416,8 +417,8 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
 
         if (isLinked()) {
             pConfig.dhdPos = getLinkedPos();
-            if (world.random.nextFloat() < 0.3f)
-                pConfig.upgrades.add(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_DHD);
+            if (world.random.nextFloat() < 0.04f)
+                pConfig.upgrades.add(IStargateGenerator.StargateUpgradesEnum.DHD_DIALING_EXTENDED);
             pConfig.dhdFluid = (int) (((JSGConfig.DialHomeDevice.fluidCapacity.get() - (JSGConfig.DialHomeDevice.fluidCapacity.get() * 0.1f)) * world.random.nextFloat()) + (JSGConfig.DialHomeDevice.fluidCapacity.get() * 0.1f));
         }
 
@@ -427,6 +428,11 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
         generateAddresses(true);
         refreshStaticAddresses();
         updateLinkStatus();
+
+        getLinkedDeviceOptional().ifPresent(dhd -> {
+            if (world.random.nextFloat() < 0.1f)
+                dhd.getStateManager().disassemblePart((IDHDPartItem) dhd.getControlCrystal(), false);
+        });
         setChanged();
     }
 
