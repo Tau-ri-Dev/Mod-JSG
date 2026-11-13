@@ -10,7 +10,8 @@ import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.blockentity.stargate.*;
 import dev.tauri.jsg.common.registry.JSGBlocks;
-import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;import dev.tauri.jsgcore.mapping.JSGMapping;
+import dev.tauri.jsgcore.common.registry.helper.DeferredRegisterWrapper;
+import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -71,7 +72,12 @@ public class StargateTypesLoader {
                 List.of(StargatePointOfOriginsDefaults.VARIANT_GATE),
                 List.of(),
                 List.of(
-                        JSGMapping.rl(JSG.MOD_ID, "default")
+                        JSGMapping.rl(JSG.MOD_ID, "default"),
+                        JSGMapping.rl(JSG.MOD_ID, "p7j989"),
+                        JSGMapping.rl(JSG.MOD_ID, "nether"),
+                        JSGMapping.rl(JSG.MOD_ID, "antarctica"),
+                        JSGMapping.rl(JSG.MOD_ID, "abydos"),
+                        JSGMapping.rl(JSG.MOD_ID, "tauri")
                 )));
         JSGApi.REGISTRY_HELPER.pooType().register("stargate/movie", StargateTypes.MOVIE);
     }
