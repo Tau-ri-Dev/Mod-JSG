@@ -66,6 +66,7 @@ public class StargateOrlinMemberBlock extends StargateAbstractMemberBlock implem
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag) {
         if (ItemNBT.hasTag(itemStack)) {
             CompoundTag compound = ItemNBT.getTag(itemStack);
