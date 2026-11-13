@@ -125,3 +125,4 @@ run-data/
 # Generated data
 **/src/generated/**
 **/.jsg_builds/**
+/src/main/resources/META-INF/faststats/**
