@@ -87,16 +87,22 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         );
     }
 
+    public double getExplosionCraterRadius() {
+        return 100.0;
+    }
+
     @Override
     @ParametersAreNonnullByDefault
     public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
-        if (level instanceof ServerLevel serverLevel)
+        if (level instanceof ServerLevel serverLevel) {
+            var r = getExplosionCraterRadius();
+            if (r <= 0) return;
             new ExplosionHelper.Crater(
                     serverLevel,
                     pos.getCenter(),
                     new Vec3(0, 0, 0),
-                    100.0,
+                    r,
                     level.random.nextLong(),
                     new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
@@ -106,6 +112,7 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
                             .add(Blocks.BASALT.defaultBlockState(), 1)
                             .build())
             ).create();
+        }
     }
 
     @Override

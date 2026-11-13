@@ -45,6 +45,11 @@ public class StargateOrlinBaseBlock extends StargateAbstractBaseBlock {
     }
 
     @Override
+    public double getExplosionCraterRadius() {
+        return 10;
+    }
+
+    @Override
     protected void createBlockStateDefinition(@NotNull StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(dev.tauri.jsgcore.common.blockstate.JSGProperties.ORLIN_BROKEN);
