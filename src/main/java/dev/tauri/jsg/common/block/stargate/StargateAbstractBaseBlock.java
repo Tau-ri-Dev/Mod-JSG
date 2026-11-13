@@ -65,8 +65,8 @@ import java.util.function.Supplier;
 
 public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements dev.tauri.jsgcore.common.block.util.IItemBlock, IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_BASE_PROPS = Properties.of()
-            .strength(2.5f, 0.5f)
-            //.strength(2.5F, 30.0F)
+            //.strength(2.5f, 0.5f)
+            .strength(2.5F, 30.0F)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
             .isViewBlocking((BlockState state, BlockGetter getter, BlockPos pos) -> false)
             .emissiveRendering((BlockState state, BlockGetter getter, BlockPos pos) -> false)
