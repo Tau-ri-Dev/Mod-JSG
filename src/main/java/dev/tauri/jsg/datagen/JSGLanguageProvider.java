@@ -18,6 +18,10 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add(object.get().getDescriptionId() + ".empty", "Empty " + pathToName(object.getId().getPath()));
     }
 
+    protected void addDHDItem(RegistryObjectWrapper<? extends Item> object) {
+        this.add(object.get(), pathToName(object.getId().getPath()).replace("Dhd", "DHD"));
+    }
+
     @Override
     protected void addTranslations() {
         //SPECIAL BLOCKS
@@ -60,22 +64,22 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addItem(JSGItems.ICON_PRIEST_TRADE);
 
         //DHD PARTS
-        addItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS);
-        addItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE);
+        addDHDItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS);
+        addDHDItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE);
         addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal", "Main control crystal of DHD", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
         addItemWithCustomName(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)");
         addItemWithCustomName(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate");
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_MILKYWAY, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
 
 
-        addItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS);
-        addItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE);
+        addDHDItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS);
+        addDHDItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE);
         addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL, "Pegasus DHD Main Control Crystal", "Main control crystal of DHD", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
         addItemWithCustomName(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)");
         addItemWithCustomName(JSGItems.PEGASUS_DHD_UPGRADES_COVER, "Pegasus Upgrades Cover Plate");
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Pegasus Dial Home Device (DHD)", "Control panel for Pegasus gates", null);
 
-        addItem(JSGItems.DHD_NAQUADAH_TANK);
+        addDHDItem(JSGItems.DHD_NAQUADAH_TANK);
 
         add("item." + JSG.MOD_ID + ".dhd.assembly_helper.needed", "Missing %s");
 
