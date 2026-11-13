@@ -3,7 +3,7 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 1,
+      "weight": 2,
       "element": {
         "element_type": "minecraft:empty_pool_element"
       }
@@ -13,7 +13,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_1",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_1",
         "processors": "minecraft:empty"
       }
     },
@@ -22,7 +22,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_2",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_2",
         "processors": "minecraft:empty"
       }
     },
@@ -31,7 +31,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_3",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_3",
         "processors": "minecraft:empty"
       }
     },
@@ -40,7 +40,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_4",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_4",
         "processors": "minecraft:empty"
       }
     },
@@ -49,7 +49,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_5",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_5",
         "processors": "minecraft:empty"
       }
     },
@@ -58,7 +58,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_6",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_6",
         "processors": "minecraft:empty"
       }
     },
@@ -67,7 +67,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_7",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_7",
         "processors": "minecraft:empty"
       }
     },
@@ -76,7 +76,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_8",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_8",
         "processors": "minecraft:empty"
       }
     },
@@ -85,7 +85,88 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working_9",
+        "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_9",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_1",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_2",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_3",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_4",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_5",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_6",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_7",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_8",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_9",
         "processors": "minecraft:empty"
       }
     }

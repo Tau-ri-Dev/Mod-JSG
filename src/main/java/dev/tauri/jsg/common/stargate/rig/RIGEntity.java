@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsgcore.common.util.ParameterReplacer;
-import dev.tauri.jsgcore.mapping.JSGMapping;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
@@ -12,6 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Zombie;
+
+import java.util.Objects;
 
 public class RIGEntity {
     public static final Codec<RIGEntity> CODEC = RecordCodecBuilder.create(rigEntityInstance -> rigEntityInstance.group(
@@ -23,9 +24,17 @@ public class RIGEntity {
     public int weight;
     public CompoundTag nbt = new CompoundTag();
 
+    public RIGEntity(EntityType<?> entityType, int weight) {
+        this(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(entityType)).toString(), weight);
+    }
+
     public RIGEntity(String name, int weight) {
         this.name = name;
         this.weight = weight;
+    }
+
+    public RIGEntity(EntityType<?> entityType, int weight, String nbt) {
+        this(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(entityType)).toString(), weight, nbt);
     }
 
     public RIGEntity(String name, int weight, String nbt) {
@@ -44,14 +53,10 @@ public class RIGEntity {
 
     public Entity get(ServerLevel level, ParameterReplacer replacer) {
         Entity entity = null;
-        var rlString = JSGMapping.rl(replacer.apply(name));
         try {
-            var type = BuiltInRegistries.ENTITY_TYPE.get(rlString);
-            if (type != null) {
-                CompoundTag compoundtag = nbt.copy();
-                compoundtag.putString("id", replacer.apply(name));
-                entity = EntityType.loadEntityRecursive(compoundtag, level, e -> e);
-            }
+            CompoundTag compoundtag = nbt.copy();
+            compoundtag.putString("id", replacer.apply(name));
+            entity = EntityType.loadEntityRecursive(compoundtag, level, e -> e);
         } catch (Exception e) {
             JSG.logger.error("Error while parsing entity from RIG config! Entity in config: {}", replacer.apply(name));
             JSG.logger.error("Stacktrace:", e);

@@ -425,6 +425,7 @@ public abstract class StargateClassicBaseBE<S extends StargateClassicRendererSta
         generator.setStargateEnergyInternalSmart(pConfig, (int) (JSGConfig.Stargate.stargateEnergyStorage.get() * world.random.nextFloat()));
         generator.generateStargate(pConfig, false);
         generateAddresses(true);
+        refreshStaticAddresses();
         updateLinkStatus();
         setChanged();
     }

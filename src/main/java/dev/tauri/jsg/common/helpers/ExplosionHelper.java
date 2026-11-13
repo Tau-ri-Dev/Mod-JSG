@@ -46,6 +46,11 @@ public class ExplosionHelper {
         }
     }
 
+    /**
+     * This class has been partially taken from the Create: Lanterns mod <br>
+     * (<a href="https://www.curseforge.com/minecraft/mc-mods/create-lanterns">https://www.curseforge.com/minecraft/mc-mods/create-lanterns</a>).<br>
+     * Right now it's just only as a proof of concept, but will be rewritten in future updates so minimal code from the original mod is present here!
+     */
     public static class Crater {
         public final ServerLevel level;
         public final Vec3 centre;
