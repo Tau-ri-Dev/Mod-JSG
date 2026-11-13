@@ -13,7 +13,6 @@ import dev.tauri.jsg.api.stargate.StargateClosedReasonEnum;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateCloseResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
-import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.dialhomedevice.animation.DHDButtonsState;
 import dev.tauri.jsg.common.dialhomedevice.manager.DHDReactorManager;
@@ -192,7 +191,6 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                 // BRB pressed on idling gate, attempt to open
                 StargateOpenResult openResult = dm.attemptOpenDialed();
                 if (openResult.ok()) {
-                    JSGCriterions.CHEVRON_SEVEN_LOCKED.trigger(player);
                     return;
                 }
                 if (openResult == StargateOpenResult.NOT_ENOUGH_POWER && player != null) {
