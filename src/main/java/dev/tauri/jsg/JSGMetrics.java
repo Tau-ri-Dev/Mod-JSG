@@ -12,7 +12,7 @@ public class JSGMetrics {
                     .noneMatch(element -> element.getClassName().startsWith(JSGMetrics.class.getPackageName() + ".")));
 
 
-    private static final NeoForgeContext CONTEXT = new NeoForgeContext.Factory(JSG.MOD_ID, "cde31746dd3fdcfc6f40a935edcf1d83")
+    private static final NeoForgeContext CONTEXT = new NeoForgeContext.Factory(JSG.MOD_ID)
             .requireConsent()
             .errorTrackerService(ERROR_TRACKER)
             .metrics(Metrics.Factory::create)
