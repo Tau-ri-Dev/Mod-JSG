@@ -205,12 +205,11 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         //CHAT AND HOTBAR MESSAGES:
         add("chat.orlins.energyStored", "Energy stored: %s FE (Required: %s FE, %s s");
 
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.no_crystal_warn", "DHD has no control crystal");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.not_linked_warn", "DHD is not linked to the gate");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.not_enough_power", "Insufficient power");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.incoming_wormhole_warn", "Unable to close an incoming wormhole");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.computer_dial", "Computer dial is in progress");
-        add("tile." + JSG.MOD_ID + ".dhd_block.incoming_wormhole_warn", "Unable to close an incoming wormhole");
+        add("block." + JSG.MOD_ID + ".dhd.no_crystal_warn", "DHD has no control crystal");
+        add("block." + JSG.MOD_ID + ".dhd.not_linked_warn", "DHD is not linked to the gate");
+        add("block." + JSG.MOD_ID + ".dhd.not_enough_power", "Insufficient power");
+        add("block." + JSG.MOD_ID + ".dhd.incoming_wormhole_warn", "Unable to close an incoming wormhole");
+        add("block." + JSG.MOD_ID + ".dhd.computer_dial", "Computer dial is in progress");
 
         add("item." + JSG.MOD_ID + ".universe_dialer.dial_start", "Dialing the gate...");
         add("item." + JSG.MOD_ID + ".universe_dialer.aborting", "Aborting dial");

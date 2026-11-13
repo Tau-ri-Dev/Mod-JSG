@@ -158,19 +158,24 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                         .deactivate());
     }
 
-    // TODO(Mine): Refactor "dhd_milkyway" key to just "dhd"
     @Override
     public void pushSymbolButton(SymbolInterface symbol, @Nullable ServerPlayer player, boolean force) {
         if (getBehaviors().stream().anyMatch(behavior -> !behavior.onSymbolButtonPushed(symbol, player, force)))
             return;
         if (!hasControlCrystal()) {
             if (player != null)
-                player.sendSystemMessage(Component.translatable("block.jsg.dhd_milkyway.no_crystal_warn"), true);
+                player.sendSystemMessage(Component.translatable("block.jsg.dhd.no_crystal_warn"), true);
             return;
         }
         getLinkedDeviceOptional().ifPresentOrElse((gateTile) -> {
             var dm = gateTile.getDialingManager();
             var gateState = dm.getStargateState();
+            if (gateState.dialingComputer()) {
+                if (player != null) {
+                    player.sendSystemMessage(Component.translatable("block.jsg.dhd.computer_dial"), true);
+                }
+                return;
+            }
             if (gateState.engaged() && symbol.brb()) {
                 // Gate is open, BRB was press, possible closure attempt
                 if (gateState.initiating()) {
@@ -179,7 +184,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                 }
                 if (player != null) {
                     StargateComputerEvents.ATTEMPT_CLOSE_FAILED.apply(StargateCloseResult.NOT_INITIATING, dm.getDialedAddress(), false).sendVia(gateTile);
-                    player.sendSystemMessage(Component.translatable("block.jsg.dhd_milkyway.incoming_wormhole_warn"), true);
+                    player.sendSystemMessage(Component.translatable("block.jsg.dhd.incoming_wormhole_warn"), true);
                     return;
                 }
             }
@@ -194,7 +199,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
                     return;
                 }
                 if (openResult == StargateOpenResult.NOT_ENOUGH_POWER && player != null) {
-                    player.sendSystemMessage(Component.translatable("block.jsg.dhd_milkyway.not_enough_power"), true);
+                    player.sendSystemMessage(Component.translatable("block.jsg.dhd.not_enough_power"), true);
                     return;
                 }
                 return;
@@ -202,7 +207,7 @@ public abstract class DHDAbstractBE extends JSGBlockEntity implements StargateDH
             dm.engageSymbolDHD(symbol, false, false);
         }, () -> {
             if (player != null)
-                player.sendSystemMessage(Component.translatable("block.jsg.dhd_milkyway.not_linked_warn"), true);
+                player.sendSystemMessage(Component.translatable("block.jsg.dhd.not_linked_warn"), true);
         });
     }
 
