@@ -14,6 +14,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
+
 public class RIGEntity {
     public static final Codec<RIGEntity> CODEC = RecordCodecBuilder.create(rigEntityInstance -> rigEntityInstance.group(
             Codec.STRING.fieldOf("name").forGetter((rigEntity) -> rigEntity.name),
@@ -24,9 +26,17 @@ public class RIGEntity {
     public int weight;
     public CompoundTag nbt = new CompoundTag();
 
+    public RIGEntity(EntityType<?> entityType, int weight) {
+        this(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(entityType)).toString(), weight);
+    }
+
     public RIGEntity(String name, int weight) {
         this.name = name;
         this.weight = weight;
+    }
+
+    public RIGEntity(EntityType<?> entityType, int weight, String nbt) {
+        this(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(entityType)).toString(), weight, nbt);
     }
 
     public RIGEntity(String name, int weight, String nbt) {

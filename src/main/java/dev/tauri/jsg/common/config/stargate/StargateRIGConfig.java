@@ -5,6 +5,7 @@ import dev.tauri.jsg.common.stargate.rig.RIGEntity;
 import dev.tauri.jsg.common.stargate.rig.RIGWave;
 import net.minecraft.Util;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.EntityType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,11 @@ public class StargateRIGConfig {
     public static final Map<String, RIGWave> DEFAULT_VALUES = Util.make(new HashMap<>(), (map) -> {
         map.put("standard_hostile_wave", RIGWave.Builder.create()
                 .weight(40)
-                .addEntity(new RIGEntity("minecraft:zombie", 10, "{CanPickUpLoot:1b,CanBreakDoors:1b,ArmorItems:[{},{},{},{Count:1,id:leather_helmet,tag:{Enchantments:[{id:protection,lvl:2}]}}],ArmorDropChances:[0.0f,0.0f,0.0f,0.2f]}"))
-                .addEntity(new RIGEntity("minecraft:zombie", 10, "{CanBreakDoors:1b,HandItems:[{Count:1,id:stone_sword},{}],ArmorItems:[{},{},{},{Count:1,id:iron_helmet}]}"))
-                .addEntity(new RIGEntity("minecraft:zombie", 10, "{CanPickUpLoot:1b,ArmorItems:[{},{Count:1,id:leather_leggings},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.3f,0.0f,0.2f]}"))
-                .addEntity(new RIGEntity("minecraft:zombie", 7, "{IsBaby:1,CanPickUpLoot:1b,ArmorItems:[{},{},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.0f,0.0f,0.2f]}"))
-                .addEntity(new RIGEntity("minecraft:chicken", 1, "{Passengers:[{id:zombie,IsBaby:1,HandItems:[{Count:1,id:stone_sword,tag:{Enchantments:[{id:sharpness,lvl:1}]}},{}],ArmorItems:[{},{},{},{Count:1,id:golden_helmet,tag:{Enchantments:[{id:projectile_protection,lvl:2}]}}]}]}"))
+                .addEntity(new RIGEntity(EntityType.ZOMBIE, 10, "{CanPickUpLoot:1b,CanBreakDoors:1b,ArmorItems:[{},{},{},{Count:1,id:leather_helmet,tag:{Enchantments:[{id:protection,lvl:2}]}}],ArmorDropChances:[0.0f,0.0f,0.0f,0.2f]}"))
+                .addEntity(new RIGEntity(EntityType.ZOMBIE, 10, "{CanBreakDoors:1b,HandItems:[{Count:1,id:stone_sword},{}],ArmorItems:[{},{},{},{Count:1,id:iron_helmet}]}"))
+                .addEntity(new RIGEntity(EntityType.ZOMBIE, 10, "{CanPickUpLoot:1b,ArmorItems:[{},{Count:1,id:leather_leggings},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.3f,0.0f,0.2f]}"))
+                .addEntity(new RIGEntity(EntityType.ZOMBIE, 7, "{IsBaby:1,CanPickUpLoot:1b,ArmorItems:[{},{},{},{Count:1,id:leather_helmet}],ArmorDropChances:[0.0f,0.0f,0.0f,0.2f]}"))
+                .addEntity(new RIGEntity(EntityType.CHICKEN, 1, "{Passengers:[{id:zombie,IsBaby:1,HandItems:[{Count:1,id:stone_sword,tag:{Enchantments:[{id:sharpness,lvl:1}]}},{}],ArmorItems:[{},{},{},{Count:1,id:golden_helmet,tag:{Enchantments:[{id:projectile_protection,lvl:2}]}}]}]}"))
                 .blacklistedBiomes(List.of("#minecraft:is_nether", "#minecraft:is_end", "#forge:is_sandy", "#forge:is_cold/overworld", "#minecraft:is_ocean"))
                 .selectRandomMobs()
                 .randomMobsCount(5, 15)
