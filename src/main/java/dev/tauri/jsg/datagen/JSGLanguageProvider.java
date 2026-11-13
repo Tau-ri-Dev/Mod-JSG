@@ -81,6 +81,14 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         addDHDItem(JSGItems.DHD_NAQUADAH_TANK);
 
+        add("gui.dhd.reactor.status", "Reactor status: %s");
+        add("gui.dhd.reactor.status.online", "Running");
+        add("gui.dhd.reactor.status.not_linked", "DHD not linked");
+        add("gui.dhd.reactor.status.no_fuel", "Fuel missing");
+        add("gui.dhd.reactor.status.standby", "Standby");
+        add("gui.dhd.reactor.status.no_crystal", "Crystal missing");
+        add("gui.dhd.reactor.status.no_fluid_tank", "Fluid Tank missing");
+
         add("item." + JSG.MOD_ID + ".dhd.assembly_helper.needed", "Missing %s");
 
         //ADDRESS AND UPGRADE CRYSTALS
