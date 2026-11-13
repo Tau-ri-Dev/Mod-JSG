@@ -4,9 +4,11 @@ import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateMovieBaseBE;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.MovieIncomingAnimation;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -14,6 +16,7 @@ import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 import java.util.Random;
 
 import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState.*;
@@ -23,6 +26,11 @@ import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsSt
 public class StargateMovieDialingManager extends StargateMilkyWayDialingManager {
     public StargateMovieDialingManager(StargateMovieBaseBE stargate) {
         super(stargate);
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_MOVIE_GATE);
     }
 
     @Override

@@ -14,6 +14,7 @@ import dev.tauri.jsg.api.stargate.manager.IStargateEventHorizonManager;
 import dev.tauri.jsg.api.stargate.traveler.IStargateTeleporter;
 import dev.tauri.jsg.api.stargate.traveler.IStargateTraveler;
 import dev.tauri.jsg.api.stargate.traveler.TravelerSendResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsg.common.config.JSGConfigUtil;
@@ -430,6 +431,8 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
                     traveler.killUnstable();
                     remove(traveler);
                     continue;
+                } else if (isCurrentlyUnstable && traveler.get() instanceof ServerPlayer sp) {
+                    JSGCriterions.UNSTABLE_SURVIVE.trigger(sp);
                 }
                 send(traveler);
             } else {

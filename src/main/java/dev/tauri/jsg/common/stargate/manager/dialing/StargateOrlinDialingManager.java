@@ -8,12 +8,14 @@ import dev.tauri.jsg.api.stargate.animation.EnumDialingType;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateOrlinBaseBE;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.StaticIncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.spinning.ClassicSpinHelper;
 import dev.tauri.jsg.common.stargate.animation.spinning.OrlinSpinHelper;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
 import net.minecraft.FieldsAreNonnullByDefault;
@@ -21,6 +23,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -33,6 +36,11 @@ public class StargateOrlinDialingManager extends StargateAbstractDialingManager<
         super(stargate);
         this.spinHelper = generateSpinHelper();
         this.addressToDial = new StargateAddressDynamic(stargate.getSymbolType());
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_ORLIN_GATE);
     }
 
     @Override

@@ -10,10 +10,12 @@ import dev.tauri.jsg.api.stargate.animation.EnumSpinDirection;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.api.stargate.result.StargateManualDialingAttemptResult;
 import dev.tauri.jsg.api.stargate.result.StargateOpenResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateMilkyWayBaseBE;
 import dev.tauri.jsg.common.registry.tags.JSGItemTags;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.MilkyWayIncomingAnimation;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.FieldsAreNonnullByDefault;
@@ -25,6 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 import java.util.Random;
 
 import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState.A_CHEVRON_ACTIVATE_AFTER_OPEN_DELAY;
@@ -44,6 +47,11 @@ public class StargateMilkyWayDialingManager extends StargateClassicDialingManage
 
     public StargateMilkyWayDialingManager(StargateMilkyWayBaseBE stargate) {
         super(stargate);
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_MILKYWAY_GATE);
     }
 
     @Override

@@ -4,13 +4,16 @@ import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateTollanBaseBE;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
@@ -19,6 +22,11 @@ import java.util.Random;
 public class StargateTollanDialingManager extends StargateMilkyWayDialingManager {
     public StargateTollanDialingManager(StargateTollanBaseBE stargate) {
         super(stargate);
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_TOLLAN_GATE);
     }
 
     @Override

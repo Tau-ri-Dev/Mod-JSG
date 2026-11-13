@@ -11,12 +11,14 @@ import dev.tauri.jsg.api.stargate.animation.EnumSpinDirection;
 import dev.tauri.jsg.api.stargate.exception.StargateException;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddressDynamic;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateUniverseBaseBE;
 import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.stargate.StargateAddressDialSequence;
 import dev.tauri.jsg.common.stargate.animation.chevron.StargateUniverseChevronsState;
 import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.UniverseIncomingAnimation;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.entity.ScheduledTaskType;
@@ -26,6 +28,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
@@ -34,6 +37,11 @@ import java.util.Random;
 public class StargateUniverseDialingManager extends StargateClassicDialingManager<StargateUniverseBaseBE> {
     public StargateUniverseDialingManager(StargateUniverseBaseBE stargate) {
         super(stargate);
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_UNIVERSE_GATE);
     }
 
     @Override
