@@ -290,7 +290,7 @@ public class StargateOrlinBaseBE extends StargateAbstractBaseBE<StargateOrlinRen
         if (this instanceof ILinkable<?> linkable && linkable.isLinked()) {
             pConfig.dhdPos = linkable.getLinkedPos();
             if (level.random.nextFloat() < 0.3f)
-                pConfig.upgrades.add(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_DHD);
+                pConfig.upgrades.add(IStargateGenerator.StargateUpgradesEnum.DHD_DIALING_EXTENDED);
             pConfig.dhdFluid = (int) (((JSGConfig.DialHomeDevice.fluidCapacity.get() - (JSGConfig.DialHomeDevice.fluidCapacity.get() * 0.1f)) * level.random.nextFloat()) + (JSGConfig.DialHomeDevice.fluidCapacity.get() * 0.1f));
         }
 

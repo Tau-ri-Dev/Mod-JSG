@@ -2,6 +2,7 @@ package dev.tauri.jsg.common.worldgen.generator;
 
 import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.config.JSGConfig;
+import dev.tauri.jsg.api.item.IDHDPartItem;
 import dev.tauri.jsg.api.stargate.network.address.StargateAddress;
 import dev.tauri.jsg.api.util.GeneratedStargate;
 import dev.tauri.jsg.api.util.IStargateGenerator;
@@ -182,15 +183,10 @@ public class StargateGenerator implements IStargateGenerator {
             }
             DHDAbstractBE dhdTile = ((DHDAbstractBE) Objects.requireNonNull(conf.world.getBlockEntity(conf.dhdPos)));
 
-            ItemStack crystal = new ItemStack(dhdTile.getControlCrystal());
-            dhdTile.getItemStackHandler().setStackInSlot(0, crystal);
+            dhdTile.getStateManager().assemblePart((IDHDPartItem) dhdTile.getControlCrystal(), new ItemStack(dhdTile.getControlCrystal()));
 
-            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.GLYPH_CRYSTAL_DHD))
-                dhdTile.getItemStackHandler().setStackInSlot(1, new ItemStack(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(), 1));
-            /*.if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_CAPACITY_DHD))
-                dhdTile.getItemStackHandler().setStackInSlot(2, new ItemStack(CoreItems.CRYSTAL_UPGRADE_CAPACITY.get(), 1));
-            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.UPGRADE_EFFICIENCY_DHD))
-                dhdTile.getItemStackHandler().setStackInSlot(3, new ItemStack(CoreItems.CRYSTAL_UPGRADE_EFFICIENCY.get(), 1));*/
+            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.DHD_DIALING_EXTENDED))
+                dhdTile.getStateManager().assemblePart((IDHDPartItem) JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(), new ItemStack(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get()));
 
             if (conf.dhdFluid >= 0) {
                 var tank = dhdTile.getReactorManager().getTank();

@@ -38,7 +38,7 @@ public interface IStargateGenerator {
         UPGRADE_IRIS_CREATIVE,
         UPGRADE_SHIELD,
 
-        GLYPH_CRYSTAL_DHD,
+        DHD_DIALING_EXTENDED,
         UPGRADE_EFFICIENCY_DHD,
         UPGRADE_CAPACITY_DHD
     }
