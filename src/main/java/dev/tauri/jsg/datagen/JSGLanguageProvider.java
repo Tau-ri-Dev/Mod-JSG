@@ -224,10 +224,6 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("block." + JSG.MOD_ID + ".dhd.incoming_wormhole_warn", "Unable to close an incoming wormhole");
         add("block." + JSG.MOD_ID + ".dhd.computer_dial", "Computer dial is in progress");
 
-        add("item." + JSG.MOD_ID + ".universe_dialer.dial_start", "Dialing the gate...");
-        add("item." + JSG.MOD_ID + ".universe_dialer.aborting", "Aborting dial");
-        add("item." + JSG.MOD_ID + ".universe_dialer.gate_busy", "Stargate is busy");
-
 
         add("block." + JSG.MOD_ID + ".printer.empty_input", "Insert a notebook page");
         add("block." + JSG.MOD_ID + ".printer.no_ink.general", "Cartridge is missing!");
