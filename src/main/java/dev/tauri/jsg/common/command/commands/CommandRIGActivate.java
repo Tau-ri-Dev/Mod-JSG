@@ -116,12 +116,12 @@ public class CommandRIGActivate extends JSGAbstractCommand {
             StargateAbstractBaseBE<?, ?> stargate;
             if (!(be instanceof StargateAbstractBaseBE<?, ?> sg)) {
                 if (player == null || !posChanged) {
-                    baseCommand.sendErrorMess(ctx.getSource(), "commands.rig.not_stargate");
+                    baseCommand.sendErrorMess(ctx.getSource(), "commands.rig.not_stargate.target");
                     return 0;
                 }
                 stargate = LinkingHelper.findClosestTile(level, player.blockPosition(), JSGBlockTags.ALL_STARGATE_BASES, StargateAbstractBaseBE.class, 20, 20);
                 if (stargate == null) {
-                    baseCommand.sendErrorMess(ctx.getSource(), "commands.rig.not_stargate");
+                    baseCommand.sendErrorMess(ctx.getSource(), "commands.rig.not_stargate.nearby");
                     return 0;
                 }
             } else

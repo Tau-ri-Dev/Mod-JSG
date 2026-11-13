@@ -34,14 +34,14 @@ public abstract class AbstractStargateCommand extends JSGAbstractCommand {
         if (position == null) {
             position = RayTraceHelper.rayTracePos(player, 8);
             if (position == null) {
-                baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.notstargate");
+                baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.not_stargate");
                 return null;
             }
         }
 
         var be = player.level().getBlockEntity(position);
         if (!(be instanceof Stargate<?> stargate)) {
-            baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.notstargate");
+            baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.not_stargate");
             return null;
         }
         return stargate;
