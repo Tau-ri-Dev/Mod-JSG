@@ -9,7 +9,6 @@ import dev.tauri.jsg.common.item.stargate.StargateBaseItem;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
-import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.helper.BlockPosHelper;
 import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
 import dev.tauri.jsgcore.common.helper.ItemHelper;
@@ -105,7 +104,6 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
                             .add(Blocks.GRAVEL.defaultBlockState(), 1)
                             .add(Blocks.MAGMA_BLOCK.defaultBlockState(), 1)
                             .add(Blocks.BASALT.defaultBlockState(), 1)
-                            .add(MaterialType.REFINED_NAQUADAH.getStorage().get().defaultBlockState(), 10)
                             .build())
             ).create();
     }
