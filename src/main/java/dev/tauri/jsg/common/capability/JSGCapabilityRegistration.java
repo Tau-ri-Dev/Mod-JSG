@@ -10,8 +10,6 @@ import dev.tauri.jsg.common.blockentity.jub.JUBCableBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractBaseBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractMemberBE;
 import dev.tauri.jsg.common.blockentity.stargate.StargateClassicBaseBE;
-import dev.tauri.jsg.common.item.energy.ZPMItemBlock;
-import dev.tauri.jsg.common.registry.JSGBlocks;
 import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsgcore.JSGCore;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -69,9 +67,8 @@ public class JSGCapabilityRegistration {
                 (stack, ctx) -> new DHDFluidHandlerItemStack(stack, JSGConfig.DialHomeDevice.fluidCapacity.get()),
                 JSGItems.DHD_NAQUADAH_TANK.get());
 
-        //TODO: Minedragon ZPM HERE
-       event.registerItem(Capabilities.EnergyStorage.ITEM,
+       /*..event.registerItem(Capabilities.EnergyStorage.ITEM,
                 (stack, ctx) -> ((ZPMItemBlock) stack.getItem()).createEnergyStorage(stack),
-                JSGBlocks.ZPM.get().asItem(), JSGBlocks.CREATIVE_ZPM.get().asItem());
+                JSGBlocks.ZPM.get().asItem(), JSGBlocks.CREATIVE_ZPM.get().asItem());*/
     }
 }

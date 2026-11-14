@@ -6,10 +6,6 @@ import dev.tauri.jsg.common.block.PrinterBlock;
 import dev.tauri.jsg.common.block.ToasterBlock;
 import dev.tauri.jsg.common.block.dialhomedevice.DHDMilkyWayBlock;
 import dev.tauri.jsg.common.block.dialhomedevice.DHDPegasusBlock;
-import dev.tauri.jsg.common.block.energy.ZPMBlock;
-import dev.tauri.jsg.common.block.energy.ZPMBlockCreative;
-import dev.tauri.jsg.common.block.energy.ZPMHubBlock;
-import dev.tauri.jsg.common.block.energy.ZPMSlotBlock;
 import dev.tauri.jsg.common.block.invisible.IrisBlock;
 import dev.tauri.jsg.common.block.stargate.*;
 import dev.tauri.jsg.common.block.stargate.redstone.StargateRedstoneDialerI;
@@ -66,11 +62,10 @@ public class JSGBlocks {
 
     //public static final RegistryObjectWrapper<Block> ORBAN_NAQUADAH_GENERATOR_BLOCK = REGISTER.register("orban_naquadah_generator_block", OrbanNaquadahGeneratorBlock::new);
 
-    //TODO: MINEDRAGON ZPM HERE
-    public static final RegistryObjectWrapper<Block> ZPM = REGISTER.register("zpm", ZPMBlock::new);
-    public static final RegistryObjectWrapper<Block> CREATIVE_ZPM = REGISTER.register("creative_zpm", ZPMBlockCreative::new);
-    public static final RegistryObjectWrapper<Block> ZPM_HUB = REGISTER.register("zpm_hub_block", ZPMHubBlock::new);
-    public static final RegistryObjectWrapper<Block> ZPM_SLOT = REGISTER.register("zpm_slot_block", ZPMSlotBlock::new);
+    //public static final RegistryObjectWrapper<Block> ZPM = REGISTER.register("zpm", ZPMBlock::new);
+    //public static final RegistryObjectWrapper<Block> CREATIVE_ZPM = REGISTER.register("creative_zpm", ZPMBlockCreative::new);
+    //public static final RegistryObjectWrapper<Block> ZPM_HUB = REGISTER.register("zpm_hub_block", ZPMHubBlock::new);
+    //public static final RegistryObjectWrapper<Block> ZPM_SLOT = REGISTER.register("zpm_slot_block", ZPMSlotBlock::new);
 
 
     /**
