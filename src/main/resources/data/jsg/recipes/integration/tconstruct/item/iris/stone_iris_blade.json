@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "pattern": "jsg:iris_blade",
+  "pattern_item": {
+    "tag": "tconstruct:patterns/default"
+  },
+  "material": "tconstruct:rock",
+  "cost": 4,
+  "result": {
+    "count": 1,
+    "item": "jsg:stone_iris_blade"
+  }
+}
