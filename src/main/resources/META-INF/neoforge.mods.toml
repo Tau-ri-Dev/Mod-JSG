@@ -10,6 +10,7 @@ updateJSONURL="https://api.modrinth.com/updates/jsg/forge_updates.json"
     displayURL="https://justsgmod.eu"
     authors="${mod_authors}"
     description='''${mod_description}'''
+    featureFlags="META-INF/feature_flags.json"
 
 [[dependencies.${mod_id}]]
     modId="neoforge"

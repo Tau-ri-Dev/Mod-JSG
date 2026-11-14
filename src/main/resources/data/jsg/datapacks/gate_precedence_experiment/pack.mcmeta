@@ -1,0 +1,11 @@
+{
+    "pack": {
+        "pack_format": 48,
+        "description": "Enables the Gate precedence experiment for JSG"
+    },
+    "features": {
+        "enabled": [
+            "jsg:gate_precedence_experiment"
+        ]
+    }
+}

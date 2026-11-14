@@ -1,0 +1,5 @@
+{
+    "flags": [
+        "${mod_id}:gate_precedence_experiment"
+    ]
+}
