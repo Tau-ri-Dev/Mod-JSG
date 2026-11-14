@@ -37,15 +37,6 @@
         "location": "jsg:stargate/parts/milkyway/badlands/bases/fallen",
         "processors": "jsg:stargate_outpost/desert_and_badlands"
       }
-    },
-    {
-      "weight": 3,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "jsg:stargate/parts/milkyway/badlands/bases/buried",
-        "processors": "jsg:stargate_outpost/desert_and_badlands"
-      }
     }
   ]
 }
