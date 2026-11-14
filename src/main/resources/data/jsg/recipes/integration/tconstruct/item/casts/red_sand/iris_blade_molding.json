@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:molding_table",
+  "material": {
+    "tag": "tconstruct:casts/red_sand"
+  },
+  "pattern": {
+    "tag": "jsg:iris_blades"
+  },
+  "result": "jsg:iris_blade_red_sand_cast"
+}
