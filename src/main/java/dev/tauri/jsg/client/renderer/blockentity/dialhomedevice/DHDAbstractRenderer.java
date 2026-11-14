@@ -159,7 +159,7 @@ public abstract class DHDAbstractRenderer<S extends DHDAbstractRendererState> im
         Font font = Minecraft.getInstance().font;
         AtomicInteger i = new AtomicInteger(0);
         Util.make(new ArrayList<Component>(), list -> {
-            list.add(Component.translatable("gui.dhd.reactorStatus", I18n.format("gui.dhd.reactor." + rendererState.reactorState.name().toLowerCase())));
+            list.add(Component.translatable("gui.dhd.reactor.status", I18n.format("gui.dhd.reactor.status." + rendererState.reactorState.name().toLowerCase())));
             if (!tileEntity.isAssembled(tileEntity.getFluidTankItemPart()))
                 return;
             list.add(Component.literal(rendererState.naquadahAmount + "mB/" + rendererState.naquadahMaxAmount + "mB"));

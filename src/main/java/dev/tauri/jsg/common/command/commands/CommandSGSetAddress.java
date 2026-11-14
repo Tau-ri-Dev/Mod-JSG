@@ -123,13 +123,13 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
         if (stargate == null) return 0;
 
         if (map == null || glyphs == null) {
-            baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.noaddressspace");
+            baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.no_address_space");
             return 0;
         }
 
         var symbolType = SymbolType.byId(map);
         if (symbolType == null) {
-            baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.noaddressspace");
+            baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.address_space_not_exists");
             return 0;
         }
 
@@ -141,22 +141,22 @@ public class CommandSGSetAddress extends AbstractStargateCommand {
                 break;
             var symbol = SymbolUtil.getSymbolFromNameIndex(symbolType, s.replace("_", " "));
             if (symbol == null || !symbol.isValidForAddress()) {
-                baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.wrongsymbol", i);
+                baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.wrong_symbol", i);
                 return 0;
             }
             if (address.contains(symbol)) {
-                baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.duplicatesymbol", i);
+                baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.duplicate_symbol", i);
                 return 0;
             }
             address.addSymbol(symbol);
         }
         if (i < 8 || address.getSize() < 8) {
-            baseCommand.sendErrorMess(ctx.getSource(), "commands.sgsetaddress.wrongaddress");
+            baseCommand.sendErrorMess(ctx.getSource(), "commands.sg_set_address.wrong_address", address.getSize());
             return 0;
         }
 
         stargate.setGateAddress(symbolType, address.toImmutable());
-        baseCommand.sendSuccessMess(ctx.getSource(), "commands.sgsetaddress.success", BlockHelper.blockPosToBetterString(position), address.toString());
+        baseCommand.sendSuccessMess(ctx.getSource(), "commands.sg_set_address.success", BlockHelper.blockPosToBetterString(position), address.toString());
         return 1;
     }
 }

@@ -1,7 +1,7 @@
 package dev.tauri.jsg.common.capability;
 
 import dev.tauri.jsg.common.registry.JSGDataComponents;
-import dev.tauri.jsgcore.common.definition.material.MaterialType;
+import dev.tauri.jsg.common.registry.tags.JSGFluidTags;
 import dev.tauri.jsgcore.common.util.ItemNBT;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -34,7 +34,8 @@ public class DHDFluidHandlerItemStack extends FluidHandlerItemStack {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-        return stack.getFluid() == MaterialType.REFINED_NAQUADAH.getFluid().get();
+        return stack.getFluid().is(JSGFluidTags.DHD_FUEL);
     }
 }

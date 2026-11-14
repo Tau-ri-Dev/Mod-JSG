@@ -34,33 +34,6 @@
         "location": "jsg:stargate/common/dhds/milkyway/working/no_glyph_6",
         "processors": "minecraft:empty"
       }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_4",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_5",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 1,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "jsg:stargate/common/dhds/milkyway/working/with_glyph_6",
-        "processors": "minecraft:empty"
-      }
     }
   ]
 }

@@ -1,6 +1,7 @@
 package dev.tauri.jsg.common.registry;
 
 import dev.tauri.jsg.Constants;
+import dev.tauri.jsg.JSG;
 import dev.tauri.jsg.api.JSGApi;
 import dev.tauri.jsg.api.stargate.StargateUpgrade;
 import dev.tauri.jsg.api.stargate.iris.EnumIrisType;
@@ -186,12 +187,24 @@ public class JSGItems {
     }
 
     public static void init() {
-        Integrations.TCONSTRUCT.addOnLoad(() -> {
+        Integrations.Loader tConstructRunnable = () -> {
             Constants.JSG_ITEM_HELPER.builder("iris_blade_golden_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
             Constants.JSG_ITEM_HELPER.builder("iris_blade_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
             Constants.JSG_ITEM_HELPER.builder("iris_blade_red_sand_cast").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
             Constants.JSG_ITEM_HELPER.builder("stone_iris_blade").setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
-        });
-        Integrations.CREATE.addOnLoad(() -> Constants.JSG_ITEM_HELPER.builder("incomplete_chocolate_bar").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric());
+        };
+        Integrations.Loader createRunnable = () -> Constants.JSG_ITEM_HELPER.builder("incomplete_chocolate_bar").clearTooltip().setInTabs(List.of(CoreTabs.TAB_INTEGRATIONS)).buildGeneric();
+        if (JSG.isRunningData()) {
+            JSG.logger.debug("Registering TC & Create items, because we are running datagen...");
+            try {
+                tConstructRunnable.run();
+                createRunnable.run();
+            } catch (Exception e) {
+                JSG.logger.error("Error while registering TC & Create items in data run!", e);
+            }
+        } else {
+            Integrations.TCONSTRUCT.addOnLoad(tConstructRunnable);
+            Integrations.CREATE.addOnLoad(createRunnable);
+        }
     }
 }

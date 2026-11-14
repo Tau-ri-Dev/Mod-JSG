@@ -20,6 +20,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -195,15 +196,19 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
         return compound;
     }
 
-    public void deserializeAssemblyFromNBT(CompoundTag compound) {
+    public void deserializeAssemblyFromNBT(@Nullable CompoundTag compound) {
         assembledParts.clear();
-        dhd.getAllParts().forEach(part -> {
-            var partNBT = compound.getCompound(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(part.self())).toString());
-            var isAssembled = (partNBT.isEmpty() || partNBT.getBoolean("assembled"));
-            if (isAssembled) {
-                assembledParts.put(part, (partNBT.isEmpty() ? new ItemStack(part.self()) : ItemStack.parseOptional(CurrentRegistries.getOrThrow(), partNBT.getCompound("itemStack"))));
-            }
-        });
+        if (compound == null || !compound.isEmpty()) {
+            if (compound == null) compound = new CompoundTag();
+            @NotNull var finalCompound = compound;
+            dhd.getAllParts().forEach(part -> {
+                var partNBT = finalCompound.getCompound(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(part.self())).toString());
+                var isAssembled = (partNBT.isEmpty() || partNBT.getBoolean("assembled"));
+                if (isAssembled) {
+                    assembledParts.put(part, (partNBT.isEmpty() ? new ItemStack(part.self()) : ItemStack.parseOptional(CurrentRegistries.getOrThrow(), partNBT.getCompound("itemStack"))));
+                }
+            });
+        }
 
         var level = dhd.getLevel();
         if (level != null && !level.isClientSide())
@@ -221,6 +226,6 @@ public abstract class DHDAbstractStateManager<DHD extends DHDAbstractBE, S exten
     @Override
     public void deserializeNBT(CompoundTag compound) {
         buttonsState.deserializeNBT(compound.getCompound("buttonsState"));
-        deserializeAssemblyFromNBT(compound.getCompound("parts"));
+        deserializeAssemblyFromNBT(compound.contains("parts") ? compound.getCompound("parts") : null);
     }
 }

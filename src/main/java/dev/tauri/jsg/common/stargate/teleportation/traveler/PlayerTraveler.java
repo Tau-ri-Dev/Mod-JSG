@@ -3,6 +3,7 @@ package dev.tauri.jsg.common.stargate.teleportation.traveler;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.api.stargate.traveler.IStargateTraveler;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.effect.StargateWormholeHandler;
 import dev.tauri.jsg.common.effect.StargateWormholeType;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
@@ -114,6 +115,8 @@ public class PlayerTraveler extends LivingTraveler<ServerPlayer> {
 
     @Override
     public void send() {
+        if (!isStatic())
+            JSGCriterions.WORMHOLE_GO.trigger(get());
         JSGPacketHandler.sendTo(new StargatePlayerMotionRequestToClient(getTransmitter().blockPosition(), false), get());
     }
 

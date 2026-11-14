@@ -1,6 +1,8 @@
 package dev.tauri.jsg.datagen.tag;
 
 import dev.tauri.jsg.JSG;
+import dev.tauri.jsg.common.registry.tags.JSGFluidTags;
+import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.datagen.tag.CoreFluidTagGenerator;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -17,6 +19,7 @@ public class JSGFluidTagGenerator extends CoreFluidTagGenerator {
 
     @Override
     @ParametersAreNonnullByDefault
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.Provider provider) {
+        tag(JSGFluidTags.DHD_FUEL).add(MaterialType.REFINED_NAQUADAH.getFluid().get());
     }
 }

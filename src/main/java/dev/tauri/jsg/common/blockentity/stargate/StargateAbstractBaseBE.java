@@ -25,7 +25,6 @@ import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.stargate.rig.StargateRIGManager;
 import dev.tauri.jsg.common.state.stargate.StargateRendererActionState;
-import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
 import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
 import dev.tauri.jsgcore.common.blockentity.IBELogManager;
@@ -375,7 +374,6 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
         var s = (StargateAbstractStateManager<?, ?>) getStateManager();
         s.sendRenderingUpdate(StargateRendererActionState.EnumGateAction.GATE_RENDER_CHANGED, true);
         s.getAndSendState(CoreStateTypes.RENDERER_STATE.get());
-        JSGAdvancementsUtil.tryTriggerRangedAdvancement((Stargate<?>) this, JSGAdvancementsUtil.EnumAdvancementType.GATE_MERGE);
         refresh();
     }
 

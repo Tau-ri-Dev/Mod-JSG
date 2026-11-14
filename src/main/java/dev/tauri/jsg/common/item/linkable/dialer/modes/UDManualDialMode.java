@@ -122,7 +122,7 @@ public class UDManualDialMode extends UniverseDialerMode {
                     break;
 
                 case ENGAGED:
-                    serverPlayer.displayClientMessage(Component.translatable("tile.jsg.dhd_block.incoming_wormhole_warn"), true);
+                    serverPlayer.displayClientMessage(Component.translatable("block.jsg.dhd.incoming_wormhole_warn"), true);
                     JSGSoundHelper.playSoundToPlayer(serverPlayer, JSGSoundEvents.UNIVERSE_DIALER_ERROR, player.blockPosition());
                     break;
 

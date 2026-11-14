@@ -64,6 +64,10 @@ public class JSG implements JSGAddon {
         return JSGMapping.rl(JSG.MOD_ID, path);
     }
 
+    public static boolean isRunningData() {
+        return Boolean.getBoolean("jsg.is_datagen");
+    }
+
     public JSG(IEventBus eventBus) {
         logger = new LoggerWrapper("[" + MOD_ID + "] ", LoggerFactory.getLogger(MOD_NAME));
 

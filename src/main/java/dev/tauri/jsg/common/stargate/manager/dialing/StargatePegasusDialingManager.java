@@ -8,6 +8,7 @@ import dev.tauri.jsg.api.stargate.EnumStargateState;
 import dev.tauri.jsg.api.stargate.animation.EnumDialingType;
 import dev.tauri.jsg.api.stargate.exception.StargateException;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
+import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargatePegasusBaseBE;
 import dev.tauri.jsg.common.stargate.StargateAddressDialSequence;
 import dev.tauri.jsg.common.stargate.animation.chevron.StargatePegasusChevronsState;
@@ -15,6 +16,7 @@ import dev.tauri.jsg.common.stargate.animation.incoming.IncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.incoming.PegasusIncomingAnimation;
 import dev.tauri.jsg.common.stargate.animation.spinning.ClassicSpinHelper;
 import dev.tauri.jsg.common.stargate.animation.spinning.PegasusSpinHelper;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.entity.ScheduledTask;
 import dev.tauri.jsgcore.common.symbol.SymbolInterface;
 import net.minecraft.FieldsAreNonnullByDefault;
@@ -23,6 +25,7 @@ import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 
 import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsState.A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY;
 
@@ -32,6 +35,11 @@ import static dev.tauri.jsg.common.stargate.animation.chevron.StargateChevronsSt
 public class StargatePegasusDialingManager extends StargateClassicDialingManager<StargatePegasusBaseBE> {
     public StargatePegasusDialingManager(StargatePegasusBaseBE stargate) {
         super(stargate);
+    }
+
+    @Override
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.of(JSGCriterions.ACTIVATE_PEGASUS_GATE);
     }
 
     @Override

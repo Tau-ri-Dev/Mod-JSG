@@ -30,6 +30,8 @@ import dev.tauri.jsg.common.stargate.manager.*;
 import dev.tauri.jsg.common.stargate.manager.state.StargateAbstractStateManager;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsg.common.state.stargate.StargateRendererActionState;
+import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
+import dev.tauri.jsgcore.common.advancement.JSGCriterion;
 import dev.tauri.jsgcore.common.blockentity.ITickable;
 import dev.tauri.jsgcore.common.blockentity.ScheduledTaskExecutorInterface;
 import dev.tauri.jsgcore.common.chunkloader.ChunkManager;
@@ -155,6 +157,10 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
     }
 
     public void clearDialingBuffer() {
+    }
+
+    public Optional<JSGCriterion> getActivationAdvancementCriterion() {
+        return Optional.empty();
     }
 
     // -----------------------------------------
@@ -512,6 +518,9 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
             if (conn.isInitiating()) {
                 // extract energy from the gate
                 ((StargateEnergyManager<?, ?>) stargate.getEnergyManager()).onGateOpen();
+
+                // trigger advancement
+                getActivationAdvancementCriterion().ifPresent(crit -> JSGAdvancementsUtil.tryTriggerRangedAdvancement(stargate, crit));
             }
             dm.onGateOpen(conn.isInitiating());
             stargate.setStargateChanged();

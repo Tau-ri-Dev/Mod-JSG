@@ -92,6 +92,7 @@ public abstract class StargateClassicDialingManager<SG extends StargateClassicBa
                 return;
             }
             if (engageSymbolBySpin(symbol, addressBuffer.second().first(), addressBuffer.second().second())) {
+                setStargateState(EnumStargateState.DIALING);
                 canDialNextFromBuffer = false;
                 addressBuffer.first().remove(0);
                 stargate.setChanged();

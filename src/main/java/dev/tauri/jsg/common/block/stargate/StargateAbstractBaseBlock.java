@@ -10,7 +10,6 @@ import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelp
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
 import dev.tauri.jsgcore.common.blockstate.JSGProperties;
-import dev.tauri.jsgcore.common.definition.material.MaterialType;
 import dev.tauri.jsgcore.common.helper.BlockPosHelper;
 import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
 import dev.tauri.jsgcore.common.helper.ItemHelper;
@@ -90,26 +89,32 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         );
     }
 
+    public double getExplosionCraterRadius() {
+        return 100.0;
+    }
+
     @Override
     @ParametersAreNonnullByDefault
     public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
-        if (level instanceof ServerLevel serverLevel)
+        if (level instanceof ServerLevel serverLevel) {
+            var r = getExplosionCraterRadius();
+            if (r <= 0) return;
             new ExplosionHelper.Crater(
                     serverLevel,
                     pos.getCenter(),
                     new Vec3(0, 0, 0),
-                    100.0,
+                    r,
                     level.random.nextLong(),
                     new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
                             .add(Blocks.BLACKSTONE.defaultBlockState(), 2)
-                            .add(Blocks.GRAVEL.defaultBlockState())
-                            .add(Blocks.MAGMA_BLOCK.defaultBlockState())
-                            .add(Blocks.BASALT.defaultBlockState())
-                            .add(MaterialType.REFINED_NAQUADAH.getStorage().get().defaultBlockState(), 10)
+                            .add(Blocks.GRAVEL.defaultBlockState(), 1)
+                            .add(Blocks.MAGMA_BLOCK.defaultBlockState(), 1)
+                            .add(Blocks.BASALT.defaultBlockState(), 1)
                             .build())
             ).create();
+        }
     }
 
     @Override

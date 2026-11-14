@@ -18,6 +18,11 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add(object.get().getDescriptionId() + ".empty", "Empty " + pathToName(object.getId().getPath()));
     }
 
+    protected void addDHDItem(RegistryObjectWrapper<? extends Item> object, String tooltip) {
+        this.add(object.get(), pathToName(object.getId().getPath()).replace("Dhd", "DHD"));
+        this.add(object.get().getDescriptionId() + ".tooltip", tooltip);
+    }
+
     @Override
     protected void addTranslations() {
         //SPECIAL BLOCKS
@@ -60,22 +65,30 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addItem(JSGItems.ICON_PRIEST_TRADE);
 
         //DHD PARTS
-        addItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS);
-        addItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE);
-        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal", "Main control crystal of DHD", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
-        addItemWithCustomName(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)");
-        addItemWithCustomName(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate");
+        addDHDItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS, "Mandatory DHD Component");
+        addDHDItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE, "Mandatory DHD Component");
+        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal", "Mandatory DHD Component", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
+        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)", "Mandatory DHD Component",  null);
+        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate", "Optional DHD Component", null);
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_MILKYWAY, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
 
 
-        addItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS);
-        addItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE);
-        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL, "Pegasus DHD Main Control Crystal", "Main control crystal of DHD", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
-        addItemWithCustomName(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)");
-        addItemWithCustomName(JSGItems.PEGASUS_DHD_UPGRADES_COVER, "Pegasus Upgrades Cover Plate");
+        addDHDItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS, "Mandatory DHD Component");
+        addDHDItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE, "Mandatory DHD Component");
+        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL, "Pegasus DHD Main Control Crystal", "Mandatory DHD Component", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
+        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)", "Mandatory DHD Component" , null);
+        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_UPGRADES_COVER, "Pegasus Upgrades Cover Plate", "Optional DHD Component", null);
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Pegasus Dial Home Device (DHD)", "Control panel for Pegasus gates", null);
 
-        addItem(JSGItems.DHD_NAQUADAH_TANK);
+        addDHDItem(JSGItems.DHD_NAQUADAH_TANK, "Mandatory DHD Component");
+
+        add("gui.dhd.reactor.status", "Reactor status: %s");
+        add("gui.dhd.reactor.status.online", "Running");
+        add("gui.dhd.reactor.status.not_linked", "DHD not linked");
+        add("gui.dhd.reactor.status.no_fuel", "Fuel missing");
+        add("gui.dhd.reactor.status.standby", "Standby");
+        add("gui.dhd.reactor.status.no_crystal", "Crystal missing");
+        add("gui.dhd.reactor.status.no_fluid_tank", "Fluid Tank missing");
 
         add("item." + JSG.MOD_ID + ".dhd.assembly_helper.needed", "Missing %s");
 
@@ -197,7 +210,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addAdvancement(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "Ours is bigger" , "Activate Tollan Stargate");
         addAdvancement(JSGAdvancements.KAWOOSH_DEATH, "Escaping Hadante" , "Get cremated by the Unstable Vortex");
         addAdvancement(JSGAdvancements.IRIS_IMPACT, "Like bugs on a windshield" , "Witness an object hit the iris");
-        addAdvancement(JSGAdvancements.HIT_WITH_GLOVES, "Gotta bend those kosars" , "Hit player or mob while wearing dialing gloves");
+        addAdvancement(JSGAdvancements.HIT_WITH_GLOVES, "Gotta bend those cozars" , "Hit player or mob while wearing dialing gloves");
         addAdvancement(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "Bon Voyage!" , "Activate Pegasus Stargate");
         addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years" , "Activate Universe Stargate");
         addAdvancement(JSGAdvancements.CRAFT_SHIELD, "Using power, using power..." , "Obtain stargate shield");
@@ -205,16 +218,11 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         //CHAT AND HOTBAR MESSAGES:
         add("chat.orlins.energyStored", "Energy stored: %s FE (Required: %s FE, %s s");
 
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.no_crystal_warn", "DHD has no control crystal");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.not_linked_warn", "DHD is not linked to the gate");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.not_enough_power", "Insufficient power");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.incoming_wormhole_warn", "Unable to close an incoming wormhole");
-        add("block." + JSG.MOD_ID + ".dhd_milkyway.computer_dial", "Computer dial is in progress");
-        add("tile." + JSG.MOD_ID + ".dhd_block.incoming_wormhole_warn", "Unable to close an incoming wormhole");
-
-        add("item." + JSG.MOD_ID + ".universe_dialer.dial_start", "Dialing the gate...");
-        add("item." + JSG.MOD_ID + ".universe_dialer.aborting", "Aborting dial");
-        add("item." + JSG.MOD_ID + ".universe_dialer.gate_busy", "Stargate is busy");
+        add("block." + JSG.MOD_ID + ".dhd.no_crystal_warn", "DHD has no control crystal");
+        add("block." + JSG.MOD_ID + ".dhd.not_linked_warn", "DHD is not linked to the gate");
+        add("block." + JSG.MOD_ID + ".dhd.not_enough_power", "Insufficient power");
+        add("block." + JSG.MOD_ID + ".dhd.incoming_wormhole_warn", "Unable to close an incoming wormhole");
+        add("block." + JSG.MOD_ID + ".dhd.computer_dial", "Computer dial is in progress");
 
 
         add("block." + JSG.MOD_ID + ".printer.empty_input", "Insert a notebook page");
@@ -284,7 +292,9 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui." + JSG.MOD_ID + ".ingame_config.spin_speed.title", "Stargate's Ring Rotation Speed");
         add("gui." + JSG.MOD_ID + ".ingame_config.spin_speed.comment", "Ring rotation speed in %");
         add("gui." + JSG.MOD_ID + ".ingame_config.max_crystals.title", "Max crystals");
-        add("gui." + JSG.MOD_ID + ".ingame_config.max_crystals.comment", "How many Energy Crystals can be inserted in stagate");
+        add("gui." + JSG.MOD_ID + ".ingame_config.max_crystals.comment", "How many Energy Crystals can be inserted in stargate");
+        add("gui." + JSG.MOD_ID + ".ingame_config.dhd_dialing_type.title", "DHD Dialing type");
+        add("gui." + JSG.MOD_ID + ".ingame_config.dhd_dialing_type.comment", "Specifies type of dialing animation while Stargate is dialed by DHD");
 
         add("gui." + JSG.MOD_ID + ".ingame_config.force_unstable.title", "Force Unstable Event Horizon");
         add("gui." + JSG.MOD_ID + ".ingame_config.force_unstable.comment", "If set to Enabled, stargate's event horizon will be unstable permanently (this also effects connected gate on the other side)");
@@ -347,6 +357,8 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("item." + JSG.MOD_ID + ".gdo.iris_opened", "Iris is open!");
         add("item." + JSG.MOD_ID + ".gdo.operator", "T-Mobile 5G");
         add("item." + JSG.MOD_ID + ".gdo.code", "Code:");
+        add("item." + JSG.MOD_ID + ".gdo.computer_handled", "Waiting for computer...");
+        add("item." + JSG.MOD_ID + ".gdo.code_not_set", "Iris has no code");
 
         //UNIVERSE DIALER - GUI
         add("item." + JSG.MOD_ID + ".universe_dialer.in_menu.alert", "Edit entry name or press ESC");
@@ -355,7 +367,10 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("item." + JSG.MOD_ID + ".universe_dialer.mode_saved", "Memory");
         add("item." + JSG.MOD_ID + ".universe_dialer.mode_info", "Status");
         add("item." + JSG.MOD_ID + ".universe_dialer.manual_dialing", "Dialing");
-        add("item." + JSG.MOD_ID + ".universe_dialer.manula_dialing.delete", "Delete");
+        add("item." + JSG.MOD_ID + ".universe_dialer.manual_dialing.delete", "Delete");
+        add("item." + JSG.MOD_ID + ".universe_dialer.aborting", "Aborting dialing sequence...");
+        add("item." + JSG.MOD_ID + ".universe_dialer.dial_start", "Dialing started...");
+        add("item." + JSG.MOD_ID + ".universe_dialer.gate_busy", "Stargate is busy...");
 
         //ADMIN CONTROLLER - GUI
         add("gui.admincontroller.name","Admin Controller");
@@ -411,14 +426,13 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         //CONFIG
         add("key.categories." + JSG.MOD_ID, "Just Stargate Mod");
-        add("config." + JSG.MOD_ID + ".address.down", "Universe dialer address down");
-        add("config." + JSG.MOD_ID + ".address.edit", "Open address edit menu");
-        add("config." + JSG.MOD_ID + ".address.scroll", "Universe dialer address scroll");
-        add("config." + JSG.MOD_ID + ".address.up", "Universe dialer address up");
-        add("config." + JSG.MOD_ID + ".mode.down", "Universe dialer mode down");
-        add("config." + JSG.MOD_ID + ".mode.scroll", "Universe dialer mode scroll");
-        add("config." + JSG.MOD_ID + ".mode.up", "Universe dialer mode up");
-        add("config." + JSG.MOD_ID + ".rename.entry", "Universe dialer rename entry");
+        add("config." + JSG.MOD_ID + ".address_down", "Universe dialer address down");
+        add("config." + JSG.MOD_ID + ".address_scroll", "Universe dialer address scroll");
+        add("config." + JSG.MOD_ID + ".address_up", "Universe dialer address up");
+        add("config." + JSG.MOD_ID + ".mode_down", "Universe dialer mode down");
+        add("config." + JSG.MOD_ID + ".mode_scroll", "Universe dialer mode scroll");
+        add("config." + JSG.MOD_ID + ".mode_up", "Universe dialer mode up");
+        add("config." + JSG.MOD_ID + ".rename_entry", "Universe dialer rename entry");
 
         //DEATH MESSAGES
         add("death.attack.kawoosh", "%s was disintegrated by the Unstable Vortex");
@@ -427,14 +441,29 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("death.attack.iris", "%s slammed into the Iris");
 
         //COMMANDS
+        add("commands.generic.player_only", "This command can be used only by players");
         add("commands.prepare.not_preparable","Targeted block is not prepare-able");
-        add("commands.prepare.success","Blocks successfully prepared for saving into NBT");
-        add("commands.prepare.error","Error while preparing block to saving into NBT");
-        add("commands.rig.not_stargate","No Stargate nearby that could initiate RIG");
-        add("commands.rig.already.active","Stargate already has an active RIG");
-        add("commands.sgsetaddress.notstargate","Target block isn't stargate base block");
-        add("commands.sgsetaddress.wrongsymbol","Wrong glyph name or Map");
-        add("commands.sgsetaddress.success","Target stargate address is successfully changed");
+        add("commands.prepare.success","Block successfully prepared for saving into NBT");
+        add("commands.prepare.error","Error while preparing block to save into NBT");
+        add("commands.rig.position_empty","No block's position specified");
+        add("commands.rig.unknown_level","Specified level doesn't exist");
+        add("commands.rig.not_stargate.nearby","No Stargate nearby that could initiate RIG");
+        add("commands.rig.not_stargate.target","Target block isn't Stargate base block");
+        add("commands.rig.already_active","Stargate already has an active RIG");
+        add("commands.sg_set_address.no_address_space","Address type isn't specified");
+        add("commands.sg_set_address.address_space_not_exists","Provided address type doesn't exist");
+        add("commands.sg_set_address.wrong_symbol","Wrong symbol at %s position");
+        add("commands.sg_set_address.duplicate_symbol","Duplicate symbol at %s position");
+        add("commands.sg_set_address.wrong_address","Address must be 8 symbols long. Got %s");
+        add("commands.sg_set_address.success","Target stargate dynamic address has been successfully changed");
+        add("commands.sg_set_address.not_stargate","Target block isn't stargate base block");
+        add("commands.sg_set_static_address.no_address_space","Address type isn't specified");
+        add("commands.sg_set_static_address.address_space_not_exists","Provided address type doesn't exist");
+        add("commands.sg_set_static_address.wrong_symbol","Wrong symbol at %s position");
+        add("commands.sg_set_static_address.duplicate_symbol","Duplicate symbol at %s position");
+        add("commands.sg_set_static_address.wrong_address","Address must be 8 symbols long. Got %s");
+        add("commands.sg_set_static_address.success","Target stargate dynamic address has been successfully changed");
+
 
         //SUBTITLES
         addAllSubtitles(JSGSoundEvents.class);
