@@ -5,7 +5,6 @@ import dev.tauri.jsg.client.renderer.item.AdminControllerBEWLR;
 import dev.tauri.jsg.common.blockentity.stargate.StargateAbstractMemberBE;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.AdminControllerGuiOpenToClient;
-import dev.tauri.jsg.common.registry.JSGItems;
 import dev.tauri.jsg.common.registry.tags.JSGBlockTags;
 import dev.tauri.jsg.common.stargate.network.StargateNetwork;
 import dev.tauri.jsgcore.JSGCore;
@@ -32,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class AdminControllerItem extends JSGItem {
@@ -48,7 +46,7 @@ public class AdminControllerItem extends JSGItem {
     @Override
     @ParametersAreNonnullByDefault
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag) {
-        ItemHelper.applyGenericToolTip(Objects.requireNonNull(JSGItems.ADMIN_CONTROLLER.getId()).getPath(), components, tooltipFlag);
+        ItemHelper.applyGenericToolTip(getDescriptionId(), components, tooltipFlag);
     }
 
     @Override
