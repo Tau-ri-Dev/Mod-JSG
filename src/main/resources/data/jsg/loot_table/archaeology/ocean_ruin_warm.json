@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:archaeology",
   "pools": [
     {
       "rolls": 1,
@@ -6,7 +7,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "jsg:pegasus_schematic"
+          "name": "jsg:pegasus_schematic",
+          "weight": 2
         }
       ]
     }

@@ -123,10 +123,10 @@ public class JSGItems {
     /**
      * SCHEMATICS
      */
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
-    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_TOLLAN = Constants.JSG_ITEM_HELPER.builder("tollan_schematic").setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_MILKYWAY = Constants.JSG_ITEM_HELPER.builder("milkyway_schematic").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_PEGASUS = Constants.JSG_ITEM_HELPER.builder("pegasus_schematic").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_UNIVERSE = Constants.JSG_ITEM_HELPER.builder("universe_schematic").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
+    public static final RegistryObjectWrapper<JSGItem> SCHEMATIC_TOLLAN = Constants.JSG_ITEM_HELPER.builder("tollan_schematic").clearTooltip().setInTabs(List.of(() -> CoreTabs.TAB_RESOURCES)).buildGeneric();
 
 
     /**

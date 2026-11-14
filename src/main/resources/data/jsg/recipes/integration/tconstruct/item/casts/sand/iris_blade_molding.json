@@ -1,0 +1,16 @@
+{
+  "type": "tconstruct:molding_table",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "material": {
+    "tag": "tconstruct:casts/sand"
+  },
+  "pattern": {
+    "tag": "jsg:iris_blades"
+  },
+  "result": "jsg:iris_blade_sand_cast"
+}

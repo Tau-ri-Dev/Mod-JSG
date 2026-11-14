@@ -42,7 +42,7 @@ public class JSGItemTagGenerator extends CoreItemTagGenerator {
         tag(JSGItemTags.IRIS_BLADES)
                 .add(JSGItems.IRIS_BLADE.get())
                 .add(JSGItems.IRIS_BLADE_TRINIUM.get())
-                .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_stone"));
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "stone_iris_blade"));
 
         // Stargate energy extenders
         tag(JSGItemTags.STARGATE_ENERGY_CRYSTALS)
@@ -53,9 +53,8 @@ public class JSGItemTagGenerator extends CoreItemTagGenerator {
 
         //Tinkers Construct casts
 
-        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts")))
-                .add(JSGItems.IRIS_BLADE.get())
-                .add(JSGItems.IRIS_BLADE_TRINIUM.get());
+        tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "parts")))
+                .addOptional(JSGMapping.rl(JSG.MOD_ID, "stone_iris_blade"));
 
         tag(ItemTags.create(JSGMapping.rl(Integrations.TCONSTRUCT.modNames.getFirst(), "casts/gold")))
                 .addOptional(JSGMapping.rl(JSG.MOD_ID, "iris_blade_golden_cast"));

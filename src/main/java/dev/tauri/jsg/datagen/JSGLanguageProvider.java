@@ -165,9 +165,9 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("item." + JSG.MOD_ID + ".iris_blade_golden_cast", "Iris Blade Golden Cast");
         add("item." + JSG.MOD_ID + ".iris_blade_sand_cast", "Iris Blade Sand Cast");
         add("item." + JSG.MOD_ID + ".iris_blade_red_sand_cast", "Iris Blade Red Sand Cast");
-        add("item." + JSG.MOD_ID + ".iris_blade_stone", "Stone Iris Blade");
+        add("item." + JSG.MOD_ID + ".stone_iris_blade", "Stone Iris Blade");
+        add("item." + JSG.MOD_ID + ".stone_iris_blade.tooltip", "Use this blade to craft cast");
         add("pattern." + JSG.MOD_ID + ".iris_blade", "Iris Blade");
-        add("item." + JSG.MOD_ID + ".iris_blade_stone.tooltip", "Use this blade to craft cast");
 
         add("item." + JSG.MOD_ID + ".incomplete_chocolate_bar", "Incomplete Chocolate Bar");
 
