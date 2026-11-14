@@ -5,22 +5,16 @@ import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.stargate.type.StargateType;
 import dev.tauri.jsg.api.stargate.type.StargateTypes;
 import dev.tauri.jsg.common.registry.JSGBlockEntities;
-import dev.tauri.jsgcore.JSGCore;
 import dev.tauri.jsgcore.common.registry.CoreTabs;
 import dev.tauri.jsgcore.common.registry.helper.RegistryObjectWrapper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
 import java.util.function.Supplier;
 
 public abstract class StargateMovieMemberBlock extends StargateMilkyWayMemberBlock {
@@ -28,13 +22,6 @@ public abstract class StargateMovieMemberBlock extends StargateMilkyWayMemberBlo
     @Override
     public @NonNull StargateType<?> getStargateType() {
         return StargateTypes.MOVIE.get();
-    }
-
-    @Override
-    @ParametersAreNonnullByDefault
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext context, List<Component> components, TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, context, components, tooltipFlag);
-        components.add(JSGCore.getInProgress());
     }
 
     public static class StargateMovieChevronBlock extends StargateMovieMemberBlock implements IStargateChevronBlock {

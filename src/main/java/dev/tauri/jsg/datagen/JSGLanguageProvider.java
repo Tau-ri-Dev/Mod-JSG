@@ -319,6 +319,11 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui." + JSG.MOD_ID + ".ingame_config.orange_shield.title", "Orange Shield");
         add("gui." + JSG.MOD_ID + ".ingame_config.orange_shield.comment", "Switch shield to orange color on this gate");
 
+        add("gui." + JSG.MOD_ID + ".config_child.general", "General");
+        add("gui." + JSG.MOD_ID + ".config_child.debug", "Debug");
+        add("gui." + JSG.MOD_ID + ".config_child.dialhomedevice", "DHD");
+        add("gui." + JSG.MOD_ID + ".config_child.stargate", "Stargate");
+
         //STARGATE GUI
         add("gui.stargate.energy_crystals", "Energy Crystals");
         add("gui.stargate." + JSG.MOD_ID + ".milkyway.title", "Milky Way");

@@ -62,7 +62,7 @@ public class DimensionStargateGenerator {
         JSG.logger.info("Found {} total dimensions", totalDimensions);
         final long started = Util.getMillis();
         for (ResourceKey<Level> dimension : levels) {
-            var percent = String.format("%.2f", (double) stats.size() / (double) totalDimensions * 100f);
+            var percent = String.format("%.2f", (double) stats.entrySet().stream().filter(entry -> entry.getValue().status.isDone()).toList().size() / (double) totalDimensions * 100f);
             if (!percent.equalsIgnoreCase(lastPercentage)) {
                 lastPercentage = percent;
                 JSG.logger.info("SG generator progress: {}% ({}s elapsed)", percent, (double) (Util.getMillis() - started) / 1000);
