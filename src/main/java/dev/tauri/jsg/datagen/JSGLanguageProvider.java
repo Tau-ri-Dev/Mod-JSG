@@ -68,7 +68,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addDHDItem(JSGItems.MILKYWAY_DHD_CONTROL_CRYSTALS, "Mandatory DHD Component");
         addDHDItem(JSGItems.MILKYWAY_DHD_BUTTONS_CONSOLE, "Mandatory DHD Component");
         addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_MAIN_CRYSTAL, "Milky Way DHD Main Control Crystal", "Mandatory DHD Component", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
-        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)", "Mandatory DHD Component",  null);
+        addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_ACTIVATION_BUTTON, "Bright Red Button (BRB)", "Mandatory DHD Component", null);
         addItemWithCustomNameAndTooltip(JSGItems.MILKYWAY_DHD_UPGRADES_COVER, "Milky Way Upgrades Cover Plate", "Optional DHD Component", null);
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_MILKYWAY, "Milky Way Home Device (DHD)", "Control panel for Milky Way, Tollan and Movie gates", null);
 
@@ -76,7 +76,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         addDHDItem(JSGItems.PEGASUS_DHD_CONTROL_CRYSTALS, "Mandatory DHD Component");
         addDHDItem(JSGItems.PEGASUS_DHD_BUTTONS_CONSOLE, "Mandatory DHD Component");
         addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_MAIN_CRYSTAL, "Pegasus DHD Main Control Crystal", "Mandatory DHD Component", "Insert this crystal into DHD (Dial Home Device)%nl%to make the DHD functional and be able%nl%to link with the nearest gate.");
-        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)", "Mandatory DHD Component" , null);
+        addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_ACTIVATION_BUTTON, "Bright Blue Button (BBB)", "Mandatory DHD Component", null);
         addItemWithCustomNameAndTooltip(JSGItems.PEGASUS_DHD_UPGRADES_COVER, "Pegasus Upgrades Cover Plate", "Optional DHD Component", null);
         addBlockWithCustomNameAndTooltip(JSGBlocks.DHD_PEGASUS, "Pegasus Dial Home Device (DHD)", "Control panel for Pegasus gates", null);
 
@@ -194,26 +194,26 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
 
         //ADVANCEMENTS
-        addAdvancement(JSGAdvancements.CRAFT_PRINTER, "Not enough Magenta!" , "Works like regular printer, but it's more advanced");
-        addAdvancement(JSGAdvancements.TRADE_WITH_PRIEST, "Sacrifices to their gods" , "Trade with Priest Villager");
-        addAdvancement(JSGAdvancements.VISIT_ABYDOS, "Welcome to Ra's realm" , "Visit Abydos");
-        addAdvancement(JSGAdvancements.USE_GDO, "Code accepted!" , "Use a GDO to open the iris");
-        addAdvancement(JSGAdvancements.OBTAIN_TOASTER, "Carter's Toaster" , "You wouldn't believe the things that you can make from common items.");
-        addAdvancement(JSGAdvancements.ACTIVATE_ORLIN_GATE, "So you built one?" , "Ohh... and you're going to need a new toaster!");
-        addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_CRYSTAL, "Not Incorrect, Incomplete" , "Obtain Extended Address Crystal");
-        addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_DIALING_CRYSTAL, "We Determined 7th Symbol" , "Obtain Extended Address Dialing Crystal");
-        addAdvancement(JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, "Its Not Address, Its a Code" , "Obtain Static Address Crystal");
-        addAdvancement(JSGAdvancements.ACTIVATE_MOVIE_GATE, "Giza, 1928" , "Activate Movie Stargate");
-        addAdvancement(JSGAdvancements.WORMHOLE_GO, "What's a wormhole? And why a worm?" , "Enter the Event Horizon of a Stargate");
-        addAdvancement(JSGAdvancements.UNSTABLE_GO, "Unstable Wormhole?!" , "For a moment i thought we were in trouble");
-        addAdvancement(JSGAdvancements.ACTIVATE_MILKYWAY_GATE, "Pyramid with Sun above it" , "Activate Milky Way Stargate");
-        addAdvancement(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "Ours is bigger" , "Activate Tollan Stargate");
-        addAdvancement(JSGAdvancements.KAWOOSH_DEATH, "Escaping Hadante" , "Get cremated by the Unstable Vortex");
-        addAdvancement(JSGAdvancements.IRIS_IMPACT, "Like bugs on a windshield" , "Witness an object hit the iris");
-        addAdvancement(JSGAdvancements.HIT_WITH_GLOVES, "Gotta bend those cozars" , "Hit player or mob while wearing dialing gloves");
-        addAdvancement(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "Bon Voyage!" , "Activate Pegasus Stargate");
-        addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years" , "Activate Universe Stargate");
-        addAdvancement(JSGAdvancements.CRAFT_SHIELD, "Using power, using power..." , "Obtain stargate shield");
+        addAdvancement(JSGAdvancements.CRAFT_PRINTER, "Not enough Magenta!", "Works like regular printer, but it's more advanced");
+        addAdvancement(JSGAdvancements.TRADE_WITH_PRIEST, "Sacrifices to their gods", "Trade with Priest Villager");
+        addAdvancement(JSGAdvancements.VISIT_ABYDOS, "Welcome to Ra's realm", "Visit Abydos");
+        addAdvancement(JSGAdvancements.USE_GDO, "Code accepted!", "Use a GDO to open the iris");
+        addAdvancement(JSGAdvancements.OBTAIN_TOASTER, "Carter's Toaster", "You wouldn't believe the things that you can make from common items.");
+        addAdvancement(JSGAdvancements.ACTIVATE_ORLIN_GATE, "So you built one?", "Ohh... and you're going to need a new toaster!");
+        addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_CRYSTAL, "Not Incorrect, Incomplete", "Obtain Extended Address Crystal");
+        addAdvancement(JSGAdvancements.OBTAIN_EXTENDED_ADDRESS_DIALING_CRYSTAL, "We Determined 7th Symbol", "Obtain Extended Address Dialing Crystal");
+        addAdvancement(JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, "Its Not Address, Its a Code", "Obtain Static Address Crystal");
+        addAdvancement(JSGAdvancements.ACTIVATE_MOVIE_GATE, "Giza, 1928", "Activate Movie Stargate");
+        addAdvancement(JSGAdvancements.WORMHOLE_GO, "What's a wormhole? And why a worm?", "Enter the Event Horizon of a Stargate");
+        addAdvancement(JSGAdvancements.UNSTABLE_GO, "Unstable Wormhole?!", "For a moment i thought we were in trouble");
+        addAdvancement(JSGAdvancements.ACTIVATE_MILKYWAY_GATE, "Pyramid with Sun above it", "Activate Milky Way Stargate");
+        addAdvancement(JSGAdvancements.ACTIVATE_TOLLAN_GATE, "Ours is bigger", "Activate Tollan Stargate");
+        addAdvancement(JSGAdvancements.KAWOOSH_DEATH, "Escaping Hadante", "Get cremated by the Unstable Vortex");
+        addAdvancement(JSGAdvancements.IRIS_IMPACT, "Like bugs on a windshield", "Witness an object hit the iris");
+        addAdvancement(JSGAdvancements.HIT_WITH_GLOVES, "Gotta bend those cozars", "Hit player or mob while wearing dialing gloves");
+        addAdvancement(JSGAdvancements.ACTIVATE_PEGASUS_GATE, "Bon Voyage!", "Activate Pegasus Stargate");
+        addAdvancement(JSGAdvancements.ACTIVATE_UNIVERSE_GATE, "Several billion light years", "Activate Universe Stargate");
+        addAdvancement(JSGAdvancements.CRAFT_SHIELD, "Using power, using power...", "Obtain stargate shield");
 
         //CHAT AND HOTBAR MESSAGES:
         add("chat.orlins.energyStored", "Energy stored: %s FE (Required: %s FE, %s s");
@@ -319,6 +319,14 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("gui." + JSG.MOD_ID + ".ingame_config.orange_shield.title", "Orange Shield");
         add("gui." + JSG.MOD_ID + ".ingame_config.orange_shield.comment", "Switch shield to orange color on this gate");
 
+        // CONFIG
+        add(JSG.MOD_ID + ".configuration.title", "Just Stargate Mod Configuration");
+        add(JSG.MOD_ID + ".configuration.section.general", "General");
+        add(JSG.MOD_ID + ".configuration.section.debug", "Debug");
+        add(JSG.MOD_ID + ".configuration.section.dialhomedevice", "DHD");
+        add(JSG.MOD_ID + ".configuration.section.stargate", "Stargates");
+        add(JSG.MOD_ID + ".configuration.section.zpm", "ZPM");
+
         add("gui." + JSG.MOD_ID + ".config_child.general", "General");
         add("gui." + JSG.MOD_ID + ".config_child.debug", "Debug");
         add("gui." + JSG.MOD_ID + ".config_child.dialhomedevice", "DHD");
@@ -378,56 +386,56 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("item." + JSG.MOD_ID + ".universe_dialer.gate_busy", "Stargate is busy...");
 
         //ADMIN CONTROLLER - GUI
-        add("gui.admincontroller.name","Admin Controller");
+        add("gui.admincontroller.name", "Admin Controller");
 
-        add("gui.admincontroller.tab.dialing.name","Dialling");
-        add("gui.admincontroller.tab.diagnostics.name","Diagnostics");
-        add("gui.admincontroller.tab.network.name","Network");
+        add("gui.admincontroller.tab.dialing.name", "Dialling");
+        add("gui.admincontroller.tab.diagnostics.name", "Diagnostics");
+        add("gui.admincontroller.tab.network.name", "Network");
 
-        add("gui.admincontroller.tab.dialing.gate.not_linked","OFFLINE");
-        add("gui.admincontroller.tab.dialing.abort.name","Abort dialing");
-        add("gui.admincontroller.tab.dialing.close.name","Close stargate");
-        add("gui.admincontroller.tab.dialing.iris.name","Toggle the gate's iris");
+        add("gui.admincontroller.tab.dialing.gate.not_linked", "OFFLINE");
+        add("gui.admincontroller.tab.dialing.abort.name", "Abort dialing");
+        add("gui.admincontroller.tab.dialing.close.name", "Close stargate");
+        add("gui.admincontroller.tab.dialing.iris.name", "Toggle the gate's iris");
 
-        add("gui.admincontroller.tab.diagnostics.state","Stargate status:");
-        add("gui.admincontroller.tab.diagnostics.subspace","Subspace status:");
-        add("gui.admincontroller.tab.diagnostics.energy","Energy (FE):");
-        add("gui.admincontroller.tab.diagnostics.energy_consumption","Energy consumption (FE/tick):");
-        add("gui.admincontroller.tab.diagnostics.seconds_open","Open time:");
-        add("gui.admincontroller.tab.diagnostics.seconds_to_close","Seconds until closure:");
+        add("gui.admincontroller.tab.diagnostics.state", "Stargate status:");
+        add("gui.admincontroller.tab.diagnostics.subspace", "Subspace status:");
+        add("gui.admincontroller.tab.diagnostics.energy", "Energy (FE):");
+        add("gui.admincontroller.tab.diagnostics.energy_consumption", "Energy consumption (FE/tick):");
+        add("gui.admincontroller.tab.diagnostics.seconds_open", "Open time:");
+        add("gui.admincontroller.tab.diagnostics.seconds_to_close", "Seconds until closure:");
 
-        add("gui.admincontroller.tab.network.address_list.name","Addresses");
-        add("gui.admincontroller.tab.network.map.name","Network map");
-        add("gui.admincontroller.tab.network.map.you_are_here","You are here");
-        add("gui.admincontroller.tab.network.map.stargate.name","Name:");
-        add("gui.admincontroller.tab.network.map.stargate.pos","Position:");
-        add("gui.admincontroller.tab.network.map.stargate.type","Type:");
-        add("gui.admincontroller.tab.network.map.stargate.dimension","Dimension:");
-        add("gui.admincontroller.tab.network.dimension_select.all.name","All dimensions");
-        add("gui.admincontroller.tab.network.address_list.slow_dail.name","Slow dialing");
-        add("gui.admincontroller.tab.network.address_list.fast_dial.name","Fast dialing");
-        add("gui.admincontroller.tab.network.address_list.nox_dialing.name","Nox dialing");
-        add("gui.admincontroller.tab.network.address_list.address.name","Get address");
-        add("gui.admincontroller.tab.network.address_list.teleport.name","Teleport to gate");
+        add("gui.admincontroller.tab.network.address_list.name", "Addresses");
+        add("gui.admincontroller.tab.network.map.name", "Network map");
+        add("gui.admincontroller.tab.network.map.you_are_here", "You are here");
+        add("gui.admincontroller.tab.network.map.stargate.name", "Name:");
+        add("gui.admincontroller.tab.network.map.stargate.pos", "Position:");
+        add("gui.admincontroller.tab.network.map.stargate.type", "Type:");
+        add("gui.admincontroller.tab.network.map.stargate.dimension", "Dimension:");
+        add("gui.admincontroller.tab.network.dimension_select.all.name", "All dimensions");
+        add("gui.admincontroller.tab.network.address_list.slow_dail.name", "Slow dialing");
+        add("gui.admincontroller.tab.network.address_list.fast_dial.name", "Fast dialing");
+        add("gui.admincontroller.tab.network.address_list.nox_dialing.name", "Nox dialing");
+        add("gui.admincontroller.tab.network.address_list.address.name", "Get address");
+        add("gui.admincontroller.tab.network.address_list.teleport.name", "Teleport to gate");
 
-        add("gui.admincontroller.response.error","✘");
-        add("gui.admincontroller.response.success","✔");
-        add("gui.admincontroller.response.stargate.not_linked.error","Controller not linked to a gate");
-        add("gui.admincontroller.response.stargate.not_merged.error","Stargate must be merged");
-        add("gui.admincontroller.response.stargate.dial_address.error.busy","Stargate is busy");
-        add("gui.admincontroller.response.stargate.dial_address.error.already_engaged","One or more symbols have already been engaged");
-        add("gui.admincontroller.response.stargate.dial_address.error.blocked_by_event","Dialling blocked by an error (Check logs)");
-        add("gui.admincontroller.response.stargate.dial_address.success","Begun dialling...");
-        add("gui.admincontroller.response.stargate.give_address.success","Giving address book...");
-        add("gui.admincontroller.response.stargate.abort.error","Stargate is not dialing");
-        add("gui.admincontroller.response.stargate.abort.success","Dialing aborted");
-        add("gui.admincontroller.response.stargate.iris.empty","Stargate doesn't have an iris");
-        add("gui.admincontroller.response.stargate.iris.busy","Stargate's iris is busy");
-        add("gui.admincontroller.response.stargate.iris.close","Closing the iris...");
-        add("gui.admincontroller.response.stargate.iris.open","Opening the iris...");
-        add("gui.admincontroller.response.stargate.close.success","Closing gate...");
-        add("gui.admincontroller.response.stargate.close.error.not_open","Stargate is not open");
-        add("gui.admincontroller.response.stargate.close.error.blocked_by_event","Closing blocked by an error (Check logs)");
+        add("gui.admincontroller.response.error", "✘");
+        add("gui.admincontroller.response.success", "✔");
+        add("gui.admincontroller.response.stargate.not_linked.error", "Controller not linked to a gate");
+        add("gui.admincontroller.response.stargate.not_merged.error", "Stargate must be merged");
+        add("gui.admincontroller.response.stargate.dial_address.error.busy", "Stargate is busy");
+        add("gui.admincontroller.response.stargate.dial_address.error.already_engaged", "One or more symbols have already been engaged");
+        add("gui.admincontroller.response.stargate.dial_address.error.blocked_by_event", "Dialling blocked by an error (Check logs)");
+        add("gui.admincontroller.response.stargate.dial_address.success", "Begun dialling...");
+        add("gui.admincontroller.response.stargate.give_address.success", "Giving address book...");
+        add("gui.admincontroller.response.stargate.abort.error", "Stargate is not dialing");
+        add("gui.admincontroller.response.stargate.abort.success", "Dialing aborted");
+        add("gui.admincontroller.response.stargate.iris.empty", "Stargate doesn't have an iris");
+        add("gui.admincontroller.response.stargate.iris.busy", "Stargate's iris is busy");
+        add("gui.admincontroller.response.stargate.iris.close", "Closing the iris...");
+        add("gui.admincontroller.response.stargate.iris.open", "Opening the iris...");
+        add("gui.admincontroller.response.stargate.close.success", "Closing gate...");
+        add("gui.admincontroller.response.stargate.close.error.not_open", "Stargate is not open");
+        add("gui.admincontroller.response.stargate.close.error.blocked_by_event", "Closing blocked by an error (Check logs)");
 
         //CONFIG
         add("key.categories." + JSG.MOD_ID, "Just Stargate Mod");
@@ -447,27 +455,27 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         //COMMANDS
         add("commands.generic.player_only", "This command can be used only by players");
-        add("commands.prepare.not_preparable","Targeted block is not prepare-able");
-        add("commands.prepare.success","Block successfully prepared for saving into NBT");
-        add("commands.prepare.error","Error while preparing block to save into NBT");
-        add("commands.rig.position_empty","No block's position specified");
-        add("commands.rig.unknown_level","Specified level doesn't exist");
-        add("commands.rig.not_stargate.nearby","No Stargate nearby that could initiate RIG");
-        add("commands.rig.not_stargate.target","Target block isn't Stargate base block");
-        add("commands.rig.already_active","Stargate already has an active RIG");
-        add("commands.sg_set_address.no_address_space","Address type isn't specified");
-        add("commands.sg_set_address.address_space_not_exists","Provided address type doesn't exist");
-        add("commands.sg_set_address.wrong_symbol","Wrong symbol at %s position");
-        add("commands.sg_set_address.duplicate_symbol","Duplicate symbol at %s position");
-        add("commands.sg_set_address.wrong_address","Address must be 8 symbols long. Got %s");
-        add("commands.sg_set_address.success","Target stargate dynamic address has been successfully changed");
-        add("commands.sg_set_address.not_stargate","Target block isn't stargate base block");
-        add("commands.sg_set_static_address.no_address_space","Address type isn't specified");
-        add("commands.sg_set_static_address.address_space_not_exists","Provided address type doesn't exist");
-        add("commands.sg_set_static_address.wrong_symbol","Wrong symbol at %s position");
-        add("commands.sg_set_static_address.duplicate_symbol","Duplicate symbol at %s position");
-        add("commands.sg_set_static_address.wrong_address","Address must be 8 symbols long. Got %s");
-        add("commands.sg_set_static_address.success","Target stargate dynamic address has been successfully changed");
+        add("commands.prepare.not_preparable", "Targeted block is not prepare-able");
+        add("commands.prepare.success", "Block successfully prepared for saving into NBT");
+        add("commands.prepare.error", "Error while preparing block to save into NBT");
+        add("commands.rig.position_empty", "No block's position specified");
+        add("commands.rig.unknown_level", "Specified level doesn't exist");
+        add("commands.rig.not_stargate.nearby", "No Stargate nearby that could initiate RIG");
+        add("commands.rig.not_stargate.target", "Target block isn't Stargate base block");
+        add("commands.rig.already_active", "Stargate already has an active RIG");
+        add("commands.sg_set_address.no_address_space", "Address type isn't specified");
+        add("commands.sg_set_address.address_space_not_exists", "Provided address type doesn't exist");
+        add("commands.sg_set_address.wrong_symbol", "Wrong symbol at %s position");
+        add("commands.sg_set_address.duplicate_symbol", "Duplicate symbol at %s position");
+        add("commands.sg_set_address.wrong_address", "Address must be 8 symbols long. Got %s");
+        add("commands.sg_set_address.success", "Target stargate dynamic address has been successfully changed");
+        add("commands.sg_set_address.not_stargate", "Target block isn't stargate base block");
+        add("commands.sg_set_static_address.no_address_space", "Address type isn't specified");
+        add("commands.sg_set_static_address.address_space_not_exists", "Provided address type doesn't exist");
+        add("commands.sg_set_static_address.wrong_symbol", "Wrong symbol at %s position");
+        add("commands.sg_set_static_address.duplicate_symbol", "Duplicate symbol at %s position");
+        add("commands.sg_set_static_address.wrong_address", "Address must be 8 symbols long. Got %s");
+        add("commands.sg_set_static_address.success", "Target stargate dynamic address has been successfully changed");
 
 
         //SUBTITLES
