@@ -7,7 +7,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "jsg:milkyway_schematic"
+          "name": "jsg:milkyway_schematic",
+          "weight": 2
         }
       ]
     }

@@ -7,7 +7,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "jsg:pegasus_schematic"
+          "name": "jsg:pegasus_schematic",
+          "weight": 2
         }
       ]
     }
