@@ -1,5 +1,5 @@
 name: Crash report
-description: "Some kind of issue that does not result in a crash such as incorrect behaviour or forced disconnectes from a server"
+description: "Some kind of issue that results in a crash (sudden unexpected exiting of the game)"
 labels: ["crash"]
 body:
   - type: textarea
@@ -35,13 +35,22 @@ body:
 
   - type: dropdown
     attributes:
+      label: Minecraft Version
+      options:
+        - 1.20.1
+        - 1.21.1
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
       label: Occurs in clean environment
       description: >
-        Does the crash still occur when only JSG is present
+        Does the bug still occur when only JSG is present
       options:
-        - label: Yes
-        - label: No
-        - label: Unknown
+        - 'Yes'
+        - 'No'
+        - Unknown
     validations:
       required: true
 
@@ -50,6 +59,14 @@ body:
       label: JSG Version
       description: >
         Please provide the version of JSG you are using as the full name of the mod jar file located in your \"`mods`\" folder
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: JSGCore Version
+      description: >
+        Please provide the version of JSGCore you are using as the full name of the mod jar file located in your \"`mods`\" folder
     validations:
       required: true
 
