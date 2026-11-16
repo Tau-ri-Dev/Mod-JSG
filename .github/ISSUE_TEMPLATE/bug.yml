@@ -33,13 +33,22 @@ body:
 
   - type: dropdown
     attributes:
+      label: Minecraft Version
+      options:
+        - 1.20.1
+        - 1.21.1
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
       label: Occurs in clean environment
       description: >
         Does the bug still occur when only JSG is present
       options:
-        - label: Yes
-        - label: No
-        - label: Unknown
+        - 'Yes'
+        - 'No'
+        - Unknown
     validations:
       required: true
 
@@ -48,6 +57,14 @@ body:
       label: JSG Version
       description: >
         Please provide the version of JSG you are using as the full name of the mod jar file located in your \"`mods`\" folder
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: JSGCore Version
+      description: >
+        Please provide the version of JSGCore you are using as the full name of the mod jar file located in your \"`mods`\" folder
     validations:
       required: true
 
