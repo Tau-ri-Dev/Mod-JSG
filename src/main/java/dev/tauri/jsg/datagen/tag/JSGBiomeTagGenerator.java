@@ -87,7 +87,10 @@ public class JSGBiomeTagGenerator extends CoreBiomeTagGenerator {
 
         tag(JSGBiomeTags.HAS_STRUCTURE_TOLLAN_OUTPOST_COMPAT);
 
-        tag(JSGBiomeTags.HAS_STRUCTURE_UNIVERSE_OUTPOST_END).add(Biomes.END_HIGHLANDS).add(Biomes.END_MIDLANDS);
+        tag(JSGBiomeTags.HAS_STRUCTURE_UNIVERSE_OUTPOST_END)
+                .add(Biomes.END_HIGHLANDS)
+                .add(Biomes.END_MIDLANDS)
+                .addOptionalTag(JSGMapping.rl("betterend", "is_end/high_or_midland"));
         tag(JSGBiomeTags.HAS_STRUCTURE_UNIVERSE_OUTPOST_END_MAIN_ISLAND).add(Biomes.THE_END);
         tag(JSGBiomeTags.HAS_STRUCTURE_UNIVERSE_OUTPOST_COMPAT);
 

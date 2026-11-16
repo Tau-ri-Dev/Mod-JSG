@@ -145,7 +145,7 @@ public class DimensionStargateGenerator {
             // Go into future...
             AccessUtil.setNextTickTime(level.getServer(), (Util.getMillis() + 5 * 60 * 1000));
             // now search for structure in max 5 minutes
-            var structureEntry = level.getChunkSource().getGenerator().findNearestMapStructure(level, holderSet.get(), new BlockPos(0, 0, 0), 200, true);
+            var structureEntry = level.getChunkSource().getGenerator().findNearestMapStructure(level, holderSet.get(), new BlockPos(0, 0, 0), 100, true);
             // ...and back to present.
             AccessUtil.setNextTickTime(level.getServer(), Util.getMillis());
             if (structureEntry == null) {
