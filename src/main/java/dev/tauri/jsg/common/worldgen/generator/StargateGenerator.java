@@ -184,9 +184,15 @@ public class StargateGenerator implements IStargateGenerator {
             DHDAbstractBE dhdTile = ((DHDAbstractBE) Objects.requireNonNull(conf.world.getBlockEntity(conf.dhdPos)));
 
             dhdTile.getStateManager().assemblePart((IDHDPartItem) dhdTile.getControlCrystal(), new ItemStack(dhdTile.getControlCrystal()));
+            var dhdInv = dhdTile.getItemHandler();
 
-            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.DHD_DIALING_EXTENDED))
-                dhdTile.getStateManager().assemblePart((IDHDPartItem) JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get(), new ItemStack(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get()));
+            if (conf.upgrades.contains(IStargateGenerator.StargateUpgradesEnum.DHD_DIALING_EXTENDED)) {
+                for (var i = 0; i < dhdInv.getSlots(); i++) {
+                    if (!dhdInv.getStackInSlot(i).isEmpty()) continue;
+                    dhdTile.getItemHandler().insertItem(i, new ItemStack(JSGItems.CRYSTAL_ADDRESS_DIALING_EXTENDED.get()), false);
+                    break;
+                }
+            }
 
             if (conf.dhdFluid >= 0) {
                 var tank = dhdTile.getReactorManager().getTank();
