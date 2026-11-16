@@ -29,7 +29,11 @@ public class StargateContainerGuiState extends State {
     @Override
     public void toBytes(ByteBuf buff) {
         var buf = new FriendlyByteBuf(buff);
+        var types = SymbolType.values(JSGSymbolUsages.STARGATES.get());
+        var size = types.size();
+        buf.writeInt(size);
         for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
+            buf.writeResourceLocation(symbolType.getId());
             gateAddressMap.get(symbolType).toBytes(buf);
             gateAddressMapStatic.get(symbolType).toBytes(buf);
         }
@@ -40,9 +44,12 @@ public class StargateContainerGuiState extends State {
     @Override
     public void fromBytes(ByteBuf buff) {
         var buf = new FriendlyByteBuf(buff);
-        gateAddressMap = new HashMap<>(3);
+        gateAddressMap = new HashMap<>();
+        gateAddressMapStatic = new HashMap<>();
 
-        for (SymbolType<?> symbolType : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
+        var size = buf.readInt();
+        for(var i = 0; i < size; i++){
+            var symbolType = SymbolType.byId(buf.readResourceLocation());
             StargateAddress address = new StargateAddress(symbolType);
             address.fromBytes(buf);
             gateAddressMap.put(symbolType, address);

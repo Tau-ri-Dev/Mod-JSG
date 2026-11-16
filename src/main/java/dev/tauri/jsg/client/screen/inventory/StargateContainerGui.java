@@ -87,7 +87,7 @@ public class StargateContainerGui extends TabbedContainerScreen<StargateContaine
     @Override
     protected void initTabs(List<Tab> tabs) {
         int i = 0;
-        for (SymbolType<?> type : SymbolType.values(JSGSymbolUsages.STARGATES.get())) {
+        for (SymbolType<?> type : menu.gateTile.gateAddressMapClient.keySet()) {
             var tab = TabAddress.builder()
                     .setAddressProvider(new IAddressProvider() {
                         @Override
