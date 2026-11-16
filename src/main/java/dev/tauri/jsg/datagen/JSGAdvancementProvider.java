@@ -160,7 +160,7 @@ public class JSGAdvancementProvider extends CoreAdvancementProvider {
                         true,
                         false
                 )
-                .addCriterion("get_static_address_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_ADDRESS_EXTENDED.get()))
+                .addCriterion("get_static_address_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(JSGItems.CRYSTAL_ADDRESS_STATIC.get()))
                 .save(saver, JSGAdvancements.OBTAIN_STATIC_ADDRESS_CRYSTAL, fileHelper);
 
 
