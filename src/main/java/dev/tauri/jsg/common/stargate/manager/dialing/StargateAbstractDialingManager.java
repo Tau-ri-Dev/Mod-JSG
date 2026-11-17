@@ -166,6 +166,7 @@ public abstract class StargateAbstractDialingManager<SG extends Stargate<?>> ext
     // -----------------------------------------
     // SCHEDULING THE CHEVRONS OPERATIONS
 
+    @Nullable
     public ChevronEnum getNextChevron(@Nullable SymbolInterface symbolToLock, boolean alreadyInAddress, boolean ignoreMaxChevrons) {
         var nextChevron = ChevronEnum.valueOf(dialedAddress.size() - (alreadyInAddress ? 1 : 0));
         if (isLockChevron(symbolToLock, !alreadyInAddress, ignoreMaxChevrons))

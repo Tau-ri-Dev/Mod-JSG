@@ -40,6 +40,7 @@ public interface IStargateDialingManager extends INBTSerializable<CompoundTag>, 
 
     Optional<IAddressDialSequence> getDialingSequence();
 
+    @Nullable
     ChevronEnum getNextChevron(@Nullable SymbolInterface symbolToLock, boolean alreadyInAddress, boolean ignoreMaxChevrons);
 
     StargateAddressCheckResult checkEnergyRequirementsOnDialed();
