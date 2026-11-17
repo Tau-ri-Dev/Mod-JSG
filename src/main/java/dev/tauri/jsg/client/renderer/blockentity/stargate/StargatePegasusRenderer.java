@@ -115,10 +115,10 @@ public class StargatePegasusRenderer extends StargateClassicRenderer<StargatePeg
             stack.pushPose();
 
             stack.translate(0, chevronOffset, 0);
-            ElementEnum.PEGASUS_CHEVRON_MOVING.render(stack, source, combinedLight, renderEmissive);
+            ElementEnum.MILKYWAY_CHEVRON_LIGHT.render(stack, source, combinedLight, renderEmissive);
 
             stack.translate(0, -2 * chevronOffset, 0);
-            ElementEnum.PEGASUS_CHEVRON_LIGHT.render(stack, source, combinedLight, renderEmissive);
+            ElementEnum.MILKYWAY_CHEVRON_MOVING.render(stack, source, combinedLight, renderEmissive);
 
             stack.popPose();
 
