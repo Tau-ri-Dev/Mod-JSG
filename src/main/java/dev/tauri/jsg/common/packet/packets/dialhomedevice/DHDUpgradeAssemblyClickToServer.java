@@ -59,13 +59,14 @@ public class DHDUpgradeAssemblyClickToServer extends PositionedPacket {
             if (handler.getSlots() <= slot) return;
             var stackIn = handler.getStackInSlot(slot);
             if (stackIn.isEmpty() == disassemble) return;
-            if (disassemble)
+            if (disassemble) {
                 player.addItem(handler.extractItem(slot, 1, false));
-            else {
+                player.swing(InteractionHand.MAIN_HAND);
+            } else if (handler.isItemValid(slot, itemStack)) {
                 handler.insertItem(slot, itemStack.copyWithCount(1), false);
                 itemStack.shrink(1);
+                player.swing(InteractionHand.MAIN_HAND);
             }
-            player.swing(InteractionHand.MAIN_HAND);
         });
     }
 }
