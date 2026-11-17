@@ -31,7 +31,7 @@ public class StargateComputerEvents {
     );
     public static final ChevronEvent CHEVRON_ENGAGED = (source, poo, symbol, chevron, dialedAddressSize) -> SignalHolder.of(
             "stargate_chevron_engaged",
-            source.name(), symbol.getEnglishName(poo), chevron.index, dialedAddressSize
+            source.name(), symbol.getEnglishName(poo), (chevron != null ? chevron.index : -1), dialedAddressSize
     );
     public static final Function<ChevronEnum, SignalHolder> CHEVRON_OPEN = (chevronEnum -> SignalHolder.of("stargate_chevron_open", chevronEnum.index));
     public static final Function<ChevronEnum, SignalHolder> CHEVRON_LIT = (chevronEnum -> SignalHolder.of("stargate_chevron_lit", chevronEnum.index));
@@ -87,6 +87,6 @@ public class StargateComputerEvents {
             INCOMING_WORMHOLE
         }
 
-        SignalHolder apply(Source source, @Nullable PointOfOrigin poo, SymbolInterface symbol, ChevronEnum chevron, int dialedAddressSize);
+        SignalHolder apply(Source source, @Nullable PointOfOrigin poo, SymbolInterface symbol, @Nullable ChevronEnum chevron, int dialedAddressSize);
     }
 }

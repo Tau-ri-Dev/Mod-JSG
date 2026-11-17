@@ -39,6 +39,7 @@ public interface IStargateDialingManager extends LegacyNBTSerializable, ITickabl
 
     Optional<IAddressDialSequence> getDialingSequence();
 
+    @Nullable
     ChevronEnum getNextChevron(@Nullable SymbolInterface symbolToLock, boolean alreadyInAddress, boolean ignoreMaxChevrons);
 
     StargateAddressCheckResult checkEnergyRequirementsOnDialed();
