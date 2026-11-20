@@ -3,6 +3,7 @@ package dev.tauri.jsg.common.block.stargate;
 import dev.tauri.jsg.api.block.stargate.IStargateBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateChevronBlock;
 import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
+import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.helpers.ExplosionHelper;
 import dev.tauri.jsg.common.item.stargate.StargateBaseItem;
@@ -102,7 +103,7 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
                 super.onBlockExploded(state, level, pos, explosion);
                 if (wasMerged && level instanceof ServerLevel serverLevel) {
                     var r = getExplosionCraterRadius();
-                    if (r <= 0) return;
+                    if (r <= 0 || !JSGConfig.Stargate.enableGateExplosionChainReaction.get()) return;
                     new ExplosionHelper.Crater(
                             serverLevel,
                             pos.getCenter(),

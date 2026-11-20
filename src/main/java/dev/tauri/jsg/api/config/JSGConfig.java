@@ -190,6 +190,12 @@ public class JSGConfig {
                 "SIDE: SERVER"
         ));
 
+        public static final JSGConfigValue.BooleanValue enableGateExplosionChainReaction = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER,
+                "Mechanics.Enable gate explosion chain reaction", true,
+                "Should gate explode and create VERY BIG crater when detonated?",
+                "SIDE: SERVER"
+        ));
+
         public static final JSGConfigValue.DoubleValue gateMaxHeat = C_SG.add(new JSGConfigValue.DoubleValue(BUILDER,
                 "Mechanics.Max stargate heat", 4340D, 0, Double.MAX_VALUE,
                 "SIDE: SERVER/CLIENT"
