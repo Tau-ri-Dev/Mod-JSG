@@ -64,8 +64,7 @@ import java.util.function.Supplier;
 
 public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements dev.tauri.jsgcore.common.block.util.IItemBlock, IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_BASE_PROPS = Properties.of()
-            //.strength(2.5f, 0.5f)
-            .strength(2.5F, 30.0F)
+            .strength(2.5F, 12f)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
             .isViewBlocking((BlockState state, BlockGetter getter, BlockPos pos) -> false)
             .emissiveRendering((BlockState state, BlockGetter getter, BlockPos pos) -> false)
@@ -94,25 +93,35 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
     @Override
     @ParametersAreNonnullByDefault
     public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
-        super.onBlockExploded(state, level, pos, explosion);
-        if (level instanceof ServerLevel serverLevel) {
-            var r = getExplosionCraterRadius();
-            if (r <= 0) return;
-            new ExplosionHelper.Crater(
-                    serverLevel,
-                    pos.getCenter(),
-                    new Vec3(0, 0, 0),
-                    r,
-                    level.random.nextLong(),
-                    new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                            .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
-                            .add(Blocks.BLACKSTONE.defaultBlockState(), 2)
-                            .add(Blocks.GRAVEL.defaultBlockState(), 1)
-                            .add(Blocks.MAGMA_BLOCK.defaultBlockState(), 1)
-                            .add(Blocks.BASALT.defaultBlockState(), 1)
-                            .build())
-            ).create();
-        }
+        if (!level.isClientSide()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof Stargate<?> stargate) {
+                var wasMerged = stargate.isMerged();
+                stargate.getMergeHelper().updateMemberStateAndCheck(false);
+                stargate.onGateBroken();
+                super.onBlockExploded(state, level, pos, explosion);
+                if (wasMerged && level instanceof ServerLevel serverLevel) {
+                    var r = getExplosionCraterRadius();
+                    if (r <= 0) return;
+                    new ExplosionHelper.Crater(
+                            serverLevel,
+                            pos.getCenter(),
+                            new Vec3(0, 0, 0),
+                            r,
+                            level.random.nextLong(),
+                            new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                    .add(Blocks.COARSE_DIRT.defaultBlockState(), 2)
+                                    .add(Blocks.BLACKSTONE.defaultBlockState(), 2)
+                                    .add(Blocks.GRAVEL.defaultBlockState(), 1)
+                                    .add(Blocks.MAGMA_BLOCK.defaultBlockState(), 1)
+                                    .add(Blocks.BASALT.defaultBlockState(), 1)
+                                    .build())
+                    ).explode();
+                }
+            } else
+                super.onBlockExploded(state, level, pos, explosion);
+        } else
+            super.onBlockExploded(state, level, pos, explosion);
     }
 
     @Override

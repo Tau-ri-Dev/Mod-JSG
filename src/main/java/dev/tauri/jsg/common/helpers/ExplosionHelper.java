@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +19,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+// TODO: Move to JSG: Core 6.1+ & 7.1+
 
 @Mod.EventBusSubscriber(modid = JSG.MOD_ID)
 public class ExplosionHelper {
@@ -51,7 +54,7 @@ public class ExplosionHelper {
      * (<a href="https://www.curseforge.com/minecraft/mc-mods/create-lanterns">https://www.curseforge.com/minecraft/mc-mods/create-lanterns</a>).<br>
      * Right now it's just only as a proof of concept, but will be rewritten in future updates so minimal code from the original mod is present here!
      */
-    public static class Crater {
+    public static class Crater extends Explosion {
         public final ServerLevel level;
         public final Vec3 centre;
         public final double radius;
@@ -61,6 +64,7 @@ public class ExplosionHelper {
         public int next;
 
         public Crater(ServerLevel level, Vec3 explosionCenter, Vec3 explosionDirection, double radius, long seed, BlockStateProvider scorchedBlocksProvider) {
+            super(level, null, explosionCenter.x, explosionCenter.y, explosionCenter.z, (float) radius, List.of());
             this.level = level;
             this.centre = explosionCenter.add(explosionDirection.scale(radius * 0.3));
             this.radius = radius;
@@ -87,10 +91,20 @@ public class ExplosionHelper {
 
         }
 
-        public void create() {
+        @Override
+        public void explode() {
             synchronized (CRATERS) {
                 CRATERS.add(this);
             }
+        }
+
+        @Override
+        public void finalizeExplosion(boolean pSpawnParticles) {
+        }
+
+        @Override
+        public boolean interactsWithBlocks() {
+            return true;
         }
 
         public double edge(double nx, double ny, double nz) {
@@ -121,11 +135,12 @@ public class ExplosionHelper {
                         ++looked;
                         if (this.within(x, y, z)) {
                             pos.set(x, y, z);
+                            var power = radius * Math.max(1 - (centre.distanceTo(pos.getCenter()) / radius), 0.3f);
                             BlockState state = this.level.getBlockState(pos);
                             if (state.isAir()) {
                                 floor = y;
-                            } else if (!(state.getDestroySpeed(this.level, pos) < 0.0F)) {
-                                this.level.setBlock(pos, Blocks.AIR.defaultBlockState(), 50);
+                            } else if (state.getExplosionResistance(this.level, pos, this) <= power) {
+                                this.level.getBlockState(pos).onBlockExploded(level, pos, this);
                                 this.shell(pos);
                                 ++gone;
                                 floor = y;
