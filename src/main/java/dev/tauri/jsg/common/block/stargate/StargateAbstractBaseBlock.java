@@ -1,14 +1,16 @@
 package dev.tauri.jsg.common.block.stargate;
 
 import dev.tauri.jsg.api.block.stargate.IStargateBlock;
-import dev.tauri.jsg.api.block.stargate.IStargateChevronBlock;
-import dev.tauri.jsg.api.block.stargate.IStargateRingBlock;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.api.stargate.Stargate;
 import dev.tauri.jsg.common.helpers.ExplosionHelper;
 import dev.tauri.jsg.common.item.stargate.StargateBaseItem;
 import dev.tauri.jsg.common.multistructure.mergehelper.StargateAbstractMergeHelper;
+import dev.tauri.jsg.common.multistructure.mergehelper.StargateClassicMergeHelper;
 import dev.tauri.jsgcore.common.block.TickableBEBlock;
+import dev.tauri.jsgcore.common.block.util.IHighlightBlock;
+import dev.tauri.jsgcore.common.block.util.IItemBlock;
+import dev.tauri.jsgcore.common.block.util.WrenchRotatable;
 import dev.tauri.jsgcore.common.blockentity.CamouflageBE;
 import dev.tauri.jsgcore.common.helper.BlockPosHelper;
 import dev.tauri.jsgcore.common.helper.ItemHandlerHelper;
@@ -63,7 +65,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Supplier;
 
-public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements dev.tauri.jsgcore.common.block.util.IItemBlock, IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
+public abstract class StargateAbstractBaseBlock extends TickableBEBlock implements IItemBlock, IStargateBlock, IHighlightBlock, SimpleWaterloggedBlock, ITabbedItem, WrenchRotatable {
     protected static final Properties STARGATE_BASE_PROPS = Properties.of()
             .strength(2.5F, 12f)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
@@ -218,16 +220,16 @@ public abstract class StargateAbstractBaseBlock extends TickableBEBlock implemen
         IMergeHelper mergeHelper = gateTile.getMergeHelper();
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!gateTile.isMerged()) {
+        if (!gateTile.isMerged() && mergeHelper instanceof StargateAbstractMergeHelper abstractMergeHelper) {
 
             // This check ensures that stack represents matching member block.
-            boolean chevron = (Block.byItem(stack.getItem()) instanceof IStargateChevronBlock);
-            boolean ring = (Block.byItem(stack.getItem()) instanceof IStargateRingBlock);
+            boolean ring = stack.is(abstractMergeHelper.getRingBlock().asItem());
+            boolean chevron = (abstractMergeHelper instanceof StargateClassicMergeHelper classicMergeHelper && stack.is(classicMergeHelper.getChevronBlock().asItem()));
             if (!chevron && !ring) {
                 return false;
             }
 
-            List<StargateAbstractMergeHelper.MemberAutoBuildBlock> posList = mergeHelper.getAbsentBlockPositions(world, chevron);
+            var posList = mergeHelper.getAbsentBlockPositions(world, chevron);
 
             if (!posList.isEmpty()) {
                 BlockPos pos = posList.get(0).pos;
