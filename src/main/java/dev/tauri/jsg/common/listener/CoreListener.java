@@ -36,6 +36,8 @@ public class CoreListener {
         );
 
         event.registerEntry(Level.NETHER.location().toString(), JSGDimensionConfig.Entry.createDefaultExcept(
+                // TODO: Refactor when Core will be 1.1 / 2.1 and be using list of parameter instead of function in the registry
+                Pair.of("distance", ops -> new Dynamic<>(ops, ops.createInt(5))),
                 Pair.of("groups", (ops) -> new Dynamic<>(ops, ops.createList(Stream.of(ops.createString("milkyway"))))),
                 Pair.of("origins", (ops) -> new Dynamic<>(ops, ops.createMap(Map.of(
                         ops.createString(StargateTypes.MILKYWAY.get().getPoONamespaceIdentifier().toString()), ops.createMap(Map.of(
@@ -47,6 +49,8 @@ public class CoreListener {
         );
 
         event.registerEntry(Level.END.location().toString(), JSGDimensionConfig.Entry.createDefaultExcept(
+                // TODO: Refactor when Core will be 1.1 / 2.1 and be using list of parameter instead of function in the registry
+                Pair.of("distance", ops -> new Dynamic<>(ops, ops.createInt(-95))),
                 Pair.of("generateStargates", (ops) -> new Dynamic<>(ops, ops.createInt(4))),
                 Pair.of("groups", (ops) -> new Dynamic<>(ops, ops.createList(Stream.of(ops.createString("milkyway"))))),
                 Pair.of("origins", (ops) -> new Dynamic<>(ops, ops.createMap(Map.of(
