@@ -179,7 +179,9 @@ public abstract class StargateEnergyManager<SG extends StargateAbstractBaseBE<?,
         else distance = 5000 * Math.log10(distance) / Math.log10(5000);
 
         EnergyRequiredToOperate energyRequired = PowerUtils.stargateConsumption();
-        energyRequired = energyRequired.mul(distance).add(PowerUtils.stargateConsumption().mul(JSGDimensionConfig.INSTANCE.getDistanceBetween(sourceDim, targetDim)));
+        var dimDistance = JSGDimensionConfig.INSTANCE.getDistanceBetween(sourceDim, targetDim);
+        var dimDistCoef = Math.pow(1.13, dimDistance - 50) * dimDistance;
+        energyRequired = energyRequired.mul(distance).add(PowerUtils.stargateConsumption().mul(dimDistCoef));
 
         if (address.size() == 9)
             energyRequired = energyRequired.mul(JSGConfig.Stargate.nineSymbolAddressMul.get());
