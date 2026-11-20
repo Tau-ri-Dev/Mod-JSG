@@ -46,7 +46,7 @@ import static dev.tauri.jsg.common.block.stargate.StargateAbstractBaseBlock.getN
 
 public abstract class StargateAbstractMemberBlock extends TickableBEBlock implements IStargateBlock, dev.tauri.jsgcore.common.block.util.IHighlightBlock, SimpleWaterloggedBlock, dev.tauri.jsgcore.common.block.util.WrenchRotatable {
     protected static final Properties STARGATE_MEMBER_PROPS = Properties.of()
-            .strength(2.5f, 30f)
+            .strength(2.5f, 12f)
             .isRedstoneConductor((BlockState state, BlockGetter getter, BlockPos pos) -> true)
             .isViewBlocking((BlockState state, BlockGetter getter, BlockPos pos) -> false)
             .noOcclusion()
@@ -125,6 +125,7 @@ public abstract class StargateAbstractMemberBlock extends TickableBEBlock implem
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof StargateAbstractMemberBE member) {
                 member.dropCamo();
+                member.findBaseAndUpdateMergeState(false);
             }
         }
     }

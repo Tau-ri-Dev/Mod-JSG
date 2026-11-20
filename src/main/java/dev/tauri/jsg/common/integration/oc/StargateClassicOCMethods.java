@@ -181,6 +181,10 @@ public class StargateClassicOCMethods extends StargateAbstractOCMethods<Stargate
             return new Object[]{false, "stargate_failure_full", "Already dialed 9 chevrons"};
         }
 
+        if (deviceTile.getDialingManager().isFinalActive()) {
+            return new Object[]{false, "stargate_failure_full", "Address is already full"};
+        }
+
         var symbol = args.checkAny(0);
         if (symbol == null)
             throw new IllegalArgumentException("bad argument (symbol name/index invalid)");
@@ -189,7 +193,7 @@ public class StargateClassicOCMethods extends StargateAbstractOCMethods<Stargate
         // disables engaging unknown symbols (gate has only 36, but dhd 38)
         if (!targetSymbol.isValidForAddress() && !targetSymbol.origin())
             throw new IllegalArgumentException("bad argument (symbol name/index invalid)");
-        deviceTile.getDialingManager().engageSymbolBySpin(targetSymbol, false, false);
+        deviceTile.getDialingManager().engageSymbolBySpin(targetSymbol, false, true);
         deviceTile.setChanged();
 
         return new Object[]{true, "stargate_spin"};
