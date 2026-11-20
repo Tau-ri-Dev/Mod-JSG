@@ -8,7 +8,7 @@ import dev.tauri.jsgcore.common.symbol.SymbolType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StargateContainerGuiState extends State {
@@ -16,8 +16,8 @@ public class StargateContainerGuiState extends State {
         this.config = config;
     }
 
-    public Map<SymbolType<?>, StargateAddress> gateAddressMap = new HashMap<>();
-    public Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new HashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMap = new LinkedHashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new LinkedHashMap<>();
     public BEConfig config;
 
     public StargateContainerGuiState(Map<SymbolType<?>, StargateAddress> gateAddressMap, Map<SymbolType<?>, StargateAddress> gateAddressMapStatic, BEConfig config) {
@@ -44,8 +44,8 @@ public class StargateContainerGuiState extends State {
     @Override
     public void fromBytes(ByteBuf buff) {
         var buf = new FriendlyByteBuf(buff);
-        gateAddressMap = new HashMap<>();
-        gateAddressMapStatic = new HashMap<>();
+        gateAddressMap = new LinkedHashMap<>();
+        gateAddressMapStatic = new LinkedHashMap<>();
 
         var size = buf.readInt();
         for(var i = 0; i < size; i++){

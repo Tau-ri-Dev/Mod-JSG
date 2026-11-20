@@ -80,16 +80,16 @@ public abstract class StargateAbstractBaseBE<S extends StargateAbstractRendererS
     protected StargateAutoCloseManager autoCloseManager;
     protected ComputerDeviceHolder computerDeviceHolder;
 
-    protected final Map<SymbolType<?>, StargateAddress> gateAddressMap = new HashMap<>();
-    protected final Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new HashMap<>();
+    protected final Map<SymbolType<?>, StargateAddress> gateAddressMap = new LinkedHashMap<>();
+    protected final Map<SymbolType<?>, StargateAddress> gateAddressMapStatic = new LinkedHashMap<>();
     protected StargatePos stargatePos;
     protected StargateAbstractMergeHelper mergeHelper = null;
     protected boolean isMerged;
     protected boolean addedToComputerNetwork;
     protected boolean needRegenerate = false;
 
-    public Map<SymbolType<?>, StargateAddress> gateAddressMapClient = new HashMap<>();
-    public Map<SymbolType<?>, StargateAddress> gateAddressMapClientStatic = new HashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMapClient = new LinkedHashMap<>();
+    public Map<SymbolType<?>, StargateAddress> gateAddressMapClientStatic = new LinkedHashMap<>();
 
     protected UUID uuid;
 
