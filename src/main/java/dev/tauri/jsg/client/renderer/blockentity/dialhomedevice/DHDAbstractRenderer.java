@@ -195,7 +195,8 @@ public abstract class DHDAbstractRenderer<S extends DHDAbstractRendererState> im
 
             // check address type && button is not activated
             var buttonsState = tileEntity.getStateManager().getButtonsState();
-            if (buttonsState.get(st.getBRB()).isActive()) return new Vector3f(1f, 1f, 1f);
+            var brbState = buttonsState.get(st.getBRB());
+            if (brbState == null || brbState.isActive()) return new Vector3f(1f, 1f, 1f);
             if (st == symbolType && !buttonsState.get(symbol).isActive() && !buttonsState.get(st.getOrigin()).isActive()) {
 
                 var activatedButtons = buttonsState.getActivatedButtons();
