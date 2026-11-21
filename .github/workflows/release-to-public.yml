@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*' # Run when any tag is pushed
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sourcecode
+        uses: actions/checkout@v4
+
+      - name: Setup Java (JDK)
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Setup permissions for Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Remove minecraft version from the mod version
+        id: version
+        run: |
+          CLEAN_VERSION="${GITHUB_REF_NAME#1.20.1-}"
+          echo "clean_version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Run datagen
+        run: xvfb-run -a ./gradlew :runData -Pmod_version=${{ steps.version.outputs.clean_version }}
+
+      - name: Build server-jar
+        run: ./gradlew server:jar -Pmod_version=${{ steps.version.outputs.clean_version }}
+
+      - name: Build project & gen JavaDoc
+        run: ./gradlew :jar :plainJavadocJar -Pmod_version=${{ steps.version.outputs.clean_version }}
+
+      - name: Package HTML JavDoc to zip
+        run: |
+          cd build/docs/javadoc
+          zip -r ../../.jsg_builds/jsg-${{ github.ref_name }}-javadoc-html.zip .
+
+      - name: Verify generated files
+        run: ls -la build/.jsg_builds/
+
+      - name: Create Release in target repository
+        uses: softprops/action-gh-release@v2
+        with:
+          # Target repository
+          repository: Tau-ri-Dev/Mod-JSG
+          tag_name: ${{ github.ref_name }}
+          name: jsg-${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            build/.jsg_builds/jsg-${{ github.ref_name }}.jar
+            build/.jsg_builds/jsg-${{ github.ref_name }}-javadoc.jar
+            build/.jsg_builds/jsg-*-javadoc-html.zip
+            server/build/.jsg_builds/jsg-server-${{ github.ref_name }}.jar
+          token: ${{ secrets.RELEASE_TOKEN }}

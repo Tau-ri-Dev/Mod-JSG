@@ -1,0 +1,10 @@
+jdk:
+  - openjdk17
+
+install:
+  # 1. Download from releases
+  - curl -L -o jsg-${VERSION}.jar "https://github.com/Tau-ri-Dev/Mod-JSG/releases/download/${VERSION}/jsg-${VERSION}.jar"
+  - curl -L -o jsg-${VERSION}-javadoc.jar "https://github.com/Tau-ri-Dev/Mod-JSG/releases/download/${VERSION}/jsg-${VERSION}-javadoc.jar"
+
+  # 2. Install to jitpack local
+  - mvn install:install-file -Dfile=jsg-${VERSION}.jar -Djavadoc=jsg-${VERSION}-javadoc.jar -DgroupId=com.github.Tau-ri-Dev -DartifactId=jsg -Dversion=${VERSION} -Dpackaging=jar

@@ -26,6 +26,12 @@ allprojects {
         archivesName = build_extrapath + "-" + minecraft_version
     }
 
+    idea {
+        module {
+            downloadJavadoc = true
+        }
+    }
+
     java {
         toolchain.languageVersion = JavaLanguageVersion.of(17)
     }
@@ -161,7 +167,11 @@ allprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation(fg.deobf("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false })
+        if (building_release == "true") {
+            implementation(fg.deobf("com.github.Tau-ri-Dev:Mod-JSGCore-public:${minecraft_version}-${core_version}"))
+        } else {
+            implementation(fg.deobf("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false })
+        }
 
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
