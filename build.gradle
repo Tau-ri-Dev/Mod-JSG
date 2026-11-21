@@ -18,6 +18,12 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
+idea {
+    module {
+        downloadJavadoc = true
+    }
+}
+
 neoForge {
     version = project.neo_version
 
@@ -99,6 +105,12 @@ configurations {
 
 dependencies {
     compileOnly "org.jspecify:jspecify:1.0.0"
+
+    if (building_release == "true") {
+        implementation("com.github.Tau-ri-Dev:Mod-JSGCore-public:${minecraft_version}-${core_version}")
+    } else {
+        implementation("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false }
+    }
 
     implementation("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false }
 
