@@ -23,23 +23,19 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
-import java.util.WeakHashMap;
+import java.util.*;
 
 /**
- * SERVER SIDE. Travellers walk into the event horizon and step back out of the one at the other end, instead of
+ * SERVER SIDE. Travelers walk into the event horizon and step back out of the one at the other end, instead of
  * vanishing just in front of the first gate and appearing a block in front of the second.
  * <ul>
- *     <li>{@link #onSend}: remembers where a traveller went in (which side of the gate's centre line).</li>
+ *     <li>{@link #onSend}: remembers where a traveler went in (which side of the gate's center line).</li>
  *     <li>{@link #onReceive}: right after {@code place()}, moves the arrival back so it starts inside the
  *     destination horizon on the side it went in, then keeps it moving out until it is clear.</li>
  *     <li>{@link #startWalkIn}: during the travel animation the player stays visible and walks on into the
  *     source horizon; they are hidden once their whole body is through.</li>
  * </ul>
- * Clients get a {@link StargateWalkOutToClient} so they can hide the part of a traveller that is inside the
+ * Clients get a {@link StargateWalkOutToClient} so they can hide the part of a traveler that is inside the
  * horizon (see {@code StargateWalkOutClient}).
  */
 @EventBusSubscriber(modid = JSG.MOD_ID)
@@ -48,17 +44,17 @@ public final class StargateWalkOut {
     private static final double MARGIN = 0.02;
     /** Step used when backing off from a wall behind the gate. */
     private static final double STEP = 0.05;
-    /** Players this far away are told about the traveller (covers normal render distance). */
+    /** Players this far away are told about the traveler (covers normal render distance). */
     private static final double NOTIFY_RADIUS = 128.0;
     /** How far through the horizon the front of a departing body must be before it counts as through. */
     private static final double DEPART_DEPTH = 0.05;
     /**
      * Ticks between a departing player being through on the server and hiding them. Other players see them a
-     * little behind the server; their own game hides the traveller as soon as it is through on their screen.
+     * little behind the server; their own game hides the traveler as soon as it is through on their screen.
      */
     private static final int HIDE_GRACE = 10;
 
-    /** Where a traveller touched the source horizon, kept until they arrive (by UUID: survives dimension changes). */
+    /** Where a traveler touched the source horizon, kept until they arrive (by UUID: survives dimension changes). */
     private record Entry(Vec3 pos, EventHorizonPlane plane, long time) {
     }
 
@@ -83,7 +79,7 @@ public final class StargateWalkOut {
     // --------------------------------------------------
     // GOING IN
 
-    /** Called from {@code StargateEventHorizonManager.send()} just before the traveller is sent. */
+    /** Called from {@code StargateEventHorizonManager.send()} just before the traveler is sent. */
     public static void onSend(IStargateTraveler<?> traveler, Stargate<?> sourceGate) {
         if (!enabled() || traveler.isStatic() || !(traveler.get() instanceof Entity entity)) {
             return;
@@ -130,7 +126,7 @@ public final class StargateWalkOut {
 
     /**
      * Called from {@code StargateEventHorizonManager.receive()} right after {@code place()} and the receive event,
-     * before the iris check and before the traveller is added to the recently-through list (which protects it
+     * before the iris check and before the traveler is added to the recently-through list (which protects it
      * from wrong-side killing while it is still inside the horizon).
      */
     public static void onReceive(IStargateTraveler<?> traveler, Stargate<?> gate, boolean redirected) {
@@ -150,7 +146,7 @@ public final class StargateWalkOut {
             return;
         }
         Entry entry = ENTRIES.remove(entity.getUUID());
-        // A closed iris kills the traveller straight after this; nothing to walk out of.
+        // A closed iris kills the traveler straight after this; nothing to walk out of.
         if (gate instanceof StargateWithIris<?> withIris && withIris.getIrisManager().isIrisClosed()) {
             return;
         }
@@ -170,7 +166,7 @@ public final class StargateWalkOut {
             Vec3 side = plane.side();
             double halfWidth = (box.getXsize() * Math.abs(side.x) + box.getZsize() * Math.abs(side.z)) / 2.0;
             double limit = Math.max(0.0, plane.halfWidth() - halfWidth - 0.05);
-            double wanted = Math.max(-limit, Math.min(limit, entry.pos().subtract(entry.plane().point()).dot(entry.plane().side().reverse())));
+            double wanted = Math.clamp(entry.pos().subtract(entry.plane().point()).dot(entry.plane().side().reverse()), -limit, limit);
             double now = placed.subtract(plane.point()).dot(side);
             entity.setPos(entity.position().add(side.scale(wanted - now)));
         }
@@ -217,7 +213,7 @@ public final class StargateWalkOut {
     }
 
     /**
-     * Where to start the traveller: as deep inside the horizon as configured, backing off outwards until the body
+     * Where to start the traveler: as deep inside the horizon as configured, backing off outwards until the body
      * fits (a wall right behind the gate). Only the distance along the gate's normal changes.
      *
      * @return null to keep the current spot (already right, or nothing else fits)
@@ -268,7 +264,7 @@ public final class StargateWalkOut {
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
         serverTicks++;
-        // Forget entries for travellers that were never sent (stepped back out); a player's trip takes ~5 s.
+        // Forget entries for travelers that were never sent (stepped back out); a player's trip takes ~5 s.
         if (!ENTRIES.isEmpty() && serverTicks % 100 == 0) {
             ENTRIES.values().removeIf(e -> serverTicks - e.time() > 600);
         }
@@ -292,7 +288,7 @@ public final class StargateWalkOut {
                 Departing d = it.next().getValue();
                 ServerPlayer player = d.player();
                 if (player.isRemoved() || !StargateWormholeHandler.WORMHOLE_ANIMATION_END_MAP.containsKey(player.getUUID())) {
-                    it.remove(); // trip finished or cancelled; release() has made them visible again
+                    it.remove(); // trip finished or canceled; release() has made them visible again
                     continue;
                 }
                 if (d.plane().depthThrough(player.getBoundingBox()) >= DEPART_DEPTH && d.grace()[0] < 0) {

@@ -8,13 +8,13 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * The flat surface of an event horizon: a point on it and the direction travellers come out (the front of the gate),
+ * The flat surface of an event horizon: a point on it and the direction travelers come out (the front of the gate),
  * plus the size of the opening (half its width, its bottom and top heights).
- * Used by the server (placing and pushing arrivals) and the client (hiding travellers, pushing the local player).
+ * Used by the server (placing and pushing arrivals) and the client (hiding travelers, pushing the local player).
  */
 public record EventHorizonPlane(Vec3 point, Vec3 normal, double halfWidth, double bottom, double top) {
 
-    /** Travellers are helped this far clear of the horizon, so they don't stop with their back in the puddle. */
+    /** Travelers are helped this far clear of the horizon, so they don't stop with their back in the puddle. */
     public static final double CLEARANCE = 0.3;
 
     /**
@@ -71,30 +71,25 @@ public record EventHorizonPlane(Vec3 point, Vec3 normal, double halfWidth, doubl
         return -(signedDistance(box.getCenter()) + halfDepth(box));
     }
 
-    /** True once the traveller has stepped far enough out that the walk-out is done. */
+    /** True once the traveler has stepped far enough out that the walk-out is done. */
     public boolean clear(AABB box) {
         return depthInside(box) <= -CLEARANCE;
     }
 
-    public void write(FriendlyByteBuf buf) {
-        writeVec(buf, point);
-        writeVec(buf, normal);
+    public void toBytes(FriendlyByteBuf buf) {
+        buf.writeVec3(point);
+        buf.writeVec3(normal);
         buf.writeDouble(halfWidth);
         buf.writeDouble(bottom);
         buf.writeDouble(top);
     }
 
-    public static EventHorizonPlane read(FriendlyByteBuf buf) {
-        return new EventHorizonPlane(readVec(buf), readVec(buf), buf.readDouble(), buf.readDouble(), buf.readDouble());
-    }
-
-    public static void writeVec(FriendlyByteBuf buf, Vec3 v) {
-        buf.writeDouble(v.x);
-        buf.writeDouble(v.y);
-        buf.writeDouble(v.z);
-    }
-
-    public static Vec3 readVec(FriendlyByteBuf buf) {
-        return new Vec3(buf.readDouble(), buf.readDouble(), buf.readDouble());
+    public static EventHorizonPlane fromBytes(FriendlyByteBuf buf) {
+        var point = buf.readVec3();
+        var normal = buf.readVec3();
+        var halfWidth = buf.readDouble();
+        var bottom = buf.readDouble();
+        var top = buf.readDouble();
+        return new EventHorizonPlane(point, normal, halfWidth, bottom, top);
     }
 }

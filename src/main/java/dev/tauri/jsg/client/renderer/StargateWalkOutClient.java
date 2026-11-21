@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * CLIENT SIDE half of the walk-out (see {@code StargateWalkOut}): hides the part of a traveller that is inside
+ * CLIENT SIDE half of the walk-out (see {@code StargateWalkOut}): hides the part of a traveler that is inside
  * an event horizon, pushes the local player out of (or into) the horizon, and flashes the screen on arrival
  * when the travel animation is off.
  */
@@ -50,11 +50,11 @@ public final class StargateWalkOutClient {
     }
 
     private static final Map<Integer, Active> ACTIVE = new HashMap<>();
-    /** A departing traveller is hidden once its trailing side is this far through the horizon. */
+    /** A departing traveler is hidden once its trailing side is this far through the horizon. */
     private static final double GONE_DEPTH = 0.02;
     /** Walking in stops once the front of the body is this far through the horizon. */
     private static final double DEPART_DEPTH = 0.1;
-    /** Within this distance (squared: 3 blocks) of the arrival spot, the traveller counts as at the gate. */
+    /** Within this distance (squared: 3 blocks) of the arrival spot, the traveler counts as at the gate. */
     private static final double ARRIVED_SQR = 9.0;
     /** The cut-off surface sits this far behind the horizon, clear of its ripples (under 0.01 blocks). */
     private static final double CUT_OFF_DEPTH = 0.03;
@@ -68,29 +68,29 @@ public final class StargateWalkOutClient {
     private StargateWalkOutClient() {
     }
 
-    public static void onPacket(StargateWalkOutToClient p) {
+    public static void handlePacket(StargateWalkOutToClient packet) {
         Minecraft mc = Minecraft.getInstance();
         // A few spare ticks: the entity's position update can reach us a moment after this packet.
         // A departure starts where the player already is, so there is no slide to hide.
-        Active active = new Active(p.entityId, p.departing, p.plane, p.start, ticks + p.ticks + 10, p.speed,
-                p.hideFromBehind, new boolean[]{p.departing}, new boolean[]{false});
-        ACTIVE.put(p.entityId, active);
-        Entity known = mc.level == null ? null : mc.level.getEntity(p.entityId);
-        if (!p.departing && known != null && known.position().distanceToSqr(p.start) > ARRIVED_SQR) {
+        Active active = new Active(packet.entityId, packet.departing, packet.plane, packet.start, ticks + packet.ticks + 10, packet.speed,
+                packet.hideFromBehind, new boolean[]{packet.departing}, new boolean[]{false});
+        ACTIVE.put(packet.entityId, active);
+        Entity known = mc.level == null ? null : mc.level.getEntity(packet.entityId);
+        if (!packet.departing && known != null && known.position().distanceToSqr(packet.start) > ARRIVED_SQR) {
             snapToStart(active, known);
         }
         LocalPlayer player = mc.player;
-        if (player != null && player.getId() == p.entityId) {
+        if (player != null && player.getId() == packet.entityId) {
             self = active;
             // The travel animation ends in its own white flash; don't stack a second one on it.
             boolean animation = StargateWormholeEffect.isPlaying || StargateWormholeEffect.isPlayingWhite;
-            if (!p.departing && JSGConfig.Stargate.walkOutArrivalFlash.get() && !animation) {
+            if (!packet.departing && JSGConfig.Stargate.walkOutArrivalFlash.get() && !animation) {
                 flashStart = ticks;
             }
         }
     }
 
-    /** Skip Minecraft's slide: put the traveller straight onto the arrival spot. */
+    /** Skip Minecraft's slide: put the traveler straight onto the arrival spot. */
     private static void snapToStart(Active a, Entity entity) {
         if (entity == Minecraft.getInstance().player) {
             return;
@@ -100,7 +100,7 @@ public final class StargateWalkOutClient {
         entity.lerpTo(s.x, s.y, s.z, entity.getYRot(), entity.getXRot(), 0);
     }
 
-    /** Should this traveller be left out of this frame? */
+    /** Should this traveler be left out of this frame? */
     static boolean shouldHide(Entity entity, Vec3 cam) {
         Active a = ACTIVE.get(entity.getId());
         if (a == null) {
