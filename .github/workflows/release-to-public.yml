@@ -35,8 +35,8 @@ jobs:
       - name: Run datagen
         run: xvfb-run -a ./gradlew :runData -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
 
-      - name: Build server-jar
-        run: ./gradlew server:jar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
+      #- name: Build server-jar
+      #  run: ./gradlew server:jar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
 
       - name: Build project & gen JavaDoc
         run: ./gradlew :jar :plainJavadocJar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
