@@ -39,7 +39,7 @@ jobs:
       #  run: ./gradlew server:jar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
 
       - name: Build project & gen JavaDoc
-        run: ./gradlew :jar :plainJavadocJar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
+        run: ./gradlew :build :plainJavadocJar -Pbuilding_release=true -Pmod_version=${{ steps.version.outputs.clean_version }}
 
       - name: Package HTML JavDoc to zip
         run: |

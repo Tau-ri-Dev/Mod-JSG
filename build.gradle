@@ -91,6 +91,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        name = 'JitPack'
+        url = 'https://jitpack.io'
+    }
 
     // Metrics
     maven {
@@ -111,8 +115,6 @@ dependencies {
     } else {
         implementation("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false }
     }
-
-    implementation("eu.tauridev:jsg-core-${minecraft_version}:${core_version}:") { transitive = false }
 
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
