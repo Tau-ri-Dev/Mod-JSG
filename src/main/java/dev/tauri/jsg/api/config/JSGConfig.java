@@ -67,6 +67,11 @@ public class JSGConfig {
         ));
 
         public static final JSGConfigValue.BooleanValue renderBoundingBoxes = C_DEBUG.add(new JSGConfigValue.BooleanValue(BUILDER, "Render bounding boxes", false));
+
+        public static final JSGConfigValue.BooleanValue walkOutShowCutOff = C_DEBUG.add(new JSGConfigValue.BooleanValue(BUILDER, "Render walk-out cut-off surface", false,
+                "Draws the invisible surface that hides travellers still inside an event horizon in see-through red",
+                "SIDE: CLIENT"
+        ));
     }
 
     public static class DialHomeDevice {
@@ -367,6 +372,70 @@ public class JSGConfig {
 
         public static final JSGConfigValue.BooleanValue blackHoleCanSuckBlocks = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "EventHorizon.Blackhole field can suck blocks", true,
                 "SIDE: SERVER"
+        ));
+
+        // --------------------------------------
+        //      WALK-OUT
+        // --------------------------------------
+
+        public static final JSGConfigValue.BooleanValue walkOutEnabled = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Enable walk-out", true,
+                "Travellers walk into the event horizon and step back out of the one at the other end,",
+                "instead of vanishing in front of the first gate and appearing a block in front of the second",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutPlayers = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Players", true,
+                "Players step out of the event horizon",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutMobs = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Mobs", true,
+                "Mobs, animals and other living entities step out of the event horizon",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutOtherEntities = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Other entities", true,
+                "Items, arrows and other non-living entities come out of the event horizon",
+                "Boats, minecarts and anything riding or carrying something always use the normal placement",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutWalkIn = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Walk into the horizon", true,
+                "During the travel animation, players visibly walk into the departure horizon",
+                "instead of vanishing just in front of it",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutKeepSide = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Keep side", true,
+                "Come out on the same side of the gate you went in",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.DoubleValue walkOutStartInside = C_SG.add(new JSGConfigValue.DoubleValue(BUILDER, "WalkOut.Start inside", 1.0, 0.0, 1.0,
+                "How much of the traveller starts inside the event horizon: 1.0 = all of them, 0.5 = half",
+                "If a wall right behind the gate leaves less room, they start as deep as fits",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.DoubleValue walkOutExitSpeed = C_SG.add(new JSGConfigValue.DoubleValue(BUILDER, "WalkOut.Exit speed", 0.18, 0.05, 1.0,
+                "Slowest speed a traveller comes out at, in blocks per tick (walking is about 0.22)",
+                "Anyone already moving faster keeps their own speed",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.IntValue walkOutMaxTicks = C_SG.add(new JSGConfigValue.IntValue(BUILDER, "WalkOut.Max walk ticks", 40, 5, 200,
+                "Longest time, in ticks, a traveller is helped into or out of a horizon",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutHideFromBehind = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Hide from behind", true,
+                "Hide a traveller from players behind the gate while any part of them is still inside the horizon",
+                "SIDE: SERVER"
+        ));
+
+        public static final JSGConfigValue.BooleanValue walkOutArrivalFlash = C_SG.add(new JSGConfigValue.BooleanValue(BUILDER, "WalkOut.Arrival flash", true,
+                "Flash the screen when you arrive through a gate (skipped when the travel animation plays)",
+                "SIDE: CLIENT"
         ));
 
         // --------------------------------------

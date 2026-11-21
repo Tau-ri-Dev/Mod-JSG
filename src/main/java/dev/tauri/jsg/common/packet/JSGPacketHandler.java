@@ -67,6 +67,7 @@ public class JSGPacketHandler {
         HANDLER.registerPacketToClient(AdminControllerGuiOpenToClient.class);
         HANDLER.registerPacketToClient(StargateMotionAndRotationToClient.class);
         HANDLER.registerPacketToClient(StargateWormholeEffectToClient.class);
+        HANDLER.registerPacketToClient(dev.tauri.jsg.common.packet.packets.stargate.StargateWalkOutToClient.class);
         HANDLER.registerPacketToClient(StargatePlayerMotionRequestToClient.class);
         HANDLER.registerPacketToClient(ACResponsePacketToClient.class);
         HANDLER.registerPacketToClient(ACStargateEngageSymbolPacketToClient.class);

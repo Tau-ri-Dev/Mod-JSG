@@ -38,5 +38,6 @@ public class ClientModListener {
     @SubscribeEvent
     public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(dev.tauri.jsgcore.mapping.JSGMapping.rl(dev.tauri.jsg.JSG.MOD_ID, "wormhole_overlay"), StargateWormholeEffect::render);
+        event.registerAboveAll(dev.tauri.jsgcore.mapping.JSGMapping.rl(dev.tauri.jsg.JSG.MOD_ID, "walkout_arrival_flash"), dev.tauri.jsg.client.renderer.StargateWalkOutClient::renderFlash);
     }
 }

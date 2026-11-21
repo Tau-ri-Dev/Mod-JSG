@@ -3,6 +3,7 @@ package dev.tauri.jsg.common.effect;
 import dev.tauri.jsg.api.config.JSGConfig;
 import dev.tauri.jsg.common.packet.JSGPacketHandler;
 import dev.tauri.jsg.common.packet.packets.effect.StargateWormholeEffectToClient;
+import dev.tauri.jsg.common.stargate.teleportation.walkout.StargateWalkOut;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,13 +41,15 @@ public class StargateWormholeHandler {
         WORMHOLE_ANIMATION_END_MAP.put(sp.getUUID(), (time + (length * 1000L)));
         PLAYER_PLACER_INTERFACES.put(sp.getUUID(), placer);
         JSGPacketHandler.sendTo(new StargateWormholeEffectToClient(false, type, length), sp);
-        sp.setInvisible(true);
+        // With the walk-out, the player stays visible while walking on into the horizon and is hidden once through.
+        boolean walkingIn = StargateWalkOut.startWalkIn(sp);
+        if (!walkingIn) sp.setInvisible(true);
         sp.setInvulnerable(true);
         sp.noPhysics = true;
         sp.getAbilities().invulnerable = true;
         sp.getAbilities().mayBuild = false;
         sp.onUpdateAbilities();
-        sp.setInvisible(true);
+        if (!walkingIn) sp.setInvisible(true);
 
         //((ServerLevel) sp.level()).removePlayerImmediately(sp, Entity.RemovalReason.DISCARDED);
         //sp.server.getPlayerList().remove(sp);
