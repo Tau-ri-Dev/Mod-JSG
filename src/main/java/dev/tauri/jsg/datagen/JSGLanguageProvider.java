@@ -480,6 +480,20 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         //SUBTITLES
         addAllSubtitles(JSGSoundEvents.class);
-
+        add(JSG.MOD_ID + ".subtitle.misc.stargate.wormhole.travel", "Travelling trough wormhole...");
+        add(JSG.MOD_ID + ".subtitle.misc.stargate.wormhole.loop", "Event horizon humming");
+        add(JSG.MOD_ID + ".subtitle.misc.stargate.movie.wormhole.loop", "Event horizon humming");
+        add(JSG.MOD_ID + ".subtitle.misc.stargate.shield.humming", "Shield humming");
+        add(JSG.MOD_ID + ".subtitle.misc.printer.printing", "Printer printing");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.milkyway.ring_roll.start", "Milky Way ring rolling begun");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.milkyway.ring_roll.loop", "Milky Way ring rolling");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.milkyway.ring_roll.manual.start", "Milky Way gate ring manually rolling begun");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.milkyway.ring_roll.manual.loop", "Milky Way gate ring manually rolling");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.universe.ring_roll.start", "Universe gate gate rolling begun");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.universe.ring_roll.loop", "Universe gate gate rolling");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.pegasus.ring_roll.start", "Pegasus gate ring spinning begun");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.pegasus.ring_roll.loop", "Pegasus gate ring spinning");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.movie.ring_roll.start", "Movie gate ring rolling begun");
+        add(JSG.MOD_ID + ".subtitle.block.stargate.movie.ring_roll.loop", "Movie gate ring rolling");
     }
 }
