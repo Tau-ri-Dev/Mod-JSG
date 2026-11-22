@@ -1,8 +1,10 @@
 package dev.tauri.jsg.common.stargate.manager.dialing;
 
+import dev.tauri.jsg.api.config.ingame.option.StargateConfigOptions;
 import dev.tauri.jsg.api.integration.StargateComputerEvents;
 import dev.tauri.jsg.api.registry.JSGScheduledTaskTypes;
 import dev.tauri.jsg.api.stargate.EnumStargateState;
+import dev.tauri.jsg.api.stargate.animation.EnumSpinDirection;
 import dev.tauri.jsg.api.stargate.result.StargateChevronEngageResult;
 import dev.tauri.jsg.common.advancements.JSGCriterions;
 import dev.tauri.jsg.common.blockentity.stargate.StargateMovieBaseBE;
@@ -63,6 +65,19 @@ public class StargateMovieDialingManager extends StargateMilkyWayDialingManager 
 
     @Override
     public StargateChevronEngageResult engageSymbolDHD(SymbolInterface symbol, boolean noEnergy, boolean ignoreMaxChevrons) {
+        // dial using buffer - spinning the ring while dialing with DHD
+        if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).spinEngage()) {
+            var result = engageSymbolToBuffer(symbol, noEnergy, ignoreMaxChevrons);
+            if (result != StargateChevronEngageResult.OK) return result;
+            var dhd = stargate.getLinkedDevice();
+            if (stargate.isLinkedAndDHDOperational() && dhd != null) {
+                dhd.activateSymbol(symbol);
+            }
+            if (addressDialSequence != null)
+                addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 10));
+            return StargateChevronEngageResult.OK;
+        }
+
         if (!getStargateState().idle())
             return StargateChevronEngageResult.BUSY;
         var r = engageSymbolInternal(symbol, false, noEnergy, ignoreMaxChevrons);
@@ -75,6 +90,11 @@ public class StargateMovieDialingManager extends StargateMilkyWayDialingManager 
             getConnection().runOnConnected((conn, sg) -> ((StargateAbstractDialingManager<?>) sg.getDialingManager()).runIncomingWormhole(dialedAddress.addOriginIfMissingAndImmutable().size(), 30));
         }
         int plusTime = new Random().nextInt(5);
+        if (isLockChevron(symbol, ignoreMaxChevrons)) {
+            getSpinHelper().stopSpinning(true);
+        } else if (stargate.getConfig().getValueOrDefault(StargateConfigOptions.MilkyWay.DHD_DIALING_TYPE).freeSpin()) {
+            getSpinHelper().rotateFreely(EnumSpinDirection.random(new Random()), 1.5f * getSpinHelper().getRingSpeedFromConfig());
+        }
         stargate.getStateManager().getChevronsState().scheduleChevronActivate(10 + plusTime, getNextChevron(symbol, true, ignoreMaxChevrons), null, true, false, true, noEnergy, ignoreMaxChevrons);
         if (addressDialSequence != null)
             addTask(new ScheduledTask(JSGScheduledTaskTypes.STARGATE_DIAL_NEXT, 15 + plusTime + A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY * 2));
