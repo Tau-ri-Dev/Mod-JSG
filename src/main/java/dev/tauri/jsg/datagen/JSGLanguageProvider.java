@@ -444,6 +444,11 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
         add("death.attack.unstable_eh", "%s didn't make it to the other side");
         add("death.attack.wrong_side", "%s entered the wrong side of the gate");
         add("death.attack.iris", "%s slammed into the Iris");
+        
+        //BIOMES
+        add("biome." + JSG.MOD_ID + ".abydos_desert", "Abydos desert");
+        add("biome." + JSG.MOD_ID + ".abydos_naquadah_deposits", "Abydos naquadah deposits");
+        add("biome." + JSG.MOD_ID + ".abydos_plains", "Abydos plains");
 
         //COMMANDS
         add("commands.generic.player_only", "This command can be used only by players");
