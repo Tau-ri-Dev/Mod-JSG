@@ -116,6 +116,7 @@ builds
 # Common working directory
 run/
 run-data/
+run-tests/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar

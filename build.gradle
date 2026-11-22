@@ -27,6 +27,8 @@ idea {
 neoForge {
     version = project.neo_version
 
+    addModdingDependenciesTo sourceSets.test
+
     parchment {
         minecraftVersion = project.parchment_minecraft_version
         mappingsVersion = project.parchment_mappings_version
@@ -49,6 +51,13 @@ neoForge {
                     '--output', file('src/generated/resources/').absolutePath,
                     '--existing', file('src/main/resources/').absolutePath,
                     '--existing-mod', 'jsg_core'
+        }
+        gameTestServer {
+            client()
+            type = "gameTestServer"
+            gameDirectory = project.file('run-tests')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            sourceSet = sourceSets.test
         }
         configureEach {
             logLevel = org.slf4j.event.Level.DEBUG

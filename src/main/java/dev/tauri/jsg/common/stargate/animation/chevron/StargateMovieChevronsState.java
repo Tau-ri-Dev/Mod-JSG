@@ -105,25 +105,26 @@ public abstract class StargateMovieChevronsState extends StargateChevronsState {
             var result = dialingManager.onChevronActivates(customData);
             if (result != null && result != StargateChevronEngageResult.OK) {
                 if (result == StargateChevronEngageResult.FAILED_FAIL_GATE)
-                    stargate.getStateManager().getChevronsState().onChevronFailedToLock(true);
+                    onChevronFailedToLock(true);
                 else
-                    stargate.getStateManager().getChevronsState().onChevronFailedToLock(customData.getBoolean("checkConnection"));
+                    onChevronFailedToLock(customData.getBoolean("checkConnection"));
             } else {
                 if (customData.getBoolean("setIdle"))
                     dialingManager.setStargateState(EnumStargateState.IDLE);
                 if (customData.getBoolean("litAll")) {
                     openAll();
+                    stargate.getDialingManager().allowDialNextFromBuffer();
                 } else {
-                    if (customData.getBoolean("isFinal"))
+                    if (customData.getBoolean("isFinal")) {
                         openDialed();
+                        stargate.getDialingManager().allowDialNextFromBuffer();
+                    }
                     else
                         get(customData.getInt("chevron"), customData.getBoolean("isFinal")).open();
                 }
                 if (customData.getBoolean("animateTopChevronLock")) {
                     if (!customData.getBoolean("isFinal"))
                         scheduleChevronClose(A_CHEVRON_CLOSE_AFTER_ACTIVATE_DELAY * 2, ChevronEnum.valueOf(customData.getInt("chevron")), true);
-                    else
-                        stargate.getDialingManager().setStargateState(EnumStargateState.IDLE);
                 }
                 if (customData.getBoolean("tryOpenAfter"))
                     dialingManager.attemptOpenDialed();
@@ -133,16 +134,19 @@ public abstract class StargateMovieChevronsState extends StargateChevronsState {
             get(customData.getInt("chevron"), customData.getBoolean("isFinal")).close();
             if (customData.getBoolean("setIdle"))
                 dialingManager.setStargateState(EnumStargateState.IDLE);
+            stargate.getDialingManager().allowDialNextFromBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_FAIL.get()) {
             if (customData.getBoolean("setIdle"))
                 dialingManager.dialingFailed(StargateOpenResult.ADDRESS_MALFORMED);
             closeAll();
+            stargate.getDialingManager().clearDialingBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CHEVRON_DIM.get()) {
             JSG.logger.error("", new StargateException("Tried to dim chevron on a movie gate!", stargate));
         } else if (scheduledTask == JSGScheduledTaskTypes.STARGATE_CLEAR_CHEVRONS.get()) {
             closeAll();
             if (customData.getBoolean("setIdle"))
                 dialingManager.setStargateState(EnumStargateState.IDLE);
+            stargate.getDialingManager().clearDialingBuffer();
         } else if (scheduledTask == JSGScheduledTaskTypes.LIGHT_UP_CHEVRONS.get()) {
             // We are in Movie gate which cannot light up it's chevrons - open them instead then
             if (customData.getBoolean("playSound"))
