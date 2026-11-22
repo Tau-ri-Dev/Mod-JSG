@@ -152,6 +152,10 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << '-Xmaxerrs' << '5000'
 }
 
+tasks.named('test', Test) {
+    failOnNoDiscoveredTests = false
+}
+
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
