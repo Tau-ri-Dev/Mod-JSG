@@ -96,7 +96,14 @@ allprojects {
             // By default, the server will crash when no gametests are provided.
             // The gametest system is also enabled by default for other run configs under the /test command.
             gameTestServer {
+                workingDirectory project.file('run-tests')
                 property 'forge.enabledGameTestNamespaces', "${mod_id}"
+
+                mods {
+                    "${mod_id}" {
+                        source sourceSets.test
+                    }
+                }
             }
 
             data {
@@ -188,8 +195,8 @@ allprojects {
         compileOnly "com.github.SlimeKnights:TinkersConstruct:v3.9.2.37"
 
 
-        implementation fg.deobf("maven.modrinth:embeddium:UTbfe5d1")
-        implementation fg.deobf("maven.modrinth:oculus:iQ1SwGc3")
+        //implementation fg.deobf("maven.modrinth:embeddium:UTbfe5d1")
+        //implementation fg.deobf("maven.modrinth:oculus:iQ1SwGc3")
 
         compileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-core-api:${cct_version}")
         compileOnly(fg.deobf("cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cct_version}"))
