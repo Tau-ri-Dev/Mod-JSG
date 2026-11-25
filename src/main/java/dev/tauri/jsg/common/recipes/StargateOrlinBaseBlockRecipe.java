@@ -46,8 +46,7 @@ public class StargateOrlinBaseBlockRecipe extends ShapedRecipe {
     public boolean matches(CraftingContainer inv, Level world) {
         for (int i = 0; i < inv.getContainerSize(); i++) {
             var stack = inv.getItem(i);
-            var item = stack.getItem();
-            if (getIngredients().get(i).getItems()[0].getItem() != item) return false;
+            if (!getIngredients().get(i).test(stack)) return false;
             if (i == 1) {
                 // slot where notebook page should be at
                 if (!stack.hasTag() || stack.getTag() == null) return false;
@@ -63,6 +62,7 @@ public class StargateOrlinBaseBlockRecipe extends ShapedRecipe {
     @Override
     @ParametersAreNonnullByDefault
     public @NotNull ItemStack assemble(CraftingContainer inv, RegistryAccess level) {
+        if (inv.getContainerSize() < 2) return ItemStack.EMPTY;
         var page = inv.getItem(1);
         if (page.isEmpty()) return ItemStack.EMPTY;
         if (page.getItem() != CoreItems.NOTEBOOK_PAGE_FILLED.get()) return ItemStack.EMPTY;
