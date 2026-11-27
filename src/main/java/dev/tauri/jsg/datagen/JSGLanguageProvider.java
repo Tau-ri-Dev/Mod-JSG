@@ -31,7 +31,7 @@ public class JSGLanguageProvider extends CoreLanguageProvider {
 
         //UTILITIES BLOCKS
         addBlockWithTooltip(JSGBlocks.SG_REDSTONE_DIALER_I_BLOCK, "Dial a stargate using redstone signal", "To dial a symbol you need to set symbol ID%nl%using listed inputs then engage it.%nl%Selected symbol id = ((Right * 16) + Front)%nl%%nl%" + ChatFormatting.BOLD + "Inputs:" + "%nl%Top: Engage gate%nl%Bottom: Enable DHD Dialing animation%nl%Left: Engage symbol%nl%Right: 2nd bit of symbol ID%nl%Front: 1st bit of symbol ID");
-        addBlockWithTooltip(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK, "Get redstone output by current stargate state", ChatFormatting.BOLD + "Output:" + "%nl%0: Idle%nl%1: Dialing DHD%nl%2: Dialing Computer%nl%3: Engaged Incoming%nl%4: Engaged Outgoing%nl%5: Unstable%nl%6: Failing%nl%7: Incoming Wormhole");
+        addBlockWithTooltip(JSGBlocks.SG_REDSTONE_STATE_O_BLOCK, "Get redstone output by current stargate state", ChatFormatting.BOLD + "Output:" + "%nl%0: Idle%nl%1: Dialing via DHD%nl%2: Dialing via Computer%nl%3: Dialing via Remote%nl%4: Engaged Incoming%nl%5: Engaged Outgoing%nl%6: Unstable Opening%nl%7: Unstable Closing%nl%8: Failing%nl%9: Resetting%nl%10: Incoming Wormhole");
         addBlockWithTooltip(JSGBlocks.TOASTER, "Orlin still owes Carter a new one.", null);
         addBlockWithTooltip(JSGBlocks.PRINTER, "Useful to print notebook pages", null);
 
