@@ -176,6 +176,7 @@ public class SymbolUniverseProvider extends SymbolType<SymbolUniverseEnum> {
 
     @Override
     public int getMinimalSymbolCountTo(SymbolType<?> symbolType, boolean localDial) {
+        // TODO: Move that to probably some kind of registry, so other modded symbol types can "override" this?
         if (symbolType == null) return 9;
 
         if (symbolType.equals(this))
@@ -184,7 +185,7 @@ public class SymbolUniverseProvider extends SymbolType<SymbolUniverseEnum> {
         if (JSGConfig.Stargate.useNineSymbolsToDialUni.get()) return 9;
 
         boolean ignoreType = !JSGConfig.Stargate.useEightSymbolsBetweenDiffSymbolType.get();
-        return ((ignoreType || localDial) ? 7 : 8);
+        return ((ignoreType && localDial) ? 7 : 8);
     }
 
     @Override
