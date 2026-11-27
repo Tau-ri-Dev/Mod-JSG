@@ -20,10 +20,7 @@ import dev.tauri.jsg.common.packet.packets.effect.StargateWormholeEffectToClient
 import dev.tauri.jsg.common.packet.packets.linkable.GDOCodeKeyPressedToServer;
 import dev.tauri.jsg.common.packet.packets.linkable.UniverseDialerActionPacketToServer;
 import dev.tauri.jsg.common.packet.packets.linkable.UniverseDialerKeyPressedToServer;
-import dev.tauri.jsg.common.packet.packets.stargate.SaveIrisCodeToServer;
-import dev.tauri.jsg.common.packet.packets.stargate.StargateMotionAndRotationToClient;
-import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionRequestToClient;
-import dev.tauri.jsg.common.packet.packets.stargate.StargatePlayerMotionToServer;
+import dev.tauri.jsg.common.packet.packets.stargate.*;
 import dev.tauri.jsgcore.common.packet.SimplePacketHandler;
 import dev.tauri.jsgcore.common.packet.TargetPoint;
 import dev.tauri.jsgcore.mapping.JSGMapping;
@@ -67,6 +64,7 @@ public class JSGPacketHandler {
         HANDLER.registerPacketToClient(AdminControllerGuiOpenToClient.class);
         HANDLER.registerPacketToClient(StargateMotionAndRotationToClient.class);
         HANDLER.registerPacketToClient(StargateWormholeEffectToClient.class);
+        HANDLER.registerPacketToClient(StargateWalkOutToClient.class);
         HANDLER.registerPacketToClient(StargatePlayerMotionRequestToClient.class);
         HANDLER.registerPacketToClient(ACResponsePacketToClient.class);
         HANDLER.registerPacketToClient(ACStargateEngageSymbolPacketToClient.class);

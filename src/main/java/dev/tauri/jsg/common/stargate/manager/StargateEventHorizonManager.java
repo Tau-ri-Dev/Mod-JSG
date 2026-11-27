@@ -22,6 +22,7 @@ import dev.tauri.jsg.common.registry.JSGSoundEvents;
 import dev.tauri.jsg.common.stargate.teleportation.StargateKillingHelper;
 import dev.tauri.jsg.common.stargate.teleportation.StargateTeleporter;
 import dev.tauri.jsg.common.stargate.teleportation.traveler.*;
+import dev.tauri.jsg.common.stargate.teleportation.walkout.StargateWalkOut;
 import dev.tauri.jsg.common.state.stargate.StargateFlashState;
 import dev.tauri.jsg.common.state.stargate.StargateVaporizeBlockParticlesRequest;
 import dev.tauri.jsg.common.util.JSGAdvancementsUtil;
@@ -195,6 +196,7 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
         if (new StargateSendTravelerEvent(traveler.getTransmitter(), traveler.getReceiver(), traveler).post()) {
             return TravelerSendResult.BLOCKED_BY_EVENT;
         }
+        StargateWalkOut.onSend(traveler, stargate);
         traveler.send();
         StargateComputerEvents.EH_TRAVELER.apply(false, (traveler.get() instanceof Entity e ? e : null)).sendVia(stargate);
         return TravelerSendResult.OK;
@@ -203,7 +205,10 @@ public abstract class StargateEventHorizonManager extends AbstractStargateManage
     public void receive(IStargateTraveler<?> traveler) {
         traveler.place();
         if (traveler.isStatic()) return;
-        new StargateReceiveTravelerEvent(traveler.getTransmitter(), traveler.getReceiver(), traveler).post();
+        var receiveEvent = new StargateReceiveTravelerEvent(traveler.getTransmitter(), traveler.getReceiver(), traveler);
+        receiveEvent.post();
+        // Before the iris check and before entitiesRecentlyGoThrough: the traveller may now start inside the horizon.
+        StargateWalkOut.onReceive(traveler, stargate, receiveEvent.isRedirected());
         if (traveler.getTransmitter() != null) // rig entity has null transmitter
             ((StargateEventHorizonManager) traveler.getTransmitter().getEventHorizonManager()).remove(traveler);
         stargate.playSoundEvent(JSGSoundEvents.WORMHOLE_GO);
